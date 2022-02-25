@@ -16,9 +16,21 @@ Burada, birden fazla seçenek olduğu durumda takip edilen seçenek ve olabildi�
 
 ### İsimlendirme
 
+İsimlendirmedeki temel amacımız bütün kodlarda birbirleri ile uyumlu ve takip edilebilir yaklaşım sergilemektir. Burada isimlendirmelerde, birbirleri ile çelişkili durumlardan kaçınılacaktır. Bu sayede de, kodun okunabilirliği arttırılacaktır.
+
 - Dosya isimleri küçük harf ve kelimeler arasında alt çizgi ile ayrılacaktır (https://www.wikiwand.com/en/Snake_case),
 - C++ dosya uzantıları için .cc yerine .cpp kullanılacaktır,
 - Tip (classes, structs, type aliases, enums, and type template parameters) isimlerinde alt çizgi kullanılmayacak, her kelime büyük harf ile başlayacak,
+- Sınıf isimleri, isimlerden seçilecektir,
+  - Sınıf üye değişkenleri (private olanlar), "m", ile başlayacaktır ve sonrasında gelen kelimeler büyük harfle başlayıp, alt çizgisiz birleştirilecektir,
+  - struct üye değişkenleri büyük harf ile "m" olmadan başlayacaktır,
+- Fonksiyon isimleri, fonksiyonun ne yaptığını ifade edecek şekilde verilecektir ve olabildiğince fiil ile başlayacaktır. Fonksiyon isimleri büyük harf ile başlayacaktır,
+- Global değişkenler isimlendirilirken "g" ile başlayacaktır. Kelimeler arasında "_" kullanılmayacaktır,
+- Sabit değişkenler isimlendirilirken "c" ile başlayacaktır. Kelimeler arasında "_" kullanılmayacaktır,
+- Statik değişkenler isimlendirilirken "s" ile başlayacaktır. Kelimeler arasında "_" kullanılmayacaktır,
+- Makro tanımlamaları ise tamamen büyük harf ile ve kelimeler arasında "_" kullanılarak isimlendirilecektir,
+- Namespace isimlendirmeleri tamamen küçük harf olacak ve kelimeler arasında "_" kullanılarak isimlendirilecektir,
+- Enumerator'ler normal tipler gibi isimlendirilecektir. Literal isimleri "e" ile başlar ve kelimeler arası "_" olmadan büyük harf ile başlayacaktır.
 
 
 
