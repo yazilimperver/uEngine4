@@ -5,5 +5,8 @@ cmake_minimum_required (VERSION 3.8)
 
 project ("src")
 
-# Include sub-projects.
+# Uygulama alt dizinlerini ekleyelim
 add_subdirectory ("example_app")
+
+# Statik kütüphane alt dizinlerini ekleyelim
+add_subdirectory ("infra")

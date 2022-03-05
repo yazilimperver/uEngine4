@@ -18,7 +18,7 @@ Burada, birden fazla seçenek olduğu durumda takip edilen seçenek ve olabildi�
 
 İsimlendirmedeki temel amacımız bütün kodlarda birbirleri ile uyumlu ve takip edilebilir yaklaşım sergilemektir. Burada isimlendirmelerde, birbirleri ile çelişkili durumlardan kaçınılacaktır. Bu sayede de, kodun okunabilirliği arttırılacaktır.
 
-- Dosya isimleri küçük harf ve kelimeler arasında alt çizgi ile ayrılacaktır (https://www.wikiwand.com/en/Snake_case),
+- Dosya ve dizin isimleri küçük harf ve kelimeler arasında alt çizgi ile ayrılacaktır (https://www.wikiwand.com/en/Snake_case),
 - C++ dosya uzantıları için .cc yerine .cpp kullanılacaktır,
 - Tip (classes, structs, type aliases, enums, and type template parameters) isimlerinde alt çizgi kullanılmayacak, her kelime büyük harf ile başlayacak,
 - Sınıf isimleri, isimlerden seçilecektir,
