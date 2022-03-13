@@ -1,0 +1,15 @@
+add_subdirectory(googletest-master)
+add_subdirectory(json-develop)
+add_subdirectory(spdlog-1.x)
+add_subdirectory(fmt-8.1.1)
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	# Bu projeyi VS icerisinde ayri bir folderda tutalim
+	set_target_properties(fmt PROPERTIES FOLDER Ext/fmt)
+	set_target_properties(nlohmann_json PROPERTIES FOLDER Ext/json-develop)
+	set_target_properties(spdlog PROPERTIES FOLDER Ext/spdlog)
+	set_target_properties(gmock PROPERTIES FOLDER Ext/GoogleTest)
+	set_target_properties(gtest PROPERTIES FOLDER Ext/GoogleTest)
+	set_target_properties(gmock_main PROPERTIES FOLDER Ext/GoogleTest)
+	set_target_properties(gtest_main PROPERTIES FOLDER Ext/GoogleTest)
+endif()	

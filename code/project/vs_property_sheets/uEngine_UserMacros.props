@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros">
+    <UENGINE_ROOT_DIR>$(SolutionDir)..\..\..</UENGINE_ROOT_DIR>
+    <UENGINE_EXT_DIR>$(UENGINE_ROOT_DIR)\src\ext</UENGINE_EXT_DIR>
+    <UENGINE_SRC_ROOT>$(UENGINE_ROOT_DIR)\src</UENGINE_SRC_ROOT>
+    <UENGINE_BINARY_DIR>$(UENGINE_ROOT_DIR)\binary</UENGINE_BINARY_DIR>
+    <UENGINE_ANDROID_APP_DIR>$(UENGINE_ROOT_DIR)\Projects\Android\Executables\SDL2_ApplicationDynamic</UENGINE_ANDROID_APP_DIR>
+    <UENGINE_ANDROID_APP_LIB_DIR>$(UENGINE_ANDROID_APP_DIR)\libs</UENGINE_ANDROID_APP_LIB_DIR>
+  </PropertyGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <ClCompile />
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <BuildMacro Include="UENGINE_ROOT_DIR">
+      <Value>$(UENGINE_ROOT_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="UENGINE_SRC_ROOT">
+      <Value>$(UENGINE_SRC_ROOT)</Value>
+    </BuildMacro>
+    <BuildMacro Include="UENGINE_EXT_DIR">
+      <Value>$(UENGINE_EXT_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="UENGINE_BINARY_DIR">
+      <Value>$(UENGINE_BINARY_DIR)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

@@ -15,12 +15,12 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\example_app\example_app.cpp">
+    <ClCompile Include="..\..\..\..\src\apps\example_app\example_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\src\example_app\example_app.h">
+    <ClInclude Include="..\..\..\..\src\apps\example_app\example_app.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

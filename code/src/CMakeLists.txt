@@ -1,12 +1,65 @@
-﻿# CMakeList.txt : Top-level CMake project file, do global configuration
-# and include sub-projects here.
-#
-cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required(VERSION 3.10)
 
-project ("src")
+# Proje ismimiz. Bu VS kullanimi durumunda solutiona karsilik gelmekte
+# Alt CMakeLists.txt icerisinden bu dizine `ApplicationMonitorTool_SOURCE_DIR` ile erisebiliriz
+project(uEngine4)
+
+# Otomatik surum ile ilgili konfigurasyon dosyasi olusturalim
+set(PROJECT_NAME "uEngine4 Library")
+set(CMAKE_PROJECT_VERSION_MAJOR 4)
+set(CMAKE_PROJECT_VERSION_MINOR 0)
+set(CMAKE_PROJECT_VERSION_PATCH 0)
+
+# Projeleri organize ederken dizinleri kullanmayi seciyioruz
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# Tepe Cmake dosyasinda C++ standardini eklyelim
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+# Baslik dosyalarini ayri tutma kararimiz isiginda ilgili dizinleri ekleyelim
+set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
+
+# Debug derleme çıktıları sonuna d ekleyelim
+set(CMAKE_DEBUG_POSTFIX d)
+
+# Dizinleri ortaklama icin boyle bir yontem izleyebiliriz
+foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
+    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
+    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/out )
+endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
+
+# CMake üzerinden test kabiliyetlerini aktifleştirmek
+enable_testing()
+
+# GTesti sisteme kurmaya gerek yok 
+# Diger ayarlar icin https://github.com/google/googletest/blob/master/CMakeLists.txt goz atabilirsiniz
+set(INSTALL_GTEST OFF CACHE INTERNAL "")
+
+# If you only include this third party in PRIVATE source files, you do not need to install it
+# when your main project gets installed.
+set(JSON_Install OFF CACHE INTERNAL "")
+
+# Windows uzerinde calisma zamani hatalarini almamak icin bunu ekliyoruz.
+# Varsayılan olarak, yeni Visual Studio projeleri C çalışma zamanlarını dinamik olarak birbirine bağlar 
+# ancak GoogleTest bunları statik olarak bağlar. Bu durumda asağıdakine benzer hatalar alabilirsiniz:
+# "error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MT_StaticRelease' doesn't match value 'MD_DynamicRelease'"
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 # Uygulama alt dizinlerini ekleyelim
-add_subdirectory ("example_app")
+add_subdirectory ("apps")
 
 # Statik kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("infra")
+
+# Dis kütüphane alt dizinlerini ekleyelim
+add_subdirectory ("ext")
+
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+     message(STATUS "Windows icin yazilim olusturma dosyalari hazirlaniyor.")
+elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+     message(STATUS "Linux icin yazilim olusturma dosyalari hazirlaniyor.")    
+endif()
