@@ -10,6 +10,16 @@ set(CMAKE_PROJECT_VERSION_MAJOR 4)
 set(CMAKE_PROJECT_VERSION_MINOR 0)
 set(CMAKE_PROJECT_VERSION_PATCH 0)
 
+# Temel dizin animlamalarini yapalim
+set(EXT_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/ext")
+
+
+# Baslik dosyalarini ayri tutma kararimiz isiginda ilgili dizinleri ekleyelim
+set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
+
+# CMake dosyalari icin nereye bakalim
+set(SDL2_DIR "${EXT_INCLUDE_FOLDER}/SDL2-2.0.20")
+
 # Projeleri organize ederken dizinleri kullanmayi seciyioruz
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -17,9 +27,6 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-
-# Baslik dosyalarini ayri tutma kararimiz isiginda ilgili dizinleri ekleyelim
-set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
 
 # Debug derleme çıktıları sonuna d ekleyelim
 set(CMAKE_DEBUG_POSTFIX d)

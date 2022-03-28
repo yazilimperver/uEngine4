@@ -27,11 +27,11 @@
     <ClInclude Include="..\..\..\..\src\infra\time\sleep_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\src\infra\time\fps_timer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\src\infra\time\precisesleep.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\..\src\infra\time\stop_watch.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,6 +39,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\src\infra\time\sleep_util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\src\infra\time\fps_timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

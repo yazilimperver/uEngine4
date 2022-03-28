@@ -38,11 +38,11 @@ public:
 
 	void PrintResults();
 private:
-	double mMin;
-	double mMax;
-	double mQ[3];
-	double mAvg;
-	double mVariance;
+	double mMin{0};
+	double mMax{ 0 };
+	double mQ[3]{ 0 };
+	double mAvg{ 0 };
+	double mVariance{ 0 };
 };
 
 /**

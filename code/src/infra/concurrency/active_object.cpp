@@ -1,6 +1,9 @@
 #include "active_object.h"
-
+#include <codeanalysis\warnings.h>
+#pragma warning( push )
+#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
 #include "spdlog/spdlog.h"
+#pragma warning( pop )
 
 inline ActiveObject::ActiveObject() {
     mThread = std::unique_ptr<std::thread>(

@@ -18,9 +18,15 @@
     <ClCompile Include="..\..\..\..\src\apps\example_app\example_app.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\src\apps\example_app\sdl_touch_service.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\src\apps\example_app\example_app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\src\apps\example_app\sdl_touch_service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

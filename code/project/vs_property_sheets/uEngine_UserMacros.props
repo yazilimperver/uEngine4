@@ -8,10 +8,14 @@
     <UENGINE_BINARY_DIR>$(UENGINE_ROOT_DIR)\binary</UENGINE_BINARY_DIR>
     <UENGINE_ANDROID_APP_DIR>$(UENGINE_ROOT_DIR)\Projects\Android\Executables\SDL2_ApplicationDynamic</UENGINE_ANDROID_APP_DIR>
     <UENGINE_ANDROID_APP_LIB_DIR>$(UENGINE_ANDROID_APP_DIR)\libs</UENGINE_ANDROID_APP_LIB_DIR>
+    <UENGINE_LIB_DIR>$(UENGINE_ROOT_DIR)\src\lib</UENGINE_LIB_DIR>
   </PropertyGroup>
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile />
+    <ClCompile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+    </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
     <BuildMacro Include="UENGINE_ROOT_DIR">
@@ -25,6 +29,9 @@
     </BuildMacro>
     <BuildMacro Include="UENGINE_BINARY_DIR">
       <Value>$(UENGINE_BINARY_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="UENGINE_LIB_DIR">
+      <Value>$(UENGINE_LIB_DIR)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>

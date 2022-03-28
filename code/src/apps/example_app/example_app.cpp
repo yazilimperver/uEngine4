@@ -9,12 +9,46 @@
 
 #include "spdlog/spdlog.h"
 
+#include "graphics/color.h"
+
+#include "application_base/touch_service.h"
+
 #include <nlohmann/json.hpp>
 using nlohmann::json;
 
+#include <cstdint>
 #include <chrono>
 
 using namespace std;
+
+#include "SDL.h" 
+
+int main(int argc, char* argv[])
+{
+    SDL_Init(SDL_INIT_VIDEO);
+
+    SDL_Window* window = SDL_CreateWindow(
+        "SDL2Test",
+        SDL_WINDOWPOS_UNDEFINED,
+        SDL_WINDOWPOS_UNDEFINED,
+        640,
+        480,
+        0
+    );
+
+    SDL_Renderer* renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_SOFTWARE);
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(renderer);
+    SDL_RenderPresent(renderer);
+
+    SDL_Delay(3000);
+
+    SDL_DestroyWindow(window);
+    SDL_Quit();
+
+    return 0;
+}
+
 /*
 int main() {
 	//CBoundedSharedQueue<int> deneme{ 10 };
@@ -63,7 +97,7 @@ int main() {
     return 0;
 }
 */
-
+/*
 class TimerTest : public ThreadBase {
     double mSleepTimeInSec{ 10.0 };
 public:
@@ -87,6 +121,7 @@ protected:
 };
 
 int main() {
+    Color deneme{255, 0, 0};
 
     spdlog::debug("[example_app] Application is started!");
 
@@ -94,4 +129,4 @@ int main() {
     instance1.Start();
     int i;
     std::cin >> i;
-}
+}*/

@@ -1,0 +1,17 @@
+{
+    "Object": {
+        "value0": "Default uEngine 4 Window",
+        "value1": 640,
+        "value2": 480,
+        "value3": 0,
+        "value4": 0,
+        "value5": {
+            "value0": 180,
+            "value1": 50,
+            "value2": 79,
+            "value3": 255
+        },
+        "value6": false,
+        "value7": false
+    }
+}

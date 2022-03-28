@@ -19,12 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\src\infra\concurreny\active_object.h" />
-    <ClInclude Include="..\..\..\..\..\src\infra\concurreny\thread_base.h" />
+    <ClCompile Include="..\..\..\..\..\src\infra\concurrency\active_object.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\infra\concurrency\thread_base.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\src\infra\concurreny\active_object.cpp" />
-    <ClCompile Include="..\..\..\..\..\src\infra\concurreny\thread_base.cpp" />
+    <ClInclude Include="..\..\..\..\..\src\infra\concurrency\active_object.h" />
+    <ClInclude Include="..\..\..\..\..\src\infra\concurrency\thread_base.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -68,22 +68,30 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_StaticLibraryDebug.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_spdlog.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_StaticLibraryRel.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_spdlog.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_StaticLibraryDebug.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_spdlog.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_StaticLibraryRel.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_spdlog.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -106,6 +114,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -123,6 +132,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -140,6 +150,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>
@@ -157,6 +168,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>NotUsing</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>

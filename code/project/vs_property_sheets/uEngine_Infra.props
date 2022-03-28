@@ -7,7 +7,7 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(UENGINE_INFRA_DIR)\</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(UENGINE_INFRA_DIR)\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>

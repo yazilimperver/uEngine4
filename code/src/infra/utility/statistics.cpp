@@ -1,6 +1,10 @@
 #include "Statistics.h"
 #include <fstream>
+#include <codeanalysis\warnings.h>
+#pragma warning( push )
+#pragma warning ( disable : ALL_CODE_ANALYSIS_WARNINGS )
 #include "fmt/core.h"
+#pragma warning( pop )
 
 Statistics::Statistics(double* results, std::size_t count)
 {
