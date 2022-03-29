@@ -48,7 +48,7 @@ void SdlTextureSample::Initialize(SdlApplication& sdlApplication) {
 	//Load PNG texture
 	mTexture = LoadTexture("texture.png");
 	if (mTexture == NULL)	{
-		printf("Failed to load texture image!\n");
+		spdlog::error("Failed to load texture image!");
 	}
 }
 

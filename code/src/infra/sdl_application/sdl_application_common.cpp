@@ -24,6 +24,7 @@
 #include "application_base/window_parameter_serializer.h"
 
 #include "utility/json_data_parser.h"
+#include "sdl_application/sdl_parameters_serializer.h"
 
 using namespace std::chrono;
 
@@ -43,6 +44,15 @@ bool SdlApplication::Initialize() {
     mWindowParameters.IsVSYNCEnabled = false;
     mWindowParameters.Left = 100;
     mWindowParameters.Top = 100;
+
+    ParseWindowParameters();
+
+    mAppWiseSettings.UpdateParameterValue("WinWidth", mWindowParameters.Width);
+    mAppWiseSettings.UpdateParameterValue("WinHeight", mWindowParameters.Height);
+    mAppWiseSettings.UpdateParameterValue("WinLeft", mWindowParameters.Left);
+    mAppWiseSettings.UpdateParameterValue("WinTop", mWindowParameters.Top);
+    mAppWiseSettings.UpdateParameterValue("IsFullScreen", mWindowParameters.IsFullScreen);
+    mAppWiseSettings.UpdateParameterValue("IsVSYNCEnabled", mWindowParameters.IsVSYNCEnabled);
 
     result = this->InitializeSDL();
     
@@ -81,6 +91,19 @@ void SdlApplication::ParseWindowParameters(){
     }
 }
 
+void SdlApplication::ParseSdlParameters(){
+    JsonDataParser<SdlParameters> wpParser;
+
+    auto opResult = wpParser.Deserialize("sdl_application_configuration.json");
+
+    if (true == opResult.has_value()) {
+        mSdlParameters = opResult.value();
+    }
+    else {
+        // hata durumlarina bakalim sonra
+    }
+}
+
 bool SdlApplication::InitializeSDL() {
     bool status{ false };
 
@@ -92,10 +115,6 @@ bool SdlApplication::InitializeSDL() {
     }
 
     mGamepadController.Initialize();
-
-    mSDLParameters.IsDisplayEventLogs = false;
-    mSDLParameters.MajorVersion = 3;
-    mSDLParameters.MinorVersion = 2;
 
     this->InitializeWindows();
 
@@ -136,9 +155,15 @@ bool SdlApplication::InitializeSDL() {
 
 void SdlApplication::InitializeWindows() {
     if (mIsGlEnabled) {
-        mSDLParameters.IsDisplayEventLogs = false;
-        mSDLParameters.MajorVersion = 1;
-        mSDLParameters.MinorVersion = 2;
+        mSdlParameters.IsDisplayEventLogs = false;
+        mSdlParameters.MajorVersion = 1;
+        mSdlParameters.MinorVersion = 2;    
+        
+        ParseSdlParameters();
+
+        mAppWiseSettings.UpdateParameterValue("DisplayEventLogs", mSdlParameters.IsDisplayEventLogs);
+        mAppWiseSettings.UpdateParameterValue("SdlMajorVersion", mSdlParameters.MajorVersion);
+        mAppWiseSettings.UpdateParameterValue("SdlMinorVersion", mSdlParameters.MinorVersion);
 
         // Request opengl context
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
@@ -295,8 +320,7 @@ void SdlApplication::HandleSDLEvents() {
         }
         break;
         //multi gesture
-        case SDL_MULTIGESTURE:
-        {
+        case SDL_MULTIGESTURE: {
             touchAction = TouchAction::MultiGesture;
             touchData.Timestamp = e.mgesture.timestamp;
             touchData.FingerCount = e.mgesture.numFingers;
@@ -307,79 +331,64 @@ void SdlApplication::HandleSDLEvents() {
             touchData.DDist = e.mgesture.dDist;
 
             // Inform listeners
-            for (auto& listener : mTouchEventListeners)
-            {
+            for (auto& listener : mTouchEventListeners) {
                 listener->TouchEvent(touchAction, touchData);
             }
         }
         break;
             // User requests quit
-        case SDL_QUIT:
-        {
-            //ConsoleLogger::Info("[SdlApplication] Quit Event Is Received\r\n");
-            mIsApplicationActive = false;
+        case SDL_QUIT: {
+            spdlog::info("Quit Event Is Received");
+            mIsAppActive.store(false);
         }
         break;
         // User presses a key
-        case SDL_KEYDOWN:
-        {
+        case SDL_KEYDOWN: {
             keyboardModifier = ConvertSDLKeyModifierCodes(e.key.keysym.mod);
             inputAction = InputActions::PressAction;
             keyCode = ConvertSDLKeyCodes(e.key.keysym.scancode);
 
-            if (keyCode == KeyboardCodes::KEY_F1)
-            {
+            if (keyCode == KeyboardCodes::KEY_F1) {
                 this->SetFullScreen(true);
             }
-            else if (keyCode == KeyboardCodes::KEY_F2)
-            {
+            else if (keyCode == KeyboardCodes::KEY_F2) {
                 this->SetFullScreen(false);
             }
 #ifdef PLUGIN_MONITORING_SHORTCUTS_ENABLED
-            else if (keyCode == KeyboardCodes::KEY_F3)
-            {
+            else if (keyCode == KeyboardCodes::KEY_F3) {
                 this->PrintActivePlugins();
             }
 #endif
             if (keyCode == KeyboardCodes::KEY_Q
-                || keyCode == KeyboardCodes::KEY_ESCAPE)
-            {
+                || keyCode == KeyboardCodes::KEY_ESCAPE) {
 
-                //ConsoleLogger::Info("[SdlApplication] Q or Esc is pressed!\r\n");
-                mIsApplicationActive = false;
+                spdlog::info("Q or Esc is pressed!");
+                mIsAppActive.store(false);
             }
 									   
-			if (e.key.keysym.sym == SDLK_AC_BACK)
-			{
-				if (false == mIgnoreExitWithBackButton)
-				{
-					//ConsoleLogger::Info("[SdlApplication] Q or Esc is pressed!\r\n");
-					mIsApplicationActive = false;
+			if (e.key.keysym.sym == SDLK_AC_BACK) {
+				if (false == mIgnoreExitWithBackButton) {
+                    spdlog::info("Q or Esc is pressed!");
+                    mIsAppActive.store(false);
 				}
-				else
-				{
+				else {
 					keyCode = KeyboardCodes::KEY_ESCAPE;
 				}
 			}
 
-            // Inform listeners
-            for (auto& listener : mKeyboardEventListeners)
-            {
+            for (auto& listener : mKeyboardEventListeners) {
                 listener->KeyboardEvent(keyCode, e.key.keysym.scancode, inputAction, keyboardModifier);
             }
         }
         break;
-        // User releases a key
-        case SDL_KEYUP:
-        {
+        case SDL_KEYUP: {
             //Pass event to clients
             keyboardModifier = ConvertSDLKeyModifierCodes(e.key.keysym.mod);
             inputAction = InputActions::ReleaseAction;
             keyCode = ConvertSDLKeyCodes(e.key.keysym.scancode);
 
             // Inform listeners
-            for (auto& listener : mKeyboardEventListeners)
-            {
+            for (auto& listener : mKeyboardEventListeners) {
                 listener->KeyboardEvent(keyCode, e.key.keysym.scancode, inputAction, keyboardModifier);
             }
         }

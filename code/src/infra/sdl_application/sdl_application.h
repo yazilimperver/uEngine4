@@ -15,6 +15,8 @@
 #include "tick/sdl_app_ticker.h"
 #include "tick/graphical_tickable.h"
 
+#include "utility/parameter_set.h"
+
 #include "sdl_gamepad_controller.h"
 #include "sdl_gamecontroller.h"
 #include "sdl_touch_service.h"
@@ -69,6 +71,7 @@ protected:
 
     //! Parse windows parameters
     void ParseWindowParameters();
+    void ParseSdlParameters();
 
     //! Full screen switch
     void SetFullScreen(bool isFullscreen);
@@ -82,47 +85,54 @@ protected:
     // Initialize opengl settings
     bool InitializeOpenGL();
 
-    //! The client application
+    /** @brief Ýstemci grafik uygulamasý */
     std::shared_ptr<ClientGraphicApplication> mClientGraphicalApplication{ nullptr };
 
-    //! The status of application
-    bool mIsApplicationActive = true;
-
-	//! Ignore back space exit in case of android
+	/** @brief Geri dugmesi ile cikilsin mi */
 	bool mIgnoreExitWithBackButton = true;
 
-    //! The SDL touch service API wrapper
+    /** @brief SDL dokunma servisi */
     SdlTouchService mTouchService;
 
+    /** @brief SDL OpenGL icin mi kullanilacak */
     bool mIsGlEnabled{ false };
 
-    //! The SDL opengl context
+    /** @brief SDL OpenGL context */
     void* mMainGLContext;
 
-    //! The SDL window reference
-    SDL_Window* mWindow = nullptr;
+    /** @brief SDL penceresi */
+    SDL_Window* mWindow{ nullptr };
 
-    //! The sdl renderer object
-    SDL_Renderer* mRenderer = nullptr;
+    /** @brief SDL renderer */
+    SDL_Renderer* mRenderer{ nullptr };
 
-    //! Event listeners
+    /** @brief Olay dinleyicileri */
     std::vector<KeyboardEventListener*>  mKeyboardEventListeners;
     std::vector<MouseEventListener*>     mMouseEventListeners;
     std::vector<MouseMoveEventListener*> mMouseMoveEventListeners;
     std::vector<TouchEventHandler*>      mTouchEventListeners;
 
-    //! Gamepad controller
+    /** @brief Gamepad kontrolcüsü */
     SdlGamepadController mGamepadController;
 
-    //! The sdl window parameters
-    SdlParameters mSDLParameters;
+    /** @brief SDL parametreleri */
+    SdlParameters mSdlParameters;
 
-    //! Window parameters
+    /** @brief Pencere ayarlarý */
     WindowParameter mWindowParameters;
 
+    /** @brief Uygulama aktif mi */
     std::atomic<bool> mIsAppActive{ true };
 
+    /** @brief FPS ticker */
     FpsTicker mFpsTicker;
+
+    /** @brief Varsayýlan SDL ticker */
     SdlAppTicker mSdlTicker;
+
+    /** @brief Perioydik ticker */
     PeriodicTicker mPeriodicTicker;
+
+    /** @brief Uygulama capinda paylasilacak olan ayarlar */
+    ParameterSet mAppWiseSettings;
 };

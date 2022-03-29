@@ -28,6 +28,7 @@
     <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_application.h" />
     <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_gamepad_controller.h" />
     <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_parameters.h" />
+    <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_parameters_serializer.h" />
     <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_touch_service.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

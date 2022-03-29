@@ -41,5 +41,8 @@
     <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_touch_service.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\src\infra\sdl_application\sdl_parameters_serializer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -186,6 +186,9 @@
     <ProjectReference Include="..\..\infra\tick\tick.vcxproj">
       <Project>{1dd42d85-3084-4cc1-8d99-6c8edfc4b21b}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\infra\utility\utility.vcxproj">
+      <Project>{85ff4d6c-9476-48b7-a32f-dfed0aea2117}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\time\time.vcxproj">
       <Project>{cb444fec-9561-4c6c-a8eb-dab3f095e492}</Project>
     </ProjectReference>

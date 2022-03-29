@@ -30,6 +30,9 @@
     <ProjectReference Include="..\infra\concurrency\concurrency.vcxproj">
       <Project>{e0b392a5-1c94-4f17-a79c-45754259523a}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\infra\utility\utility.vcxproj">
+      <Project>{85ff4d6c-9476-48b7-a32f-dfed0aea2117}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\time\time.vcxproj">
       <Project>{cb444fec-9561-4c6c-a8eb-dab3f095e492}</Project>
     </ProjectReference>

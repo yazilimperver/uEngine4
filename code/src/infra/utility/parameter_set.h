@@ -12,8 +12,7 @@
 #include <unordered_map>
 
 /*! @brief	This class is responsible for holding set of parameters */
-class ParameterSet
-{
+class ParameterSet {
 public:
 	/*! @brief	Print currently registered parameters */
 	void PrintCurrentParameters();
