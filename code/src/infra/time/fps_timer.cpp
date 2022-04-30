@@ -21,6 +21,9 @@ void FPSTimer::SetFPSParameters(double theTargetFps, uint32_t reportInterval) {
 }
 
 milliseconds FPSTimer::FPSCheck() {
+	std::chrono::milliseconds sleepDuration;
+	int32_t frameCount{1};
+
 	mFrameEndTime = high_resolution_clock::now();
 
 	nanoseconds durat = mFrameEndTime - mFrameStartTime;
@@ -31,19 +34,19 @@ milliseconds FPSTimer::FPSCheck() {
 			double reportDurationInSec = duration_cast<milliseconds>(mFrameEndTime - mLastReportTime).count() * 0.001;
 			mLastReportTime = mFrameEndTime;
 			// +1 son periyodu da ekleyelim
-			mCurrentFps = round(static_cast<double>(mFrameCount) / mReportIntervalInSeconds) + 1;
-			mFrameCount = 1;
+			mCurrentFps = round(static_cast<double>(frameCount) / mReportIntervalInSeconds) + 1;
+			frameCount = 1;
 
-			spdlog::info("The FPS: {}. The average frame time: {:.03f} ms!", mCurrentFps, static_cast<double>(reportDurationInSec) / mFrameCount);
+			spdlog::info("The FPS: {}. The average frame time: {:.03f} ms!", mCurrentFps, static_cast<double>(reportDurationInSec) / frameCount);
 		}
 		else  {
-			++mFrameCount;
+			++frameCount;
 		}
 
 	}
-	mSleepDuration = mTargetFrameDurationInMsec - mFrameDuration;
+	sleepDuration = mTargetFrameDurationInMsec - mFrameDuration;
 
-	if (mSleepDuration.count() > 0.0)	{
+	if (sleepDuration.count() > 0.0)	{
 		SleepUtil::PreciseSleep(mTargetFrameDurationInSec);
 	}
 	mFrameStartTime = high_resolution_clock::now();

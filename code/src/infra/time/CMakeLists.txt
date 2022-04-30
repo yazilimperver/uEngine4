@@ -6,6 +6,7 @@ set(LIB_NAME time)
 # Baslik dosyalari
 set(HEADER_FILES
 	chrono_util.h
+	fps_timer.h
 	sleep_util.h
 	stop_watch.h
 	timestamp.h
@@ -16,7 +17,8 @@ source_group("Header Files" FILES ${HEADER_FILES})
 
 # Kaynak kod dosyalari
 set(SOURCE_FILES
-    sleep_util.cpp
+    fps_timer.cpp
+	sleep_util.cpp
     stop_watch.cpp
     timestamp.cpp
  )

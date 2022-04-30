@@ -5,10 +5,12 @@ set(LIB_NAME utility)
 
 # Baslik dosyalari
 set(HEADER_FILES
+	json_data_parser.h
 	parameter_set.h
 	perf_utils.h
 	property_item.h
 	statistics.h
+	type_name.h
 	unique_id_generator.h
 )
 

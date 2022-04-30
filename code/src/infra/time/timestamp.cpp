@@ -1,5 +1,3 @@
-// Orjinal yazı için: https://www.yazilimperver.com/index.php/2020/11/09/haftalik-c-33-zaman-bilgisi-etiketi/
-// For original post: https://www.yazilimperver.com/index.php/2020/11/09/haftalik-c-33-zaman-bilgisi-etiketi/
 #include "timestamp.h"
 
 // Asagida ihtiyac duyuacaginiz baslik dosyalarini görebilirsiniz

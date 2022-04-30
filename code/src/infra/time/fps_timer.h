@@ -27,46 +27,62 @@ public:
     void SetReportIntervalInSec(uint32_t val);
 protected:
 
-    // Minimum allowed fps
+    /** @brief Izin verilen minimum FPS */
     const double cMIN_TARGET_FPS = 10.0;
 
-    // If you set this above the refresh of your monitor and enable VSync it'll break! Be aware!
+    /** @brief Izin verilen maksimum FPS, bu degerleri belirlerken monitorun VSYNC durumuna dikkat edilmeli! */
     const double cMAX_TARGET_FPS = 120.0;
 
-    // Frame start time
+    /** @brief Frame baslangic zamani */
     std::chrono::high_resolution_clock::time_point mFrameStartTime;
 
-    // Frame end time
+    /** @brief Frame bitis zamani */
     std::chrono::high_resolution_clock::time_point mFrameEndTime;
 
-    // How many milliseconds between the last frame and this frame
+    /** @brief En son gecen frame zamaninin milisaniye cinsinden karsiligi */
     std::chrono::milliseconds mFrameDuration;
 
-    // The desired FPS to run at (i.e. maxFPS)
+    /** @brief Hedeflenen FPS degeri */
     double mTargetFps;
 
-    // The current FPS value 
+    /** @brief En son hesaplanan FPS degeri */
     double mCurrentFps;
 
-    // How many frames have been drawn s
-    int32_t mFrameCount;
-
-    // How many milliseconds each frame should take to hit a target FPS value (i.e. 60fps = 1.0 / 60 = 0.016ms)
+    /** @brief Hedeflenen FPS icin, ilgili frame'in milisaniye cinsinden ne kadar surecegini tutar */
     double mTargetFrameDurationInSec{ 0 };
     std::chrono::milliseconds mTargetFrameDurationInMsec{ 0 };
 
-    // How long to sleep if we're exceeding the target frame rate duration
-    std::chrono::milliseconds mSleepDuration;
-
-    // The timestamp of when we last reported
+    /** @brief En son FPS raporlama zamani */
     std::chrono::high_resolution_clock::time_point mLastReportTime;
 
-    // Is reporting enabled
+    /** @brief Raporlama aktif mi */
     bool mIsReportingEnabled;
 
-    // How often to update the FPS value
+    /** @brief FPS degeri ne kadar zamanda bir raporlanacak */
     double mReportIntervalInSeconds;
     std::chrono::nanoseconds mReportInterval;
 };
 
 #endif // FPSTIMER_H__
+
+/**
+Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
