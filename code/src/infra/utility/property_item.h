@@ -1,33 +1,25 @@
+#ifndef PROPERTYITEM
+#define PROPERTYITEM
+
 /*!
  * @file	property_item.h.
  * @date	19.01.2021
  * @author	Yazilimperver
- * @brief	
+ * @brief	Isim deger ikilisi tutmak icin kullanilabilecek olan yardimci sinif
  * @remark	Copyright (c) 2021, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
 #include <string>
 #include <any>
 
-/*! @brief	Property item for name value pair. */
 struct PropertyItem {
-	/*! @brief	Default constructor */
 	PropertyItem();
-
-	/*!
-	 * @brief	Yapici
-	 *
-	 * @param 	name 	Ýsim
-	 * @param 	value	Ýlgili deðer
-	 */
 	PropertyItem(const std::string& name, const std::any& value);
 
-	/*! @brief	The name */
-	std::string mName;
-	
-	/*! @brief	The value */
+	std::string mName;	
 	std::any mValue;
 };
+#endif // !PROPERTYITEM
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

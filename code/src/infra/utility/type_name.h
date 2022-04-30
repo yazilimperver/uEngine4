@@ -1,3 +1,6 @@
+#ifndef TYPENAME
+#define TYPENAME
+
 /**
  * @file type_name.h.
  * @date 20.03.2022
@@ -5,8 +8,6 @@
  * @brief  https://stackoverflow.com/questions/81870/is-it-possible-to-print-a-variables-type-in-standard-c/56766138#56766138
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
-
 #include <string_view>
 
 template <typename T>
@@ -30,3 +31,4 @@ constexpr auto type_name() {
 	return name;
 }
 
+#endif // TYPENAME

@@ -1,88 +1,35 @@
+#ifndef PARAMETERSET
+#define PARAMETERSET
+
 /*!
  * @file	parameter_set.h.
  * @date	1.01.2021
  * @author	Yazilimperver
- * @brief	Class responsible for holding set of parameters that can be used for different purposes such as configuration
+ * @brief	Isim/deger parametreleri tutmak icin kullanilabilecek olan yardimci siniftir.
  */
-#pragma once
+
 
 #include <any>
 #include <string>
 #include <optional>
 #include <unordered_map>
 
-/*! @brief	This class is responsible for holding set of parameters */
 class ParameterSet {
 public:
-	/*! @brief	Print currently registered parameters */
 	void PrintCurrentParameters();
-
-	/*!
-	 * @brief	This method update existing parameter value and add given parameter if not exist
-	 *
-	 * @param	paramName 	Parameter Name.
-	 * @param	paramValue	Parameter Value.
-	 */
 	void UpdateParameterValue(const std::string& paramName, const std::any& paramValue);
-
-	/*!
-	 * @brief	This method check if current mapping contains given parameter name
-	 *
-	 * @param	paramName	The parameter that we will check.
-	 *
-	 * @returns	true if it exist, false o.w.
-	 */
 	bool HasParameter(const std::string& paramName);
-
-	/*!
-	 * @brief	paramName ile belirtilen parametre var ise temizler
-	 *
-	 * @param 	paramName	Name of the parameter.
-	 *
-	 * @returns	true if it exist, false o.w.
-	 */
 	bool RemoveParameter(const std::string& paramName);
-
-	/*!
-	 * @brief	Obtain parameter value with respect to given fiParametereld name
-	 *
-	 * @param	paramName	Parameter Name.
-	 *
-	 * @returns	The value of parameter if exist o.w. no value is returned!
-	 */
 	std::optional<std::any> GetParameterValue(const std::string& paramName);
 
-	/*!
-	 * @brief	The template version of getParameterValue which returns the requested value as
-	 * 			parameter to prevent any cast
-	 *
-	 * @tparam	T	Generic type parameter.
-	 * @param 		  	paramName 	Parameter Name.
-	 * @param [in,out]	paramValue	Parameter Value.
-	 *
-	 * @returns	true if parameter is found, o.w. false.
-	 */
 	template <typename T>
 	bool GetParameterValue(const std::string& paramName, T& paramValue);
 
-	/*! @brief	Mevcut parametre listesini temizler */
 	void Clear();
 protected:
-
-	/*! @brief	Each parameter will be registered via a Parameter name in string as they will not affect the runtime performance
-				Each communication medium is responsible for specific parameter */
 	std::unordered_map<std::string, std::any> mParameters;
 };
 
-/*!
- * @brief	Gets parameter value
- *
- * @tparam	T	Generic type parameter.
- * @param 		  	paramName 	Name of the parameter.
- * @param [in,out]	paramValue	The parameter value.
- *
- * @returns	True if it succeeds, false if it fails.
- */
 template <typename T>
 bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue)
 {
@@ -100,8 +47,10 @@ bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue
 	return isValueExist;
 }
 
+#endif // !PARAMETERSET
+
 /*!
-Copyright (c) [2021][yazilimpervergs@gmail.com]
+Copyright (c) [2022][yazilimpervergs@gmail.com]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

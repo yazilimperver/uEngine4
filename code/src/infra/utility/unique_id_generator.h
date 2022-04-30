@@ -1,42 +1,24 @@
+#ifndef UNIQUEIDGENERATOR
+#define UNIQUEIDGENERATOR
+
 /*!
  * @file	UniqueIDGenerator.h.
  * @date	1.01.2021
  * @author	Yazilimperver
- * @brief	Declares the unique id generator class
+ * @brief	Essiz bir tanimlayici uretmek icin kullanilabilece olan bir siniftir
  */
-#pragma once
-
 #include <cstdint>
 #include <atomic>
 
-/*!
- * @class	UniqueIDGenerator
- *
- * @brief	A unique ID generator.
- */
 class UniqueIDGenerator {
 public:
-
-	/*!
-	 * @fn	static void UniqueIDGenerator::reset();
-	 *
-	 * @brief	Resets this object
-	 */
 	static void Reset();
-
-	/*!
-	 * @fn	static uint64_t UniqueIDGenerator::getNextID();
-	 *
-	 * @brief	Gets the next ID
-	 *
-	 * @returns	The next ID.
-	 */
 	static uint64_t GetNextID();
 private:
-
-	/*! @brief	The ID source */
 	inline static std::atomic<uint64_t> mIdSource{ 0U };
 };
+
+#endif // !UNIQUEIDGENERATOR
 
 /*!
 Copyright (c) [2021][yazilimpervergs@gmail.com]

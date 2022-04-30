@@ -1,11 +1,14 @@
+#ifndef STATISTICS
+#define STATISTICS
+
 /*!
  * @file	Statistics.h.
  * @date	31.08.2021
  * @author	Yazilimperver
  * @brief	Detaylar için: https://github.com/cameron314/microbench/blob/master/microbench.h
+ * 			Temel istatistiksel verileri tutmak için kullanýlabilecek yardimci sýnýftýr.
  * @remark	Copyright (c) 2021, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
 
 #include <cstdint>
 #include <cassert>
@@ -16,10 +19,6 @@
 #include <vector>
 #include <string_view>
 
-/**
- * @class Statistics
- * @brief Temel istatistiksel verileri tutmak için kullanýlabilecek sýnýftýr.
- */
 class Statistics {
 public:
 	Statistics(double* results, std::size_t count);
@@ -45,6 +44,7 @@ private:
 	double mVariance{ 0 };
 };
 
+#endif // !STATISTICS
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
 

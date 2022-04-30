@@ -6,13 +6,6 @@ using namespace std;
 using namespace std::chrono;
 
 namespace Tools {
-    /*!
-    * @brief	Multithreaded olcum islemleri icin kullanilabilecek yardimci fonksiyondur
-    *
-    * @param 	threadCount   	Thread sayisi
-    * @param 	messageCount  	Mesaj adeti.
-    * @param 	iterationCount	(Opsiyonel) Iterasyon sayisi.
-    */
     std::vector<double>  PerfUtils::MultithreadedBenchEntry(std::function<void(int)> threadFunc, int threadCount, int testRunCount, int iterationCount) {
         using std::chrono::high_resolution_clock;
         std::vector<double> results(iterationCount, 0);
