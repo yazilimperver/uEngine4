@@ -2,36 +2,24 @@
  * @file gamepad_event_listener.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Gamepad olaylarini dinlemek icin kullanilacak olan servis arayuzudur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef GAMEPAD_EVENT_LISTENER
+#define GAMEPAD_EVENT_LISTENER
 
 #include <cstdint>
 #include <string_view>
 #include "input_actions.h"
 
-/**
-* @struct uGamepadButtonData
-* @brief A gamepad button data.
-*/
 struct GamepadButtonData;
-
-/**
-* @struct uGamepadAxisData
-* @brief A gamepad axis data.
-*/
 struct GamepadAxisData;
-
-/**
-* @class uIGamepadEventListener
-* @brief A ý gamepad event listener.
-*/
 class GamepadEventListener {
 public:
 	/**
 		* @brief  Gamepad events that will be provided to listener in case of event happening
-		* @param 	controllerIndex The controller ýndex.
+		* @param 	controllerIndex The controller ï¿½ndex.
 		* @param 	inputAction	    The input action.
 		* @param 	buttonData	    Information describing the button.
 		*/
@@ -39,7 +27,7 @@ public:
 
 	/**
 		* @brief Gamepad event
-		* @param 	controllerIndex The controller ýndex.
+		* @param 	controllerIndex The controller ï¿½ndex.
 		* @param 	axisData	    Information describing the axis.
 		*/
 	virtual void GamepadEvent(int32_t controllerIndex, const GamepadAxisData& axisData) = 0;
@@ -80,3 +68,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* GAMEPAD_EVENT_LISTENER */

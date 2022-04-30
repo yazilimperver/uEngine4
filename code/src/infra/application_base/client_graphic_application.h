@@ -1,11 +1,14 @@
+#ifndef CLIENTGRAPHICAPPLICATION
+#define CLIENTGRAPHICAPPLICATION
+
 /**
  * @file client_graphic_application.h.
  * @date 16.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Calistirilacak olan grafiksel uygulamalar icin kullanilabilecek arayuz.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
 #include <cstdint>
 
 class SdlApplication;
@@ -17,6 +20,8 @@ public:
     virtual void Display(double tickTimeInMsec) = 0;
     virtual void Finalize() = 0;
 };
+
+#endif // !CLIENTGRAPHICAPPLICATION
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

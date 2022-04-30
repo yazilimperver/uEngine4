@@ -2,34 +2,18 @@
  * @file keyboard_event_listener.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Klavye girdilerini dinlemek icin kullanilacak olan arayuzdur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef KEYBOARD_EVENT_LISTENER
+#define KEYBOARD_EVENT_LISTENER
 #include <cstdint>
 
-/**
-* @enum InputActions
-* @brief Values that represent ýnput actions
-*/
 enum class InputActions : uint32_t;
-
-/**
-* @enum KeyboardCodes
-* @brief Values that represent keyboard codes
-*/
 enum class KeyboardCodes;
-
-/**
-* @enum KeyboardModifier
-* @brief Values that represent keyboard modifiers
-*/
 enum class KeyboardModifier;
 
-/**
-* @class KeyboardEventListener
-* @brief A keyboard event listener.
-*/
 class KeyboardEventListener {
 public:
 	/**
@@ -63,3 +47,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+#endif /* KEYBOARD_EVENT_LISTENER */

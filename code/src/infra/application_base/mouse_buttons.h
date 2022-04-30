@@ -2,16 +2,15 @@
  * @file mouse_buttons.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Fare tuslarini temsil eden enumeratordur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef MOUSE_BUTTONS
+#define MOUSE_BUTTONS
+
 #include <cstdint>
 
-/**
-* @enum  MouseButtons
-* @brief Values that represent mouse buttons
-*/
 enum class MouseButtons : int32_t {
 	MouseButton1 = 0,
 	MouseButton2 = 1,
@@ -49,3 +48,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* MOUSE_BUTTONS */

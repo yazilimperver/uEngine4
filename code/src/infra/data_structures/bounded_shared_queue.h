@@ -10,7 +10,9 @@
  * @copyright Copyright (c) 2021
  * 
  */
-#pragma once
+
+#ifndef BOUNDED_SHARED_QUEUE
+#define BOUNDED_SHARED_QUEUE
 
 #include <atomic>
 #include <condition_variable>
@@ -164,3 +166,6 @@ private:
 	/*! @brief En fazla alabilecegi boyut */
 	std::size_t mMaxSize;
 };
+
+
+#endif /* BOUNDED_SHARED_QUEUE */

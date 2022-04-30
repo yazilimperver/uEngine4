@@ -2,16 +2,15 @@
  * @file touch_data.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Dokunma verilerini temsil eden veri yapisidir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef TOUCH_DATA
+#define TOUCH_DATA
+
 #include <cstdint>
 
-/**
- * @struct TouchData
- * @brief A touch data.
- */
 struct TouchData {
     /** @brief The touch device id (valid also for multi gesture) */
     uint64_t TouchDeviceId;
@@ -74,3 +73,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* TOUCH_DATA */

@@ -24,6 +24,7 @@ set(HEADER_FILES
 	touch_event_handler.h
 	touch_service.h
 	window_parameter.h
+	window_parameter_serializer.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -38,7 +39,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 # Statik kutuphane olarak bu projeyi ekliyoruz
-add_library(${LIB_NAME} INTERFACE)
+add_library(${LIB_NAME} INTERFACE ${HEADER_FILES})
 
 # Windows icin bir kac ek tanimlama
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")

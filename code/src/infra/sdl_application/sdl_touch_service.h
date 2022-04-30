@@ -5,7 +5,9 @@
  * @brief
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef SDL_TOUCH_SERVICE
+#define SDL_TOUCH_SERVICE
 
 #include <cstdint>
 
@@ -42,3 +44,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* SDL_TOUCH_SERVICE */

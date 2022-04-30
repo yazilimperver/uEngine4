@@ -2,16 +2,15 @@
  * @file input_actions.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief
+ * @brief  Girdi olaylarini temsil eden siniftir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef INPUT_ACTIONS
+#define INPUT_ACTIONS
+
 #include <cstdint>
 
-/**
- * @enum InputActions
- * @brief Values that represent input actions
- */
 enum class InputActions : uint32_t {
 	ReleaseAction = 0,
 	PressAction = 1,
@@ -40,3 +39,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+#endif /* INPUT_ACTIONS */

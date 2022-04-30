@@ -7,7 +7,9 @@
  * @copyright Copyright (c) 2021
  * 
  */
-#pragma once
+
+#ifndef UNBOUNDED_SHARED_QUEUE
+#define UNBOUNDED_SHARED_QUEUE
 
 #include <atomic>
 #include <condition_variable>
@@ -131,3 +133,6 @@ private:
 	/*! @brief	Kuyrugu uyandirmak ve uyuytmak icin kullanacagimiz kosul degiskeni */
 	std::condition_variable mCondition;
 };
+
+
+#endif /* UNBOUNDED_SHARED_QUEUE */

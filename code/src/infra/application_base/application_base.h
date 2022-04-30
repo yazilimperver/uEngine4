@@ -2,16 +2,14 @@
  * @file application_base.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Uygulama siniflari icin kullanilabilecek olan ust sinif. Bu siniftan turetilen sinif ya ana thread ya da kendi threadinde kosuyor olmali
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+#ifndef APPLICATIONBASE
+#define APPLICATIONBASE
+
 #include <cstdint>
 
-/**
- * @class ApplicationBase
- * @brief Uygulama siniflari icin kullanilabilecek olan ust sinif. Bu siniftan turetilen sinif ya ana thread ya da kendi threadinde kosuyor olmali
- */
 class ApplicationBase {
 public:
     virtual void Start() = 0;
@@ -26,6 +24,8 @@ protected:
     /** @brief Uygulama kapatilirken yapilacak islevler */
     virtual void Finalize() = 0;
 };
+
+#endif // !APPLICATIONBASE
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

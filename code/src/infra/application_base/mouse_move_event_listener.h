@@ -2,23 +2,17 @@
  * @file mouse_move_event_listener.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Fare hareket olaylarina iliskin girdileri dinlemek icin kullanilacak olan arayuzdur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef MOUSE_MOVE_EVENT_LISTENER
+#define MOUSE_MOVE_EVENT_LISTENER
+
 #include <cstdint>
 
-/**
-* @class MouseMoveEventListener
-* @brief A mouse move event listener.
-*/
 class MouseMoveEventListener {
 public:
-	/**
-	* @brief Mouse move event
-	* @param 	x The x coordinate.
-	* @param 	y The y coordinate.
-	*/
 	virtual void MouseMoveEvent(double x, double y) = 0;
 };
 
@@ -43,3 +37,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* MOUSE_MOVE_EVENT_LISTENER */

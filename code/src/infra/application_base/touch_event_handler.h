@@ -2,34 +2,19 @@
  * @file touch_event_handler.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Dokunma olaylarini dinlemek icin kullanilabilecek olan arayuzdur.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef TOUCH_EVENT_HANDLER
+#define TOUCH_EVENT_HANDLER
+
 #include <cstdint>
 
-/**
-* @enum TouchAction
-* @brief Values that represent touch actions
-*/
 enum class TouchAction;
-
-/**
-* @struct TouchData
-* @brief A touch data.
-*/
 struct TouchData;
-
-/**
-* @class TouchService
-* @brief A service for accessing ý touches information.
-*/
 class TouchService;
 
-/**
-* @class TouchEventHandler
-* @brief A touch event handler.
-*/
 class TouchEventHandler {
 public:
 	/**
@@ -67,3 +52,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* TOUCH_EVENT_HANDLER */

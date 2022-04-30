@@ -3,9 +3,11 @@
  * \date    2019/06/07
  * \author  yazilimperver
  * \brief   
- * Copyright © 2019, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ * Copyright ï¿½ 2019, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef CONNECTEDCLIENT
+#define CONNECTEDCLIENT
 
 #include "IConnectedClient.h"
 
@@ -98,3 +100,6 @@ protected:
   OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
   SOFTWARE.
 */
+
+
+#endif /* CONNECTEDCLIENT */

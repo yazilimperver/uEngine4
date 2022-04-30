@@ -1,4 +1,5 @@
-#pragma once
+#ifndef IPEERMEDIUM
+#define IPEERMEDIUM
 
 #include <QObject>
 #include "Utility/PropertyItem.h"
@@ -129,3 +130,6 @@ signals:
     /*! @brief	There is data that need to be processed */
     void dataReadyToRead();
 };
+
+
+#endif /* IPEERMEDIUM */

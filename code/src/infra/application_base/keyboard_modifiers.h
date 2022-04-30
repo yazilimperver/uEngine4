@@ -2,16 +2,15 @@
  * @file keyboard_modifiers.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Ctrl, shift gibi klavye modifiyecileri temsil eden enumerator
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef KEYBOARD_MODIFIERS
+#define KEYBOARD_MODIFIERS
+
 #include <cstdint>
 
-/**
-* @enum  KeyboardModifier
-* @brief Values that represent keyboard modifiers
-*/
 enum class KeyboardModifier : int32_t {
 	KMOD_NONE = 0x0000,
 	KMOD_LSHIFT = 0x0001,
@@ -46,3 +45,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* KEYBOARD_MODIFIERS */

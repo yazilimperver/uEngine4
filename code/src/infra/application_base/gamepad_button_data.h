@@ -2,10 +2,13 @@
  * @file gamepad_button_data.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Gamepad dugme bilgilerini iceren veri yapisi
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef GAMEPAD_BUTTON_DATA
+#define GAMEPAD_BUTTON_DATA
+
 #include <cstdint>
 
  /**
@@ -66,3 +69,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* GAMEPAD_BUTTON_DATA */

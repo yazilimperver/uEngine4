@@ -2,16 +2,15 @@
  * @file touch_action.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Dokunma olaylarini temsil edecek olan enumeratordur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef TOUCH_ACTION
+#define TOUCH_ACTION
+
 #include <cstdint>
 
-/**
- * @enum TouchAction
- * @brief Values that represent touch actions
- */
 enum class TouchAction : int32_t {
     FingerMotion = 0,
     FingerDown= 1,
@@ -40,3 +39,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* TOUCH_ACTION */

@@ -1,17 +1,15 @@
 /**
- * @file finger_data.h.
- * @date 15.03.2022
- * @author Yazilimperver
- * @brief 
- * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
- */
-#pragma once
+* @file finger_data.h.
+* @date 15.03.2022
+* @author Yazilimperver
+* @brief  Dokunmatik arayuz icin kullanilabilecek dokunma verisi
+* @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+*/
+#ifndef FINGERDATA
+#define FINGERDATA
+
 #include <cstdint>
 
-/**
- * @struct FingerData
- * @brief A finger data.
- */
 struct FingerData {
     /** @brief The x-axis location of the touch event, normalized (0...1) */
     float X;
@@ -22,6 +20,8 @@ struct FingerData {
     /** @brief The quantity of pressure applied, normalized (0..1) */
     float Pressure;
 };
+
+#endif // !FINGERDATA
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

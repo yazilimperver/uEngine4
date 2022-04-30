@@ -2,38 +2,20 @@
  * @file mouse_event_listener.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Fare hareket ve dugme olaylarini dinlemek icin kullanilabilecek olan arayuzdur
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef MOUSE_EVENT_LISTENER
+#define MOUSE_EVENT_LISTENER
+
 #include <cstdint>
 
-/**
-* @enum MouseButtons
-* @brief Values that represent mouse buttons
-*/
 enum class MouseButtons;
-
-/**
-* @enum InputActions
-* @brief Values that represent ýnput actions
-*/
 enum class InputActions : uint32_t;
 
-/**
-* @class MouseEventListener
-* @brief A ý mouse event listener.
-*/
 class MouseEventListener {
 public:
-	/**
-	* @brief Mouse button event
-	* @param 	button The button.
-	* @param 	action The action.
-	* @param 	mods   The mods.
-	* @param 	x	   The x coordinate.
-	* @param 	y	   The y coordinate.
-	*/
 	virtual void MouseButtonEvent(MouseButtons button, InputActions action, int32_t mods, int32_t x, int32_t y) = 0;
 };
 
@@ -58,3 +40,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* MOUSE_EVENT_LISTENER */

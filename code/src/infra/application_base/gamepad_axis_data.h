@@ -2,16 +2,15 @@
  * @file gamepad_axis_data.h.
  * @date 16.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Gamepad eksen verisini tutan veri yapisidir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef GAMEPAD_AXIS_DATA
+#define GAMEPAD_AXIS_DATA
+
 #include <cstdint>
 
- /**
- * @struct uGamepadAxisData
- * @brief A gamepad axis data.
- */
 struct GamepadAxisData {
 	/** @brief The left trigger */
 	int16_t mLeftTrigger;
@@ -48,3 +47,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* GAMEPAD_AXIS_DATA */

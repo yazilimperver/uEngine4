@@ -2,24 +2,18 @@
  * @file touch_service.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  SDL dokunma kabiliyetlerini kullanmak icin kullanilabilecek olan arayuzudr
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef TOUCH_SERVICE
+#define TOUCH_SERVICE
 
 #include <cstdint>
 #include <optional>
 
-/**
-* @struct FingerData
-* @brief A finger data.
-*/
 struct FingerData;
 
-/**
-* @class TouchService
-* @brief Just wrapper for SDL touch API
-*/
 class TouchService {
 public:
     /**
@@ -73,3 +67,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* TOUCH_SERVICE */

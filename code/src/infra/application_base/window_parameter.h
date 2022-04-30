@@ -1,23 +1,19 @@
 /**
-* @file window_parameter.h
-* @date  2015/10/11 22:33
-* @brief Auto generated config content data
-* @author Mehmet Fatih ULUAT
-*
-* @details
-*
-* Copyright © 2015, uEngine V3.0 Mehmet Fatih ULUAT <fatihuluat@gmail.com>
-*/
-#pragma once
+ * @file window_parameter.h.
+ * @date 30.04.2022
+ * @author Yazilimperver
+ * @brief  Olusturulacak olan SDL penceresine iliskin verileri tutacak olan veri yapisidir
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
+
+#ifndef WINDOW_PARAMETER
+#define WINDOW_PARAMETER
+
 #include <cstdint>
 #include <string>
 
 #include "graphics/color.h"
 
-/**
- * @struct WindowParameter
- * @brief A window parameter.
- */
 struct WindowParameter {
     //! Title of application window
     /** @brief The title */
@@ -73,3 +69,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* WINDOW_PARAMETER */

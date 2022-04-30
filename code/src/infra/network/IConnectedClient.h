@@ -3,10 +3,10 @@
  * \date    2019/06/06
  * \author  yazilimperver
  * \brief   
- * Copyright © 2019, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ * Copyright ï¿½ 2019, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#ifndef ICONNECTEDCLIENT_H__
-#define ICONNECTEDCLIENT_H__
+#ifndef ICONNECTEDCLIENT
+#define ICONNECTEDCLIENT
 
 #include <vector>
 #include <QByteArray>
@@ -60,7 +60,7 @@ public:
         virtual int64_t writeData(const int8_t* data) = 0;
 };
 
-#endif // ICONNECTEDCLIENT_H__
+#endif /* ICONNECTEDCLIENT */
 
 /*
   Copyright (c) [2019][Yazilimperver <yazilimpervergs@gmail.com>]

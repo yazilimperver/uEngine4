@@ -2,10 +2,13 @@
  * @file keyboard_codes.h.
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Klavye girdilerini temsil eden enumerator
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef KEYBOARD_CODES
+#define KEYBOARD_CODES
+
 #include <cstdint>
 
 /**
@@ -170,3 +173,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* KEYBOARD_CODES */

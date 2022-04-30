@@ -2,24 +2,20 @@
  * @file gamepad_data.h
  * @date 15.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Gamepad dugme ve eksen bilgilerini iceren veri yapisi
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+
+#ifndef GAMEPAD_DATA
+#define GAMEPAD_DATA
+
 #include <cstdint>
 
 #include "gamepad_axis_data.h"
 #include "gamepad_button_data.h"
 
-/**
-* @struct GamepadData
-* @brief A gamepad data.
-*/
 struct GamepadData {
-	/** @brief Information describing the button */
 	GamepadButtonData mButtonData;
-	
-	/** @brief Information describing the axis */
 	GamepadAxisData mAxisData;
 };
 
@@ -44,3 +40,6 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+
+#endif /* GAMEPAD_DATA */
