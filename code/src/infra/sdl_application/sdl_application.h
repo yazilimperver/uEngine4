@@ -11,6 +11,7 @@
 #include <cstdint>
 #include <vector>
 #include <atomic>
+#include <memory>
 
 #include "application_base/application_base.h"
 #include "application_base/window_parameter.h"
@@ -68,29 +69,20 @@ protected:
     //! For more details check https://gafferongames.com/post/fix_your_timestep/ and http://gameprogrammingpatterns.com/game-loop.html
     //! For best information: http://www.yazilimperver.com/index.php/2017/12/09/oyun-donguleri/
     virtual bool Initialize() override;
+
     //virtual uErrorCode PostInitialize() override;
     virtual void Finalize() override;
     virtual void Input(double intervalInMsec);
     virtual void Update(double intervalInMsec);
     virtual void Display(double intervalInMsec);
 
-    //! Handle SDL events
     void HandleSDLEvents();
-
-    //! Parse windows parameters
     void ParseWindowParameters();
     void ParseSdlParameters();
-
-    //! Full screen switch
     void SetFullScreen(bool isFullscreen);
 
-    //! Initialize SDL
     bool InitializeSDL();
-
-    //! Initialize window settings
     void InitializeWindows();
-
-    // Initialize opengl settings
     bool InitializeOpenGL();
 
     /** @brief Ýstemci grafik uygulamasý */

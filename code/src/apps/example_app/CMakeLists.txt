@@ -33,8 +33,7 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} concurrency time ${SDL2_LIBRARIES})
-target_link_libraries(${APP_NAME} nlohmann_json spdlog_header_only)
+target_link_libraries(${APP_NAME} concurrency time ${SDL2_LIBRARIES} nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} )
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS})

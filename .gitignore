@@ -439,3 +439,5 @@ FodyWeavers.xsd
 # JetBrains Rider
 *.sln.iml
 *.exp
+/code/src/buildLinux
+/code/src/buildNinja

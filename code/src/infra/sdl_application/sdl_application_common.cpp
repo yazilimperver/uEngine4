@@ -2,8 +2,8 @@
 
 #include <chrono>
 
-#include <Gl/glew.h>
-#include <GL/GL.h>
+#include <gl/glew.h>
+#include <GL/gl.h>
 #include <SDL.h>
 
 #include "spdlog/spdlog.h"
@@ -339,7 +339,7 @@ void SdlApplication::HandleSDLEvents() {
             // User requests quit
         case SDL_QUIT: {
             spdlog::info("Quit Event Is Received");
-            mIsAppActive.store(false);
+            Stop();
         }
         break;
         // User presses a key
@@ -363,13 +363,13 @@ void SdlApplication::HandleSDLEvents() {
                 || keyCode == KeyboardCodes::KEY_ESCAPE) {
 
                 spdlog::info("Q or Esc is pressed!");
-                mIsAppActive.store(false);
+                Stop();
             }
 									   
 			if (e.key.keysym.sym == SDLK_AC_BACK) {
 				if (false == mIgnoreExitWithBackButton) {
                     spdlog::info("Q or Esc is pressed!");
-                    mIsAppActive.store(false);
+                    Stop();
 				}
 				else {
 					keyCode = KeyboardCodes::KEY_ESCAPE;

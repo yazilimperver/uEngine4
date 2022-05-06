@@ -23,6 +23,8 @@ set(GLEW_DIR "${EXT_INCLUDE_FOLDER}/glew-2.1.0")
 set(FREEGLUT_DIR "${EXT_INCLUDE_FOLDER}/freeglut-2.8.0")
 set(CEREAL_DIR "${EXT_INCLUDE_FOLDER}/cereal-1.3.2")
 
+set(OpenGL_GL_PREFERENCE LEGACY)
+
 # Projeleri organize ederken dizinleri kullanmayi seciyioruz
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 

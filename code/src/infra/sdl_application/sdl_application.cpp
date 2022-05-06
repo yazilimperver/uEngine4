@@ -2,8 +2,8 @@
 
 #include <chrono>
 
-#include <Gl/glew.h>
-#include <GL/GL.h>
+#include <gl/glew.h>
+#include <GL/gl.h>
 
 #include <SDL.h>
 
@@ -44,6 +44,7 @@ void SdlApplication::Stop() {
 
     spdlog::info("SDL application execution stop command initiated!");
     mIsAppActive.store(false);
+    mSdlTicker.StopTicker();
 }
 
 void SdlApplication::Input(double intervalInMsec) {

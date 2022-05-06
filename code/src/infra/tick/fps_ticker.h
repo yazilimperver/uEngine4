@@ -10,6 +10,7 @@
 
 #include "time/fps_timer.h"
 #include "tickable.h"
+#include <atomic>
 
 class FpsTicker {
 public:

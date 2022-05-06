@@ -39,7 +39,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 # Statik kutuphane olarak bu projeyi ekliyoruz
-add_library(${LIB_NAME} INTERFACE ${HEADER_FILES})
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	add_library(${LIB_NAME} INTERFACE ${HEADER_FILES})
+else()
+	add_library(${LIB_NAME} INTERFACE)
+endif()
 
 # Windows icin bir kac ek tanimlama
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
@@ -48,7 +52,9 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()
 
 # Kutuphaneleri baglayalim
-target_link_libraries(${LIB_NAME} INTERFACE spdlog_header_only)
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	target_link_libraries(${LIB_NAME} INTERFACE spdlog_header_only)
+endif()
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${LIB_NAME} INTERFACE ${INFRA_INCLUDE_FOLDER})

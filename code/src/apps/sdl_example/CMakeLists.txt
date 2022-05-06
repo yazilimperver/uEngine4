@@ -11,6 +11,7 @@ find_package(SDL2IMAGE REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
+find_package(OpenGL REQUIRED)
 
 # Baslik dosyalari
 set(HEADER_FILES
@@ -44,12 +45,12 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} sdl_application tick time utility)
-target_link_libraries(${APP_NAME} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES} nlohmann_json spdlog_header_only opengl32.lib )
+target_link_libraries(${APP_NAME} sdl_application tick time utility nlohmann_json spdlog_header_only)
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS}  ${SDL2IMAGE_INCLUDE_DIRS})
-target_include_directories(${APP_NAME} PUBLIC ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS} ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER Src/Apps)
