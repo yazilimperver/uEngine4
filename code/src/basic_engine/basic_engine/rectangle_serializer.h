@@ -7,10 +7,10 @@
 namespace basic_engine {
 	template<class Archive, typename T>
 	void serialize(Archive& archive, basic_engine::Rectangle<T>& m) {
-		archive(cereal::make_nvp("Left", m.mLeft),
-			cereal::make_nvp("Top", m.mTop),
-			cereal::make_nvp("Width", m.mWidth),
-			cereal::make_nvp("Height", m.mHeight));
+		archive(cereal::make_nvp("Left", m.Left),
+			cereal::make_nvp("Top", m.Top),
+			cereal::make_nvp("Width", m.Width),
+			cereal::make_nvp("Height", m.Height));
 	}
 }
 
