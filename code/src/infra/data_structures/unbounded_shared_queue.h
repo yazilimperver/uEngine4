@@ -41,7 +41,7 @@ public:
 	bool Pop(T& out) {
 		{
 			std::unique_lock<std::mutex> lock(mGuardMutex);
-			mCondition.wait(lock, [this]() { return !this->mQueue.empty() || !mValid; });
+			mTaskCV.wait(lock, [this]() { return !this->mQueue.empty() || !mValid; });
 
 			// Arada gereksiz uyuanmalar karsi bu tarz bir onlem almak gerekiyor.
 			if (!mValid) {
@@ -59,7 +59,7 @@ public:
 		{
 			std::unique_lock<std::mutex> lock(mGuardMutex);
 			
-			if (!mCondition.wait_for(lock, waitDuration, [this]() { return !this->mQueue.empty() || !mValid; })) {
+			if (!mTaskCV.wait_for(lock, waitDuration, [this]() { return !this->mQueue.empty() || !mValid; })) {
 				return false;
 			}
 
@@ -80,7 +80,7 @@ public:
 			std::lock_guard<std::mutex> lock(mGuardMutex);
 			mQueue.push(std::move(value));
 		}
-		mCondition.notify_one();
+		mTaskCV.notify_one();
 	}
 	
 	/*! @brief	Yeni kaydi kuyruha ekler */
@@ -89,7 +89,7 @@ public:
 			std::lock_guard<std::mutex> lock(mGuardMutex);
 			mQueue.push(std::move(value));
 		}
-		mCondition.notify_one();
+		mTaskCV.notify_one();
 	}
 
 	/*! @brief	Kuyruk bos mu degil mi, kontrolu yapar. */
@@ -104,14 +104,14 @@ public:
 		while (!mQueue.empty()) {
 			mQueue.pop();
 		}
-		mCondition.notify_all();
+		mTaskCV.notify_all();
 	}
 
 	/*! @brief Kuyrugu gecersiz kilmaya yonelik islevleri gerceklestirir. Butun bekleyenleri uyandirir.	 */
 	void Invalidate(void) {
 		std::lock_guard<std::mutex> lock{ mGuardMutex };
 		mValid = false;
-		mCondition.notify_all();
+		mTaskCV.notify_all();
 	}
 
 	/*! @brief Kuyrugun gecerli olup/olmadigini doner.*/
@@ -131,7 +131,7 @@ private:
 	std::queue<T> mQueue;
 	
 	/*! @brief	Kuyrugu uyandirmak ve uyuytmak icin kullanacagimiz kosul degiskeni */
-	std::condition_variable mCondition;
+	std::condition_variable mTaskCV;
 };
 
 

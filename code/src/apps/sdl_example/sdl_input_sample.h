@@ -28,7 +28,7 @@ protected:
 	WindowParameter mParameters;
 
 	SDL_Point mCenter{ 0,0 };
-	// Inherited via KeyboardEventListener
+
 	virtual void KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) override;
 };
 

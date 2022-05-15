@@ -20,11 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\src\infra\concurrency\active_object.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\infra\concurrency\basic_thread_pool.cpp" />
     <ClCompile Include="..\..\..\..\..\src\infra\concurrency\thread_base.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\infra\concurrency\thread_pool.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\src\infra\concurrency\active_object.h" />
+    <ClInclude Include="..\..\..\..\..\src\infra\concurrency\basic_thread_pool.h" />
     <ClInclude Include="..\..\..\..\..\src\infra\concurrency\thread_base.h" />
+    <ClInclude Include="..\..\..\..\..\src\infra\concurrency\thread_pool.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

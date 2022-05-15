@@ -1,0 +1,148 @@
+{
+  "FrameTime": 200.0,
+  "TextureFiles": [
+    {
+      "Label": "Main",
+      "FileName": "SpriteSheet.png"
+    }
+  ],
+  "InitialAnimation": "DownWalking",
+  "Animations": [
+    {
+      "AnimationName": "DownWalking",
+      "TextureName": "Main",
+      "Frames": [
+        {
+          "name": "sprite1",
+          "x": 32,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite2",
+          "x": 64,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite3",
+          "x": 32,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite4",
+          "x": 0,
+          "y": 0,
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "AnimationName": "LeftWalking",
+      "TextureName": "Main",
+      "Frames": [
+        {
+          "name": "sprite1",
+          "x": 32,
+          "y": 32,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite2",
+          "x": 64,
+          "y": 32,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite3",
+          "x": 32,
+          "y": 32,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite4",
+          "x": 0,
+          "y": 32,
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "AnimationName": "RightWalking",
+      "TextureName": "Main",
+      "Frames": [
+        {
+          "name": "sprite1",
+          "x": 32,
+          "y": 64,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite2",
+          "x": 64,
+          "y": 64,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite3",
+          "x": 32,
+          "y": 64,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite4",
+          "x": 0,
+          "y": 64,
+          "width": 32,
+          "height": 32
+        }
+      ]
+    },
+    {
+      "AnimationName": "UpWalking",
+      "TextureName": "Main",
+      "Frames": [
+        {
+          "name": "sprite1",
+          "x": 32,
+          "y": 96,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite2",
+          "x": 64,
+          "y": 96,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite3",
+          "x": 32,
+          "y": 96,
+          "width": 32,
+          "height": 32
+        },
+        {
+          "name": "sprite4",
+          "x": 0,
+          "y": 96,
+          "width": 32,
+          "height": 32
+        }
+      ]
+    }
+  ]
+}

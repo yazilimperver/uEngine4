@@ -23,5 +23,8 @@
     <None Include="data.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="SpriteExample.json">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

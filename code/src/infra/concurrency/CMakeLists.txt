@@ -7,6 +7,8 @@ set(LIB_NAME concurrency)
 set(HEADER_FILES
 	active_object.h
 	thread_base.h
+	basic_thread_pool.h
+	thread_pool.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -16,6 +18,8 @@ source_group("Header Files" FILES ${HEADER_FILES})
 set(SOURCE_FILES
     active_object.cpp
     thread_base.cpp
+	basic_thread_pool.cpp
+	thread_pool.cpp
  )
 
 # Kaynak dosya grubu (VS altindaki filtre gibi)

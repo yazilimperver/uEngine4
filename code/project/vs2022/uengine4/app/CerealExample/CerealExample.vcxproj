@@ -63,6 +63,8 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Cereal.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableDebug.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -70,6 +72,8 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableRelease.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -77,6 +81,8 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableDebug.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -84,6 +90,8 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_UserMacros.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_Infra.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableRelease.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -160,6 +168,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="data.json" />
+    <None Include="SpriteExample.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\basic_engine\basic_engine\basic_engine.vcxproj">
+      <Project>{a650f957-9758-47f6-b515-da3b9c6fc4f7}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

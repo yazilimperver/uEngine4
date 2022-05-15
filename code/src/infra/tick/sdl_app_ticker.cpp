@@ -20,24 +20,24 @@ void SdlAppTicker::Execute(int32_t targetFps) {
     mTickData.TickPerSeconds = targetFps;
     mTickData.SkipTicks = 1000 / mTickData.TickPerSeconds;
     mTickData.MaxFrameCountToSkip = 5; 
-    
+        
     high_resolution_clock::time_point currentTime;
     high_resolution_clock::time_point previousTime = high_resolution_clock::now();
     double elapsedInMsec{ 0.0 };
+    auto nextGameTick = time_point_cast<milliseconds>(system_clock::now()).time_since_epoch().count();
 
     while (true == mIsTickerActive.load()) {
         int32_t loopCount{ 0 };
         double interpolation{ 0.0 };
-        auto nextGameTick = time_point_cast<milliseconds>(system_clock::now()).time_since_epoch().count();
-
+        
         currentTime = high_resolution_clock::now();
         elapsedInMsec = static_cast<double>(duration_cast<nanoseconds>(currentTime - previousTime).count()) * 0.000001;
         previousTime = currentTime;
 
        // Girdi tetikleyici
-        mTickableApp->Input(elapsedInMsec);
+       mTickableApp->Input(elapsedInMsec);
 
-        while ((time_point_cast<milliseconds>(system_clock::now()).time_since_epoch().count() > nextGameTick)
+       while ((time_point_cast<milliseconds>(system_clock::now()).time_since_epoch().count() > nextGameTick)
             &&
             (loopCount < mTickData.MaxFrameCountToSkip)) {
 
