@@ -10,9 +10,10 @@
 
 
 namespace basic_engine {
-    SpriteSheet::SpriteSheet(std::string_view spriteSheetConfig, bool paused, bool looped)
+    SpriteSheet::SpriteSheet(std::string_view spriteSheetConfig, const Rectangle<int32_t>& spriteBoundary, bool paused, bool looped)
         : mCurrentAnimation{ nullptr }
         , mSpriteSheetConfig{ spriteSheetConfig }
+        , mSpriteBoundary {spriteBoundary.Left, spriteBoundary.Top, spriteBoundary.Width, spriteBoundary.Height }
         , mCurrentFrameIndex{ 0 }
         , mIsPaused{ paused }
         , mIsLooped{ looped }
@@ -32,7 +33,8 @@ namespace basic_engine {
         }
     }
 
-    void SpriteSheet::Initialize() {
+    bool SpriteSheet::Initialize() {
+        bool isInitialized{ false };
         if (auto parameters = ParseConfigFile(mSpriteSheetConfig); parameters.has_value()) {
             mLastUsedParameters = parameters.value();
 
@@ -67,7 +69,8 @@ namespace basic_engine {
             }
 
             if (mLoadedAnimations.contains(mLastUsedParameters.InitialAnimation)) {
-                mCurrentAnimation = mLoadedAnimations[mLastUsedParameters.InitialAnimation].get();
+                SetAnimation(mLastUsedParameters.InitialAnimation);
+                isInitialized = true;
             }
             else {
                 spdlog::error("Initial animation: {} not found!", mLastUsedParameters.InitialAnimation);
@@ -77,6 +80,8 @@ namespace basic_engine {
         else {
             spdlog::error("Spritesheet parse error, so spritesheet not updated!");
         }
+
+        return isInitialized;
     }
 
     void SpriteSheet::SetAnimation(std::string_view animationLabel) {
@@ -135,7 +140,7 @@ namespace basic_engine {
 
     void SpriteSheet::SetFrame(uint32_t newFrame, bool resetTime) {
         if (mCurrentAnimation) {
-            mAnimationBoundaary = mCurrentAnimation->Frame(newFrame);
+            mAnimationBoundary = mCurrentAnimation->Frame(newFrame);
         }
 
         if (resetTime) {
@@ -143,9 +148,9 @@ namespace basic_engine {
         }
     }
 
-    void SpriteSheet::Update(double deltaTime) {
+    void SpriteSheet::Update(double intervalInMsec) {
         if (!mIsPaused && mCurrentAnimation) {
-            mCurrentTime += TimeInMSec(deltaTime);
+            mCurrentTime += TimeInMSec(intervalInMsec);
 
             if (mCurrentTime >= mFrameTime) {
                 mCurrentTime = TimeInMSec::zero();
@@ -166,15 +171,22 @@ namespace basic_engine {
                 SetFrame(mCurrentFrameIndex, false);
             }
         }
+
+        // Konum guncellemesi yapalim
+        mSpriteBoundary.x = static_cast<int32_t>(mTransform.Pos().x);
+        mSpriteBoundary.y = static_cast<int32_t>(mTransform.Pos().y);
     }
 
     void SpriteSheet::Display(SDL_Renderer* renderer) const {
         if (nullptr != renderer && nullptr != mCurrentTexture) {
             SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0x80);
-            SDL_RenderFillRect(renderer, &mSpriteBoundary);
+            
+            if (mDrawBoundary){
+                SDL_RenderFillRect(renderer, &mSpriteBoundary);
+            }
 
             // Flip bilgisine bakmamiz gerekebilir
-            SDL_RenderCopyEx(renderer, mCurrentTexture->Texture(), nullptr, &mSpriteBoundary, 0, nullptr, SDL_FLIP_NONE);
+            SDL_RenderCopyEx(renderer, mCurrentTexture->Texture(), reinterpret_cast<const SDL_Rect*>(&mAnimationBoundary), &mSpriteBoundary, 0, nullptr, SDL_FLIP_NONE);
         }
     }
 }

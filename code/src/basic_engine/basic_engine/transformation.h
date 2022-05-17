@@ -19,12 +19,13 @@ namespace basic_engine {
 		void Rotate(float angle);
 		void Scale(const Vector2f& scale);
 		void Move(float offsetX, float offsetY);
+		void SetPosition(float posX, float posY);
 	protected:
 		/** @brief Tasima, donme ve olceklendirme icin referans alinacak noktadir */
 		Vector2f mOrigin{0,0};
 		Vector2f mPosition{ 0,0 };
-		float mRotation{ 0.0f };
 		Vector2f mScale{ 0,0 };
+		float mRotation{ 0.0f };
 	};
 }
 

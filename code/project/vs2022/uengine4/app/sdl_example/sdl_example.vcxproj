@@ -186,11 +186,18 @@
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_input_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_simple_shape.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_texture_sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\basic_engine\basic_engine\basic_engine.vcxproj">
       <Project>{a650f957-9758-47f6-b515-da3b9c6fc4f7}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\basic_engine\sdl_asset\sdl_asset.vcxproj">
+      <Project>{61c7da41-9fed-4bf9-bfb9-37e89a29835a}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\basic_engine\sprite_sheet\sprite_sheet.vcxproj">
+      <Project>{3b9a2d9f-e922-41fd-a23c-5c25084746b1}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\infra\sdl_application\sdl_application.vcxproj">
       <Project>{7f58bb25-5a4a-47be-a429-aabf1dafe6ef}</Project>
@@ -210,6 +217,7 @@
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_input_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_simple_shape.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.h" />
+    <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_texture_sample.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

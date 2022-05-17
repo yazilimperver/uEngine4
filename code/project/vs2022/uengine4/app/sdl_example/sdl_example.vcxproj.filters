@@ -33,6 +33,9 @@
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\primitive_sample.h">
@@ -48,6 +51,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

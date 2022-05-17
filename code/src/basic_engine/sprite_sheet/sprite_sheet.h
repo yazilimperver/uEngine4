@@ -29,9 +29,10 @@ namespace basic_engine {
 
     class SpriteSheet  {
     public:
-        explicit SpriteSheet(std::string_view spriteSheetConfig, bool paused = false, bool looped = true);
-        
-        void Initialize();
+        explicit SpriteSheet(std::string_view spriteSheetConfig, const Rectangle<int32_t>& spriteBoundary, bool paused = false, bool looped = true);
+
+        /** @brief Ilklendirme sonucu donulecektir. */
+        bool Initialize();
         void Update(double deltaTimeInMsec);
         void Display(SDL_Renderer* renderer) const;
 
@@ -59,17 +60,18 @@ namespace basic_engine {
         std::string mCurrentAnimationLabel;
 
         SDL_Rect mSpriteBoundary;
-        Rectangle<int32_t> mAnimationBoundaary;
+        Rectangle<int32_t> mAnimationBoundary{0, 0, 0, 0};
 
         //! Reference to current animation
         Color mActiveColor;
-        const Animation* mCurrentAnimation;
+        const Animation* mCurrentAnimation{nullptr};
         TimeInMSec mFrameTime{ 0 };
         TimeInMSec mCurrentTime{ 0 };
         uint32_t mCurrentFrameIndex{0};
 
-        bool mIsPaused;
-        bool mIsLooped;
+        bool mIsPaused{false};
+        bool mIsLooped{false};
+        bool mDrawBoundary{ false };
         const SdlTextureAsset* mCurrentTexture;
         SpriteSheetParameters mLastUsedParameters;
 

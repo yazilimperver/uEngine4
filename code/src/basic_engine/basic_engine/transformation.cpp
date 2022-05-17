@@ -6,6 +6,11 @@ namespace basic_engine {
 		mPosition.y += offsetY;
 	}
 
+	void Transformation::SetPosition(float posX, float posY) {
+		mPosition.x = posX;
+		mPosition.y = posY;
+	}
+
 	const Vector2f& Transformation::Pos() const {
 		return mPosition;
 	}
