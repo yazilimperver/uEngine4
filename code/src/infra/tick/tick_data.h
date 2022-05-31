@@ -12,7 +12,7 @@ struct TickData {
     int32_t TickPerSeconds{ 60U };
 
     //! The amount of time that is allocated per tick in milliseconds
-    int32_t SkipTicks{ 1000 / TickPerSeconds };
+    int32_t SkipTicksInMsec{ 1000 / TickPerSeconds };
 
     //! Max frame count to skip
     int32_t MaxFrameCountToSkip{ 5 };
