@@ -17,8 +17,6 @@ namespace basic_engine {
 	struct SpriteParameter {
 		std::string TexturePath;
 		std::string TextureLabel;
-		float Width;
-		float Height;
 		float X;
 		float Y;
 		SDL_RendererFlip Flip;

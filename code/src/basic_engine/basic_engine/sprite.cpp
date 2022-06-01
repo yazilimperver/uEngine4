@@ -7,40 +7,50 @@ namespace basic_engine {
 	Sprite::Sprite(const SpriteParameter& params)
 		: mFlip{ params.Flip } 
 	{
-		mBoundary = { static_cast<int32_t>(params.X - params.Width), 
-					  static_cast<int32_t>(params.Y - params.Height), 
-					  static_cast<int32_t>(params.Width), 
-			          static_cast<int32_t>(params.Height)};
-
-		mTransform.Move(params.X, params.Y);
-		mBoundary.x = static_cast<int32_t>(mTransform.Pos().x);
-		mBoundary.y = static_cast<int32_t>(mTransform.Pos().y);
-
 		auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, params.TexturePath, params.TextureLabel);
 
 		if (textHandle.has_value()) {
 			mTexture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+			Move(params.X, params.Y);
 		}
 	}
 
-	void Sprite::Update(double tickTimeInMsec) {
-		mBoundary.x = static_cast<int32_t>(mTransform.Pos().x);
-		mBoundary.y = static_cast<int32_t>(mTransform.Pos().y);
+	Sprite::Sprite(SdlTextureAsset* textureAsset, const Vector2f& pos, SDL_RendererFlip flip)
+		: mTexture{ textureAsset }
+		, mSourceRect{ 0, 0, textureAsset->Width(), textureAsset->Height() }
+		, mFlip {flip } {
+		Move(pos.x, pos.y);
 	}
 
-	Transformation& Sprite::Transform() {
+	Sprite::Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip)
+		: mTexture{ textureAsset }
+		, mSourceRect{srcRectangle.Left, srcRectangle.Top, srcRectangle.Width, srcRectangle.Height }
+		, mFlip{ flip } {
+		mDestinationRect = mSourceRect;
+		mDestinationRect.x = 0;
+		mDestinationRect.y = 0;
+	}
+
+	void Sprite::Update(double tickTimeInMsec) {
+	}
+
+
+	void Sprite::Move(float offsetX, float offsetY) {
+		mTransform.Move(offsetX, offsetY);
+		mDestinationRect = { static_cast<int32_t>(mTransform.Pos().x),
+			static_cast<int32_t>(mTransform.Pos().y),
+			static_cast<int32_t>(mSourceRect.w),
+			static_cast<int32_t>(mSourceRect.h) };
+	}
+
+	const Transformation& Sprite::Transform() const {
 		return mTransform;
 	}
 
 	void Sprite::Display(SDL_Renderer* renderer) const {
 		if (nullptr != renderer && nullptr != mTexture) {
-
-			// Boundary
-			SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0x80);
-			SDL_RenderFillRect(renderer, &mBoundary);
-
 			// Sprite
-			SDL_RenderCopyEx(renderer, mTexture->Texture(), nullptr, &mBoundary, 0, nullptr, mFlip);
+			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &mDestinationRect, 0, nullptr, mFlip);
 		}
 	}
 }

@@ -9,6 +9,10 @@ namespace basic_engine {
 
 	void SdlTextureAsset::AssignTexture(SDL_Texture* texture) {
 		mTexture = texture;
+
+		if (nullptr != mTexture) {
+			SDL_QueryTexture(texture, NULL, NULL, &mWidth, &mHeight);
+		}
 	}
 
 	SDL_Texture* SdlTextureAsset::Texture() const {
@@ -21,5 +25,13 @@ namespace basic_engine {
 
 	AssetInfo& SdlTextureAsset::InfoRef() {
 		return mInfo;
+	}
+
+	int32_t SdlTextureAsset::Width() const {
+		return mWidth;
+	}
+
+	int32_t SdlTextureAsset::Height() const {
+		return mHeight;
 	}
 }

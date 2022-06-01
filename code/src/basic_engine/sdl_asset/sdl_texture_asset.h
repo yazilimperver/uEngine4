@@ -27,7 +27,12 @@ namespace basic_engine {
 		/** @brief Asset bilgilerine iliskin API'ler */
 		virtual const AssetInfo& Info() const override;
 		AssetInfo& InfoRef();
+
+		int32_t Width() const;
+		int32_t Height() const;
 	private:
+		int32_t mWidth{ 0 };
+		int32_t mHeight{ 0 };
 		AssetInfo mInfo;
 		SDL_Texture* mTexture{ nullptr };
 	};

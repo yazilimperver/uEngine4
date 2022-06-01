@@ -68,6 +68,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableDebug.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -80,6 +81,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableRelease.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -92,6 +94,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableDebug.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -104,6 +107,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_ExecutableRelease.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -188,6 +192,7 @@
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_texture_sample.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_tile_map_sample.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\basic_engine\basic_engine\basic_engine.vcxproj">
@@ -198,6 +203,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\basic_engine\sprite_sheet\sprite_sheet.vcxproj">
       <Project>{3b9a2d9f-e922-41fd-a23c-5c25084746b1}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\basic_engine\tile_map\tile_map.vcxproj">
+      <Project>{944760b4-48a0-41e4-bb85-7925dbee1d91}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\infra\sdl_application\sdl_application.vcxproj">
       <Project>{7f58bb25-5a4a-47be-a429-aabf1dafe6ef}</Project>
@@ -219,6 +227,11 @@
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_sprite_sheet_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_texture_sample.h" />
+    <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_tile_map_sample.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="tilemap\example\example.tmj" />
+    <None Include="tilemap\example\example.tmx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

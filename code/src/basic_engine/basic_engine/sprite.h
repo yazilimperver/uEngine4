@@ -20,14 +20,29 @@ namespace basic_engine {
 
 	class Sprite {
 	public:
+		/** @brief Yukleme isi de bu sinif icerisinde yapilacak */
 		Sprite(const SpriteParameter& params);
+
+		/** @brief Zaten yuklenmis bir resmin tamamini gostermek icin kullanilacak */
+		Sprite(SdlTextureAsset* textureAsset, const Vector2f& pos, SDL_RendererFlip flip);
+
+		/** @brief Zaten yuklenmis bir resmin verilen kismi icin kullanilacak */
+		Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
 		void Update(double tickTimeInMsec);
 		void Display(SDL_Renderer* renderer) const;
-		Transformation& Transform();
+		void Move(float offsetX, float offsetY);
+		const Transformation& Transform() const;
+
 	protected:
 		Transformation mTransform;
-		SDL_Rect mBoundary;
-		SdlTextureAsset* mTexture;
+
+		/** @brief Cizim yapilacak olan hedef sinirlar */
+		SDL_Rect mDestinationRect;
+
+		/** @brief Texture icerisinden neresini kullanacagimiz */
+		SDL_Rect mSourceRect;
+
+		SdlTextureAsset* mTexture{nullptr};
 		SDL_RendererFlip mFlip;
 	};
 }
