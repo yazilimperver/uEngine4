@@ -11,15 +11,25 @@ namespace basic_engine {
 
 		if (textHandle.has_value()) {
 			mTexture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
-			Move(params.X, params.Y);
+			mWidth = mTexture->Width();
+			mHeight = mTexture->Height();
+			mSourceRect = SDL_Rect{ 0, 0, mWidth, mHeight };
+			mDestinationRect = mSourceRect;
+			SetPosition(params.X, params.Y);
 		}
 	}
 
-	Sprite::Sprite(SdlTextureAsset* textureAsset, const Vector2f& pos, SDL_RendererFlip flip)
+	Sprite::Sprite(SdlTextureAsset* textureAsset, const Vector2i& pos, SDL_RendererFlip flip)
 		: mTexture{ textureAsset }
-		, mSourceRect{ 0, 0, textureAsset->Width(), textureAsset->Height() }
 		, mFlip {flip } {
-		Move(pos.x, pos.y);
+
+		if (nullptr != mTexture) {
+			mWidth = mTexture->Width();
+			mHeight = mTexture->Height();
+			mSourceRect = SDL_Rect{ 0, 0, mWidth, mHeight };
+			mDestinationRect = mSourceRect;
+			SetPosition(pos.x, pos.y);
+		}
 	}
 
 	Sprite::Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip)
@@ -27,20 +37,33 @@ namespace basic_engine {
 		, mSourceRect{srcRectangle.Left, srcRectangle.Top, srcRectangle.Width, srcRectangle.Height }
 		, mFlip{ flip } {
 		mDestinationRect = mSourceRect;
-		mDestinationRect.x = 0;
-		mDestinationRect.y = 0;
+		mWidth = srcRectangle.Width;
+		mHeight = srcRectangle.Height;
+		/// CHECK
 	}
 
 	void Sprite::Update(double tickTimeInMsec) {
 	}
 
+	void Sprite::SetPosition(int32_t offsetX, int32_t offsetY) {
+		mTransform.SetPosition(offsetX, offsetY);
 
-	void Sprite::Move(float offsetX, float offsetY) {
-		mTransform.Move(offsetX, offsetY);
-		mDestinationRect = { static_cast<int32_t>(mTransform.Pos().x),
-			static_cast<int32_t>(mTransform.Pos().y),
-			static_cast<int32_t>(mSourceRect.w),
-			static_cast<int32_t>(mSourceRect.h) };
+		mDestinationRect.x = mTransform.Pos().x - static_cast<int>(mWidth * 0.5F);
+		mDestinationRect.y = mTransform.Pos().y - static_cast<int>(mHeight * 0.5F);;
+	}
+
+	void Sprite::Rotate(float rotate) {
+		mTransform.Rotate(rotate);
+	}
+
+	void Sprite::SetScale(const Vector2f& scale) {
+		mTransform.SetScale(scale);
+
+		mDestinationRect.x = static_cast<int>(mTransform.Pos().x - mWidth * scale.x * 0.5f);
+		mDestinationRect.y = static_cast<int>(mTransform.Pos().y - mHeight * scale.y * 0.5f);
+
+		mDestinationRect.w = static_cast<int>(scale.x * mWidth);
+		mDestinationRect.h = static_cast<int>(scale.y * mHeight);
 	}
 
 	const Transformation& Sprite::Transform() const {
@@ -49,8 +72,7 @@ namespace basic_engine {
 
 	void Sprite::Display(SDL_Renderer* renderer) const {
 		if (nullptr != renderer && nullptr != mTexture) {
-			// Sprite
-			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &mDestinationRect, 0, nullptr, mFlip);
+			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &mDestinationRect, mTransform.Rotation(), nullptr, mFlip);
 		}
 	}
 }

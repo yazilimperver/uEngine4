@@ -26,16 +26,32 @@ namespace basic_engine {
 			
 			// Ortak verileri okuyalim
 			position = tileObject.getPosition();
+
+			position.x += layer.getOffset().x;
+			position.y += layer.getOffset().y;
+
 			auto tileSetPath = std::string(rootPath.data()) + tileset->getImage().string();
 			auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, tileSetPath, tileset->getName());
 			
+			float rotation{ 0.0f };
+			Vector2f scale{ 1.0F, 1.0F };
+
+			if (tileObject.getTile()->hasFlipFlags(tson::TileFlipFlags::Horizontally))
+				scale.x = -scale.x;
+			if (tileObject.getTile()->hasFlipFlags(tson::TileFlipFlags::Vertically))
+				scale.y = -scale.y;
+			if (tileObject.getTile()->hasFlipFlags(tson::TileFlipFlags::Diagonally))
+				rotation += 90.f;
+
 			if (textHandle.has_value()) {
 				auto texture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
 				bool hasAnimation = tile->getAnimation().any();
 				
 				if (!hasAnimation) {
 					mNonAnimatedSprites.emplace_back(std::make_unique<Sprite>(texture, GetRectangle(tileObject.getDrawingRect()), SDL_FLIP_NONE));
-					mNonAnimatedSprites[mNonAnimatedSprites.size() - 1]->Move(position.x, position.y);
+					mNonAnimatedSprites[mNonAnimatedSprites.size() - 1]->SetPosition(static_cast<int>(position.x), static_cast<int>(position.y));
+					mNonAnimatedSprites[mNonAnimatedSprites.size() - 1]->SetScale(scale);
+					mNonAnimatedSprites[mNonAnimatedSprites.size() - 1]->Rotate(rotation);
 				}
 				else {
 					auto animation = tile->getAnimation();
@@ -48,7 +64,9 @@ namespace basic_engine {
 						tson::Tile* animatedTile = tileset->getTile(frame.getTileId());
 
 						newTile.FrameSprites.emplace_back(std::make_unique<Sprite>(texture, GetRectangle(animatedTile->getDrawingRect()), SDL_FLIP_NONE));
-						newTile.FrameSprites[newTile.FrameSprites.size() - 1]->Move(position.x, position.y);
+						newTile.FrameSprites[newTile.FrameSprites.size() - 1]->SetPosition(static_cast<int>(position.x), static_cast<int>(position.y));
+						newTile.FrameSprites[newTile.FrameSprites.size() - 1]->SetScale(scale);
+						newTile.FrameSprites[newTile.FrameSprites.size() - 1]->Rotate(rotation);
 						newTile.FrameTimesInMsec.emplace_back(frame.getDuration());
 					}
 

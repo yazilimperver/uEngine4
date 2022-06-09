@@ -24,13 +24,16 @@ namespace basic_engine {
 		Sprite(const SpriteParameter& params);
 
 		/** @brief Zaten yuklenmis bir resmin tamamini gostermek icin kullanilacak */
-		Sprite(SdlTextureAsset* textureAsset, const Vector2f& pos, SDL_RendererFlip flip);
+		Sprite(SdlTextureAsset* textureAsset, const Vector2i& pos, SDL_RendererFlip flip);
 
 		/** @brief Zaten yuklenmis bir resmin verilen kismi icin kullanilacak */
 		Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
 		void Update(double tickTimeInMsec);
 		void Display(SDL_Renderer* renderer) const;
-		void Move(float offsetX, float offsetY);
+		void SetPosition(int32_t posX, int32_t posY);
+		
+		void Rotate(float rotate);
+		void SetScale(const Vector2f& scale);
 		const Transformation& Transform() const;
 
 	protected:
@@ -42,7 +45,14 @@ namespace basic_engine {
 		/** @brief Texture icerisinden neresini kullanacagimiz */
 		SDL_Rect mSourceRect;
 
+		/** @brief Kullanilacak olan doku*/
 		SdlTextureAsset* mTexture{nullptr};
+
+		/** @brief Doku yukseklik ve genislik */
+		int32_t mHeight;
+		int32_t mWidth;
+
+		/** @brief Dokuya iliskin flip bilgisi */
 		SDL_RendererFlip mFlip;
 	};
 }

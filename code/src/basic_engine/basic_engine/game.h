@@ -9,17 +9,22 @@
 #define GAME_H
 
 #include "asset/asset_service.h"
+#include "application_base/window_parameter.h"
 
 namespace basic_engine {
 	class Game {
 	public:
 		static AssetService& AssetService();
+		static void AssignWindowParameters(const WindowParameter& parameters);
+		static const WindowParameter& WindowParameters();
 
 		Game(const Game&) = delete;
 		Game& operator=(const Game&) = delete;
 	private:
 		Game() = default;
 		~Game() = default;
+
+		static WindowParameter mActiveWinParameters;
 	};
 }
 #endif // !GAME_H

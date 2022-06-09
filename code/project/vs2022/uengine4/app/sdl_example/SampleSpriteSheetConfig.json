@@ -1,6 +1,6 @@
 {
   "Object": {
-    "FrameTime": 5.0,
+    "FrameTime": 250.0,
     "Textures": [
       {
         "first": "Main",

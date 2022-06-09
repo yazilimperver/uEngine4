@@ -31,7 +31,7 @@ void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	if (!mSampleSpriteSheet->Initialize()) {
 		spdlog::error("Error in sprite sheet initialization. The config file name is: {}", cSpriteSheetConfigFile);
 	}
-	mSampleSpriteSheet->Transform().SetPosition(mParameters.Width/2.0F, mParameters.Height / 2.0F);
+	mSampleSpriteSheet->Transform().SetPosition(static_cast<int>(mParameters.Width/2.0F), static_cast<int>(mParameters.Height / 2.0F));
 
 	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
 }
@@ -56,7 +56,7 @@ void SdlSpriteSheetSample::Update(double tickTimeInMsec) {
 		movement.y += speed;
 	}
 
-	mSampleSpriteSheet->Transform().Move(movement.x, movement.y);
+	mSampleSpriteSheet->Transform().Move(static_cast<int>(movement.x), static_cast<int>(movement.y));
 	mSampleSpriteSheet->Update(tickTimeInMsec);
 }
 

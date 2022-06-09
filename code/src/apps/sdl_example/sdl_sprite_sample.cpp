@@ -23,12 +23,7 @@ void SdlSpriteSample::Initialize(SdlApplication& sdlApplication) {
 
 	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
-	constexpr int32_t spriteWidth{ 200 };
-	constexpr int32_t spriteHeight{ 150};
-	SpriteParameter params{ "sprite.png", "dragon", 
-							static_cast<float>(mParameters.Width) / 2.0f - spriteWidth / 2.0f,
-							static_cast<float>(mParameters.Height) / 2.0f - spriteHeight / 2.0f,
-							SDL_FLIP_NONE };
+	SpriteParameter params{ "sprite.png", "dragon", static_cast<int32_t>(mParameters.Width) /2, static_cast<int32_t>(mParameters.Height) / 2, SDL_FLIP_NONE};
 
 	mSampleSprite = std::make_unique<Sprite>(params);
 
@@ -61,19 +56,35 @@ void SdlSpriteSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputAc
 	if (InputActions::PressAction == action) {
 		if (KeyboardCodes::KEY_UP == key) {
 			spdlog::info("Up key pressed");
-			mSampleSprite->Move(0, -1);
+			mSampleSprite->SetPosition(mSampleSprite->Transform().Pos().x, mSampleSprite->Transform().Pos().y - 1);
 		}
 		if (KeyboardCodes::KEY_DOWN == key) {
 			spdlog::info("Down key pressed");
-			mSampleSprite->Move(0, 1);
+			mSampleSprite->SetPosition(mSampleSprite->Transform().Pos().x, mSampleSprite->Transform().Pos().y + 1);
 		}
 		if (KeyboardCodes::KEY_RIGHT == key) {
 			spdlog::info("Right key pressed");
-			mSampleSprite->Move(1, 0);
+			mSampleSprite->SetPosition(mSampleSprite->Transform().Pos().x+1, mSampleSprite->Transform().Pos().y);
 		}
 		if (KeyboardCodes::KEY_LEFT == key) {
 			spdlog::info("Left key pressed");
-			mSampleSprite->Move(-1, 0);
+			mSampleSprite->SetPosition(mSampleSprite->Transform().Pos().x-1, mSampleSprite->Transform().Pos().y);
+		}
+		if (KeyboardCodes::KEY_PAGE_UP == key) {
+			spdlog::info("Rotate right pressed");
+			mSampleSprite->Rotate(mSampleSprite->Transform().Rotation() + 5);
+		}
+		if (KeyboardCodes::KEY_PAGE_DOWN == key) {
+			spdlog::info("Rotate right pressed");
+			mSampleSprite->Rotate(mSampleSprite->Transform().Rotation() - 5);
+		}
+		if (KeyboardCodes::KEY_KP_ADD == key) {
+			spdlog::info("Scale up pressed");
+			mSampleSprite->SetScale({ mSampleSprite->Transform().Scale().x + 0.2, mSampleSprite->Transform().Scale().y + 0.2 });
+		}
+		if (KeyboardCodes::KEY_KP_SUBTRACT == key) {
+			spdlog::info("Scale down pressed");
+			mSampleSprite->SetScale({ mSampleSprite->Transform().Scale().x - 0.2, mSampleSprite->Transform().Scale().y - 0.2 });
 		}
 	}
 }

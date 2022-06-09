@@ -41,7 +41,7 @@ namespace basic_engine {
 
 				// Tiled konum olarak sol alti veriyor, sdl icin sol ustu veriyoz
 				// Bunu resmin ortasina gelecek sekilde yapabiliriz
-				Vector2f position = { obj.getPosition().x, obj.getPosition().y - obj.getSize().y };
+				Vector2f position = { obj.getPosition().x + layer.getOffset().x, obj.getPosition().y + layer.getOffset().y - obj.getSize().y};
 
 				Rectangle<int32_t> textureRect{ static_cast<int32_t>(offset.x), static_cast<int32_t>(offset.y), obj.getSize().x, obj.getSize().y };
 
@@ -54,7 +54,7 @@ namespace basic_engine {
 						textureRect,
 						SDL_FLIP_NONE);
 
-					sprite->Move(position.x, position.y);
+					sprite->SetPosition(static_cast<int>(position.x), static_cast<int>(position.y));
 
 					mObjectSprites.emplace_back(std::move(sprite));
 				}

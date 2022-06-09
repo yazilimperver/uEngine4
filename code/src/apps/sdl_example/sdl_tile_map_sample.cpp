@@ -16,6 +16,8 @@ void SdlTileMapSample::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
 	mParameters = sdlApplication.GetWindowParametrs();
 
+	Game::AssignWindowParameters(mParameters);
+
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
 
 	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);

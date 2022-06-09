@@ -14,17 +14,21 @@
 namespace basic_engine {
 	class Transformation {
 	public:
-		const Vector2f& Pos() const;
+		float Rotation() const;
+		const Vector2i& Pos() const;
+		const Vector2f& Scale() const;
+		const Vector2i& Origin() const;
+
 		void Reset();
 		void Rotate(float angle);
-		void Scale(const Vector2f& scale);
-		void Move(float offsetX, float offsetY);
-		void SetPosition(float posX, float posY);
+		void SetScale(const Vector2f& scale);
+		void Move(int32_t offsetX, int32_t offsetY);
+		void SetPosition(int32_t posX, int32_t posY);
 	protected:
 		/** @brief Tasima, donme ve olceklendirme icin referans alinacak noktadir */
-		Vector2f mOrigin{0,0};
-		Vector2f mPosition{ 0,0 };
-		Vector2f mScale{ 0,0 };
+		Vector2i mOrigin{0,0};
+		Vector2i mPosition{0, 0};
+		Vector2f mScale{1, 1};
 		float mRotation{ 0.0f };
 	};
 }
