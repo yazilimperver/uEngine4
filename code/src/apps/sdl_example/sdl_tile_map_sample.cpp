@@ -8,11 +8,14 @@
 #include "application_base/keyboard_codes.h"
 #include "basic_engine/game.h"
 
+#include "basic_engine/gfx_primitives.h"
+
 #include "spdlog/spdlog.h"
 
 using namespace basic_engine;
 
-void SdlTileMapSample::Initialize(SdlApplication& sdlApplication) {
+void SdlTileMapSample::Initialize(SdlApplication& sdlApplication){
+	mSdlApplication = &sdlApplication;
 	mRenderer = sdlApplication.GetSdlRenderer();
 	mParameters = sdlApplication.GetWindowParametrs();
 
@@ -27,11 +30,15 @@ void SdlTileMapSample::Initialize(SdlApplication& sdlApplication) {
 	mSampleTileMap = std::make_unique<basic_engine::TileMap>("./tilemap/example/example.tmj");
 	mSampleTileMap->Initialize();
 
+	targetPos = { static_cast<int32_t>(mParameters.Width) * 0.5F, static_cast<int32_t>(mParameters.Height) * 0.5F };
+
 	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
 }
 
 void SdlTileMapSample::Update(double tickTimeInMsec) {
 	mSampleTileMap->Update(tickTimeInMsec);
+	Game::GameCamera().Update(tickTimeInMsec);
+	Game::GameCamera().DisplayInfo();
 }
 
 void SdlTileMapSample::Display(double tickTimeInMsec) {
@@ -45,6 +52,10 @@ void SdlTileMapSample::Display(double tickTimeInMsec) {
 	SDL_RenderDrawLine(mRenderer, static_cast<int32_t>(mParameters.Width) / 2, 0, static_cast<int32_t>(mParameters.Width) / 2, static_cast<int32_t>(mParameters.Height));
 
 	mSampleTileMap->Display(mRenderer);
+
+	constexpr int32_t cIndicatorRadius = 10;
+	roundedBoxRGBA(mRenderer, targetPos.x + cIndicatorRadius, targetPos.y- cIndicatorRadius, targetPos.x - cIndicatorRadius, targetPos.y + cIndicatorRadius, 
+				  2 * cIndicatorRadius, 255, 0, 0, 255);
 }
 
 void SdlTileMapSample::Finalize() {
@@ -52,18 +63,36 @@ void SdlTileMapSample::Finalize() {
 
 void SdlTileMapSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) {
 
+	constexpr int32_t cIncrementAmount{ 5 };
+	bool updateTarget{ false };
+	
 	if (InputActions::PressAction == action) {
 		if (KeyboardCodes::KEY_UP == key) {
 			spdlog::info("Up key pressed");
+			targetPos.y -= cIncrementAmount;
+			updateTarget = true;
 		}
 		if (KeyboardCodes::KEY_DOWN == key) {
 			spdlog::info("Down key pressed");
+			targetPos.y += cIncrementAmount;
+			updateTarget = true;
 		}
 		if (KeyboardCodes::KEY_RIGHT == key) {
 			spdlog::info("Right key pressed");
+			targetPos.x += cIncrementAmount;
+			updateTarget = true;
 		}
 		if (KeyboardCodes::KEY_LEFT == key) {
 			spdlog::info("Left key pressed");
+			targetPos.x -= cIncrementAmount;
+			updateTarget = true;
+		}
+
+		if (true == updateTarget) {
+			targetPos.x = glm::clamp(targetPos.x, 0, (2 * static_cast<int32_t>(mParameters.Width)));
+			targetPos.y = glm::clamp(targetPos.y, 0, (2 * static_cast<int32_t>(mParameters.Height)));
+
+			Game::GameCamera().SetTarget(targetPos);
 		}
 	}
 }

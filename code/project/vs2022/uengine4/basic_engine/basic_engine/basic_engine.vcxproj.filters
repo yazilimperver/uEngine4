@@ -48,6 +48,9 @@
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\image_filter.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\transformation.cpp">
@@ -66,6 +69,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\image_filter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

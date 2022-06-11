@@ -167,6 +167,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\common.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\game.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\gfx_primitives.h" />
@@ -180,6 +181,7 @@
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\transformation.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.cpp" />
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\game.cpp" />
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\gfx_primitives.cpp" />
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\image_filter.cpp" />

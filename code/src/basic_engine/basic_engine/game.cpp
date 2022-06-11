@@ -8,6 +8,11 @@ namespace basic_engine {
 		static AssetRepository instance;
 		return instance;
 	}
+
+	Camera& Game::GameCamera()	{
+		static Camera instance;
+		return instance;
+	}
 	
 	void Game::AssignWindowParameters(const WindowParameter& parameters) {
 		mActiveWinParameters = parameters;

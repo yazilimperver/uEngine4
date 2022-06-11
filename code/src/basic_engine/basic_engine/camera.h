@@ -1,36 +1,51 @@
 /**
- * @file game.h.
- * @date 12.05.2022
+ * @file camera.h.
+ * @date 11.06.2022
  * @author Yazilimperver
- * @brief  Asset service Meyer'in thread-safe singleton yaklasimi (detaylar icin google :)
+ * @brief 
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#ifndef GAME_H
-#define GAME_H
+#ifndef CAMERA
+#define CAMERA
 
-#include "asset/asset_service.h"
+#include "common.h"
+#include "rectangle.h"
+
 #include "application_base/window_parameter.h"
 
-#include "camera.h"
-
 namespace basic_engine {
-	class Game {
+	class Camera {
 	public:
-		static AssetService& AssetService();
-		static Camera& GameCamera();
-		static void AssignWindowParameters(const WindowParameter& parameters);
-		static const WindowParameter& WindowParameters();
+		void Initialize(const WindowParameter& winParameters);
+		void Update(double deltaTimeInMsec);
 
-		Game(const Game&) = delete;
-		Game& operator=(const Game&) = delete;
-	private:
-		Game() = default;
-		~Game() = default;
+		basic_engine::Rectangle<float> ViewBox() const;
+		Vector2f Center() const;
+		Vector2f Target() const;
+		void ResetTarget();
+		void SetTarget(Vector2f val);
+		void DisplayInfo();
+	protected:
+		/** @brief Kameranýn izleyecegi nokta */
+		bool mIsTargetAssigned{ false };
+		Vector2f mTarget;
 
-		static WindowParameter mActiveWinParameters;
+		/** @brief Kamera merkezi */
+		Vector2f mCenter;
+
+		/** @brief Kameranin goruntuleme alani */
+		Rectangle<float> mViewBox;
+		
+		/** @brief Pencere genisligi */
+		uint32_t mWidth{ 640 };
+
+		/** @brief Pencere yuksekligi  */
+		uint32_t mHeight{ 480 };
+		
 	};
 }
-#endif // !GAME_H
+
+#endif // !CAMERA
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

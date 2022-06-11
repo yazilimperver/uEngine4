@@ -188,6 +188,8 @@ void SdlApplication::InitializeWindows() {
             mWindowParameters.Left, mWindowParameters.Top,
             mWindowParameters.Width, mWindowParameters.Height,
             SDL_WINDOW_SHOWN);
+
+        mRenderViewport = { 0, 0, static_cast<int32_t>(mWindowParameters.Width), static_cast<int32_t>(mWindowParameters.Height) };
     }
 
     // TODO: Cursor hide mechanism
@@ -507,6 +509,10 @@ SDL_Renderer* SdlApplication::GetSdlRenderer() {
 
 SDL_Window* SdlApplication::GetSdlWindow() {
     return mWindow;
+}
+
+basic_engine::Rectangle<int32_t>& SdlApplication::GetViewport() {
+    return mRenderViewport;
 }
 
 WindowParameter& SdlApplication::GetWindowParametrs() {

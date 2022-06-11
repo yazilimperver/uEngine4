@@ -18,6 +18,8 @@
 
 struct SDL_Renderer;
 
+class SdlApplication;
+
 class SdlTileMapSample
 	: public ClientGraphicApplication, public KeyboardEventListener {
 public:
@@ -28,7 +30,11 @@ public:
 protected:
 	SDL_Renderer* mRenderer{ nullptr };
 	WindowParameter mParameters;
+	SdlApplication* mSdlApplication{nullptr};
+
 	std::unique_ptr<basic_engine::TileMap> mSampleTileMap;
+
+	Vector2i targetPos;
 
 	virtual void KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) override;
 };

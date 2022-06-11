@@ -26,6 +26,8 @@
 
 #include "utility/parameter_set.h"
 
+#include "basic_engine/rectangle.h"
+
 #include "sdl_gamepad_controller.h"
 #include "sdl_gamecontroller.h"
 #include "sdl_touch_service.h"
@@ -63,6 +65,9 @@ public:
     // SDL yardimcilari
     SDL_Renderer* GetSdlRenderer();
     SDL_Window* GetSdlWindow();
+
+    // Gosterim alanini donelim
+    basic_engine::Rectangle<int32_t>& GetViewport();
 protected:
     //! An upper bound is given for update (i.e. multiple updates per tick and one display)
     //! Constant Game Speed independent of Variable FPS
@@ -120,6 +125,9 @@ protected:
 
     /** @brief Pencere ayarlarý */
     WindowParameter mWindowParameters;
+
+    /** @brief Gosterim yapilan goruntuleme alani */
+    basic_engine::Rectangle<int32_t> mRenderViewport;
 
     /** @brief Uygulama aktif mi */
     std::atomic<bool> mIsAppActive{ true };
