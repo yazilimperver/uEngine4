@@ -34,7 +34,7 @@ namespace basic_engine {
         /** @brief Ilklendirme sonucu donulecektir. */
         bool Initialize();
         void Update(double deltaTimeInMsec);
-        void Display(SDL_Renderer* renderer) const;
+        void Display(SDL_Renderer* renderer, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;
 
         void SetAnimation(std::string_view animationLabel);
         
@@ -47,11 +47,20 @@ namespace basic_engine {
         bool IsLooped() const;
         bool IsPlaying() const;
         void SetFrame(uint32_t newFrame, bool resetTime = true);
+        void SetPosition(int32_t offsetX, int32_t offsetY);
+        void Rotate(float rotate);
+        void SetScale(const Vector2f& scale);
         double FrameTime() const;
 
         void SetColor(const Color& color);
 
-        Transformation& Transform();
+        const Transformation& Transform();
+
+        bool IsHorizontalFlipped() const;
+        void EnableHorizontalFlipped();
+        bool IsVerticalFlipped() const;
+        void EnableVerticalFlipped();
+        void DisableFlip();
     private:
         std::optional<SpriteSheetParameters> ParseConfigFile(const std::string& config);
 
@@ -59,7 +68,16 @@ namespace basic_engine {
         std::string mSpriteSheetConfig;
         std::string mCurrentAnimationLabel;
 
-        SDL_Rect mSpriteBoundary;
+        bool mIsHorizontalFlipped;
+        bool mIsVerticalFlipped;
+        SDL_RendererFlip mRenderFlip{ SDL_FLIP_NONE };
+
+        /** @brief Cizim icin kullanilacak kutu */
+        SDL_Rect mDestinationRect;
+
+		/** @brief Mevcut animasyon dokusunun yukseklik ve genisligi */
+		int32_t mHeight;
+		int32_t mWidth;
         Rectangle<int32_t> mAnimationBoundary{0, 0, 0, 0};
 
         //! Reference to current animation

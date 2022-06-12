@@ -31,8 +31,8 @@ namespace basic_engine {
 		mOrigin.x = 0;
 		mOrigin.y = 0;
 		mRotation = 0;
-		mScale.x = 0;
-		mScale.y = 0;
+		mScale.x = 1;
+		mScale.y = 1;
 	}
 
 	void Transformation::Rotate(float angle) {

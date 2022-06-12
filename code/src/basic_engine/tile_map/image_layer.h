@@ -21,6 +21,8 @@ namespace basic_engine {
 		virtual void Display(SDL_Renderer* renderer) const override;
 	protected:
 		std::unique_ptr<basic_engine::Sprite> mSprite;
+		float mParallaxFactorX{1.0F};
+		float mParallaxFactorY{1.0F};
 	};
 }
 

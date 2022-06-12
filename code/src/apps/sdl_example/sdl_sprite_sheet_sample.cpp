@@ -13,7 +13,7 @@
 
 using namespace basic_engine;
 
-constexpr char cSpriteSheetConfigFile[] = "SampleSpriteSheetConfig.json";
+constexpr char cSpriteSheetConfigFile[] = "warrior_idle_ssheet.json";
 
 void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
@@ -23,40 +23,16 @@ void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
 	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
-	constexpr int32_t spriteWidth{ 200 };
-	constexpr int32_t spriteHeight{ 150 };
-	basic_engine::Rectangle<int32_t> spriteRect{ 0, 0, 64, 64 };
+	basic_engine::Rectangle<int32_t> spriteRect{ 0, 0, 128, 128};
 
-	mSampleSpriteSheet = std::make_unique<SpriteSheet>(cSpriteSheetConfigFile, spriteRect, true);
+	mSampleSpriteSheet = std::make_unique<SpriteSheet>(cSpriteSheetConfigFile, spriteRect, false);
 	if (!mSampleSpriteSheet->Initialize()) {
 		spdlog::error("Error in sprite sheet initialization. The config file name is: {}", cSpriteSheetConfigFile);
 	}
-	mSampleSpriteSheet->Transform().SetPosition(static_cast<int>(mParameters.Width/2.0F), static_cast<int>(mParameters.Height / 2.0F));
-
-	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
+	mSampleSpriteSheet->SetPosition(static_cast<int>(mParameters.Width/2.0F), static_cast<int>(mParameters.Height / 2.0F));
 }
 
 void SdlSpriteSheetSample::Update(double tickTimeInMsec) {
-	constexpr float speed{ 1.F };
-	Vector2f movement{ 0, 0 };
-
-	if (true == mLeftMovementInitiated)	{
-		movement.x -= speed;
-	}
-
-	if (true == mRightMovementInitiated) {
-		movement.x += speed;
-	}
-
-	if (true == mTopMovementInitiated) {
-		movement.y -= speed;
-	}
-
-	if (true == mBottomMovementInitiated) {
-		movement.y += speed;
-	}
-
-	mSampleSpriteSheet->Transform().Move(static_cast<int>(movement.x), static_cast<int>(movement.y));
 	mSampleSpriteSheet->Update(tickTimeInMsec);
 }
 
@@ -77,22 +53,34 @@ void SdlSpriteSheetSample::Finalize() {
 }
 
 void SdlSpriteSheetSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) {
-	spdlog::info("Current position: <{}, {}>", 
-		mSampleSpriteSheet->Transform().Pos().x, mSampleSpriteSheet->Transform().Pos().y);
+	
+	auto spriteTransform = mSampleSpriteSheet->Transform();
+	auto spriteTransformPos = spriteTransform.Pos();
 
+	spdlog::info("Current position: <{}, {}>", 
+		spriteTransformPos.x, spriteTransformPos.y);
+	
 	if (InputActions::PressAction == action) {
 		if (KeyboardCodes::KEY_RIGHT == key) {
-			// bu animasyon icin yukari/asagi hareket ve animasyon daha oncelikli
-			if (false == mTopMovementInitiated && false == mBottomMovementInitiated) {
-				mSampleSpriteSheet->SetAnimation("RightWalking");
+			spdlog::info("Right key pressed");
+			mSampleSpriteSheet->SetAnimation("Walk");
+			mSampleSpriteSheet->SetPosition(spriteTransformPos.x + 5, spriteTransformPos.y);
+
+			if (mSampleSpriteSheet->IsHorizontalFlipped()) {
+				mSampleSpriteSheet->DisableFlip();
 			}
+
 			mRightMovementInitiated = true;
 		}
 		if (KeyboardCodes::KEY_LEFT == key) {
-			// bu animasyon icin yukari/asagi hareket ve animasyon daha oncelikli
-			if (false == mTopMovementInitiated && false == mBottomMovementInitiated) {
-				mSampleSpriteSheet->SetAnimation("LeftWalking");
+			spdlog::info("Left key pressed");
+			mSampleSpriteSheet->SetAnimation("Walk");
+			if (false == mSampleSpriteSheet->IsHorizontalFlipped()) {
+				mSampleSpriteSheet->EnableHorizontalFlipped();
 			}
+
+			mSampleSpriteSheet->SetPosition(spriteTransformPos.x - 5, spriteTransformPos.y);
+
 			mLeftMovementInitiated = true;
 		}
 		if (KeyboardCodes::KEY_UP == key) {
@@ -128,9 +116,6 @@ void SdlSpriteSheetSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, In
 		false == mLeftMovementInitiated
 		&&
 		false == mRightMovementInitiated) {
-		mSampleSpriteSheet->Stop();
-	}
-	else {
-		mSampleSpriteSheet->Play();
+		mSampleSpriteSheet->SetAnimation("Idle");
 	}
 }

@@ -13,12 +13,32 @@ namespace basic_engine {
     SpriteSheet::SpriteSheet(std::string_view spriteSheetConfig, const Rectangle<int32_t>& spriteBoundary, bool paused, bool looped)
         : mCurrentAnimation{ nullptr }
         , mSpriteSheetConfig{ spriteSheetConfig }
-        , mSpriteBoundary {spriteBoundary.Left, spriteBoundary.Top, spriteBoundary.Width, spriteBoundary.Height }
+        , mDestinationRect {spriteBoundary.Left, spriteBoundary.Top, spriteBoundary.Width, spriteBoundary.Height }
         , mCurrentFrameIndex{ 0 }
         , mIsPaused{ paused }
         , mIsLooped{ looped }
         , mCurrentTexture{ nullptr } {
 
+		mWidth = spriteBoundary.Width;
+		mHeight = spriteBoundary.Height;
+    }
+
+	void SpriteSheet::EnableHorizontalFlipped()
+	{
+		mIsHorizontalFlipped = true; mIsVerticalFlipped = false; mRenderFlip = SDL_FLIP_HORIZONTAL;
+	}
+
+	bool SpriteSheet::IsVerticalFlipped() const
+	{
+		return mIsVerticalFlipped;
+	}
+
+	void SpriteSheet::EnableVerticalFlipped() {
+		mIsVerticalFlipped = true; mIsHorizontalFlipped = false;  mRenderFlip = SDL_FLIP_VERTICAL;
+	}
+
+	void SpriteSheet::DisableFlip() { 
+        mIsVerticalFlipped = false; mIsHorizontalFlipped = false;  mRenderFlip = SDL_FLIP_NONE; 
     }
 
     std::optional<SpriteSheetParameters> SpriteSheet::ParseConfigFile(const std::string& config) {
@@ -122,11 +142,16 @@ namespace basic_engine {
         mActiveColor = color;
     }
 
-    Transformation& SpriteSheet::Transform() {
+    const Transformation& SpriteSheet::Transform() {
         return mTransform;
     }
 
-    bool SpriteSheet::IsLooped() const {
+	bool SpriteSheet::IsHorizontalFlipped() const
+	{
+		return mIsHorizontalFlipped;
+	}
+
+	bool SpriteSheet::IsLooped() const {
         return mIsLooped;
     }
 
@@ -141,12 +166,35 @@ namespace basic_engine {
     void SpriteSheet::SetFrame(uint32_t newFrame, bool resetTime) {
         if (mCurrentAnimation) {
             mAnimationBoundary = mCurrentAnimation->Frame(newFrame);
+
+            SetScale(mTransform.Scale());
         }
 
         if (resetTime) {
             mCurrentTime = TimeInMSec::zero();
         }
     }
+
+	void SpriteSheet::SetPosition(int32_t offsetX, int32_t offsetY) {
+		mTransform.SetPosition(offsetX, offsetY);
+
+		mDestinationRect.x = mTransform.Pos().x - static_cast<int>(mWidth * 0.5F);
+		mDestinationRect.y = mTransform.Pos().y - static_cast<int>(mHeight * 0.5F);
+	}
+
+	void SpriteSheet::Rotate(float rotate) {
+		mTransform.Rotate(rotate);
+	}
+
+	void SpriteSheet::SetScale(const Vector2f& scale) {
+		mTransform.SetScale(scale);
+
+		mDestinationRect.x = static_cast<int>(mTransform.Pos().x - mWidth * mTransform.Scale().x * 0.5f);
+		mDestinationRect.y = static_cast<int>(mTransform.Pos().y - mHeight * mTransform.Scale().y * 0.5f);
+
+		mDestinationRect.w = static_cast<int>(scale.x * mWidth);
+		mDestinationRect.h = static_cast<int>(scale.y * mHeight);
+	}
 
     void SpriteSheet::Update(double intervalInMsec) {
         if (!mIsPaused && mCurrentAnimation) {
@@ -171,22 +219,15 @@ namespace basic_engine {
                 SetFrame(mCurrentFrameIndex, false);
             }
         }
-
-        // Konum guncellemesi yapalim
-        mSpriteBoundary.x = static_cast<int32_t>(mTransform.Pos().x);
-        mSpriteBoundary.y = static_cast<int32_t>(mTransform.Pos().y);
     }
 
-    void SpriteSheet::Display(SDL_Renderer* renderer) const {
-        if (nullptr != renderer && nullptr != mCurrentTexture) {
-            SDL_SetRenderDrawColor(renderer, 0x00, 0xFF, 0x00, 0x80);
-            
-            if (mDrawBoundary){
-                SDL_RenderFillRect(renderer, &mSpriteBoundary);
-            }
+    void SpriteSheet::Display(SDL_Renderer* renderer, float cameraSpeedRatioX, float cameraSpeedRatioY) const {
+		if (nullptr != renderer && nullptr != mCurrentTexture) {
+			SDL_Rect displayRect = mDestinationRect;
+			displayRect.x -= static_cast<int32_t>(Game::GameCamera().Center().x * cameraSpeedRatioX);
+			displayRect.y -= static_cast<int32_t>(Game::GameCamera().Center().y * cameraSpeedRatioY);
 
-            // Flip bilgisine bakmamiz gerekebilir
-            SDL_RenderCopyEx(renderer, mCurrentTexture->Texture(), reinterpret_cast<const SDL_Rect*>(&mAnimationBoundary), &mSpriteBoundary, 0, nullptr, SDL_FLIP_NONE);
+            SDL_RenderCopyEx(renderer, mCurrentTexture->Texture(), reinterpret_cast<const SDL_Rect*>(&mAnimationBoundary), &displayRect, mTransform.Rotation(), nullptr, mRenderFlip);
         }
     }
 }

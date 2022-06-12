@@ -11,6 +11,9 @@
 
 namespace basic_engine {
 	ImageLayer::ImageLayer(std::string_view rootPath, tson::Layer& layer)	{
+		mParallaxFactorX = layer.getParallax().x;
+		mParallaxFactorY = layer.getParallax().y;
+
 		auto imagePath = std::string{ rootPath.data() } + layer.getImage();
 		auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());
 
@@ -31,6 +34,6 @@ namespace basic_engine {
 	}
 
 	void ImageLayer::Display(SDL_Renderer* renderer) const {
-		mSprite->Display(renderer);
+		mSprite->Display(renderer, mParallaxFactorX, mParallaxFactorY);
 	}
 }

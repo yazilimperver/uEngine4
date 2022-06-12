@@ -1,0 +1,215 @@
+{
+	"frames": {
+		"Warrior_01__IDLE_000.png": {
+			"frame": {
+				"x": 1,
+				"y": 1,
+				"w": 153,
+				"h": 190
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 153,
+				"h": 190
+			},
+			"sourceSize": {
+				"w": 153,
+				"h": 190
+			}
+		},
+		"Warrior_01__IDLE_001.png": {
+			"frame": {
+				"x": 156,
+				"y": 1,
+				"w": 153,
+				"h": 189
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 153,
+				"h": 189
+			},
+			"sourceSize": {
+				"w": 153,
+				"h": 189
+			}
+		},
+		"Warrior_01__IDLE_002.png": {
+			"frame": {
+				"x": 311,
+				"y": 1,
+				"w": 152,
+				"h": 188
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 152,
+				"h": 188
+			},
+			"sourceSize": {
+				"w": 152,
+				"h": 188
+			}
+		},
+		"Warrior_01__IDLE_003.png": {
+			"frame": {
+				"x": 465,
+				"y": 1,
+				"w": 151,
+				"h": 188
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 151,
+				"h": 188
+			},
+			"sourceSize": {
+				"w": 151,
+				"h": 188
+			}
+		},
+		"Warrior_01__IDLE_004.png": {
+			"frame": {
+				"x": 618,
+				"y": 1,
+				"w": 151,
+				"h": 187
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 151,
+				"h": 187
+			},
+			"sourceSize": {
+				"w": 151,
+				"h": 187
+			}
+		},
+		"Warrior_01__IDLE_005.png": {
+			"frame": {
+				"x": 771,
+				"y": 1,
+				"w": 150,
+				"h": 186
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 150,
+				"h": 186
+			},
+			"sourceSize": {
+				"w": 150,
+				"h": 186
+			}
+		},
+		"Warrior_01__IDLE_006.png": {
+			"frame": {
+				"x": 923,
+				"y": 1,
+				"w": 151,
+				"h": 187
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 151,
+				"h": 187
+			},
+			"sourceSize": {
+				"w": 151,
+				"h": 187
+			}
+		},
+		"Warrior_01__IDLE_007.png": {
+			"frame": {
+				"x": 1076,
+				"y": 1,
+				"w": 151,
+				"h": 188
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 151,
+				"h": 188
+			},
+			"sourceSize": {
+				"w": 151,
+				"h": 188
+			}
+		},
+		"Warrior_01__IDLE_008.png": {
+			"frame": {
+				"x": 1229,
+				"y": 1,
+				"w": 152,
+				"h": 188
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 152,
+				"h": 188
+			},
+			"sourceSize": {
+				"w": 152,
+				"h": 188
+			}
+		},
+		"Warrior_01__IDLE_009.png": {
+			"frame": {
+				"x": 1383,
+				"y": 1,
+				"w": 153,
+				"h": 189
+			},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {
+				"x": 0,
+				"y": 0,
+				"w": 153,
+				"h": 189
+			},
+			"sourceSize": {
+				"w": 153,
+				"h": 189
+			}
+		}
+	},
+	"meta": {
+		"app": "http://www.codeandweb.com/texturepacker",
+		"version": "1.0",
+		"image": "spritesheet.png",
+		"format": "RGBA8888",
+		"size": {
+			"w": 1537,
+			"h": 192
+		},
+		"scale": "1"
+	}
+}

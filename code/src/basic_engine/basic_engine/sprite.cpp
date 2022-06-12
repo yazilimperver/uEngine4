@@ -70,11 +70,11 @@ namespace basic_engine {
 		return mTransform;
 	}
 
-	void Sprite::Display(SDL_Renderer* renderer, float cameraSpeedRatio) const {
+	void Sprite::Display(SDL_Renderer* renderer, float cameraSpeedRatioX, float cameraSpeedRatioY) const {
 		if (nullptr != renderer && nullptr != mTexture) {		
 			SDL_Rect displayRect = mDestinationRect;
-			displayRect.x -= static_cast<int32_t>(Game::GameCamera().Center().x * cameraSpeedRatio);
-			displayRect.y -= static_cast<int32_t>(Game::GameCamera().Center().y * cameraSpeedRatio);
+			displayRect.x -= static_cast<int32_t>(Game::GameCamera().Center().x * cameraSpeedRatioX);
+			displayRect.y -= static_cast<int32_t>(Game::GameCamera().Center().y * cameraSpeedRatioY);
 
 			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &displayRect, mTransform.Rotation(), nullptr, mFlip);
 		}

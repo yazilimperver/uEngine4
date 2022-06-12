@@ -29,7 +29,7 @@ namespace basic_engine {
 		/** @brief Zaten yuklenmis bir resmin verilen kismi icin kullanilacak */
 		Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
 		void Update(double tickTimeInMsec);
-		void Display(SDL_Renderer* renderer, float cameraSpeedRatio = 1.0F) const;
+		void Display(SDL_Renderer* renderer, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;
 		void SetPosition(int32_t posX, int32_t posY);
 		
 		void Rotate(float rotate);
