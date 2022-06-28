@@ -20,6 +20,9 @@ namespace basic_engine {
 
 	class Sprite {
 	public:
+		/** @brief Ayni nesneden olusturmak icin kullanilacaktir. */
+		Sprite(const Sprite* spriteInstance);
+		
 		/** @brief Yukleme isi de bu sinif icerisinde yapilacak */
 		Sprite(const SpriteParameter& params);
 
@@ -30,12 +33,17 @@ namespace basic_engine {
 		Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
 		void Update(double tickTimeInMsec);
 		void Display(SDL_Renderer* renderer, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;
+		void Display(SDL_Renderer* renderer, const SDL_Rect& destRect, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;
 		void SetPosition(int32_t posX, int32_t posY);
 		
 		void Rotate(float rotate);
 		void SetScale(const Vector2f& scale);
-		const Transformation& Transform() const;
 
+		/** @brief Displayden farkli olarak, varsayilan sifir cunku destination recti direk donmek icin */
+		SDL_Rect DestinationRect(float cameraSpeedRatioX = 0.0F, float cameraSpeedRatioY = 0.0F) const;
+
+		const Transformation& Transform() const;
+		Sprite* Clone();
 	protected:
 		Transformation mTransform;
 

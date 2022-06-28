@@ -1,36 +1,31 @@
-#ifndef IMAGE_LAYER_H_
-#define IMAGE_LAYER_H_
+/**
+ * @file geo_point.h.
+ * @date 26.06.2022
+ * @author Yazilimperver
+ * @brief 
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
+#ifndef GEO_POINT_H
+#define GEO_POINT_H
 
-#include <cstdint>
-#include <memory>
-#include <string_view>
-
-#include "layer.h"
-
-#include "basic_engine/sprite.h"
-
-namespace tson {
-	class Layer;
-}
-
-namespace basic_engine {
-	class ImageLayer : public Layer {
+namespace gis {
+	class GeoPoint {
 	public:
-		ImageLayer(std::string_view rootPath, tson::Layer& layer);
-		virtual void Update(double deltaTimeInMsec) override;
-		virtual void Display(SDL_Renderer* renderer) const override;
-	protected:
-		std::unique_ptr<basic_engine::Sprite> mSprite;
-		int32_t mImageWidth{0};
+		GeoPoint();
+		GeoPoint(double latitude, double longitude);
 
-		bool mIsRepeatXEnabled{ false };
-		bool mIsRepeatYEnabled{ false };
-		float mParallaxFactorX{1.0F};
-		float mParallaxFactorY{1.0F};
+		double Latitude() const;
+		double Longitude() const;
+
+		void SetLatitude(double lat);
+		void SetLongitude(double longitude);
+	private:
+		double mLatitude{ 0.0 };
+		double mLongitude{0.0};
 	};
 }
 
-#endif // !IMAGE_LAYER_H_
+#endif // !GEO_POINT_H
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

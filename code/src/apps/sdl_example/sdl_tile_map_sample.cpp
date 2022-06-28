@@ -20,6 +20,7 @@ void SdlTileMapSample::Initialize(SdlApplication& sdlApplication){
 	mParameters = sdlApplication.GetWindowParametrs();
 
 	Game::AssignWindowParameters(mParameters);
+	Game::GameCamera().Initialize(mParameters);
 
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
 
@@ -89,8 +90,8 @@ void SdlTileMapSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputA
 		}
 
 		if (true == updateTarget) {
-			targetPos.x = glm::clamp(targetPos.x, 0, (2 * static_cast<int32_t>(mParameters.Width)));
-			targetPos.y = glm::clamp(targetPos.y, 0, (2 * static_cast<int32_t>(mParameters.Height)));
+			targetPos.x = glm::clamp(targetPos.x, 0, (4 * static_cast<int32_t>(mParameters.Width)));
+			targetPos.y = glm::clamp(targetPos.y, 0, (4 * static_cast<int32_t>(mParameters.Height)));
 
 			Game::GameCamera().SetTarget(targetPos);
 		}

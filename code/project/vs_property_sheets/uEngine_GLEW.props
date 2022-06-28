@@ -11,6 +11,7 @@
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>$(UENGINE_EXT_DIR)\glew-2.1.0\lib\Release\x64;$(UENGINE_EXT_DIR)\freeglut-2.8.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;$(UENGINE_EXT_DIR)\SDL2-2.0.20\lib\x64\SDL2.lib;$(UENGINE_EXT_DIR)\SDL2-2.0.20\lib\x64\SDL2main.lib;$(UENGINE_EXT_DIR)\SDL2_image-2.0.5\lib\x64\SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

@@ -42,6 +42,16 @@ namespace basic_engine {
 		/// CHECK
 	}
 
+	Sprite::Sprite(const Sprite* spriteInstance) {
+		mTransform = spriteInstance->mTransform;
+		mDestinationRect = spriteInstance->mDestinationRect;
+		mSourceRect = spriteInstance->mSourceRect;
+		mTexture = spriteInstance->mTexture;
+		mHeight = spriteInstance->mHeight;
+		mWidth = spriteInstance->mWidth;
+		mFlip = spriteInstance->mFlip;
+	}
+
 	void Sprite::Update(double tickTimeInMsec) {
 	}
 
@@ -66,17 +76,32 @@ namespace basic_engine {
 		mDestinationRect.h = static_cast<int>(scale.y * mHeight);
 	}
 
+	SDL_Rect Sprite::DestinationRect(float cameraSpeedRatioX, float cameraSpeedRatioY) const
+	{
+		SDL_Rect displayRect = mDestinationRect;
+		displayRect.x -= static_cast<int32_t>(Game::GameCamera().Center().x * cameraSpeedRatioX);
+		displayRect.y -= static_cast<int32_t>(Game::GameCamera().Center().y * cameraSpeedRatioY);
+
+		return displayRect;
+	}
+
 	const Transformation& Sprite::Transform() const {
 		return mTransform;
 	}
 
+	basic_engine::Sprite* Sprite::Clone() {
+		return new Sprite(this);
+	}
+
 	void Sprite::Display(SDL_Renderer* renderer, float cameraSpeedRatioX, float cameraSpeedRatioY) const {
 		if (nullptr != renderer && nullptr != mTexture) {		
-			SDL_Rect displayRect = mDestinationRect;
-			displayRect.x -= static_cast<int32_t>(Game::GameCamera().Center().x * cameraSpeedRatioX);
-			displayRect.y -= static_cast<int32_t>(Game::GameCamera().Center().y * cameraSpeedRatioY);
-
+			SDL_Rect displayRect = DestinationRect(cameraSpeedRatioX, cameraSpeedRatioY);
 			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &displayRect, mTransform.Rotation(), nullptr, mFlip);
+		}
+	}
+	void Sprite::Display(SDL_Renderer* renderer, const SDL_Rect& destRect, float cameraSpeedRatioX, float cameraSpeedRatioY) const	{
+		if (nullptr != renderer && nullptr != mTexture) {
+			SDL_RenderCopyEx(renderer, mTexture->Texture(), &mSourceRect, &destRect, mTransform.Rotation(), nullptr, mFlip);
 		}
 	}
 }

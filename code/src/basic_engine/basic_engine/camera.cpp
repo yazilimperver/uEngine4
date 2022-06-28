@@ -4,9 +4,14 @@
 
 namespace basic_engine {
 	void Camera::Initialize(const WindowParameter& winParameters) {
-		mViewBox = { 0, 0, static_cast<float>(winParameters.Width), static_cast<float>(winParameters.Height) };
-		mWidth = winParameters.Width;
+		mViewBox = { 0, 0, static_cast<float>(2*winParameters.Width), static_cast<float>(winParameters.Height) };
+		mWidth = 2 * winParameters.Width;
 		mHeight = winParameters.Height;
+
+		mCameraLeftBoundary = 0;
+		mCameraRightBoundary = (2.0F * static_cast<float>(mWidth));
+		mCameraTopBoundary = 0;
+		mCameraBottomBoundary = (2.0F * static_cast<float>(mHeight));
 	}
 
 	void Camera::Update(double deltaTimeInMsec)	{
@@ -14,9 +19,8 @@ namespace basic_engine {
 			mViewBox.Left = mTarget.x - mWidth * 0.5F;
 			mViewBox.Top = mTarget.y - mHeight * 0.5F;
 
-			// TODO: Asagidaki kisimlar kamera sinirlamalari icin daha sonra guncellenebilir
-			mViewBox.Left = glm::clamp(mViewBox.Left, 0.0F, (2.0F * static_cast<float>(mWidth)));
-			mViewBox.Top = glm::clamp(mViewBox.Top, 0.0F, (2.0F * static_cast<float>(mHeight)));
+			mViewBox.Left = glm::clamp(mViewBox.Left, mCameraLeftBoundary, mCameraRightBoundary);
+			mViewBox.Top  = glm::clamp(mViewBox.Top, mCameraTopBoundary, mCameraBottomBoundary);
 
 			mCenter = { mViewBox.Left, mViewBox.Top };
 		}

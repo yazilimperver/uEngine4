@@ -42,6 +42,11 @@ namespace basic_engine {
 		/** @brief Pencere yuksekligi  */
 		uint32_t mHeight{ 480 };
 		
+		/** @brief Kamera sinirlari */
+		float mCameraLeftBoundary;
+		float mCameraRightBoundary;
+		float mCameraTopBoundary;
+		float mCameraBottomBoundary;
 	};
 }
 
