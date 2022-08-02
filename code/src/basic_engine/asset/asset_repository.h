@@ -11,6 +11,8 @@
 
 #include "asset_service.h"
 
+struct SDL_Renderer;
+
 namespace basic_engine {
 	class AssetRepository 
 		: public AssetService {

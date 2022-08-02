@@ -105,8 +105,16 @@ namespace gis {
         return strStream.str();
     }
 
-    int32_t TileTmz::Zoom() {
+    uint32_t TileTmz::Zoom() const {
         return mZoom;
+    }
+
+    int32_t TileTmz::TmsX() const {
+        return mTmsX;
+    }
+
+    int32_t TileTmz::TmsY() const {
+        return mTmsY;
     }
 
 }

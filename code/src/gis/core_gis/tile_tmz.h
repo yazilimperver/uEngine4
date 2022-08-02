@@ -51,7 +51,9 @@ namespace gis {
         // Converts TMS tile coordinates to Microsoft QuadTree
         std::string QuadTreeRepresentation() const;
         
-        int32_t Zoom();
+        uint32_t Zoom() const;
+        int32_t TmsX() const;
+        int32_t TmsY() const;
 	private:
         TileTmz(int32_t tmsX, int32_t tmsY, uint32_t zoom);
 

@@ -1,9 +1,17 @@
 #include "asset_repository.h"
 
+#include "sdl_asset/sdl_texture_asset.h"
+#include "sdl_asset/sdl_texture_loader.h"
+
 namespace basic_engine {
 
 	void basic_engine::AssetRepository::RegisterLoader(std::unique_ptr<AssetLoader> loader) {
 		if (!mAssetLoaders.contains(loader->Type()) ){
+
+			if (SdlTextureAsset::SdlTextureTypeStr == loader->Type()) {
+				reinterpret_cast<basic_engine::SdlTextureLoader*>(loader.get())->AssignRenderer(mRenderer);
+			}
+
 			mAssetLoaders[loader->Type()] = std::move(loader);
 		}
 	}
@@ -15,7 +23,7 @@ namespace basic_engine {
 			std::string pathStr{ path.data() };
 			if (auto pathItr = mLoadedAssets.find(pathStr); pathItr == mLoadedAssets.end()) {
 				// yuklenmemis ise ekleyelim 
-				auto loadedAsset = itr->second->Load(mRenderer, path, label);
+				auto loadedAsset = itr->second->Load(path, label);
 
 				// yukleme ok mi?
 				if (loadedAsset) {
@@ -73,5 +81,11 @@ namespace basic_engine {
 	}
 	void AssetRepository::AssignRenderer(SDL_Renderer* renderer) {
 		mRenderer = renderer;
+
+		for (auto& loader : mAssetLoaders) {
+			if (SdlTextureAsset::SdlTextureTypeStr == loader.second->Type()) {
+				reinterpret_cast<basic_engine::SdlTextureLoader*>(loader.second.get())->AssignRenderer(mRenderer);
+			}
+		}
 	}
 }

@@ -12,12 +12,10 @@
 
 #include "asset.h"
 
-struct SDL_Renderer;
-
 namespace basic_engine {
 	class AssetLoader {
 	public:
-		virtual std::unique_ptr<Asset> Load(SDL_Renderer* renderer, std::string_view path, std::string_view label) = 0;
+		virtual std::unique_ptr<Asset> Load(std::string_view path, std::string_view label) = 0;
 
 		/* @brief Sadece ilgili asset'e dair elden cikarma islerini yapacagiz. Sahipligi aktarmadigimiz icin pass by ref!
 		 *		  http://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/

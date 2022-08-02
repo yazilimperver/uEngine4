@@ -10,12 +10,17 @@
 
 #include "asset/asset_loader.h"
 
+struct SDL_Renderer;
+
 namespace basic_engine {
 	class SdlTextureLoader : public AssetLoader {
 	public:
-		virtual std::unique_ptr<Asset> Load(SDL_Renderer* renderer, std::string_view path, std::string_view label) override;
+		void AssignRenderer(SDL_Renderer* renderer);
+		virtual std::unique_ptr<Asset> Load(std::string_view path, std::string_view label) override;
 		virtual void Dispose(std::unique_ptr<Asset>&) override;
 		virtual AssetType Type() override;
+	protected:
+		SDL_Renderer* mRenderer{ nullptr };
 	};
 }
 
