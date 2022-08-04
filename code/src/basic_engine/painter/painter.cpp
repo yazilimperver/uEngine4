@@ -2,8 +2,6 @@
 
 #include <filesystem>
 
-#include "spdlog/spdlog.h"
-
 #include "utility/file_operations.h"
 
 #include "gfx_primitives.h"
@@ -171,7 +169,7 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::DrawText(const Point2d& point, std::string_view text) {
+	void Painter::SimpleText(const Point2d& point, std::string_view text) {
 		if (nullptr != mRenderer) {
 			auto penColor = mActivePen.PenColor();
 			stringRGBA(mRenderer, point.x, point.y, text.data(), penColor.R, penColor.G, penColor.B, penColor.A);
@@ -181,30 +179,63 @@ namespace basic_engine {
 		}
 	}
 
-	std::pair<uint32_t, uint32_t> Painter::ActiveFontSizeInfo(std::string_view fontLabel) const {
+
+	void Painter::SetActiveFont(std::string_view fontLabel)	{
 		std::string label{ fontLabel.data() };
-		if (mFontSizeInfoList.contains(label)) {
-			return mFontSizeInfoList.at(label);
+		if (mFonts.contains(label)) {
+			mActiveFont = label;
+		}
+	}
+
+	bool Painter::RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size, FontStyle style)	{
+		if (nullptr != mRenderer) {
+			std::unique_ptr<FontData> fontData = std::make_unique<FontData>();
+			fontData->Font  = FC_CreateFont();
+			fontData->Path  = std::string(fontPath.data());
+			fontData->Size  = size;
+			fontData->Style = style;
+
+			uint8_t result = FC_LoadFont(fontData->Font, mRenderer, fontData->Path.c_str(), size, FC_MakeColor(0, 0, 0, 255), static_cast<int32_t>(style));
+
+			if (result != 0) {
+				std::string label{ fontLabel.data() };
+				mFonts.emplace(label, std::move(fontData));
+			}
+			else {
+				FC_FreeFont(fontData->Font);
+				spdlog::error("SDL Font register failed!");
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+		return false;
+	}
+
+	std::pair<uint32_t, uint32_t> Painter::ActiveBasicFontSizeInfo(std::string_view fontLabel) const {
+		std::string label{ fontLabel.data() };
+		if (mBasicFontSizeInfoList.contains(label)) {
+			return mBasicFontSizeInfoList.at(label);
 		}
 		return std::pair<uint32_t, uint32_t>(0, 0);
 	}
 
-	void Painter::SetActiveFont(std::string_view fontLabel) {
+	void Painter::SetActiveBasicFont(std::string_view fontLabel) {
 		std::string label{ fontLabel.data() };
-		if (mFonts.contains(label)) {
-			mActiveFont = label;
+		if (mBasicFonts.contains(label)) {
+			mActiveBasicFont = label;
 
-			auto fontSize = mFontSizeInfoList[mActiveFont];
-			gfxPrimitivesSetFont(&mFonts[mActiveFont][0], fontSize.first, fontSize.second);
+			auto fontSize = mBasicFontSizeInfoList[mActiveBasicFont];
+			gfxPrimitivesSetFont(&mBasicFonts[mActiveBasicFont][0], fontSize.first, fontSize.second);
 		}
 	}
 
-	bool Painter::RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t cw, uint32_t ch) {
+	bool Painter::RegisterBasicFont(std::string_view fontLabel, std::string_view fontPath, uint32_t cw, uint32_t ch) {
 		std::error_code ec;
 		std::string label{ fontLabel.data() };
 		try {
-			mFonts.emplace(label, FileOperations::LoadFile(fontPath));
-			mFontSizeInfoList.emplace(label, std::make_pair(cw, ch));
+			mBasicFonts.emplace(label, FileOperations::LoadFile(fontPath));
+			mBasicFontSizeInfoList.emplace(label, std::make_pair(cw, ch));
 
 			spdlog::info("Font {} loaded successfully! Path: {}", fontLabel.data(), fontPath.data());
 		}
@@ -404,4 +435,11 @@ namespace basic_engine {
 			}
 		}
 	}
+	
+	Painter::FontData::~FontData() {
+		if (nullptr != Font) {
+			FC_FreeFont(Font);
+		}
+	}
+
 }

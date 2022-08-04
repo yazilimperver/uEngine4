@@ -11,8 +11,12 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 
 	mPainter.AssignRenderer(mRenderer);
 
-	mPainter.RegisterFont("Font_7_13_Bold", "./7x13B.fnt", 7, 13);
-	mPainter.RegisterFont("Font_10_20", "./10x20.fnt", 10, 20);
+	mPainter.RegisterBasicFont("Font_7_13_Bold", "./7x13B.fnt", 7, 13);
+	mPainter.RegisterBasicFont("Font_10_20", "./10x20.fnt", 10, 20);
+
+	mPainter.RegisterFont("FreeSans_Italic_10", "fonts/FreeSans.ttf", 10, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
+	mPainter.RegisterFont("FreeSans_Normal_20", "fonts/FreeSans.ttf", 20);
+	mPainter.RegisterFont("FreeSans_ItalicBold_12", "fonts/FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
 }
 
 void SdlPainterSample::Update(double tickTimeInMsec) {
@@ -20,7 +24,6 @@ void SdlPainterSample::Update(double tickTimeInMsec) {
 
 
 #include "painter/gfx_primitives.h"
-
 void SdlPainterSample::Display(double tickTimeInMsec) {
 	//Clear screen
 	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -72,17 +75,29 @@ void SdlPainterSample::Display(double tickTimeInMsec) {
 	mPainter.DrawPolygon(&polygon[0], polygon.size());
 
 	mPainter.AssignPen(Pen{ Color::Black });
-	mPainter.SetActiveFont("Font_7_13_Bold");
-	mPainter.DrawText(screenCenter + Point2d{ -300, -240 }, "Merhaba Dunya_Siyah");
+	mPainter.SetActiveBasicFont("Font_7_13_Bold");
+	mPainter.SimpleText(screenCenter + Point2d{ -300, -240 }, "[Basit] Merhaba Dunya_Siyah");
 
-	mPainter.SetActiveFont("Font_10_20");
+	mPainter.SetActiveBasicFont("Font_10_20");
 	std::string text{ "Merhaba Dunya_Merkez" };
-	auto fontSizeInfo = mPainter.ActiveFontSizeInfo("Font_10_20");
-	mPainter.DrawText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "Merhaba Dunya_Merkez");
+	auto fontSizeInfo = mPainter.ActiveBasicFontSizeInfo("Font_10_20");
+	mPainter.SimpleText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "[Basit] Merhaba Dunya_Merkez");
 
-	mPainter.SetActiveFont("Font_7_13_Bold");
+	mPainter.SetActiveBasicFont("Font_7_13_Bold");
 	mPainter.AssignPen(Pen{ Color::Red });
-	mPainter.DrawText(screenCenter + Point2d{ +110, +220 }, "Merhaba Dunya_Kirmazi");
+	mPainter.SimpleText(screenCenter + Point2d{ +110, +220 }, "[Basit] Merhaba Dunya_Kirmazi");
+
+	mPainter.SetActiveFont("FreeSans_Normal_20");
+	mPainter.AssignPen(Pen{ Color::Green });
+	mPainter.Text(screenCenter + Point2d{ -300, -230 }, Painter::Alignment::Left, "[Ileri] Merhaba Dunya_Yesil:%d", 2022);
+
+	mPainter.SetActiveFont("FreeSans_ItalicBold_12");
+	mPainter.AssignPen(Pen{ Color::Magenta });
+	mPainter.Text(screenCenter + Point2d{ 0, -200 }, Painter::Alignment::Center, "[Ileri] Merhaba Dunya Bold Italic_Magenta Center %d", 2022);
+
+	mPainter.SetActiveFont("FreeSans_Italic_10");
+	mPainter.AssignPen(Pen{ Color::Black });
+	mPainter.TextInColumn(screenCenter + Point2d{ -310, -180 }, Painter::Alignment::Left, 200, "[Ileri] Uzun bir yaziyi diyelimki gormek istediniz artik bunu da basmaniz oldukca mumkun. Elbette coklu satir destegi de \n\n gordugunuz gibi mumkun ;) %d", 2022);
 }
 
 void SdlPainterSample::Finalize() {

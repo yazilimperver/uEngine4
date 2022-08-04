@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="D:\GitRepository\Yazilimperver\uEngine4\code\src\ext\SDL_FontCache-master\test\main.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="D:\GitRepository\Yazilimperver\uEngine4\code\src\ext\SDL_FontCache-master\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{14DC67B2-5300-3421-B6CB-C3288008289D}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
