@@ -13,9 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="gfx_files">
-      <UniqueIdentifier>{eea9dc22-3b83-4c42-a8ce-5b5e700b0935}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\transformation.h">
@@ -42,18 +39,6 @@
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\gfx_primitives.h">
-      <Filter>gfx_files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\gfx_primitives_font.h">
-      <Filter>gfx_files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\image_filter.h">
-      <Filter>gfx_files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\roto_zoom.h">
-      <Filter>gfx_files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\transformation.cpp">
@@ -67,15 +52,6 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\gfx_primitives.cpp">
-      <Filter>gfx_files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\image_filter.cpp">
-      <Filter>gfx_files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\..\..\src\basic_engine\basic_engine\roto_zoom.cpp">
-      <Filter>gfx_files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

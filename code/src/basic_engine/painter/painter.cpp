@@ -169,6 +169,28 @@ namespace basic_engine {
 		}
 	}
 
+	void Painter::DrawSprite(const Sprite* sprite) {
+		if (nullptr != mRenderer) {
+			if (nullptr != sprite) {
+				sprite->Display(mRenderer);
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+	}
+
+	void Painter::DrawSprite(const Sprite* sprite, const SDL_Rect& destRect) {
+		if (nullptr != mRenderer) {
+			if (nullptr != sprite) {
+				sprite->Display(mRenderer, destRect);
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+	}
+
 	void Painter::SimpleText(const Point2d& point, std::string_view text) {
 		if (nullptr != mRenderer) {
 			auto penColor = mActivePen.PenColor();

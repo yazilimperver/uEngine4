@@ -13,6 +13,8 @@
 
 #include "painter/painter.h"
 
+#include "basic_engine/sprite.h"
+
 struct SDL_Renderer;
 
 class SdlPainterSample : public ClientGraphicApplication {
@@ -25,6 +27,8 @@ public:
 protected:
 	SDL_Renderer* mRenderer{ nullptr };
 	WindowParameter mParameters;
+
+	std::unique_ptr<basic_engine::Sprite> mSampleSprite;
 
 	basic_engine::Painter mPainter;
 };

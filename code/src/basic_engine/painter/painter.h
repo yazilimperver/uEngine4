@@ -17,6 +17,8 @@
 #include "SDL_FontCache.h"
 #include "spdlog/spdlog.h"
 
+#include "basic_engine/sprite.h"
+
 #include "common.h"
 #include "pen.h"
 #include "brush.h"
@@ -74,6 +76,10 @@ namespace basic_engine {
 
 		/** @brief Jenerik elips cizme API'si */
 		void DrawEllipse(const Point2d& point, int16_t radiusX, int16_t radiusY) const;
+
+		/** @brief Temel sprite cizim API'leri */
+		void DrawSprite(const Sprite* sprite);
+		void DrawSprite(const Sprite* sprite, const SDL_Rect& destRect);
 
 		/** @brief Ileri Font API'leri
 				   Bu API'ler .ttf uzantili fontlari kullanmakta */

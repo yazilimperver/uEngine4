@@ -3,6 +3,11 @@
 #include "SDL.h"
 #include "sdl_application/sdl_application.h"
 
+#include "asset/asset_repository.h"
+#include "sdl_asset/sdl_texture_loader.h"
+
+#include "basic_engine/game.h"
+
 using namespace basic_engine;
 
 void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
@@ -17,17 +22,26 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 	mPainter.RegisterFont("FreeSans_Italic_10", "fonts/FreeSans.ttf", 10, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
 	mPainter.RegisterFont("FreeSans_Normal_20", "fonts/FreeSans.ttf", 20);
 	mPainter.RegisterFont("FreeSans_ItalicBold_12", "fonts/FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
+
+	// Sprite'i yukleyelim
+	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
+	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
+	SpriteParameter params{ "sprite.png", "dragon", 350, 100, SDL_FLIP_NONE };
+	mSampleSprite = std::make_unique<Sprite>(params);
+
+	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
 }
 
 void SdlPainterSample::Update(double tickTimeInMsec) {
 }
-
 
 #include "painter/gfx_primitives.h"
 void SdlPainterSample::Display(double tickTimeInMsec) {
 	//Clear screen
 	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(mRenderer);
+
+	mSampleSprite->Display(mRenderer, SDL_Rect{40, 360, 120, 120 });
 
 	constexpr Point2d screenCenter{ 320, 240 };
 
