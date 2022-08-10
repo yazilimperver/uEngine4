@@ -32,10 +32,12 @@ In this phase of the project the focus is on A, B and C. The expected features a
 
 ### Mevcut Durum
 
-| Durum | Milestone | Goals | ETA |
+| Durum | Kalem | Öncelik | Hedef Tarih |
 | :---: | :--- | :---: | :---: |
-| 🚀 | **[Implement New Project Management Model](#implement-new-project-management-model)** | 3 / 6 | Sat Oct 01 2016 |
-| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | 0 / 1 | Tue Nov 01 2016 |
+| 🚀 | **[Implement New Project Management Model](#implement-new-project-management-model)** | Yüksek | Sat Oct 01 2016 |
+| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
+| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
+| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
 
 ## Getting Started
 
