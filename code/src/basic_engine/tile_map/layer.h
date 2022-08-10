@@ -1,3 +1,10 @@
+/**
+ * @file layer.h.
+ * @date 10.08.2022
+ * @author Yazilimperver
+ * @brief Tiled tarafindan yonetilen her bir katmani temsil etmek icin kullanilacak temel arayuz sinifidir.
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
 #ifndef _LAYER_H_
 #define _LAYER_H_
 

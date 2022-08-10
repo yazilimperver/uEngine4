@@ -2,7 +2,8 @@
  * @file sdl_texture_asset.h.
  * @date 9.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  SDL tarafindan kullanilabilecek olan dokulari temsil eden 'asset' sinifidir.
+ * 		   Resimler icin SDL_Image sinifi kullanilmaktadir.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef SDLTEXTUREASSET

@@ -1,6 +1,3 @@
-#ifndef PROPERTYITEM
-#define PROPERTYITEM
-
 /*!
  * @file	property_item.h.
  * @date	19.01.2021
@@ -8,6 +5,8 @@
  * @brief	Isim deger ikilisi tutmak icin kullanilabilecek olan yardimci sinif
  * @remark	Copyright (c) 2021, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
+#ifndef PROPERTYITEM
+#define PROPERTYITEM
 
 #include <string>
 #include <any>

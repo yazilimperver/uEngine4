@@ -8,8 +8,6 @@
 #include "application_base/keyboard_codes.h"
 #include "basic_engine/game.h"
 
-#include "basic_engine/gfx_primitives.h"
-
 #include "spdlog/spdlog.h"
 
 using namespace basic_engine;
@@ -53,10 +51,6 @@ void SdlTileMapSample::Display(double tickTimeInMsec) {
 	SDL_RenderDrawLine(mRenderer, static_cast<int32_t>(mParameters.Width) / 2, 0, static_cast<int32_t>(mParameters.Width) / 2, static_cast<int32_t>(mParameters.Height));
 
 	mSampleTileMap->Display(mRenderer);
-
-	constexpr int32_t cIndicatorRadius = 10;
-	roundedBoxRGBA(mRenderer, targetPos.x + cIndicatorRadius, targetPos.y- cIndicatorRadius, targetPos.x - cIndicatorRadius, targetPos.y + cIndicatorRadius, 
-				  2 * cIndicatorRadius, 255, 0, 0, 255);
 }
 
 void SdlTileMapSample::Finalize() {

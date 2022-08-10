@@ -1,6 +1,3 @@
-#ifndef CLIENTGRAPHICAPPLICATION
-#define CLIENTGRAPHICAPPLICATION
-
 /**
  * @file client_graphic_application.h.
  * @date 16.03.2022
@@ -8,6 +5,8 @@
  * @brief  Calistirilacak olan grafiksel uygulamalar icin kullanilabilecek arayuz.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
+#ifndef CLIENTGRAPHICAPPLICATION
+#define CLIENTGRAPHICAPPLICATION
 
 #include <cstdint>
 

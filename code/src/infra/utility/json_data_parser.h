@@ -1,3 +1,10 @@
+/**
+ * @file json_data_parser.h.
+ * @date 9.08.2022
+ * @author Yazilimperver
+ * @brief JSON formatinda veri tiplerini ayiklama ve olusturmak icin kullanilabilece jenerik siniftir. Burada cereal kutuphanesi kullanildigindan, ilgili `serilestirici` siniflar hazirlanmalidir.
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
 #ifndef JSONDATAPARSER
 #define JSONDATAPARSER
 /**

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SDL_PARAMETERS
+#define SDL_PARAMETERS
 
 #include <cstdint>
 
@@ -22,3 +23,5 @@ struct SdlParameters {
     //! Whether logging is enabled or not
     bool IsDisplayEventLogs;
 };
+
+#endif // !SDL_PARAMETERS

@@ -1,5 +1,5 @@
 #ifndef MAP_VIEW_H
-#define MAP_VIEW_H MAP_VIEW_H
+#define MAP_VIEW_H
 
 #include "SDL.h"
 #include "tile_collection.h"

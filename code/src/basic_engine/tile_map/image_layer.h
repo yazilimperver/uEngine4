@@ -1,3 +1,10 @@
+/**
+ * @file image_layer.h.
+ * @date 10.08.2022
+ * @author Yazilimperver
+ * @brief Tiled tarafindan uretilen resim katmanlarini temsil eden siniftir
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
 #ifndef IMAGE_LAYER_H_
 #define IMAGE_LAYER_H_
 

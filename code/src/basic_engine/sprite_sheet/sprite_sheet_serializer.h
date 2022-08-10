@@ -2,7 +2,7 @@
  * @file sprite_sheet_serializer.h.
  * @date 15.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Spritesheet ve animasyon JSON parametrelerini anlamlandirmak icin kullanilacak olan siniftir.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef SPRITESHEETSERIALIZER_H_

@@ -2,7 +2,7 @@
  * @file animated_tile.h.
  * @date 1.06.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Animatik pafta parcalarini temsil eden siniftir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef ANIMATED_TILE_H

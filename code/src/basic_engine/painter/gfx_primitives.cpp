@@ -29,6 +29,9 @@ Richard Russell -- richard at rtrussell dot co dot uk
 #include "roto_zoom.h"
 #include "gfx_primitives_font.h"
 
+#pragma warning( push )
+#pragma warning( disable : 4244)
+
 /* ---- Structures */
 
 /*!
@@ -4947,7 +4950,7 @@ int aaFilledPieRGBA(SDL_Renderer* renderer, float cx, float cy, float rx, float 
 	start = fmod(start, 360.0) * 2.0 * M_PI / 360.0;
 	end = fmod(end, 360.0) * 2.0 * M_PI / 360.0;
 	while (start >= end)
-		end += 2.0 * M_PI;
+		end += static_cast<float>(2.0 * M_PI);
 
 	// Calculate number of vertices on perimeter
 	nverts = (end - start) * sqrt(rx * ry) / M_PI;
@@ -5022,7 +5025,7 @@ int aaArcRGBA(SDL_Renderer* renderer, float cx, float cy, float rx, float ry,
 	start = fmod(start, 360.0) * 2.0 * M_PI / 360.0;
 	end = fmod(end, 360.0) * 2.0 * M_PI / 360.0;
 	while (start >= end)
-		end += 2.0 * M_PI;
+		end += static_cast<float>(2.0 * M_PI);
 
 	// Calculate number of vertices
 	nverts = 2 * floor((end - start) * sqrt(rx * ry) / M_PI);
@@ -5209,3 +5212,4 @@ int aaFilledPolyBezierColor(SDL_Renderer* renderer, double* x, double* y, int n,
 	Uint8* c = (Uint8*)&color;
 	return aaFilledPolyBezierRGBA(renderer, x, y, n, s, c[0], c[1], c[2], c[3]);
 }
+#pragma warning( pop )

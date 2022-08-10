@@ -37,7 +37,6 @@ namespace Tools {
     }
 
     std::vector<double>  PerfUtils::SinglethreadedBenchEntry(std::function<void()> threadFunc, int testRunCount, int iterationCount) {
-
         using std::chrono::high_resolution_clock;
         std::vector<double> results(iterationCount, 0);
 
@@ -61,8 +60,7 @@ namespace Tools {
         return results;
     }
 
-    Statistics PerfUtils::BenchWithStats(std::function<void()> func, std::uint64_t iterations, std::uint32_t testRunCount)
-    {
+    Statistics PerfUtils::BenchWithStats(std::function<void()> func, std::uint64_t iterations, std::uint32_t testRunCount) {
         assert(testRunCount >= 1);
         assert(iterations >= 1);
 
@@ -83,8 +81,7 @@ namespace Tools {
         return Statistics(&results[0], results.size());
     }
 
-    void PerfUtils::PrintResults(const std::vector<double>& results, int testRunCount, int iterationCount)
-    {
+    void PerfUtils::PrintResults(const std::vector<double>& results, int testRunCount, int iterationCount) {
         int i{ 0 };
         double totalTimeInSec{ 0.0 };
 
@@ -131,8 +128,7 @@ namespace Tools {
         file.close();
     }
 
-    void PerfUtils::PrintResultsToFile(const char* fileName, const char* testName, const Statistics& results, int testRunCount, int iterationCount, bool doAppend)
-    {
+    void PerfUtils::PrintResultsToFile(const char* fileName, const char* testName, const Statistics& results, int testRunCount, int iterationCount, bool doAppend) {
         /* Test Name:
         *  Test Run Count:
         *  Test Iteration Count:

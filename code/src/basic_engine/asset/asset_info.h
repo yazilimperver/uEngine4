@@ -2,7 +2,7 @@
  * @file asset_info.h.
  * @date 7.05.2022
  * @author Yazilimperver
- * @brief  Bu motor icin kullanilacak olan `asset` lere iliskin temel bilgileri tutan POD
+ * @brief  Bu motor icin kullanilacak olan `asset` lere iliskin temel bilgileri tutan veri yapisi
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef ASSETINFO

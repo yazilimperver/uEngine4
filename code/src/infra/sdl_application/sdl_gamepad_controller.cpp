@@ -5,8 +5,7 @@
 #include "SDL.h"
 #include "SDL_gamecontroller.h"
 
-void SdlGamepadController::Initialize()
-{
+void SdlGamepadController::Initialize() {
     SDL_GameController *controller = nullptr;
     uint32_t numberOfGameControllers = SDL_NumJoysticks();
 
@@ -25,64 +24,51 @@ void SdlGamepadController::Initialize()
     SDL_GameControllerEventState(SDL_ENABLE);
 }
 
-uint32_t SdlGamepadController::GetGamepadControllerCount()
-{
+uint32_t SdlGamepadController::GetGamepadControllerCount() {
     return static_cast<uint32_t>(mControllers.size());
 }
 
-std::string SdlGamepadController::GetGamepadControllerMapping(uint32_t index)
-{
-    if (index < mControllers.size())
-    {
+std::string SdlGamepadController::GetGamepadControllerMapping(uint32_t index) {
+    if (index < mControllers.size()) {
         return std::string(SDL_GameControllerMapping(mControllers[index]));
     }
-    else
-    {
+    else {
         return std::string("");
     }
 }
 
-void SdlGamepadController::SetDeadzoneValue(uint32_t deadZone)
-{
+void SdlGamepadController::SetDeadzoneValue(uint32_t deadZone) {
     mDeadZone = deadZone;
 }
 
-uint32_t SdlGamepadController::GetDeadzoneValue()
-{
+uint32_t SdlGamepadController::GetDeadzoneValue() {
     return mDeadZone;
 }
 
-bool& SdlGamepadController::GetPollingGamepadControllerEnabledStatus()
-{
+bool& SdlGamepadController::GetPollingGamepadControllerEnabledStatus() {
     return mIsPollingGamepadControllerEnabled;
 }
 
-void SdlGamepadController::GamepadControllerDeviceAdded(SDL_Event& e)
-{
+void SdlGamepadController::GamepadControllerDeviceAdded(SDL_Event& e) {
     mIsPollingGamepadControllerEnabled = false;
     // receive the controller index given by SDL
     int32_t cIdx = e.cdevice.which;
 
-    if (SDL_IsGameController(cIdx))
-    {
+    if (SDL_IsGameController(cIdx))     {
         SDL_GameController * controller = SDL_GameControllerOpen(cIdx);
         SDL_Joystick* j = SDL_GameControllerGetJoystick(controller);
         SDL_JoystickID joyId = SDL_JoystickInstanceID(j);
 
         auto itr = mControllers.begin();
 
-        while (itr != mControllers.end())
-        {
-            if (SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(*itr)) == joyId)
-            {
+        while (itr != mControllers.end()) {
+            if (SDL_JoystickInstanceID(SDL_GameControllerGetJoystick(*itr)) == joyId) {
                 break;
             }
         }
 
-        if (itr == mControllers.end())
-        {
-            if (0 != controller)
-            {
+        if (itr == mControllers.end()) {
+            if (0 != controller) {
                 // Save the joystick id to used in the future events
                 mControllers.push_back(controller);
 
@@ -91,67 +77,53 @@ void SdlGamepadController::GamepadControllerDeviceAdded(SDL_Event& e)
 
                 std::string nameOfController(SDL_GameControllerName(controller));
                 // Inform listeners
-                for (auto& listener : mGamepadEventListeners)
-                {
+                for (auto& listener : mGamepadEventListeners) {
                     listener->GamepadControllerAdded(nameOfController, joyId);
                 }
             }
         }
-        else
-        {
-
+        else {
         }
     }
 }
 
-void SdlGamepadController::GamepadControllerAxisMotion(SDL_Event& e)
-{
+void SdlGamepadController::GamepadControllerAxisMotion(SDL_Event& e) {
     GamepadAxisData gamepadAxisData;
     int32_t controllerIndex = e.cdevice.which;
     this->PollGamepadAxisEvents(controllerIndex, gamepadAxisData);
 
     // Inform listeners
-    for (auto& listener : mGamepadEventListeners)
-    {
+    for (auto& listener : mGamepadEventListeners)     {
         listener->GamepadEvent(controllerIndex, gamepadAxisData);
     }
 }
 
-void SdlGamepadController::GamepadControllerButtonDown(SDL_Event& e)
-{
+void SdlGamepadController::GamepadControllerButtonDown(SDL_Event& e) {
     GamepadButtonData gamepadButtonData;
     int32_t controllerIndex = e.cdevice.which;
     this->PollGamepadButtons(controllerIndex, gamepadButtonData);
 
-    // Inform listeners
-    for (auto& listener : mGamepadEventListeners)
-    {
+    for (auto& listener : mGamepadEventListeners) {
         listener->GamepadEvent(controllerIndex, InputActions::ReleaseAction, gamepadButtonData);
     }
 }
 
-void SdlGamepadController::GamepadControllerButtonUp(SDL_Event& e)
-{
+void SdlGamepadController::GamepadControllerButtonUp(SDL_Event& e) {
     GamepadButtonData gamepadButtonData;
     int32_t controllerIndex = e.cdevice.which;
     this->PollGamepadButtons(controllerIndex, gamepadButtonData);
 
-    // Inform listeners
-    for (auto& listener : mGamepadEventListeners)
-    {
+    for (auto& listener : mGamepadEventListeners) {
         listener->GamepadEvent(controllerIndex, InputActions::PressAction, gamepadButtonData);
     }
 }
 
-void SdlGamepadController::RegisterEventListener(GamepadEventListener* listener)
-{
+void SdlGamepadController::RegisterEventListener(GamepadEventListener* listener) {
     mGamepadEventListeners.push_back(listener);
 }
 
-void SdlGamepadController::PollGamepadButtons(int32_t index, GamepadButtonData& buttonData)
-{
-    if (index < static_cast<int32_t>(mControllers.size()))
-    {
+void SdlGamepadController::PollGamepadButtons(int32_t index, GamepadButtonData& buttonData) {
+    if (index < static_cast<int32_t>(mControllers.size())) {
         SDL_GameController* controller = mControllers[index];
 
         // Read Button States
@@ -182,10 +154,8 @@ void SdlGamepadController::PollGamepadButtons(int32_t index, GamepadButtonData& 
     }
 }
 
-void SdlGamepadController::PollGamepadAxisEvents(int32_t index, GamepadAxisData& axisData)
-{
-    if (index < static_cast<int32_t>(mControllers.size()))
-    {
+void SdlGamepadController::PollGamepadAxisEvents(int32_t index, GamepadAxisData& axisData) {
+    if (index < static_cast<int32_t>(mControllers.size())) {
         SDL_GameController* controller = mControllers[index];
 
         // Check if the joystick has digital triggers, like the Wii U Pro Controller, and
@@ -201,27 +171,21 @@ void SdlGamepadController::PollGamepadAxisEvents(int32_t index, GamepadAxisData&
     }
 }
 
-void SdlGamepadController::PollGamepadControllers()
-{
-    if (mControllers.size() > 0)
-    {
-        if (true == mIsPollingGamepadControllerEnabled)
-        {
+void SdlGamepadController::PollGamepadControllers() {
+    if (mControllers.size() > 0) {
+        if (true == mIsPollingGamepadControllerEnabled) {
             // Update all connected controller states.
             SDL_GameControllerUpdate();
 
-            for (auto* controller : mControllers)
-            {
+            for (auto* controller : mControllers) {
                 // Check to see if sdlGamepad is actually connected. If it isn't this will terminate the
                 // polling and initialize the event handling.
-                if (SDL_FALSE == SDL_GameControllerGetAttached(controller))
-                {
+                if (SDL_FALSE == SDL_GameControllerGetAttached(controller)) {
                     mIsPollingGamepadControllerEnabled = true;
                 }
 
                 // Wait for connection
-                if (true == mIsPollingGamepadControllerEnabled)
-                {
+                if (true == mIsPollingGamepadControllerEnabled) {
                     return;
                 }
 

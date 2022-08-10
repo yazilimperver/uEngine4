@@ -86,7 +86,7 @@ void SdlPainterSample::Display(double tickTimeInMsec) {
 	mPainter.DrawRRectangle(SDL_Rect{ screenCenter.x - 100 , screenCenter.y + 50, 100, 50 }, 10);
 
 	std::vector polygon = { Point2d{150, 250}, Point2d{200, 300}, Point2d{175, 350}, Point2d{125, 350}, Point2d{100, 300} };
-	mPainter.DrawPolygon(&polygon[0], polygon.size());
+	mPainter.DrawPolygon(&polygon[0], static_cast<uint32_t>(polygon.size()));
 
 	mPainter.AssignPen(Pen{ Color::Black });
 	mPainter.SetActiveBasicFont("Font_7_13_Bold");

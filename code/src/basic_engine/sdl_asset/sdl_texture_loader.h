@@ -2,7 +2,7 @@
  * @file sdl_texture_loader.h.
  * @date 9.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief SDL destekli dokulari SDL_Image kutuphanesi kullanarak yuklemek icin kullanilabilecek siniftir.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef SDLTEXTURELOADER

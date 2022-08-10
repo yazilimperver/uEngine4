@@ -2,7 +2,7 @@
  * @file tile_map.h.
  * @date 21.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Tiled uygulamasi tarafindan olusturulan .json formatindaki tilemap verilerini okumak icin kullanilacak siniftir.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef TILEMAP_H_

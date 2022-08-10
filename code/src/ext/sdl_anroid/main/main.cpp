@@ -32,10 +32,10 @@ int main(int argc, char** argsv)
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	TTF_Font* font = TTF_OpenFontRW(SDL_RWFromFile("fonts/OpenSans-Regular.ttf", "rb"), 1, 24);
-	if (!font)
-	{
+	if (!font)	{
 		SDL_Log("Could not load font %s\n", SDL_GetError());
 	}
+
 	SDL_Color textColor = { 255, 255, 255, 0 };
 	SDL_Surface* surface = TTF_RenderText_Solid(font, "Merhaba dunya", textColor);
 	SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -59,10 +59,12 @@ int main(int argc, char** argsv)
 			SDL_RenderCopy(renderer, texture, NULL, &rect_tex);
 		SDL_RenderPresent(renderer);
 	}
-	if (texture)
+	if (texture) {
 		SDL_DestroyTexture(texture);
-	if (renderer)
+	}
+	if (renderer) {
 		SDL_DestroyRenderer(renderer);
+	}
 
 	// Close and destroy the window
 	SDL_DestroyWindow(window);

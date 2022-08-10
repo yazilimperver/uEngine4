@@ -2,7 +2,7 @@
  * @file rectangle.h.
  * @date 15.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Temel dikdörtgen sýnýfýmýz
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef RECTANGLE_H

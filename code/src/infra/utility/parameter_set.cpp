@@ -2,8 +2,7 @@
 #include <iostream>
 
 void ParameterSet::PrintCurrentParameters() {
-	for (auto &[key, val] : mParameters)
-	{
+	for (auto &[key, val] : mParameters) {
 		if (val.type() == typeid(int32_t))
 			std::cout << "[" << key << " - int32_t type]: " << std::any_cast<int32_t>(val) << "\n";
 		else if (val.type() == typeid(std::string))

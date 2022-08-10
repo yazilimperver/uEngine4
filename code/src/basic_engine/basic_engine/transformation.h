@@ -2,7 +2,7 @@
  * @file transformation.h.
  * @date 12.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Temel 2B transformasyon durumunu tutan sýnýftýr
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 

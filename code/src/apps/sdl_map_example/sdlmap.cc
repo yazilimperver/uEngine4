@@ -1,4 +1,10 @@
-
+/**
+ * @file sdlmap.cc.
+ * @date 10.08.2022
+ * @author Yazilimperver
+ * @brief  SDL kullanilarak harita gosterimine iliskin ornek bir uygulama. Burada curl kutuphanesi ile internet uzerinden ilgili paftalar yuklenerek gosterilmektedir.
+ * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ */
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>

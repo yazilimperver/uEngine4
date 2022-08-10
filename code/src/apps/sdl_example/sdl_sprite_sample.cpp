@@ -35,11 +35,11 @@ void SdlSpriteSample::Update(double tickTimeInMsec) {
 }
 
 void SdlSpriteSample::Display(double tickTimeInMsec) {
-	//Clear screen
+	// Ekrani sil
 	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
 	SDL_RenderClear(mRenderer);
 
-	// Draw blue lines
+	// Mavi cizgileri cizelim
 	SDL_SetRenderDrawColor(mRenderer, 0x00, 0x00, 0xFF, 0xFF);
 	SDL_RenderDrawLine(mRenderer, 0, static_cast<int32_t>(mParameters.Height) / 2, static_cast<int32_t>(mParameters.Width), static_cast<int32_t>(mParameters.Height) / 2);
 	SDL_RenderDrawLine(mRenderer, static_cast<int32_t>(mParameters.Width) / 2, 0, static_cast<int32_t>(mParameters.Width)/2, static_cast<int32_t>(mParameters.Height));

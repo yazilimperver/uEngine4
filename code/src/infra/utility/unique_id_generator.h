@@ -1,12 +1,12 @@
-#ifndef UNIQUEIDGENERATOR
-#define UNIQUEIDGENERATOR
-
 /*!
  * @file	UniqueIDGenerator.h.
  * @date	1.01.2021
  * @author	Yazilimperver
- * @brief	Essiz bir tanimlayici uretmek icin kullanilabilece olan bir siniftir
+ * @brief	Essiz bir tanimlayici uretmek icin kullanilabilecek olan bir siniftir
  */
+#ifndef UNIQUEIDGENERATOR
+#define UNIQUEIDGENERATOR
+
 #include <cstdint>
 #include <atomic>
 

@@ -1,6 +1,3 @@
-#ifndef PARAMETERSET
-#define PARAMETERSET
-
 /*!
  * @file	parameter_set.h.
  * @date	1.01.2021
@@ -8,6 +5,8 @@
  * @brief	Isim/deger parametreleri tutmak icin kullanilabilecek olan yardimci siniftir.
  */
 
+#ifndef PARAMETERSET
+#define PARAMETERSET
 
 #include <any>
 #include <string>
@@ -31,14 +30,11 @@ protected:
 };
 
 template <typename T>
-bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue)
-{
+bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue) {
 	bool isValueExist{ false };
 
-	if (auto itr = mParameters.find(paramName); itr != mParameters.end())
-	{
-		if (auto valPtr = std::any_cast<T>(&itr->second); valPtr)
-		{
+	if (auto itr = mParameters.find(paramName); itr != mParameters.end()) {
+		if (auto valPtr = std::any_cast<T>(&itr->second); valPtr) {
 			paramValue = *valPtr;
 			isValueExist = true;
 		}

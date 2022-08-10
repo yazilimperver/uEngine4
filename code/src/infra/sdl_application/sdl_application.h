@@ -6,7 +6,8 @@
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 
-#pragma once
+#ifndef SDL_APPLICATION_H
+#define SDL_APPLICATION_H
 
 #include <cstdint>
 #include <vector>
@@ -144,6 +145,8 @@ protected:
     /** @brief Uygulama capinda paylasilacak olan ayarlar */
     ParameterSet mAppWiseSettings;
 };
+
+#endif // !SDL_APPLICATION_H
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

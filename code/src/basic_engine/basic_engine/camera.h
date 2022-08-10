@@ -2,7 +2,8 @@
  * @file camera.h.
  * @date 11.06.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Oyun motoru kutuphanesi icerisinde hareketi ele almak icin kullanilacak olan siniftir.
+ * 		  Mevcut durumda, sprite, sprite sheet ve tilemap'ler bu sinif araciligi ile hareket ettirilmektedir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef CAMERA

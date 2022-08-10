@@ -2,11 +2,11 @@
  * @file sprite.h.
  * @date 12.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Oyunlarda kullanýlabilecek temel sprite sýnýfýmýz
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#ifndef GAMEOBJECT
-#define GAMEOBJECT
+#ifndef SDL_SPRITE
+#define SDL_SPRITE
 
 #include "SDL.h"
 
@@ -64,7 +64,7 @@ namespace basic_engine {
 		SDL_RendererFlip mFlip;
 	};
 }
-#endif // !GAMEOBJECT
+#endif // !SDL_SPRITE
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

@@ -23,13 +23,11 @@ namespace basic_engine {
 		mHeight = spriteBoundary.Height;
     }
 
-	void SpriteSheet::EnableHorizontalFlipped()
-	{
+	void SpriteSheet::EnableHorizontalFlipped()	{
 		mIsHorizontalFlipped = true; mIsVerticalFlipped = false; mRenderFlip = SDL_FLIP_HORIZONTAL;
 	}
 
-	bool SpriteSheet::IsVerticalFlipped() const
-	{
+	bool SpriteSheet::IsVerticalFlipped() const	{
 		return mIsVerticalFlipped;
 	}
 

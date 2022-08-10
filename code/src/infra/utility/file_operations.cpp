@@ -1,7 +1,6 @@
 #include "file_operations.h"
 #include <fstream>
 
-
 std::vector<std::byte> FileOperations::LoadFile(std::string_view filepath) {
     std::ifstream ifs(filepath.data(), std::ios::binary | std::ios::ate);
 

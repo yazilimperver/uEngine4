@@ -2,7 +2,7 @@
  * @file game.h.
  * @date 12.05.2022
  * @author Yazilimperver
- * @brief  Asset service Meyer'in thread-safe singleton yaklasimi (detaylar icin google :)
+ * @brief  Asset service, kamera gibi servislere kolay erisim icin singleton yaklasimi kullanan oyun sýnýfý (detaylar icin google :)
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef GAME_H

@@ -1,14 +1,13 @@
-#ifndef STATISTICS
-#define STATISTICS
-
 /*!
  * @file	Statistics.h.
  * @date	31.08.2021
  * @author	Yazilimperver
  * @brief	Detaylar için: https://github.com/cameron314/microbench/blob/master/microbench.h
- * 			Temel istatistiksel verileri tutmak için kullanýlabilecek yardimci sýnýftýr.
+ * 			Temel istatistiksel verileri hesaplamak için kullanýlabilecek yardimci sýnýftýr.
  * @remark	Copyright (c) 2021, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
+#ifndef STATISTICS
+#define STATISTICS
 
 #include <cstdint>
 #include <cassert>

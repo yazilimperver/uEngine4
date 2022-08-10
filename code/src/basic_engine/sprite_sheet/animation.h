@@ -2,7 +2,8 @@
  * @file animation.h.
  * @date 13.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Spritesheet animasyonu icin kullanilacak olan temel animasyon sinifidir.
+ * 		  Her bir animasyon, birdee fazla frame icerir ve spritesheet de birden fazla animasyon icerebilir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef ANIMATION_H__

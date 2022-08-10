@@ -2,10 +2,11 @@
  * @file asset.h.
  * @date 7.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Motorda kullanilacak olan her tur `asset` icin kullanilacak olan temel arayuz
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#pragma once
+#ifndef ASSET
+#define ASSET
 
 #include "asset_info.h"
 
@@ -16,6 +17,8 @@ namespace basic_engine {
 	};
 }
 
+
+#endif // !ASSET
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
 

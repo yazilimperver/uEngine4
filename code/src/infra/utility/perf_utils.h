@@ -1,13 +1,13 @@
-#ifndef PERFUTILS
-#define PERFUTILS
-
 /*!
  * @file	perf_utils.h.
  * @date	31.08.2021
  * @author	Yazilimperver
- * @brief    Performans ile ilgili islevler icin kullanilabilecek olan yardimc araclar
+ * @brief    Performans ile ilgili islevler icin kullanilabilecek olan bir takim yardimci araclar
  * @remark	Copyright (c) 2021, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
+
+#ifndef PERFUTILS
+#define PERFUTILS
 
 #include <atomic>
 #include <iostream>

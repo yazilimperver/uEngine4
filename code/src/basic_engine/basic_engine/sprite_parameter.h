@@ -2,7 +2,7 @@
  * @file sprite_parameter.h.
  * @date 15.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Sprite'larýn konfigüre edilmesi icin kullanýlan olan parametreler
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef SPRITEPARAMETER_H

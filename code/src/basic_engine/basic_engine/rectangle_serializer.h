@@ -2,7 +2,7 @@
  * @file rectangle_serializer.h.
  * @date 15.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Dikdörtgen sýnýfý için kullanýlacak olan JSON anlamlandýrma sýnýfý
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef RECTANGLESERIALIZER_H_

@@ -23,6 +23,8 @@ public:
     virtual int32_t GetTouchDeviceCount() override;
 };
 
+#endif /* SDL_TOUCH_SERVICE */
+
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
 
@@ -44,6 +46,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
-
-
-#endif /* SDL_TOUCH_SERVICE */

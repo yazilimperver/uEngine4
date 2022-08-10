@@ -2,7 +2,7 @@
  * \file    sprite_sheet.h
  * \date    2018/01/27
  * \author  developer
- * \brief   This class is responsible for playing animations which can be preregistered or set at the runtime
+ * \brief   Spritesheet kabiliyetine iliskin temel siniftir. Alinan konfigurasyona gore animasyon nesnelerini olusturur ve kullanilmasina izin verir.
  * Copyright © 2017, uEngine V3.1 Mehmet Fatih ULUAT <fatihuluat@gmail.com>
  */
 

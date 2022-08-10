@@ -13,7 +13,7 @@
 
 #include "spdlog/spdlog.h"
 
-#include "basic_engine/gfx_primitives.h"
+#include "painter/gfx_primitives.h"
 
 using namespace basic_engine;
 
@@ -58,13 +58,13 @@ void MapViewerClientApp::Display(double tickTimeInMsec) {
 	
 	boxRGBA(mRenderer, mParameters.Width, 0, 0, mParameters.Height, 0, 255, 0, 255);
 	roundedBoxRGBA(mRenderer, fillRect.x + fillRect.w, fillRect.y, fillRect.x, fillRect.y + fillRect.h, 25, 255, 0, 0, 255);
-	filledCircleRGBA(mRenderer, fillRect.x + fillRect.w * 0.5, fillRect.y + fillRect.h * 0.5, 100, 0, 0, 255, 255);
+	filledCircleRGBA(mRenderer, static_cast<int16_t>(fillRect.x + fillRect.w * 0.5), static_cast<int16_t>(fillRect.y + fillRect.h * 0.5), 100, 0, 0, 255, 255);
 
 	gfxPrimitivesSetFont(nullptr, 8 * 4, 8 * 4);
 
 	auto linesToDisplay = SplitString(mMapView->InfoText());
 	for (size_t i = 0; i < linesToDisplay.size(); ++i) {
-		stringRGBA(mRenderer, 10, 10 + 10 * i, linesToDisplay[i].c_str(), 0, 0, 0, 255);
+		stringRGBA(mRenderer, 10, static_cast<int16_t>(10 + 10 * i), linesToDisplay[i].c_str(), 0, 0, 0, 255);
 	}
 }
 

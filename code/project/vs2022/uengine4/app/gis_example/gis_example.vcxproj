@@ -187,6 +187,9 @@
     <ProjectReference Include="..\..\basic_engine\basic_engine\basic_engine.vcxproj">
       <Project>{a650f957-9758-47f6-b515-da3b9c6fc4f7}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\basic_engine\painter\painter.vcxproj">
+      <Project>{de31eee2-3406-4281-a92e-773fe83e2d35}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\basic_engine\sdl_asset\sdl_asset.vcxproj">
       <Project>{61c7da41-9fed-4bf9-bfb9-37e89a29835a}</Project>
     </ProjectReference>

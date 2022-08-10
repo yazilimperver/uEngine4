@@ -2,8 +2,7 @@
 #include <fstream>
 #include "fmt/core.h"
 
-Statistics::Statistics(double* results, std::size_t count)
-{
+Statistics::Statistics(double* results, std::size_t count) {
 	if (nullptr != results) {
 		std::sort(results, results + count);
 
@@ -55,8 +54,7 @@ Statistics::Statistics(double* results, std::size_t count)
 	}
 }
 
-void Statistics::PrintResults()
-{
+void Statistics::PrintResults() {
 	printf("CAS statistics: avg: %.3fms, min: %.3fms, max: %.3fms, stddev: %.3fms, Q1: %.3fms, median: %.3fms, Q3: %.3fms\n",
 		avg() * 1000,
 		min() * 1000,

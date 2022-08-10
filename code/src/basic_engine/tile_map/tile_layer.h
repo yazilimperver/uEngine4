@@ -2,7 +2,7 @@
  * @file tile_layer.h.
  * @date 30.05.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  Paftalari iceren pafta katmanini temsil eden siniftir.
  * @todo   Ölçceklendirme, dondurme ve flip vb hususlarýný ekleyeceðiz		  
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
