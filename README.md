@@ -8,11 +8,11 @@ Neyse üçün dili bırakalım da mevzuya girelim :) OpenGL, SFML, SDL2 derken b
 
 # Amaç
 
-Elbette bu tarz bir projeyi hayata geçirmek için giriş kısmında belirttiğim gibi bir motivasyona ihtiyaç var. Bunun ile birlikte takipçiler ve kullanıcılar için faydalı bir proje olabilmesi için de kapsamı ve amaçlarını net bir şekilde ortaya koymamız gerektiğini düşünüyorum. Bu başlıkda bunları kısa bir şekilde özetliyor olacağım. 
+Elbette bu tarz bir projeyi hayata geçirmek için giriş kısmında belirttiğim gibi bir motivasyona ihtiyaç var. Bunun ile birlikte takipçiler ve kullanıcılar için faydalı bir proje olabilmesi için de kapsamı ve amaçlarını net bir şekilde ortaya koymamız gerektiğini düşünüyorum. Bu başlık içerisinde, bunları kısa bir şekilde sıralıyor olacağım. 
 
 ## Yol Haritası
 
-This file provides an overview of the direction this project is heading. The roadmap is organized in steps that focus on a specific theme,for instance, UX.
+Bu başlık altında, projede belirleyeceğimiz temel kabiliyetlerin geliştirilmesine yönelik yol haritası ortaya konulacaktır.
 
 ### [M1 - Basic Infrastructure](https://github.com/Dovyski/template/milestone/1)
 
@@ -43,52 +43,48 @@ In this phase of the project the focus is on A, B and C. The expected features a
 
 ![](https://i.imgur.com/waxVImv.png)
 
-## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to **deploy**(Bold Example) the project on a live system.
+## Ön Koşullar
 
-### Prerequisites
+Bu motor ile sunulan kabiliyetleri kullanabilmeniz için tek ihtiyacınız Modern C++ kabiliyetlerini destekleyen bir derleyiciye sahip olmak olacaktır.
+Hedefimiz çoklu platform olduğu için en azından Windows, Linux ve Android için bu kütüphaenin kullanılabilecek halde idame etmeyi planlıyorum.
 
-What things you need to install the software and how to install them
+Mevcut durum aşağıda gösterilmiştir:
 
-```
-Give examples
-```
+| İşletim Sistemi | Derleyici/Araç | Durum |
+| :---: | :--- | :---: |
+| Windows 11 | Visual Studio 2022 | ✔  |
+| Linux | G++ XX | ❌ |
+| Android | Clang XX | 🚀 |
 
-### And coding style tests
 
-Explain what these tests test and why
+## Kodlama Standardı
 
-```
-Give an example
-```
+uEngine4 için izlenen kodlama standardına buradan ulaşabilirsiniz. Google C++ kodlama standardı referans alınmaktadır.
 
-## Built With
+## Kullanılan Araç ve Kütüphaneler
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [CMake](https://cmake.org/) - Açık kaynaklı, çoklu platformlar için yazılım oluşturma, test ve paketleme alt yapısı sunan araçtır.
+* [Tiled](https://www.mapeditor.org/) - Tiled ücretsiz ve açık kaynak kodlu, kullanımı kolay ve esnek bir oyun seviye düzenleyici aracıdır.
+* [Cereal](https://uscilab.github.io/cereal/) - C++ 11 uyumlu JSON, XML ve "binary" formatta serileştirme olanağı sunan tek başlıktan oluşan bir kütüphanedir.
 
-## Contributing
+
+## Nasıl Katkı Sağlarım?
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
+## Sürüm
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Kütüphanenin sürüm takibi için [SemVer](http://semver.org/) yaklaşımı kullanılacaktır. Yayınlanan sürümler için [tags on this repository](https://github.com/your/project/tags) takip edilebilir.
 
-## Authors
+TODO
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+## Yazarlar
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+* **Yazılımperver** 
 
-## License
+Projeye katkıda bulunanların listesi için [katkıda bulunanlar](https://github.com/your/project/contributors) sayfasına göz atabiliriz.
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+## Lisans
 
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+Bu projenin lisanslaması için [LICENSE.md](LICENSE.md) dosyasına bakılabilir.
