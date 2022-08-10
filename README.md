@@ -4,6 +4,8 @@ www.yazilimperver.com sayfamda yazmış olduğum ve paylaştığım konuları i�
 
 Neyse üçün dili bırakalım da mevzuya girelim :) OpenGL, SFML, SDL2 derken birçok C++ tabanlı görselleştirme kütüphanesini, çoklu platformlar için görsel uygulamalar geliştirmede kullandım. Hatta, benzerlerini de profesyonel hayatta geliştirdim. Şu bir gerçek ki, bu işlere yeni başlayan arkadaşlar için, bu kütüphanelerin sunulan API'lerini anlayıp, zihinlerindeki projeleri hemen hayata geçirmeleri biraz vakit alabiliyor (alt seviye olmaları sebebi ile SFML belki diğerlerinden bir tık önde olabilir). Bu kütüphane ile birlikte bu ilk eşiği kolay bir şekilde atlatıp, Godot ve benzeri üst seviye bir araç da kullanmadan ama çok da alt seviyeye inmeden bu vebzeri uygulama geliştirmenize yardımcı olmak.
 
+![](https://i.imgur.com/waxVImv.png)
+
 # Amaç
 
 Elbette bu tarz bir projeyi hayata geçirmek için giriş kısmında belirttiğim gibi bir motivasyona ihtiyaç var. Bunun ile birlikte takipçiler ve kullanıcılar için faydalı bir proje olabilmesi için de kapsamı ve amaçlarını net bir şekilde ortaya koymamız gerektiğini düşünüyorum. Bu başlıkda bunları kısa bir şekilde özetliyor olacağım. 
@@ -36,8 +38,10 @@ In this phase of the project the focus is on A, B and C. The expected features a
 | :---: | :--- | :---: | :---: |
 | 🚀 | **[Implement New Project Management Model](#implement-new-project-management-model)** | Yüksek | Sat Oct 01 2016 |
 | 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
-| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
-| 🚀 | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
+| ❌ | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
+| ✔  | **[First Organization Roadmap](#first-organization-roadmap)** | Düşük | Tue Nov 01 2016 |
+
+![](https://i.imgur.com/waxVImv.png)
 
 ## Getting Started
 
