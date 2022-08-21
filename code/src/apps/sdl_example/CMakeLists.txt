@@ -8,17 +8,23 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2IMAGE REQUIRED)
+find_package(SDL2_TTF REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
 find_package(OpenGL REQUIRED)
+find_package(SDLFONT_CACHE REQUIRED)
 
 # Baslik dosyalari
 set(HEADER_FILES
-    primitive_sample.h
+	primitive_sample.h
 	sdl_input_sample.h
+	sdl_painter_sample.h
 	sdl_simple_shape.h
+	sdl_sprite_sample.h
+	sdl_sprite_sheet_sample.h
 	sdl_texture_sample.h
+	sdl_tile_map_sample.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -29,8 +35,12 @@ set(SOURCE_FILES
 	main.cpp
 	primitive_sample.cpp
 	sdl_input_sample.cpp
+	sdl_painter_sample.cpp
 	sdl_simple_shape.cpp
+	sdl_sprite_sample.cpp
+	sdl_sprite_sheet_sample.cpp
 	sdl_texture_sample.cpp
+	sdl_tile_map_sample.cpp
 )
 
 # Kaynak dosya grubu (VS altindaki filtre gibi)
@@ -45,15 +55,15 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} sdl_application tick time utility nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
+target_link_libraries(${APP_NAME} asset basic_engine painter sdl_application tick tile_map time utility sdl_asset sprite_sheet nlohmann_json spdlog_header_only)
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS}  ${SDL2IMAGE_INCLUDE_DIRS})
-target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS} ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER}  ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${TILESON_DIR})
+target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${APP_NAME} PROPERTIES FOLDER Src/Apps)
+set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
 
 # Debug/release farki icin
 set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
@@ -69,7 +79,8 @@ if(WIN32)
 	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGEJPEG_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>          
 	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGEWEBP_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>          
 	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGETIFF_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>          
-	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGEZLIB_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>          
+	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2IMAGEZLIB_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>           
+	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${SDL2_TTF_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>         
 	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${GLEW_DLL_PATH}" $<TARGET_FILE_DIR:${APP_NAME}>
 	    COMMAND ${CMAKE_COMMAND} -E copy_if_different "${CMAKE_CURRENT_LIST_DIR}/texture.png" $<TARGET_FILE_DIR:${APP_NAME}>)
 endif()	        

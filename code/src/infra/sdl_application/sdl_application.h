@@ -27,7 +27,7 @@
 
 #include "utility/parameter_set.h"
 
-#include "basic_engine/rectangle.h"
+#include "graphics/rectangle.h"
 
 #include "sdl_gamepad_controller.h"
 #include "sdl_gamecontroller.h"
@@ -68,7 +68,7 @@ public:
     SDL_Window* GetSdlWindow();
 
     // Gosterim alanini donelim
-    basic_engine::Rectangle<int32_t>& GetViewport();
+    infra::Rectangle<int32_t>& GetViewport();
 protected:
     //! An upper bound is given for update (i.e. multiple updates per tick and one display)
     //! Constant Game Speed independent of Variable FPS
@@ -128,7 +128,7 @@ protected:
     WindowParameter mWindowParameters;
 
     /** @brief Gosterim yapilan goruntuleme alani */
-    basic_engine::Rectangle<int32_t> mRenderViewport;
+    infra::Rectangle<int32_t> mRenderViewport;
 
     /** @brief Uygulama aktif mi */
     std::atomic<bool> mIsAppActive{ true };

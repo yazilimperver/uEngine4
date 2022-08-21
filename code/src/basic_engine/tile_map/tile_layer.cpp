@@ -12,7 +12,7 @@
 
 namespace basic_engine {
 	inline auto GetRectangle(const tson::Rect& rect) {
-		return Rectangle<int32_t>{rect.x, rect.y, rect.width, rect.height };
+		return infra::Rectangle<int32_t>{rect.x, rect.y, rect.width, rect.height };
 	}
 
 	TileLayer::TileLayer(std::string_view rootPath, tson::Layer& layer) {

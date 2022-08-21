@@ -43,7 +43,7 @@ namespace basic_engine {
 				// Bunu resmin ortasina gelecek sekilde yapabiliriz
 				Vector2f position = { obj.getPosition().x + layer.getOffset().x, obj.getPosition().y + layer.getOffset().y - obj.getSize().y};
 
-				Rectangle<int32_t> textureRect{ static_cast<int32_t>(offset.x), static_cast<int32_t>(offset.y), obj.getSize().x, obj.getSize().y };
+				infra::Rectangle<int32_t> textureRect{ static_cast<int32_t>(offset.x), static_cast<int32_t>(offset.y), obj.getSize().x, obj.getSize().y };
 
 				auto imagePath = rootPath.data() + tileset->getImage().string();
 				auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());

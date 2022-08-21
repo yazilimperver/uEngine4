@@ -4,7 +4,7 @@
 #include <cstdint>
 
 #include "core_gis/common.h"
-#include "basic_engine/rectangle.h"
+#include "graphics/rectangle.h"
 
 #include "tile_id.h"
 
@@ -15,7 +15,7 @@ namespace basic_engine {
 namespace gis {
 	struct GeoTile {
 		TileId mID{ -1, -1 };
-		basic_engine::Rectangle<int32_t> mBoundary;
+		infra::Rectangle<int32_t> mBoundary;
 		basic_engine::Asset* mData{ nullptr };
 	};
 }

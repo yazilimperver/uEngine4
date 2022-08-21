@@ -2,7 +2,7 @@
  * @file geo_point.h.
  * @date 26.06.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Coðrafik konumu ifade etmek için kullanýlacak olan sýnýfýmýz
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef GEO_POINT_H

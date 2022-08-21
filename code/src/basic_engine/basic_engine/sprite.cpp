@@ -32,7 +32,7 @@ namespace basic_engine {
 		}
 	}
 
-	Sprite::Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip)
+	Sprite::Sprite(SdlTextureAsset* textureAsset, const infra::Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip)
 		: mTexture{ textureAsset }
 		, mSourceRect{srcRectangle.Left, srcRectangle.Top, srcRectangle.Width, srcRectangle.Height }
 		, mFlip{ flip } {

@@ -1,27 +1,18 @@
 /**
- * @file rectangle_serializer.h.
- * @date 15.05.2022
+ * @file common.h.
+ * @date 16.08.2022
  * @author Yazilimperver
- * @brief Dikdörtgen sýnýfý için kullanýlacak olan JSON anlamlandýrma sýnýfý
+ * @brief 
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
-#ifndef RECTANGLESERIALIZER_H_
-#define RECTANGLESERIALIZER_H_
+#ifndef GRAPHICS_COMMON_H
+#define GRAPHICS_COMMON_H
 
-#include <cereal/archives/json.hpp>
-#include "rectangle.h"
+#include <cstdint>
 
-namespace basic_engine {
-	template<class Archive, typename T>
-	void serialize(Archive& archive, basic_engine::Rectangle<T>& m) {
-		archive(cereal::make_nvp("Left", m.Left),
-			cereal::make_nvp("Top", m.Top),
-			cereal::make_nvp("Width", m.Width),
-			cereal::make_nvp("Height", m.Height));
-	}
-}
+#include "glm/glm.hpp"
 
-#endif // !RECTANGLESERIALIZER_H_
+#endif // !GRAPHICS_COMMON_H
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

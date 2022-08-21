@@ -170,9 +170,7 @@
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\camera.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\common.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\game.h" />
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\rectangle_serializer.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\sprite.h" />
-    <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\rectangle.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\sprite_parameter.h" />
     <ClInclude Include="..\..\..\..\..\src\basic_engine\basic_engine\transformation.h" />
   </ItemGroup>

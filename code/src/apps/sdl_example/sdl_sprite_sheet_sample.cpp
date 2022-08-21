@@ -23,7 +23,7 @@ void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
 	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
-	basic_engine::Rectangle<int32_t> spriteRect{ 0, 0, 128, 128};
+	infra::Rectangle<int32_t> spriteRect{ 0, 0, 128, 128};
 
 	mSampleSpriteSheet = std::make_unique<SpriteSheet>(cSpriteSheetConfigFile, spriteRect, false);
 	if (!mSampleSpriteSheet->Initialize()) {

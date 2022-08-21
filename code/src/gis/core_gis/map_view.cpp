@@ -9,7 +9,7 @@ namespace gis {
 		, mWinHeight{ winHeight }
 		, mGeogViewCenter{ viewCenter }
 		, mZoomLevel{ zoomLevel }
-		, mTileTmz{ TileTmz::GeographicToTile(viewCenter, zoomLevel) }{
+		, mTileTms{ TileTms::GeographicToTile(viewCenter, zoomLevel) }{
 		mViewCenterInPixels = SlippyMapUtil::GeographicToPixel(mGeogViewCenter, mZoomLevel);
 		mViewCenterInMeter = SlippyMapUtil::PixelToMeter(mViewCenterInPixels, mZoomLevel);
 	}
@@ -21,7 +21,7 @@ namespace gis {
 
 		mGeogViewCenter = SlippyMapUtil::PixelToGeographic(mViewCenterInPixels, mZoomLevel);
 		mViewCenterInMeter = SlippyMapUtil::PixelToMeter(mViewCenterInPixels, mZoomLevel);
-		mTileTmz = TileTmz::PixelToTile(mViewCenterInPixels, mZoomLevel);
+		mTileTms = TileTms::PixelToTile(mViewCenterInPixels, mZoomLevel);
 	}
 
 	std::string MapView::InfoText() {
@@ -30,8 +30,8 @@ namespace gis {
 			, mZoomLevel
 			, mViewCenterInPixels.x, mViewCenterInPixels.y
 			, mViewCenterInMeter.x, mViewCenterInMeter.y
-			, mTileTmz.TileInfo().x, mTileTmz.TileInfo().y
-			, mTileTmz.ObtainGoogleTileInfo().x, mTileTmz.ObtainGoogleTileInfo().y);
+			, mTileTms.TileInfo().x, mTileTms.TileInfo().y
+			, mTileTms.ObtainGoogleTileInfo().x, mTileTms.ObtainGoogleTileInfo().y);
 
 		return output;
 	}

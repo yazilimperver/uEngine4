@@ -5,12 +5,14 @@ set(LIB_NAME utility)
 
 # Baslik dosyalari
 set(HEADER_FILES
+	file_operations.h
 	json_data_parser.h
 	parameter_set.h
 	perf_utils.h
 	property_item.h
 	statistics.h
 	type_name.h
+	less_by_pairs.h
 	unique_id_generator.h
 )
 
@@ -19,6 +21,8 @@ source_group("Header Files" FILES ${HEADER_FILES})
 
 # Kaynak kod dosyalari
 set(SOURCE_FILES
+	less_by_pairs.cpp
+	file_operations.cpp
     statistics.cpp
 	property_item.cpp
 	perf_utils.cpp
@@ -41,7 +45,7 @@ endif()
 add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${LIB_NAME} PROPERTIES FOLDER Src/Infra)
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER infra)
 
 # Kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} PUBLIC spdlog_header_only)

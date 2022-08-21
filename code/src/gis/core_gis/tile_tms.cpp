@@ -1,19 +1,19 @@
-#include "tile_tmz.h"
+#include "tile_tms.h"
 
 namespace gis {
-    TileTmz::TileTmz(int32_t tmsX, int32_t tmsY, uint32_t zoom)
+    TileTms::TileTms(int32_t tmsX, int32_t tmsY, uint32_t zoom)
         : mTmsX{ tmsX }, mTmsY{ tmsY }, mZoom{ zoom } { }
 
-    TileTmz TileTmz::FromTmsTileInfo(const TmsTileInfo& tmsTileInfo, uint32_t zoom) {
+    TileTms TileTms::FromTmsTileInfo(const TmsTileInfo& tmsTileInfo, uint32_t zoom) {
         return { tmsTileInfo.x, tmsTileInfo.y, zoom };
     }
 
-    TileTmz TileTmz::FromGoogleTile(const GoogleTileInfo& googleTile, uint32_t zoom) {
+    TileTms TileTms::FromGoogleTile(const GoogleTileInfo& googleTile, uint32_t zoom) {
         int32_t tmsY = (1 << zoom) - 1 - googleTile.y;
         return FromTmsTileInfo(TmsTileInfo{ googleTile.x, tmsY }, zoom);
     }
 
-    TileTmz TileTmz::QuadTreeToTile(const std::string& quadTree) {
+    TileTms TileTms::QuadTreeToTile(const std::string& quadTree) {
         int32_t zoom = static_cast<int32_t>(quadTree.size());
         auto offset = (1 << zoom) - 1;
 
@@ -29,35 +29,35 @@ namespace gis {
             });
 
         int32_t tmsY = offset - googleY;
-        return TileTmz::FromTmsTileInfo(TmsTileInfo{ googleX, tmsY }, zoom);
+        return TileTms::FromTmsTileInfo(TmsTileInfo{ googleX, tmsY }, zoom);
     }
 
-    TileTmz TileTmz::GeographicToTile(const GeoPoint& pointInGeog, uint32_t zoom) {
+    TileTms TileTms::GeographicToTile(const GeoPoint& pointInGeog, uint32_t zoom) {
         auto pointInPixel = SlippyMapUtil::GeographicToPixel(pointInGeog, zoom);
-        return TileTmz::PixelToTile(pointInPixel, zoom);
+        return TileTms::PixelToTile(pointInPixel, zoom);
 
     }
 
-    TileTmz TileTmz::MeterToTile(const PointInMeters& pointInMeter, uint32_t zoom) {
+    TileTms TileTms::MeterToTile(const PointInMeters& pointInMeter, uint32_t zoom) {
         auto pointInPixel = SlippyMapUtil::MeterToPixels(pointInMeter, zoom);
-        return TileTmz::PixelToTile(pointInPixel, zoom);
+        return TileTms::PixelToTile(pointInPixel, zoom);
     }
 
-    TileTmz TileTmz::PixelToTile(const PointInPixels& inputInPixel, uint32_t zoom) {
+    TileTms TileTms::PixelToTile(const PointInPixels& inputInPixel, uint32_t zoom) {
         auto tmsX = static_cast<int>(std::ceil(inputInPixel.x / static_cast<double>(cDefaultTileSize)) - 1);
         auto tmsY = static_cast<int>(std::ceil(inputInPixel.y / static_cast<double>(cDefaultTileSize)) - 1);
         tmsY = (1 << zoom) - 1 - tmsY;
-        return TileTmz::FromTmsTileInfo(TmsTileInfo{ tmsX, tmsY }, zoom);
+        return TileTms::FromTmsTileInfo(TmsTileInfo{ tmsX, tmsY }, zoom);
     }
 
-    MercatorRectangle TileTmz::MercatorBounds() {
+    MercatorRectangle TileTms::MercatorBounds() {
         auto pixelMin = SlippyMapUtil::PixelToMeter({ mTmsX * cDefaultTileSize, mTmsY * cDefaultTileSize }, mZoom);
         auto pixelMax = SlippyMapUtil::PixelToMeter({ (mTmsX + 1) * cDefaultTileSize, (mTmsY + 1) * cDefaultTileSize }, mZoom);
 
         return { pixelMin, pixelMax };
     }
 
-    GeoRectangle TileTmz::GeographicBounds() {
+    GeoRectangle TileTms::GeographicBounds() {
         auto googleTileInfo = ObtainGoogleTileInfo();
 
         auto pixelXWest = googleTileInfo.x * cDefaultTileSize;
@@ -72,16 +72,16 @@ namespace gis {
         return { pointMin, pointMax };
     }
 
-    TmsTileInfo TileTmz::TileInfo() const{
+    TmsTileInfo TileTms::TileInfo() const{
         return { mTmsX, mTmsY };
     }
 
-    GoogleTileInfo TileTmz::ObtainGoogleTileInfo() const {
+    GoogleTileInfo TileTms::ObtainGoogleTileInfo() const {
         auto googleY = (1 << mZoom) - 1 - mTmsY;
         return { mTmsX, googleY };
     }
 
-    std::string TileTmz::QuadTreeRepresentation() const {
+    std::string TileTms::QuadTreeRepresentation() const {
         int32_t tmsX = mTmsX;
         int32_t tmsY = (1 << mZoom) - 1 - mTmsY;
 
@@ -105,15 +105,15 @@ namespace gis {
         return strStream.str();
     }
 
-    uint32_t TileTmz::Zoom() const {
+    uint32_t TileTms::Zoom() const {
         return mZoom;
     }
 
-    int32_t TileTmz::TmsX() const {
+    int32_t TileTms::TmsX() const {
         return mTmsX;
     }
 
-    int32_t TileTmz::TmsY() const {
+    int32_t TileTms::TmsY() const {
         return mTmsY;
     }
 

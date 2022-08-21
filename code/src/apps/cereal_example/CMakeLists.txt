@@ -39,7 +39,7 @@ target_link_libraries(${APP_NAME}  spdlog_header_only)
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${APP_NAME} PROPERTIES FOLDER Src/Apps)
+set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
 
 # Debug/release farki icin
 set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )

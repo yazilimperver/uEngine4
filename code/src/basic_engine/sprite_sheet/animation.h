@@ -13,7 +13,7 @@
 #include <memory>
 #include <string_view>
 
-#include "basic_engine/rectangle.h"
+#include "graphics/rectangle.h"
 #include "common.h"
 
 namespace basic_engine {
@@ -22,15 +22,15 @@ namespace basic_engine {
 	class Animation {
     public:
         Animation(std::string_view animationName, 
-                  const std::vector<Rectangle<int32_t>>& frames, 
+                  const std::vector<infra::Rectangle<int32_t>>& frames,
                   const SdlTextureAsset* texture);
 
         const SdlTextureAsset* SpriteSheet() const;
         uint32_t FrameCount() const;
-        const Rectangle<int32_t>& Frame(uint32_t n) const;
+        const infra::Rectangle<int32_t>& Frame(uint32_t n) const;
     protected:
         std::string mAnimationName;
-        std::vector<Rectangle<int32_t>> mFrames;
+        std::vector<infra::Rectangle<int32_t>> mFrames;
         const SdlTextureAsset* mTexture{nullptr};
 	};
 }

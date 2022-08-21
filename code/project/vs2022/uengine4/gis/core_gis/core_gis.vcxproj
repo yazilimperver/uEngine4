@@ -158,14 +158,14 @@
     <ClInclude Include="..\..\..\..\..\src\gis\core_gis\gis_meta_data.h" />
     <ClInclude Include="..\..\..\..\..\src\gis\core_gis\map_view.h" />
     <ClInclude Include="..\..\..\..\..\src\gis\core_gis\slippy_map_util.h" />
-    <ClInclude Include="..\..\..\..\..\src\gis\core_gis\tile_tmz.h" />
+    <ClInclude Include="..\..\..\..\..\src\gis\core_gis\tile_tms.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\geo_point.cpp" />
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\main.cpp" />
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\map_view.cpp" />
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\slippy_map_util.cpp" />
-    <ClCompile Include="..\..\..\..\..\src\gis\core_gis\tile_tmz.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\gis\core_gis\tile_tms.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

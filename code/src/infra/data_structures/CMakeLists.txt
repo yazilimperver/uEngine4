@@ -30,7 +30,7 @@ endif()
 # Windows icin bir kac ek tanimlama
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	# Bu projeyi VS icerisinde ayri bir folderda tutalim
-	set_target_properties(${LIB_NAME} PROPERTIES FOLDER Src/Infra)
+	set_target_properties(${LIB_NAME} PROPERTIES FOLDER infra)
 endif()
 
 # Kutuphaneleri baglayalim

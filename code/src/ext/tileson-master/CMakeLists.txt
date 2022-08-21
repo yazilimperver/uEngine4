@@ -56,7 +56,7 @@ endif()
 
 
 #option(BUILD_SHARED_LIBS "Build shared libraries." OFF)
-option(BUILD_TESTS "Build unit tests." ON)
+option(BUILD_TESTS "Build unit tests." OFF)
 option(BUILD_EXAMPLES "Build examples." OFF)
 option(CLEAR_TSON_CMAKE_CACHE "Clear CMake cache for variables. Activate if you are working on the code. Otherwise: keep it off" OFF)
 
@@ -79,11 +79,11 @@ set(INCLUDE_FILES include/tileson.h include/tileson_parser.hpp include/misc/Memo
         include/objects/ProjectFolder.hpp include/tiled/World.hpp include/objects/WorldMapData.hpp)
 
 # Only activated for code completion, must be uncommented before release!
-# add_library(tileson ${SOURCE_FILES} ${INCLUDE_FILES})
+add_library(tileson ${SOURCE_FILES} ${INCLUDE_FILES})
 
-if(BUILD_TESTS)
-    add_subdirectory(tests)
-endif()
+# if(BUILD_TESTS)
+#    add_subdirectory(tests)
+# endif()
 
 if(BUILD_EXAMPLES)
     set(BUILD_SHARED_LIBS OFF) #build SFML with static libs

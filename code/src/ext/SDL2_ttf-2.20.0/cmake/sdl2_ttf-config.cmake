@@ -26,9 +26,9 @@ else()
     return()
 endif()
 
-set(_sdl2ttf_incdir       "${CMAKE_CURRENT_LIST_DIR}/../include")
-set(_sdl2ttf_library      "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.lib")
-set(_sdl2ttf_dll          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.dll")
+set(SDL2_TTF_INCLUDE_DIRS       "${CMAKE_CURRENT_LIST_DIR}/../include")
+set(SDL2_TTF_LIBRARIES      "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.lib")
+set(SDL2_TTF_DLL_PATH          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.dll")
 
 # All targets are created, even when some might not be requested though COMPONENTS.
 # This is done for compatibility with CMake generated SDL2_image-target.cmake files.
@@ -44,8 +44,3 @@ if(NOT TARGET SDL2_ttf::SDL2_ttf)
             INTERFACE_SDL2_SHARED "ON"
     )
 endif()
-
-unset(_sdl_arch_subdir)
-unset(_sdl2ttf_incdir)
-unset(_sdl2ttf_library)
-unset(_sdl2ttf_dll)

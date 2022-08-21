@@ -3,3 +3,5 @@
 add_subdirectory ("example_app")
 add_subdirectory ("cereal_example")
 add_subdirectory ("sdl_example")
+add_subdirectory ("gis_example")
+add_subdirectory ("sdl_map_example")

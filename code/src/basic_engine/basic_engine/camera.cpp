@@ -26,7 +26,7 @@ namespace basic_engine {
 		}
 	}
 
-	basic_engine::Rectangle<float> Camera::ViewBox() const	{
+	infra::Rectangle<float> Camera::ViewBox() const	{
 		return mViewBox;
 	}
 

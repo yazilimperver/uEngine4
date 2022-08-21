@@ -27,7 +27,7 @@
     <ClInclude Include="..\..\..\..\..\src\gis\core_gis\slippy_map_util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\..\src\gis\core_gis\tile_tmz.h">
+    <ClInclude Include="..\..\..\..\..\src\gis\core_gis\tile_tms.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\src\gis\core_gis\map_view.h">
@@ -44,7 +44,7 @@
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\slippy_map_util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\src\gis\core_gis\tile_tmz.cpp">
+    <ClCompile Include="..\..\..\..\..\src\gis\core_gis\tile_tms.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\..\..\src\gis\core_gis\map_view.cpp">

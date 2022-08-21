@@ -38,7 +38,7 @@ endif()
 add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${LIB_NAME} PROPERTIES FOLDER Src/Infra)
+set_target_properties(${LIB_NAME} PROPERTIES FOLDER infra)
 
 # Kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} PUBLIC spdlog_header_only)

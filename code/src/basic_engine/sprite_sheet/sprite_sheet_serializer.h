@@ -11,7 +11,7 @@
 #include "animation_parameters.h"
 #include "sprite_sheet_parameters.h"
 
-#include "basic_engine/rectangle_serializer.h"
+#include "graphics/rectangle_serializer.h"
 
 #include <cereal/archives/json.hpp>
 #include <cereal/types/vector.hpp>

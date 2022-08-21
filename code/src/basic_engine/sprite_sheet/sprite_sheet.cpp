@@ -10,7 +10,7 @@
 
 
 namespace basic_engine {
-    SpriteSheet::SpriteSheet(std::string_view spriteSheetConfig, const Rectangle<int32_t>& spriteBoundary, bool paused, bool looped)
+    SpriteSheet::SpriteSheet(std::string_view spriteSheetConfig, const infra::Rectangle<int32_t>& spriteBoundary, bool paused, bool looped)
         : mCurrentAnimation{ nullptr }
         , mSpriteSheetConfig{ spriteSheetConfig }
         , mDestinationRect {spriteBoundary.Left, spriteBoundary.Top, spriteBoundary.Width, spriteBoundary.Height }

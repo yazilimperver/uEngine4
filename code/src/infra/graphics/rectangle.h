@@ -10,10 +10,10 @@
 
 #include "common.h"
 
-namespace basic_engine {
+namespace infra {
     template <typename T>
     struct Rectangle {
-        Rectangle() 
+        Rectangle()
             : Left(0),
             Top(0),
             Width(0),
@@ -27,10 +27,10 @@ namespace basic_engine {
         bool Intersects(const Rectangle<T>& rectangle) const;
         bool Intersects(const Rectangle<T>& rectangle, Rectangle<T>& intersection) const;
 
-        T Left;   
-        T Top;    
-        T Width;  
-        T Height; 
+        T Left;
+        T Top;
+        T Width;
+        T Height;
     };
 
     template <typename T>
@@ -107,10 +107,7 @@ namespace basic_engine {
     inline bool operator !=(const Rectangle<T>& Left, const Rectangle<T>& right) {
         return !(Left == right);
     }
-
-
-}  // basic_engine
-
+}
 #endif
 
 /**

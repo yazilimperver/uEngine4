@@ -1,6 +1,6 @@
 #include "pager.h"
 
-#include "core_gis/tile_tmz.h"
+#include "core_gis/tile_tms.h"
 
 namespace gis {
     void Pager::UpdateReference(const PointInPixels& newCenter, uint32_t zoomLevel) {
@@ -8,14 +8,14 @@ namespace gis {
         mProvidedCenter.ZoomLevel = zoomLevel;
 
         if (TileOrigin::Tms == mTileOrigin){
-            auto calculatedTileInfo = TileTmz::PixelToTile(newCenter, zoomLevel);
+            auto calculatedTileInfo = TileTms::PixelToTile(newCenter, zoomLevel);
 
             mProvidedCenter.TileInfo.TileX = calculatedTileInfo.TmsX();
             mProvidedCenter.TileInfo.TileY = calculatedTileInfo.TmsY();
             mProvidedCenter.TileInfo.ZoomLevel = zoomLevel;
         }
         else {
-            auto calculatedTileInfo = TileTmz::PixelToTile(newCenter, zoomLevel).ObtainGoogleTileInfo();
+            auto calculatedTileInfo = TileTms::PixelToTile(newCenter, zoomLevel).ObtainGoogleTileInfo();
             
             mProvidedCenter.TileInfo.TileX = calculatedTileInfo.x;
             mProvidedCenter.TileInfo.TileY = calculatedTileInfo.y;

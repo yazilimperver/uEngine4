@@ -511,7 +511,7 @@ SDL_Window* SdlApplication::GetSdlWindow() {
     return mWindow;
 }
 
-basic_engine::Rectangle<int32_t>& SdlApplication::GetViewport() {
+infra::Rectangle<int32_t>& SdlApplication::GetViewport() {
     return mRenderViewport;
 }
 

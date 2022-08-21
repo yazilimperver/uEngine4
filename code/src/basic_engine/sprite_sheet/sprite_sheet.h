@@ -16,7 +16,7 @@
 
 #include "graphics/color.h"
 
-#include "basic_engine/rectangle.h"
+#include "graphics/rectangle.h"
 #include "basic_engine/transformation.h"
 
 #include "common.h"
@@ -29,7 +29,7 @@ namespace basic_engine {
 
     class SpriteSheet  {
     public:
-        explicit SpriteSheet(std::string_view spriteSheetConfig, const Rectangle<int32_t>& spriteBoundary, bool paused = false, bool looped = true);
+        explicit SpriteSheet(std::string_view spriteSheetConfig, const infra::Rectangle<int32_t>& spriteBoundary, bool paused = false, bool looped = true);
 
         /** @brief Ilklendirme sonucu donulecektir. */
         bool Initialize();
@@ -78,7 +78,7 @@ namespace basic_engine {
 		/** @brief Mevcut animasyon dokusunun yukseklik ve genisligi */
 		int32_t mHeight;
 		int32_t mWidth;
-        Rectangle<int32_t> mAnimationBoundary{0, 0, 0, 0};
+        infra::Rectangle<int32_t> mAnimationBoundary{0, 0, 0, 0};
 
         //! Reference to current animation
         Color mActiveColor;

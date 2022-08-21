@@ -10,13 +10,13 @@
 
 #include <string>
 #include <vector>
-#include "basic_engine/rectangle.h"
+#include "graphics/rectangle.h"
 
 namespace basic_engine {
 	struct AnimationParameters {
 		std::string AnimationName{ "NotSet" };
 		std::string TextureName{ "NotSet" };
-		std::vector<Rectangle<int32_t>> AnimationFrames;
+		std::vector<infra::Rectangle<int32_t>> AnimationFrames;
 	};
 }
 

@@ -12,7 +12,7 @@
 
 #include "sprite_parameter.h"
 #include "transformation.h"
-#include "rectangle.h"
+#include "graphics/rectangle.h"
 #include "asset/asset.h"
 
 namespace basic_engine {
@@ -30,7 +30,7 @@ namespace basic_engine {
 		Sprite(SdlTextureAsset* textureAsset, const Vector2i& pos, SDL_RendererFlip flip);
 
 		/** @brief Zaten yuklenmis bir resmin verilen kismi icin kullanilacak */
-		Sprite(SdlTextureAsset* textureAsset, const Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
+		Sprite(SdlTextureAsset* textureAsset, const infra::Rectangle<int32_t>& srcRectangle, SDL_RendererFlip flip);
 		void Update(double tickTimeInMsec);
 		void Display(SDL_Renderer* renderer, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;
 		void Display(SDL_Renderer* renderer, const SDL_Rect& destRect, float cameraSpeedRatioX = 1.0F, float cameraSpeedRatioY = 1.0F) const;

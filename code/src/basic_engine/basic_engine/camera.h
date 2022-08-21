@@ -10,7 +10,7 @@
 #define CAMERA
 
 #include "common.h"
-#include "rectangle.h"
+#include "graphics/rectangle.h"
 
 #include "application_base/window_parameter.h"
 
@@ -20,7 +20,7 @@ namespace basic_engine {
 		void Initialize(const WindowParameter& winParameters);
 		void Update(double deltaTimeInMsec);
 
-		basic_engine::Rectangle<float> ViewBox() const;
+		infra::Rectangle<float> ViewBox() const;
 		Vector2f Center() const;
 		Vector2f Target() const;
 		void ResetTarget();
@@ -35,7 +35,7 @@ namespace basic_engine {
 		Vector2f mCenter;
 
 		/** @brief Kameranin goruntuleme alani */
-		Rectangle<float> mViewBox;
+		infra::Rectangle<float> mViewBox;
 		
 		/** @brief Pencere genisligi */
 		uint32_t mWidth{ 640 };
