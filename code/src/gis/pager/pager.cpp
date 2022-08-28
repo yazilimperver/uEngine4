@@ -7,7 +7,7 @@ namespace gis {
         mProvidedCenter.Position = newCenter;
         mProvidedCenter.ZoomLevel = zoomLevel;
 
-        if (TileOrigin::Tms == mTileOrigin){
+        if (TileOrigin::Tmz == mTileOrigin){
             auto calculatedTileInfo = TileTms::PixelToTile(newCenter, zoomLevel);
 
             mProvidedCenter.TileInfo.TileX = calculatedTileInfo.TmsX();

@@ -7,8 +7,11 @@ find_package(CEREAL REQUIRED)
 
 # Baslik dosyalari
 set(HEADER_FILES
-	color.h
+	color.h	
 	color_serializer.h
+	common.h
+	rectangle.h
+	rectangle_serializer.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
