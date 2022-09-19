@@ -1,5 +1,5 @@
 #ifndef TILE_DOWNLOADER_H
-#define TILE_DOWNLOADER_H TILE_DOWNLOADER_H
+#define TILE_DOWNLOADER_H
 
 #include <list>
 #include <string>

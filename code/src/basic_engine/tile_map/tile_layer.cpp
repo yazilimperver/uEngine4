@@ -31,7 +31,7 @@ namespace basic_engine {
 			position.y += layer.getOffset().y;
 
 			auto tileSetPath = std::string(rootPath.data()) + tileset->getImage().string();
-			auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, tileSetPath, tileset->getName());
+			auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, tileSetPath, tileset->getName());
 			
 			float rotation{ 0.0f };
 			Vector2f scale{ 1.0F, 1.0F };
@@ -44,7 +44,7 @@ namespace basic_engine {
 				rotation += 90.f;
 
 			if (textHandle.has_value()) {
-				auto texture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+				auto texture = dynamic_cast<SdlTextureAsset*>(Game::GetAssetService().GetAsset(textHandle.value()));
 				bool hasAnimation = tile->getAnimation().any();
 				
 				if (!hasAnimation) {

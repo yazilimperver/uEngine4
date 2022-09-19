@@ -19,13 +19,13 @@ namespace basic_engine {
 		mIsRepeatYEnabled = layer.hasRepeatY();
 
 		auto imagePath = std::string{ rootPath.data() } + layer.getImage();
-		auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());
+		auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());
 
 		if (textHandle.has_value()) {
 			auto winWidth = Game::WindowParameters().Width;
 			auto winHeight = Game::WindowParameters().Height;
 
-			auto loadedTexture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+			auto loadedTexture = dynamic_cast<SdlTextureAsset*>(Game::GetAssetService().GetAsset(textHandle.value()));
 			mSprite = std::make_unique<Sprite>(loadedTexture, 
 				Vector2i{ static_cast<int32_t>(loadedTexture->Width() * 0.5F + layer.getOffset().x ),
 						  static_cast<int32_t>(loadedTexture->Height() * 0.5F + layer.getOffset().y ) },

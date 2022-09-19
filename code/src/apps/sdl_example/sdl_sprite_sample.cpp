@@ -19,9 +19,9 @@ void SdlSpriteSample::Initialize(SdlApplication& sdlApplication) {
 
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
 
-	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
+	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 
-	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
+	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
 	SpriteParameter params{ "sprite.png", "dragon", static_cast<int32_t>(mParameters.Width) /2, static_cast<int32_t>(mParameters.Height) / 2, SDL_FLIP_NONE};
 

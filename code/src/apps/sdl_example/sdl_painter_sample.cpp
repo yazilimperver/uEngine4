@@ -24,8 +24,8 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 	mPainter.RegisterFont("FreeSans_ItalicBold_12", "fonts/FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
 
 	// Sprite'i yukleyelim
-	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
-	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
+	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
+	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 	SpriteParameter params{ "sprite.png", "dragon", 350, 100, SDL_FLIP_NONE };
 	mSampleSprite = std::make_unique<Sprite>(params);
 

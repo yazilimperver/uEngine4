@@ -441,3 +441,4 @@ FodyWeavers.xsd
 *.exp
 /code/src/buildLinux
 /code/src/buildNinja
+/code/src/ext/SDL_FontCache-master/linuxBuild

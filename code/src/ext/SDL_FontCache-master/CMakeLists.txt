@@ -30,7 +30,7 @@ add_library(FontCache
 )
 target_include_directories(FontCache PUBLIC ${sdl2_INCLUDE_DIR})
 target_include_directories(FontCache PUBLIC .)
-target_link_libraries(FontCache ${sdl2_LIBRARY})
+target_link_libraries(FontCache m ${sdl2_LIBRARY})
 target_link_libraries(FontCache ${sdl2main_LIBRARY})
 target_include_directories(FontCache PUBLIC ${sdl2_ttf_INCLUDE_DIR})
 target_link_libraries(FontCache ${sdl2_ttf_LIBRARY})

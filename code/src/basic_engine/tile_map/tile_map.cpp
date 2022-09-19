@@ -33,7 +33,7 @@ namespace basic_engine {
 			// Onden tilesetleri ve geri planlari yukleyebiliriz
 			for (auto& tileset : mTileMap->getTilesets()) {
 				auto path = GetPath(tileset.getImage().string());
-				auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, path, tileset.getName());
+				auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, path, tileset.getName());
 
 				if (!textHandle.has_value()) {
 					spdlog::info("Tilemap image file load error! Tilemap Name: {} File name: {}", tileset.getName(), path);

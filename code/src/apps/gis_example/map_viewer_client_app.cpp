@@ -25,9 +25,9 @@ void MapViewerClientApp::Initialize(SdlApplication& sdlApplication) {
 
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
 
-	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
+	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 
-	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
+	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
 	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
 }

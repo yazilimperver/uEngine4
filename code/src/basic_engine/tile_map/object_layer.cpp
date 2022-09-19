@@ -46,10 +46,10 @@ namespace basic_engine {
 				infra::Rectangle<int32_t> textureRect{ static_cast<int32_t>(offset.x), static_cast<int32_t>(offset.y), obj.getSize().x, obj.getSize().y };
 
 				auto imagePath = rootPath.data() + tileset->getImage().string();
-				auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());
+				auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, imagePath, layer.getName());
 
 				if (textHandle.has_value()) {
-					auto loadedTexture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+					auto loadedTexture = dynamic_cast<SdlTextureAsset*>(Game::GetAssetService().GetAsset(textHandle.value()));
 					auto sprite = std::make_unique<Sprite>(loadedTexture,
 						textureRect,
 						SDL_FLIP_NONE);

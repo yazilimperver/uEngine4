@@ -35,13 +35,11 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()    
 
-unset(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES)
-
 # Statik kutuphane olarak bu projeyi ekliyoruz
 add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER} ${GLM_DIR} .)
+target_include_directories(${LIB_NAME} PUBLIC ${GIS_INCLUDE_FOLDER} ${INFRA_INCLUDE_FOLDER} ${GLM_DIR} .)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_SYSROOT}/usr/include ${FMT_DIR/include})
 
 # Windows icin bir kac ek tanimlama

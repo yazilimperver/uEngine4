@@ -22,9 +22,9 @@ void SdlTileMapSample::Initialize(SdlApplication& sdlApplication){
 
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
 
-	dynamic_cast<AssetRepository&>(Game::AssetService()).AssignRenderer(mRenderer);
+	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 
-	Game::AssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
+	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
 	mSampleTileMap = std::make_unique<basic_engine::TileMap>("./tilemap/example/example.tmj");
 	mSampleTileMap->Initialize();

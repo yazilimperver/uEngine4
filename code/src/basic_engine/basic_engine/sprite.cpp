@@ -7,10 +7,10 @@ namespace basic_engine {
 	Sprite::Sprite(const SpriteParameter& params)
 		: mFlip{ params.Flip } 
 	{
-		auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, params.TexturePath, params.TextureLabel);
+		auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, params.TexturePath, params.TextureLabel);
 
 		if (textHandle.has_value()) {
-			mTexture = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+			mTexture = dynamic_cast<SdlTextureAsset*>(Game::GetAssetService().GetAsset(textHandle.value()));
 			mWidth = mTexture->Width();
 			mHeight = mTexture->Height();
 			mSourceRect = SDL_Rect{ 0, 0, mWidth, mHeight };

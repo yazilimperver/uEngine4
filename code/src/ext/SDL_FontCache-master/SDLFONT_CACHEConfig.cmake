@@ -4,7 +4,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	# Support both 32 and 64 bit builds
 	 set(SDL_FONT_CACHE_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/FontCache.lib")
 else()
-	  set(SDL_FONT_CACHE_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/FontCache.a")
+	  set(SDL_FONT_CACHE_LIBRARIES "${CMAKE_CURRENT_LIST_DIR}/lib/libFontCache.a")
 endif()
 
 string(STRIP "${SDL_FONT_CACHE_LIBRARIES}" SDL_FONT_CACHE_LIBRARIES)

@@ -62,10 +62,10 @@ namespace basic_engine {
             for (auto& texturePair : mLastUsedParameters.TextureFiles) {
                 auto textureLabel = texturePair.first;
                 auto texturePath = texturePair.second;
-                auto textHandle = Game::AssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, texturePath, textureLabel);
+                auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, texturePath, textureLabel);
 
                 if (textHandle.has_value()) {
-                    mTextureList[textureLabel] = dynamic_cast<SdlTextureAsset*>(Game::AssetService().GetAsset(textHandle.value()));
+                    mTextureList[textureLabel] = dynamic_cast<SdlTextureAsset*>(Game::GetAssetService().GetAsset(textHandle.value()));
                 }
                 else {
                     mTextureList[textureLabel] = nullptr;

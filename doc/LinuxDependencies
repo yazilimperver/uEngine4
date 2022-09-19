@@ -1,0 +1,9 @@
+Linux Build
+sudo apt-get install libgl1-mesa-dev
+sudo apt install x11-apps
+sudo apt install libx11-dev
+
+
+Glew
+make
+make install

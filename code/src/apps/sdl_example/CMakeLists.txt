@@ -55,8 +55,8 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} asset basic_engine painter sdl_application tick tile_map time utility sdl_asset sprite_sheet nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
+target_link_libraries(${APP_NAME} asset basic_engine painter sdl_application tick tile_map time sdl_asset utility sprite_sheet nlohmann_json spdlog_header_only)
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${SDL2_TTF_LIBRARIES} freetype ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER}  ${SDL2_INCLUDE_DIRS} ${SDL2_TTF_INCLUDE_DIRS} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${TILESON_DIR})

@@ -1,6 +1,7 @@
 
 #include "tile_downloader.h"
 #include <vector>
+#include <cstring>
 
 MemoryStruct::MemoryStruct(): size(0), memory(NULL){
 }

@@ -27,20 +27,26 @@ else()
 endif()
 
 set(SDL2_TTF_INCLUDE_DIRS       "${CMAKE_CURRENT_LIST_DIR}/../include")
-set(SDL2_TTF_LIBRARIES      "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.lib")
-set(SDL2_TTF_DLL_PATH          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.dll")
 
-# All targets are created, even when some might not be requested though COMPONENTS.
-# This is done for compatibility with CMake generated SDL2_image-target.cmake files.
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(SDL2_TTF_LIBRARIES      "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.lib")
+    set(SDL2_TTF_DLL_PATH          "${CMAKE_CURRENT_LIST_DIR}/../lib/${_sdl_arch_subdir}/SDL2_ttf.dll")
 
-if(NOT TARGET SDL2_ttf::SDL2_ttf)
-    add_library(SDL2_ttf::SDL2_ttf SHARED IMPORTED)
-    set_target_properties(SDL2_ttf::SDL2_ttf
-        PROPERTIES
-            INTERFACE_INCLUDE_DIRECTORIES "${_sdl2ttf_incdir}"
-            IMPORTED_IMPLIB "${_sdl2ttf_library}"
-            IMPORTED_LOCATION "${_sdl2ttf_dll}"
-            COMPATIBLE_INTERFACE_BOOL "SDL2_SHARED"
-            INTERFACE_SDL2_SHARED "ON"
-    )
+    # All targets are created, even when some might not be requested though COMPONENTS.
+    # This is done for compatibility with CMake generated SDL2_image-target.cmake files.
+
+    if(NOT TARGET SDL2_ttf::SDL2_ttf)
+        add_library(SDL2_ttf::SDL2_ttf SHARED IMPORTED)
+        set_target_properties(SDL2_ttf::SDL2_ttf
+            PROPERTIES
+                INTERFACE_INCLUDE_DIRECTORIES "${_sdl2ttf_incdir}"
+                IMPORTED_IMPLIB "${_sdl2ttf_library}"
+                IMPORTED_LOCATION "${_sdl2ttf_dll}"
+                COMPATIBLE_INTERFACE_BOOL "SDL2_SHARED"
+                INTERFACE_SDL2_SHARED "ON"
+        )
+    endif()
+else()
+    set(SDL2_TTF_LIBRARIES      "/usr/lib/x86_64-linux-gnu/libSDL2_ttf.a")
+    set(SDL2_TTF_DLL_PATH       "/usr/lib/x86_64-linux-gnu/libSDL2_ttf.so")
 endif()

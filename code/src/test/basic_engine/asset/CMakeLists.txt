@@ -33,7 +33,7 @@ endif()
 target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER})
 target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER}/Utility)
 
-target_link_libraries(${APP_NAME} gtest asset basic_engine utility sdl_asset spdlog_header_only)
+target_link_libraries(${APP_NAME} gtest asset basic_engine sdl_asset utility spdlog_header_only)
 target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
 # Baslik dosyalarinin yolunu ekleyelim

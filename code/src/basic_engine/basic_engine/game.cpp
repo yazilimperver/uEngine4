@@ -4,7 +4,7 @@
 namespace basic_engine {
 	WindowParameter Game::mActiveWinParameters = WindowParameter{};
 
-	AssetService& Game::AssetService() {
+	AssetService& Game::GetAssetService() {
 		static AssetRepository instance;
 		return instance;
 	}
