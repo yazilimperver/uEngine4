@@ -30,7 +30,6 @@
 #include "graphics/rectangle.h"
 
 #include "sdl_gamepad_controller.h"
-#include "sdl_gamecontroller.h"
 #include "sdl_touch_service.h"
 
 struct SDL_Window;
