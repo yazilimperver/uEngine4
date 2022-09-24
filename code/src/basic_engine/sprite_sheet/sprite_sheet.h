@@ -10,6 +10,7 @@
 #define SPRITESHEET_H__
 
 #include <chrono>
+#include <optional>
 #include <unordered_map>
 
 #include "SDL.h"
