@@ -2,6 +2,11 @@ Linux Build Steps
 sudo apt install clang -y
 sudo apt install cmake
 
+
+sudo apt install git build-essential pkg-config cmake cmake-data libsdl2-dev libsdl2-mixer-dev
+sudo apt install libsdl2-image-dev libsdl2-ttf-dev libsdl2-net-dev libsdl2-gfx-dev
+libwayland-dev
+
 // GL Bagimliliklari
 sudo apt-get install build-essential libxmu-dev libxi-dev libgl-dev
 
@@ -9,15 +14,24 @@ https://sourceforge.net/projects/glew/files/glew/2.2.0/glew-2.2.0.tgz/download '
 make
 make install
 
-https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.24.0.tar.gz
+wget https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.24.0.tar.gz
 ./configure
 make all
 make install
 
 https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.tar.gz
+./configure
+make all
+make install
+
+https://github.com/libsdl-org/SDL_mixer/archive/refs/tags/release-2.6.2.zip
+./configure
+make all
+make install
 
 sudo apt-get install libfreetype6-dev
 sudo apt-get install libsdl2-ttf-2.0-0
+sudo apt-get install -y libharfbuzz-dev
 sudo apt-get -y install libcurl4-openssl-dev
 
 sudo apt-get install libgtest-dev
