@@ -1,9 +1,30 @@
-Linux Build
+Linux Build Steps
+sudo apt install clang -y
+sudo apt install cmake
+
+// GL Bagimliliklari
+sudo apt-get install build-essential libxmu-dev libxi-dev libgl-dev
+
+https://sourceforge.net/projects/glew/files/glew/2.2.0/glew-2.2.0.tgz/download 'dan indirilecek
+make
+make install
+
+https://github.com/libsdl-org/SDL/archive/refs/tags/release-2.24.0.tar.gz
+./configure
+make all
+make install
+
+https://github.com/libsdl-org/SDL_image/archive/refs/tags/release-2.6.2.tar.gz
+
+sudo apt-get install libfreetype6-dev
+sudo apt-get install libsdl2-ttf-2.0-0
+sudo apt-get -y install libcurl4-openssl-dev
+
+sudo apt-get install libgtest-dev
+
 sudo apt-get install libgl1-mesa-dev
 sudo apt install x11-apps
 sudo apt install libx11-dev
 
 
 Glew
-make
-make install
