@@ -24,9 +24,6 @@ list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
 list(APPEND CMAKE_PREFIX_PATH ${EXT_INCLUDE_FOLDER}/glew-2.2.0)
 
 # CMake dosyalari icin nereye bakalim
-# set(SDL2_DIR "${EXT_INCLUDE_FOLDER}/SDL2-2.0.20")
-# set(SDL2_TTF_DIR "${EXT_INCLUDE_FOLDER}/SDL2_ttf-2.20.0/cmake")
-# set(SDL2IMAGE_DIR "${EXT_INCLUDE_FOLDER}/SDL2_image-2.0.5")
 set(SDLFONT_CACHE_DIR "${EXT_INCLUDE_FOLDER}/SDL_FontCache-master")
 set(FREEGLUT_DIR "${EXT_INCLUDE_FOLDER}/freeglut-2.8.0")
 set(CEREAL_DIR "${EXT_INCLUDE_FOLDER}/cereal-1.3.2")
@@ -92,6 +89,3 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
      message(STATUS "Linux icin yazilim olusturma dosyalari hazirlaniyor.")    
 endif()
-
-
-message(STATUS "SDL2 DLL Path: " ${SDL2_LIBRARY})    
