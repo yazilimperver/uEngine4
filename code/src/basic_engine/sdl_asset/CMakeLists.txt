@@ -1,7 +1,7 @@
 ﻿cmake_minimum_required(VERSION 3.10)
 
 find_package(SDL2 REQUIRED)
-find_package(SDL2IMAGE REQUIRED)
+find_package(SDL2_image REQUIRED)
 
 # Isimlendirme
 set(LIB_NAME sdl_asset)
@@ -43,7 +43,9 @@ endif()
 
 # kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} spdlog_header_only)
+target_link_libraries(${LIB_NAME} SDL2::Main)
+target_link_libraries(${LIB_NAME} SDL2::Image)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS} ${SDL2IMAGE_INCLUDE_DIRS} ${BASIC_ENGINE_INCLUDE_FOLDER} )
+target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} )
 target_include_directories(${LIB_NAME} PUBLIC .)

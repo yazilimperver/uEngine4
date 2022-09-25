@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 
 find_package(SDL2 REQUIRED)
-find_package(SDL2IMAGE REQUIRED)
+find_package(SDL2_image REQUIRED)
 
 # Isimlendirme
 set(APP_NAME asset_test)
@@ -34,7 +34,10 @@ target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER})
 target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER}/Utility)
 
 target_link_libraries(${APP_NAME} gtest asset basic_engine sdl_asset utility spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES} ${SDL2IMAGE_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
+
+target_link_libraries(${LIB_NAME} SDL2::Main)
+target_link_libraries(${LIB_NAME} SDL2::Image)
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER}  ${SDL2_INCLUDE_DIRS}  ${SDL2IMAGE_INCLUDE_DIRS})

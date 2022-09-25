@@ -33,10 +33,11 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} concurrency time ${SDL2_LIBRARIES} nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} )
+target_link_libraries(${APP_NAME} concurrency time nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} )
+target_link_libraries(${APP_NAME} SDL2::Main)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
@@ -45,9 +46,9 @@ set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
 set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
 set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_RELEASE ${APP_NAME} )
 
-if(WIN32)
-	add_custom_command(TARGET ${APP_NAME} POST_BUILD   # Adds a post-build event to ${APP_NAME}
-	    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-	        "${SDL2_DLL_PATH}" 					       # <--this is in-file
-	         $<TARGET_FILE_DIR:${APP_NAME}>)           # <--this is out-file path
-endif()	         
+#if(WIN32)
+#	add_custom_command(TARGET ${APP_NAME} POST_BUILD   # Adds a post-build event to ${APP_NAME}
+#	    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
+#	        "${SDL2_DLL_PATH}" 					       # <--this is in-file
+#	         $<TARGET_FILE_DIR:${APP_NAME}>)           # <--this is out-file path
+#endif()	         

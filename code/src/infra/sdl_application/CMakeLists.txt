@@ -44,7 +44,7 @@ unset(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES)
 add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${GLM_DIR} .)
+target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GLEW_INCLUDE_DIRS} ${GLM_DIR} .)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_SYSROOT}/usr/include ${CEREAL_INCLUDE_DIRS})
 
 # Windows icin bir kac ek tanimlama
@@ -55,3 +55,4 @@ endif()
 
 # kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} spdlog_header_only)
+target_link_libraries(${LIB_NAME} SDL2::Main)

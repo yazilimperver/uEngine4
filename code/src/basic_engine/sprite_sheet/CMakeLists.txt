@@ -47,7 +47,8 @@ endif()
 
 # kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} spdlog_header_only)
+target_link_libraries(${LIB_NAME} SDL2::Main)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${SDL2_INCLUDE_DIRS} ${GLM_DIR} ${CEREAL_INCLUDE_DIRS} ${BASIC_ENGINE_INCLUDE_FOLDER} )
+target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GLM_DIR} ${CEREAL_INCLUDE_DIRS} ${BASIC_ENGINE_INCLUDE_FOLDER} )
 target_include_directories(${LIB_NAME} PUBLIC .)
