@@ -6,7 +6,7 @@
 #include "sdl_asset/sdl_texture_loader.h"
 
 #include "SDL.h"
-#include "SDL_Image.h"
+#include "SDL_image.h"
 
 using namespace basic_engine;
 

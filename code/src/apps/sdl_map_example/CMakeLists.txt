@@ -49,6 +49,9 @@ add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
 target_link_libraries(${APP_NAME} asset sdl_asset basic_engine core_gis painter nlohmann_json sdl_application time tick utility spdlog_header_only)
+if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
+	target_link_libraries(${APP_NAME} curl) 
+endif()
 target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${FMT_INCLUDE_DIRS} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
 target_link_libraries(${APP_NAME} SDL2::Main)

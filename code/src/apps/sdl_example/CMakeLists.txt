@@ -61,7 +61,12 @@ target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES
 
 target_link_libraries(${APP_NAME} SDL2::Main)
 target_link_libraries(${APP_NAME} SDL2::Image)
-target_link_libraries(${APP_NAME} SDL2::TTF)
+
+if(WIN32)
+	target_link_libraries(${APP_NAME} SDL2::TTF)
+else()
+	target_link_libraries(${APP_NAME} SDL2::TTF freetype)
+endif()
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR})

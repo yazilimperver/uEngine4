@@ -1,0 +1,7 @@
+mkdir buildLinux
+cd buildLinux
+cmake .. -G Ninja -DSDL2_PATH=/home/osboxes/uEngine4/code/src/ext/sdl2_libraries/SDL2-2.24.0
+ -DSDL2_MIXER_PATH=/home/osboxes/uEngine4/code/src/ext/sdl2_libraries/SDL2_mixer-2.6.2
+ -DSDL2_IMAGE_PATH=/home/osboxes/uEngine4/code/src/ext/sdl2_libraries/SDL2_image-2.6.2
+ -DSDL2_TTF_PATH=/home/osboxes/uEngine4/code/src/ext/sdl2_libraries/SDL2_ttf-2.20.1 
+ -DGLEW_DIR=/home/osboxes/uEngine4/code/src/ext/sdl2_libraries/ext/glew-2.2.0

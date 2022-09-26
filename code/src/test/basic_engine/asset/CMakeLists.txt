@@ -36,9 +36,9 @@ target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER}/Utility)
 target_link_libraries(${APP_NAME} gtest asset basic_engine sdl_asset utility spdlog_header_only)
 target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
 
-target_link_libraries(${LIB_NAME} SDL2::Main)
-target_link_libraries(${LIB_NAME} SDL2::Image)
+target_link_libraries(${APP_NAME} SDL2::Main)
+target_link_libraries(${APP_NAME} SDL2::Image)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER}  ${SDL2_INCLUDE_DIRS}  ${SDL2IMAGE_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER})
 target_include_directories(${APP_NAME} PUBLIC .)

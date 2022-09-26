@@ -29,7 +29,7 @@ endif()
 target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER})
 target_include_directories(${APP_NAME} PUBLIC ${INCLUDE_FOLDER}/Utility)
 
-target_link_libraries(${APP_NAME} gtest concurrency core_gis pager utility spdlog_header_only)
+target_link_libraries(${APP_NAME} gtest concurrency pager core_gis utility spdlog_header_only)
 target_link_libraries(${APP_NAME} ${CMAKE_DL_LIBS})
 
 # Baslik dosyalarinin yolunu ekleyelim

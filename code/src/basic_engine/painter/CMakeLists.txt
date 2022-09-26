@@ -3,7 +3,7 @@
 find_package(SDL2 REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 find_package(CEREAL REQUIRED)
-find_package(SDL2_TTF REQUIRED)
+find_package(SDL2_ttf REQUIRED)
 
 # Isimlendirme
 set(LIB_NAME painter)
