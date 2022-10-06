@@ -73,9 +73,9 @@ Bu proje kapsamında da aslında en önemli bağımlılık SDL kütüphaneleri o
 
 ### Windows
 
-Windows için /code/src dizini altındaki =="prepareSDLAndProjectForWin.bat"==, SDL kütüphanelerinin indirilmesi, CMake ile Vs2022'ye yönelik dosyaların hazırlanması için gerekli adımları içermektedir. Vs2022'den farklı bir geliştirme ortamı için ilgili betiğin içeriğini güncelleyebilirsiniz.
+Windows için /code/src dizini altındaki **"prepareSDLAndProjectForWin.bat"**, SDL kütüphanelerinin indirilmesi, CMake ile Vs2022'ye yönelik dosyaların hazırlanması için gerekli adımları içermektedir. Vs2022'den farklı bir geliştirme ortamı için ilgili betiğin içeriğini güncelleyebilirsiniz.
 
-SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan "PrepareSDL2ForWindows.bat" betiğini düzenleyebilirsiniz.
+SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForWindows.bat"** betiğini düzenleyebilirsiniz.
 
 Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
 
@@ -83,9 +83,9 @@ Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
 
 Linux için de benzer bir şekilde /code/src dizini altındaki "PrepareSDL2ForLinux.sh" betiği, SDL kütüphaneleri ve diğer üçüncü parti bağımlılıkların indirilmesi, bunların derlenmesi, kurulması ve son olarak da uygulamanın, Ninja aracı ile oluşturulmasına yönelik gerekli dosyaları oluşturmasından sorumludur.
 
+SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForLinux.sh"** betiğini düzenleyebilirsiniz.
 
-Bu benim Linux'e çok aşina olmadığımdan da olabilir elbette. Bu sebeple, olabildiğince kurulum adımlarını otomatize etmeyi hedefledim.
-
+Linux için bu betikler, gerekli araçları kurmakta, SDL, Glew kütüphanelerini indirip oluşturmakta ve sistem dizinleri altına atmaktadır. Bunları çalıştırdıktan sonra geriye kalan /code/src/build dizinine gidip "ninja" komutunu çalıştırmak olacak.
 
 ## Visual Studio Projesi
 
