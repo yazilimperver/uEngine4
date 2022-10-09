@@ -62,6 +62,32 @@ Mevcut durum aşağıda gösterilmiştir:
 | Linux | G++ XX | ❌ |
 | Android | Clang XX | 🚀 |
 
+## Kurulum
+
+Açıkçası en çok vakit harcadığım konulardan birisi de üçüncü parti kütüphane ve yazılım bağımlılıklarının kolay bir şekilde kurulması oldu. 
+Her ne kadar basit uygulamalar için ya da tecrübeli yazılımcılar için bu bağımlılıkları kotarmak zor olmasa da, yeni başlayan insanlar için bu sıkıntı olabilmekte ve insanların hevesini kırabiliyor. 
+
+Önceki, çok küçük çaplı olmayan projelerimin bir çoğunu Visual Studio kullanarak geliştirip paylaştığım için bu tarz hususları da VS kullanarak çözebiliyordum. Fakat son zamanlarda, çoklu platform desteği ve CMake kullanımı ile birlikte, farklı yollar aramaya başladım. Elbette, bu noktada ilk adım CMake bağımlılıklarını kullanmak oldu. Windows için ilgili kütüphaneleri indirip, CMake üzerinden Visual Studio Projesi kolayca oluşturup, projeleri derlerken, WSL2 ve Linux için, bu kadar kolay olmadı açıkçası. 
+
+Bu proje kapsamında da aslında en önemli bağımlılık SDL kütüphaneleri oldu. Bu sebeple, ilk etapta bu kütüphanelerin kolay bir şekilde kurulabilmesi için bir takım betikler hazırladım. Her ne kadar bu kütüphaneleri "sudo apt .." ile de kurabilseniz de, daha kontrollü olması açısında ilgili sitelerden son sürümleri indirip, hazırlama yöntemi bana doğru geldi açıkçası. Şimdi, Windows ve Linux için yapılması gerekenlere bir göz atalım:
+
+### Windows
+
+Windows için /code/src dizini altındaki **"prepareSDLAndProjectForWin.bat"**, SDL kütüphanelerinin indirilmesi, CMake ile Vs2022'ye yönelik dosyaların hazırlanması için gerekli adımları içermektedir. Vs2022'den farklı bir geliştirme ortamı için ilgili betiğin içeriğini güncelleyebilirsiniz.
+
+SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForWindows.bat"** betiğini düzenleyebilirsiniz.
+
+Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
+
+### Linux
+
+Linux için de benzer bir şekilde /code/src dizini altındaki "PrepareSDL2ForLinux.sh" betiği, SDL kütüphaneleri ve diğer üçüncü parti bağımlılıkların indirilmesi, bunların derlenmesi, kurulması ve son olarak da uygulamanın, Ninja aracı ile oluşturulmasına yönelik gerekli dosyaları oluşturmasından sorumludur.
+
+SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForLinux.sh"** betiğini düzenleyebilirsiniz.
+
+Linux için bu betikler, gerekli araçları kurmakta, SDL, Glew kütüphanelerini indirip oluşturmakta ve sistem dizinleri altına atmaktadır. Bunları çalıştırdıktan sonra geriye kalan /code/src/build dizinine gidip "ninja" komutunu çalıştırmak olacak.
+
+## Visual Studio Projesi
 
 ## Kodlama Standardı
 
