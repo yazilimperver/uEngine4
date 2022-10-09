@@ -4,9 +4,7 @@
 #include "primitive_sample.h"
 
 int main() {
-	/* Empty SDL app
-	SdlApplication sldApp;
-	sldApp.Start();*/
+	SDL_SetMainReady();
 
 	PrimitiveSample sdlApp;
 	sdlApp.Start();
