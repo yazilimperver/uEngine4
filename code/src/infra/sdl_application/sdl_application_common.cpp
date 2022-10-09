@@ -516,6 +516,14 @@ infra::Rectangle<int32_t>& SdlApplication::GetViewport() {
     return mRenderViewport;
 }
 
+// Mevcut grafik uygulamasini yenisi ile degistirmek icin kullanilacak fonksiyon
+
+void SdlApplication::UpdateGraphicApplication(std::shared_ptr<ClientGraphicApplication> newApplication) {
+    if (nullptr != newApplication) {
+        mClientGraphicalApplicationToBeUsed = newApplication;
+    }
+}
+
 WindowParameter& SdlApplication::GetWindowParametrs() {
     return mWindowParameters;
 }

@@ -1,3 +1,5 @@
+#define SDL_MAIN_HANDLED
+
 #include "sdl_application/sdl_application.h"
 #include "primitive_sample.h"
 

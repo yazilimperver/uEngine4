@@ -1,19 +1,38 @@
 #include "primitive_sample.h"
-
-#include "sdl_simple_shape.h"
-#include "sdl_input_sample.h"
-#include "sdl_sprite_sample.h"
-#include "sdl_texture_sample.h"
-#include "sdl_sprite_sheet_sample.h"
-#include "sdl_tile_map_sample.h"
-#include "sdl_painter_sample.h"
+#include "application_base/input_actions.h"
+#include "application_base/keyboard_codes.h"
+#include "spdlog/spdlog.h"
 
 PrimitiveSample::PrimitiveSample() {
-	//mClientGraphicalApplication = std::make_shared<SdlPainterSample>();
-	mClientGraphicalApplication = std::make_shared<SdlTileMapSample>();
-	//mClientGraphicalApplication = std::make_shared<SdlSpriteSheetSample>();
-	//mClientGraphicalApplication = std::make_shared<SdlSpriteSample>();
-	//mClientGraphicalApplication = std::make_shared<SdlSimpleShape>();
-	//mClientGraphicalApplication = std::make_shared<SdlInputSample>();
-	//mClientGraphicalApplication = std::make_shared<SdlTextureSample>();
+
+	mSamples.insert(mSamples.begin(), 
+		{ {"Simple Graphic App", mSimpleSample},
+		{"Input Sample",  mInputSample},
+		{"Texture Sample", mTextureSample},
+		{"Painter Sample", mPainterSample},
+		{"Sprite Sample", mSpriteSample},
+		{"Tile Map Sample", mTileMapSample},
+		{"Spritesheet Sample", mSpriteSheetSample} });
+
+	mClientGraphicalApplication = std::get<1>(mSamples[0]);
+
+	RegisterEventListener(this);
+}
+
+void PrimitiveSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) {
+	static auto sampleIndex{ 0 };
+
+	if (InputActions::PressAction == action) {
+		if (KeyboardCodes::KEY_F12 == key) {
+			sampleIndex = (sampleIndex + 1) % mSamples.size();
+			spdlog::info("Switching to {}", std::get<0>(mSamples[sampleIndex]));
+			UpdateGraphicApplication(std::get<1>(mSamples[sampleIndex]));
+		}
+		else if (KeyboardCodes::KEY_F11 == key) {
+			
+			sampleIndex = sampleIndex == 0?(mSamples.size()-1):(sampleIndex-1);
+			spdlog::info("Switching to {}", std::get<0>(mSamples[sampleIndex]));
+			UpdateGraphicApplication(std::get<1>(mSamples[sampleIndex]));
+		}
+	}
 }

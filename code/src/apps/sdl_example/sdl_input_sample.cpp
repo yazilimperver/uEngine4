@@ -8,10 +8,16 @@
 // Inherited via ClientGraphicApplication
 
 void SdlInputSample::Initialize(SdlApplication& sdlApplication) {
-	mRenderer = sdlApplication.GetSdlRenderer();
-	mParameters = sdlApplication.GetWindowParametrs();
+	static bool isInitialized{ false };
 
-	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
+	if (false == isInitialized)	{
+		mRenderer = sdlApplication.GetSdlRenderer();
+		mParameters = sdlApplication.GetWindowParametrs();
+
+		sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
+
+		isInitialized = true;
+	}
 }
 
 void SdlInputSample::Update(double tickTimeInMsec) {

@@ -53,7 +53,14 @@ void SdlApplication::Input(double intervalInMsec) {
 
 void SdlApplication::Update(double intervalInMsec) {
     //spdlog::info("Tick time interval {:0.3f} msec", intervalInMsec); 
-    
+    if (nullptr != mClientGraphicalApplicationToBeUsed) {
+        mClientGraphicalApplication->Finalize();
+     
+        mClientGraphicalApplication = mClientGraphicalApplicationToBeUsed;
+        mClientGraphicalApplication->Initialize(*this);
+        mClientGraphicalApplicationToBeUsed = nullptr;
+    }
+
     if (nullptr != mClientGraphicalApplication) {
         mClientGraphicalApplication->Update(intervalInMsec);
     }

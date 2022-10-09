@@ -442,3 +442,15 @@ FodyWeavers.xsd
 /code/src/buildLinux
 /code/src/buildNinja
 /code/src/ext/SDL_FontCache-master/linuxBuild
+/code/src/ext/sdl2_libraries/SDL2_VC.zip
+/code/src/ext/sdl2_libraries/SDL2_TTF_VC.zip
+/code/src/ext/sdl2_libraries/SDL2_ttf-2.20.1
+/code/src/ext/sdl2_libraries/SDL2_Net_VC.zip
+/code/src/ext/sdl2_libraries/SDL2_net-2.2.0
+/code/src/ext/sdl2_libraries/SDL2_Mixer_VC.zip
+/code/src/ext/sdl2_libraries/SDL2_mixer-2.6.2
+/code/src/ext/sdl2_libraries/SDL2_Image_VC.zip
+/code/src/ext/sdl2_libraries/SDL2_image-2.6.2
+/code/src/ext/sdl2_libraries/SDL2-2.24.0
+/code/src/ext/sdl2_libraries/GLEW_VC.zip
+/code/src/ext/sdl2_libraries/glew-2.2.0

@@ -16,6 +16,7 @@
 
 #include "application_base/application_base.h"
 #include "application_base/window_parameter.h"
+#include "application_base/client_graphic_application.h"
 
 #include "time/fps_timer.h"
 
@@ -40,7 +41,6 @@ class MouseEventListener;
 class MouseMoveEventListener;
 class GamepadEventListener;
 class TouchEventHandler;
-class ClientGraphicApplication;
 
 struct uGamepadButtonData;
 struct uGamepadAxisData;
@@ -68,6 +68,9 @@ public:
 
     // Gosterim alanini donelim
     infra::Rectangle<int32_t>& GetViewport();
+
+    // Mevcut grafik uygulamasini yenisi ile degistirmek icin kullanilacak fonksiyon
+    void UpdateGraphicApplication(std::shared_ptr<ClientGraphicApplication> newApplication);
 protected:
     //! An upper bound is given for update (i.e. multiple updates per tick and one display)
     //! Constant Game Speed independent of Variable FPS
@@ -92,6 +95,7 @@ protected:
 
     /** @brief Ýstemci grafik uygulamasý */
     std::shared_ptr<ClientGraphicApplication> mClientGraphicalApplication{ nullptr };
+    std::shared_ptr<ClientGraphicApplication> mClientGraphicalApplicationToBeUsed{ nullptr };
 
 	/** @brief Geri dugmesi ile cikilsin mi */
 	bool mIgnoreExitWithBackButton = true;

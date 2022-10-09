@@ -8,11 +8,36 @@
 #ifndef PRIMITIVESAMPLE_H
 #define PRIMITIVESAMPLE_H
 
+#include <vector>
+
 #include "sdl_application/sdl_application.h"
 
-class PrimitiveSample : public SdlApplication {
+#include "sdl_simple_shape.h"
+#include "sdl_input_sample.h"
+#include "sdl_sprite_sample.h"
+#include "sdl_texture_sample.h"
+#include "sdl_sprite_sheet_sample.h"
+#include "sdl_tile_map_sample.h"
+#include "sdl_painter_sample.h"
+
+class PrimitiveSample : public SdlApplication, public KeyboardEventListener {
 public:
 	PrimitiveSample();
+
+private:
+	// Ornekler
+	std::shared_ptr<SdlPainterSample> mPainterSample{ std::make_shared<SdlPainterSample>() };
+	std::shared_ptr<SdlTileMapSample> mTileMapSample{ std::make_shared<SdlTileMapSample>() };
+	std::shared_ptr<SdlSpriteSheetSample> mSpriteSheetSample{ std::make_shared<SdlSpriteSheetSample>() };
+	std::shared_ptr<SdlSpriteSample> mSpriteSample{ std::make_shared<SdlSpriteSample>() };
+	std::shared_ptr<SdlSimpleShape> mSimpleSample{ std::make_shared<SdlSimpleShape>() };
+	std::shared_ptr<SdlInputSample> mInputSample{ std::make_shared<SdlInputSample>() };
+	std::shared_ptr<SdlTextureSample> mTextureSample{ std::make_shared<SdlTextureSample>() };
+
+	std::vector< std::pair<std::string, std::shared_ptr<ClientGraphicApplication>> > mSamples;
+
+	// Inherited via KeyboardEventListener
+	virtual void KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) override;
 };
 
 #endif // !PRIMITIVESAMPLE_H
