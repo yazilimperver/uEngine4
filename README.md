@@ -23,6 +23,8 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 | ✔ | **3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması. ** | Yüksek | 
 | ✔ | **Android için basit bir uygulama hazırlanması. ** | Orta | 
 | ✔ | **Örnekler arasında kolay geçiş sağlanması. ** | Orta | 
+| ✔ | **uEngine4 duyuru yazısı. ** | Orta | 
+| ✔ | **Dizin yapısına ilişkin sayfa. ** | Orta | 
 | ❌ | **2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması.** | Orta | 
 | ❌ | **2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi.** | Orta | 
 | ❌ | **Basit ses kabiliyetinin eklenmesi** | Orta | 
