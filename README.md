@@ -63,7 +63,7 @@ Mevcut durum aşağıda gösterilmiştir:
 | :---: | :--- | :---: |
 | Windows 11 | Visual Studio 2022 | ✔  |
 | Linux | G++ 11.2 | ✔  |
-| Linux | Clang XX | 🚀 |
+| Linux | Clang 10 | ✔ |
 | Android | Clang XX | 🚀 |
 
 ## Kurulum
