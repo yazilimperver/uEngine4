@@ -2,7 +2,7 @@
 
 www.yazilimperver.com sayfamda yazmış olduğum ve paylaştığım konuları içeren, C++ ile basit grafik, oyun ve dahi harita uygulaması geliştirmek isteyenlere yol göstermek, ilk adım olmak ve fikir vermek için geliştirdiğim bir kütüphanedir. Tabi ki Unreal Engine'i andırdığı doğrudur (isim olarak 😊), fakat pek alakası yoktur. Tamamen amatör bir ruhla yazılmakla birlikte belirli bir standart ve kuralları da barındırması hedeflenmektedir.
 
-Neyse üçüncü dili bırakalım da mevzuya girelim :) OpenGL, SFML, SDL2 derken birçok C++ tabanlı görselleştirme kütüphanesini, çoklu platformlar için görsel uygulamalar geliştirmede kullandım. Hatta, benzerlerini de profesyonel hayatta geliştirdim. Şu bir gerçek ki, bu işlere yeni başlayan arkadaşlar için, bu kütüphanelerin sunulan API'lerini anlayıp, zihinlerindeki projeleri hemen hayata geçirmeleri özellikle OpenGL ve SDL kullanılması durumunda biraz vakit alabiliyor, SFML belki diğerlerinden bir tık önde olabilir. Bu kütüphane ile birlikte bu ilk eşiği kolay bir şekilde atlatıp, Godot ve benzeri üst seviye bir araç da kullanmadan ama çok da alt seviyeye inmeden ve tabi ki **C++ kullanarak** bu ve benzeri uygulamaları geliştirmenize yardımcı olmak.
+Neyse üçüncü dili bırakalım da mevzuya girelim :) OpenGL, SFML, SDL2 derken birçok C++ tabanlı görselleştirme kütüphanesini, çoklu platformlar için görsel uygulamalar geliştirmede kullandım. Hatta, benzerlerini de profesyonel hayatta geliştirdim. Şu bir gerçek ki, bu işlere yeni başlayan arkadaşlar için, bu kütüphanelerin sunulan API'lerini anlayıp, zihinlerindeki projeleri hemen hayata geçirmeleri özellikle OpenGL ve SDL kullanılması durumunda biraz vakit alabiliyor, SFML belki diğerlerinden bir tık önde olabilir. Bu kütüphane ile birlikte bu ilk eşiği kolay bir şekilde atlatıp, Godot ve benzeri üst seviye bir araç da kullanmadan ama çok da alt seviyeye inmeden ve tabi ki **C++ kullanarak** bu ve benzeri uygulamaları geliştirmenize yardımcı olmak (İleride farklı dillere de belki göz atarız).
 
 ![](https://i.imgur.com/waxVImv.png)
 
@@ -20,9 +20,12 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ❌ | **3. parti bileşenlerin linux kütüphanelerinin oluşturulması. ** | Yüksek | 
-| ❌ | **Android için örnek bir uygulama hazırlanması. ** | Yüksek | 
-| ❌ | **2B Platform oyunu için uzun bir platform "tilemap"'in hazırlanması.** | Orta | 
+| ✔ | **3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması. ** | Yüksek | 
+| ✔ | **Android için basit bir uygulama hazırlanması. ** | Orta | 
+| ✔ | **Örnekler arasında kolay geçiş sağlanması. ** | Orta | 
+| ✔ | **uEngine4 duyuru yazısı. ** | Orta | 
+| ✔ | **Dizin yapısına ilişkin sayfa. ** | Orta | 
+| ❌ | **2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması.** | Orta | 
 | ❌ | **2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi.** | Orta | 
 | ❌ | **Basit ses kabiliyetinin eklenmesi** | Orta | 
 | ❌  | **IMGUI kütüphanesinin entegre edilmesine yönelik bir kabiliyet eklenmesi** | Düşük | 
@@ -59,7 +62,8 @@ Mevcut durum aşağıda gösterilmiştir:
 | İşletim Sistemi | Derleyici/Araç | Durum |
 | :---: | :--- | :---: |
 | Windows 11 | Visual Studio 2022 | ✔  |
-| Linux | G++ XX | ❌ |
+| Linux | G++ 11.2 | ✔  |
+| Linux | Clang 10 | ✔ |
 | Android | Clang XX | 🚀 |
 
 ## Kurulum
@@ -88,6 +92,23 @@ SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_lib
 Linux için bu betikler, gerekli araçları kurmakta, SDL, Glew kütüphanelerini indirip oluşturmakta ve sistem dizinleri altına atmaktadır. Bunları çalıştırdıktan sonra geriye kalan /code/src/build dizinine gidip "ninja" komutunu çalıştırmak olacak.
 
 ## Visual Studio Projesi
+
+Eğer windows ya da android için bu kütüphaneyi kullanmayı planlıyorsanız. Sizler için Visual Studio 2022 projelerini de hazırladım. Temelde, Cmake ile oluşturulanlar ile birebir olsa da, ufak tefek farklılıklar olabilir. 3. parti kütüphane, cmake ya da benzeri araçlar ile uğraşmayı istemeyenler içib bu seçenek iyi bir tercih olabilir. Elbette tek sebep bu değil 😁
+
+Vs2022 projesi içerisinde Android için kullanmanız için hazır bir proje de bulunmakta. Henüz, örneği çok detaylandıramadım ama meraklılar için faydalı bir ilk basamak olacağını düşünüyorum.
+
+## Örnekler
+
+İnşallah zamanla daha fazla örnek olacak ama şu an için aşağıdaki örnekler bulunmakta. Bu örnekler "apps/sdl_example" altında bulunmakta:
+* **[Simple Graphic App]** - SDL2 penceresi ve temel çizimlerin gösterilmesi
+* **[Input Sample]** - SdlApplication sınıfı üzerinden klavye girdilerinin ve benzeri olay dinleyicilerinin nasıl kullanılacağına yönelik bir örnek
+* **[Texture Sample]** - SDL2 doku mekanizmasının kullanılmasına yönelilk bir örnek
+* **[Painter Sample]** - QTPainter benzeri, basit ve kullanışlı çizimleri gerçekleştirmenize olanak sağlayacak olan basic_engine::Painter sınıfının marifetlerinin sergilendiği örnek. Bu örneğe özellikle bakmanızı tavsiye ederim. Bir çok çizim ihtiyacınızı gidereceğiniz düşünüyorum
+* **[Sprite Sample]** - Sprite sınıfının kullanımına ilişkin bir örnek
+* **[Tile Map Sample]** - Tiled uygulamasının .json uzantılı çıktılarının görselleştirilmesi için kullanılabilecek TileMap sınıflarının kullanımına yönelik yine kapsamlı bir örnek
+* **[Spritesheet Sample]** - Animatik gösterimler yapabilmenize olanak sağlayacak olan basic_engine::SpriteSheet sınıfına ilişkin örnek
+
+Bu örneklerin aslında her bir bir ya da bir kaç yazılık içerik barındırmakta ama pek acelemiz yok açıkçası. Sayfamdaki yazılar ile bu örnekleri de detaylı irdeliyor olacağız.
 
 ## Kodlama Standardı
 
