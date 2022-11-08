@@ -202,11 +202,15 @@ namespace basic_engine {
 	}
 
 
-	void Painter::SetActiveFont(std::string_view fontLabel)	{
+	bool Painter::SetActiveFont(std::string_view fontLabel)	{
 		std::string label{ fontLabel.data() };
+		bool isFontFound{ false };
 		if (mFonts.contains(label)) {
 			mActiveFont = label;
+			isFontFound = true;
 		}
+
+		return isFontFound;
 	}
 
 	bool Painter::RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size, FontStyle style)	{

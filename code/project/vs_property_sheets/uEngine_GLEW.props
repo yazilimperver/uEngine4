@@ -7,11 +7,11 @@
   </PropertyGroup>
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalIncludeDirectories>$(UENGINE_EXT_DIR)\glew-2.1.0\include;$(UENGINE_EXT_DIR)\freeglut-2.8.0\include;$(UENGINE_EXT_DIR)\SDL2-2.0.20\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(UENGINE_EXT_DIR)\glew-2.2.0\include;$(UENGINE_EXT_DIR)\freeglut-2.8.0\include;$(UENGINE_EXT_DIR)\sdl2_libraries\SDL2-2.24.0\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(UENGINE_EXT_DIR)\glew-2.1.0\lib\Release\x64;$(UENGINE_EXT_DIR)\freeglut-2.8.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>opengl32.lib;glew32.lib;$(UENGINE_EXT_DIR)\SDL2-2.0.20\lib\x64\SDL2.lib;$(UENGINE_EXT_DIR)\SDL2-2.0.20\lib\x64\SDL2main.lib;$(UENGINE_EXT_DIR)\SDL2_image-2.0.5\lib\x64\SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(UENGINE_EXT_DIR)\glew-2.2.0\lib\Release\x64\;$(UENGINE_EXT_DIR)\freeglut-2.8.0\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup />

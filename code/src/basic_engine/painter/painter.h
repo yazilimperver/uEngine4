@@ -93,7 +93,7 @@ namespace basic_engine {
 		template <class ... Args>
 		void TextInColumn(const Point2d& point, Alignment alignment, int32_t columnWidth, std::string_view formattedText, Args ... args);
 
-		void SetActiveFont(std::string_view fontLabel);
+		bool SetActiveFont(std::string_view fontLabel);
 		bool RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size = 12, FontStyle style = FontStyle::Normal);
 
 		/** @brief Basit metin cizmi API'si */

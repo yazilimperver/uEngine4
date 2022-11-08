@@ -30,7 +30,7 @@ void PrimitiveSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputAc
 		}
 		else if (KeyboardCodes::KEY_F11 == key) {
 			
-			sampleIndex = sampleIndex == 0?(mSamples.size()-1):(sampleIndex-1);
+			sampleIndex = sampleIndex == 0?(static_cast<int>(mSamples.size())-1):(sampleIndex-1);
 			spdlog::info("Switching to {}", std::get<0>(mSamples[sampleIndex]));
 			UpdateGraphicApplication(std::get<1>(mSamples[sampleIndex]));
 		}
