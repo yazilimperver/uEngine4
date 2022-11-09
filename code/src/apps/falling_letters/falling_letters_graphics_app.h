@@ -23,6 +23,8 @@
 
 struct SDL_Renderer;
 
+constexpr int32_t cDropletterCount{ 50 };
+
 class FallingLettersGraphicApp
 	: public ClientGraphicApplication {
 public:
@@ -36,13 +38,15 @@ protected:
 	WindowParameter mParameters;
 	basic_engine::Painter mPainter;
 
+
 	// Her bir harfi temsil edecek nesne
 	struct LetterDrop {
 		Point2d Position;
-		char    Letter[2]{"U"};
+		char    Letters[cDropletterCount][2];
 		bool    IsExist{false};
 		int16_t Speed { 5 };
 		int16_t UpdateCount{ 0 };
+		int16_t InitialAlpha{ 255 };
 		Color   Color {0, 0xFF, 0x41};
 	};
 
@@ -52,8 +56,11 @@ protected:
 		int32_t FontHeight{ 12 };
 	}mFontData;
 
+	// Her guncellemede, ne kadarlik bir aydinlanma azaltmasi olacak
+	int16_t mAlphaDecrement{ 2 };
+
 	// Karakteri kac guncellemede bir degistirelim
-	int16_t mWhenToUpdateLetter{ 10 };
+	int16_t mWhenToUpdateLetter{ 6 };
 
 	// Her bir sutun icin bir harfin konumunu belirtir
 	std::vector<LetterDrop> mDrops;
@@ -70,6 +77,7 @@ private:
 	int32_t RandomInBetween(int32_t a, int32_t b);
 	int32_t StdRandomInBetween(int32_t a, int32_t b);
 	int32_t MTRandomInBetween(int32_t a, int32_t b);
+	int32_t MTRandomInBetween2(int32_t a, int32_t b);
 };
 
 #endif // !FALLING_LETTERS_GRAPHICS_APP_H
@@ -78,6 +86,7 @@ private:
 // TODO
 // +Random sayilari daha hizli ve duzgun almaca
 // +Harfleri surekli degistirme
-// Birden fazla harf icerme
-// Matrix fontunu kullanma
-// Droplara omur bicme
+// +Birden fazla harf icerme
+// +Matrix fontunu kullanma
+// +Droplara omur bicme
+// Ust uste gelen droplar

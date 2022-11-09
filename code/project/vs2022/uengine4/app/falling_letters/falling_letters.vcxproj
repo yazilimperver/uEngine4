@@ -207,6 +207,9 @@
       <Project>{cb444fec-9561-4c6c-a8eb-dab3f095e492}</Project>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="sdl_application_configuration.json" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
