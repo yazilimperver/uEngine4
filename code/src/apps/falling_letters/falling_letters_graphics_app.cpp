@@ -1,14 +1,13 @@
 #include <random>
 #include <ctime>
 
-#include "falling_letters_graphics_app.h"
 #include "SDL.h"
 
 #include "sdl_application/sdl_application.h"
 
-using namespace basic_engine;
+#include "falling_letters_graphics_app.h"
 
-static const std::string cFontToUse{ "FreeSans_Bold_12" };
+using namespace basic_engine;
 
 void FallingLettersGraphicApp::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
@@ -18,31 +17,28 @@ void FallingLettersGraphicApp::Initialize(SdlApplication& sdlApplication) {
 	mPainter.AssignRenderer(mRenderer);
 
 	// Kullanacagimiz font
+	const std::string cFontToUse{ "MatrixFont" };
 	mPainter.RegisterFont(cFontToUse, "fonts/MatrixFont.ttf", 20, Painter::FontStyle::Bold);
-
-	// Harfleri dolduralim
-	int column = 0;
-	int height = 0;
-	int fontWidth = 16;
-	int fontHeight = 32;
-	int columCount = mParameters.Width / fontWidth;
+	mPainter.SetActiveFont(cFontToUse);
 
 	std::random_device device;
 	mRandEngine = std::make_unique< std::mt19937>(device());
 
+	// Harfleri dolduralim
+	int32_t column = 0;
+	int32_t height = 0;
+	int32_t columCount = mParameters.Width / mFontData.FontWidth;
+
 	std::generate_n(std::back_inserter(mDrops),
 		columCount,
-		[&column, &height, fontWidth, fontHeight, this]() mutable {
+		[&column, &height, this]() mutable {
 			LetterDrop drop;
 			drop.Position.x = column;
-			drop.Position.y = RandomInBetween(0, mParameters.Height / 3);
 			for (auto& letter : drop.Letters) {
 				letter[0] = '\0';
 				letter[1] = '\0';
 			}
-			drop.Speed = RandomInBetween(4, 10);
-			column += fontWidth;
-			height += fontHeight/2;
+			column += mFontData.FontWidth;
 			return drop;
 		}
 	);
@@ -53,27 +49,28 @@ void FallingLettersGraphicApp::Update(double tickTimeInMsec) {
 }
 
 void FallingLettersGraphicApp::Display(double tickTimeInMsec) {
-	//Clear screen
 	SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 0xFF);
 	SDL_RenderClear(mRenderer);	
 
-	mPainter.SetActiveFont(cFontToUse);
+	Color colorToUse;
 
 	for (const auto& drop : mDrops) {
 		if (drop.IsExist) {
-			mPainter.AssignPen(Pen{ Color {255, 255, 255, static_cast<uint8_t>(drop.InitialAlpha + 50)} });
+			colorToUse = Color::White;
+			colorToUse.A = static_cast<uint8_t>(drop.InitialAlpha + 50);
+
+			mPainter.AssignPen(Pen{ colorToUse });
 			mPainter.Text(drop.Position, Painter::Alignment::Left, drop.Letters[0]);
 
 			for (int32_t i = 1; i < cDropletterCount; i++) {
+				colorToUse = drop.Color;
 				if (drop.InitialAlpha - i * mAlphaDecrement > 0) {
-					mPainter.AssignPen(Pen{
-										Color{ drop.Color.R, drop.Color.G, drop.Color.B,
-										 static_cast<uint8_t>(drop.InitialAlpha - i * mAlphaDecrement)} });
+					colorToUse.A = static_cast<uint8_t>(drop.InitialAlpha - i * mAlphaDecrement);
+					mPainter.AssignPen(Pen{colorToUse});
 					mPainter.Text(drop.Position - Point2d{ 0, i * mFontData.FontHeight }, Painter::Alignment::Left, drop.Letters[i]);
 				}
-				else {
-					break;
-				}
+				else 
+					break; // sonraki harflere bu damla icin gerek yok
 			}
 		}
 	}
@@ -88,17 +85,19 @@ void FallingLettersGraphicApp::SwitchRandomSource() {
 }
 
 void FallingLettersGraphicApp::UpdateDrops() {
-	// Oncelikle kaybolan bir drop var ise ekleyelim
 	for (LetterDrop& drop : mDrops) {
-		if (drop.IsExist) { // var olanin konumu
+		if (drop.IsExist) {
 			drop.Position.y+= drop.Speed;
 			drop.UpdateCount++;
 			drop.InitialAlpha--;
 
 			// Ilk harf disinda, degistirelim
 			if (drop.UpdateCount == mWhenToUpdateLetter) {
-				for (int i = rand()%3; i < cDropletterCount;) {
-					drop.Letters[i][0] = RandomInBetween('a', 'z');
+				for (int32_t i = rand()%3; i < cDropletterCount;) {
+					if (i%3)
+						drop.Letters[i][0] = RandomInBetween('A', 'Z');
+					else
+						drop.Letters[i][0] = RandomInBetween('a', 'z');
 					i = i + rand() % 3;
 				}
 				drop.UpdateCount = 0;
@@ -106,15 +105,14 @@ void FallingLettersGraphicApp::UpdateDrops() {
 
 			if ((drop.Position.y - cDropletterCount* mFontData.FontHeight) > static_cast<int16_t>(mParameters.Height)
 				||
-				drop.InitialAlpha <= 30) {
+				drop.InitialAlpha <= 30) 
 				drop.IsExist = false;
-			}
 		}
-		else { // yeniden olusturalim
-			drop.Position.y = RandomInBetween(-48, mParameters.Height/4);
-			for (auto& letter: drop.Letters) {
+		else {
+			drop.Position.y = RandomInBetween(-48, mParameters.Height/4);			
+			for (auto& letter: drop.Letters) 
 				letter[0] = RandomInBetween('a', 'z');
-			}
+
 			drop.InitialAlpha = RandomInBetween(180, 255);
 			drop.Speed = RandomInBetween(2, 5);
 			drop.IsExist = true;
@@ -125,25 +123,9 @@ void FallingLettersGraphicApp::UpdateDrops() {
 
 int32_t FallingLettersGraphicApp::RandomInBetween(int32_t a, int32_t b) {
 	if (mUseMT) {
-		return MTRandomInBetween2(a, b);
+		std::uniform_int_distribution<int32_t> distribution(a, b);
+		return distribution(*mRandEngine);
 	}
-	else {
-		return MTRandomInBetween(a, b);
-	}
-}
-
-int32_t FallingLettersGraphicApp::StdRandomInBetween(int32_t a, int32_t b) {
-	return a + rand() % (b + 1 - a);
-}
-
-int32_t FallingLettersGraphicApp::MTRandomInBetween(int32_t a, int32_t b) {
-	// Mersenne twister MT19937
-	std::uniform_int_distribution<int32_t> distribution(a, b);
-	return distribution(*mRandEngine);
-}
-
-int32_t FallingLettersGraphicApp::MTRandomInBetween2(int32_t a, int32_t b)
-{
-	std::uniform_int_distribution<int32_t> distribution;
-	return a + distribution(*mRandEngine) % (b + 1 - a);
+	else 
+		return a + rand() % (b + 1 - a);
 }

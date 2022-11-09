@@ -53,7 +53,7 @@ protected:
 	// Kullanilan font ile ilgili veriler
 	struct FontData {
 		int32_t FontWidth{ 12 };
-		int32_t FontHeight{ 12 };
+		int32_t FontHeight{ 20 };
 	}mFontData;
 
 	// Her guncellemede, ne kadarlik bir aydinlanma azaltmasi olacak
@@ -72,12 +72,7 @@ protected:
 	bool mUseMT{ true };
 private:
 	void UpdateDrops();
-
-	// Random kullanimlari
 	int32_t RandomInBetween(int32_t a, int32_t b);
-	int32_t StdRandomInBetween(int32_t a, int32_t b);
-	int32_t MTRandomInBetween(int32_t a, int32_t b);
-	int32_t MTRandomInBetween2(int32_t a, int32_t b);
 };
 
 #endif // !FALLING_LETTERS_GRAPHICS_APP_H
