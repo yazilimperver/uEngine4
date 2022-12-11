@@ -17,7 +17,7 @@ public:
     virtual void Initialize(SdlApplication& sdlApplication) = 0;
     virtual void Update(double tickTimeInMsec) = 0;
     virtual void Display(double tickTimeInMsec) = 0;
-    virtual void Finalize() = 0;
+    virtual void Finalize() {};
 };
 
 #endif // !CLIENTGRAPHICAPPLICATION

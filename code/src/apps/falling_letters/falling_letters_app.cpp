@@ -5,14 +5,11 @@
 #include "spdlog/spdlog.h"
 
 FallingLettersApp::FallingLettersApp() {
-	mClientGraphicalApplication = mApp;
-
-	RegisterEventListener(this);
+	UpdateGraphicApplication(mApp); // (5)
+	RegisterEventListener(this); // (3)
 }
 
 void FallingLettersApp::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) {
-	static auto sampleIndex{ 0 };
-
 	if (InputActions::PressAction == action) {
 		if (KeyboardCodes::KEY_F1 == key) {
 			// Animasyonu sýfýrlayalým

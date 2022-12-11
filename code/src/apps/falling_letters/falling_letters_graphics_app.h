@@ -2,7 +2,7 @@
  * @file falling_letters_graphics_app.h.
  * @date 8.11.2022
  * @author Yazilimperver
- * @brief 
+ * @brief  uEngine4 kullanýlarak Matriks düþen harf animasyonu gösterimi
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 
@@ -23,65 +23,87 @@
 
 struct SDL_Renderer;
 
+// Her bir harf sütununun içereceði harf adeti
 constexpr int32_t cDropletterCount{ 50 };
 
-class FallingLettersGraphicApp
+/**
+ * @class FallingLettersGraphicApp
+ * @brief Düþen harflere iliþkin grafiksel jan janlarý yapacak yegane sýnýfýmýz
+ */
+class FallingLettersGraphicApp  // (4)
 	: public ClientGraphicApplication {
 public:
 	virtual void Initialize(SdlApplication& sdlApplication) override;
 	virtual void Update(double tickTimeInMsec) override;
 	virtual void Display(double tickTimeInMsec) override;
-	virtual void Finalize() override;
 	void SwitchRandomSource();
 protected:
-	SDL_Renderer* mRenderer{ nullptr };
-	WindowParameter mParameters;
-	basic_engine::Painter mPainter;
-
-
 	// Her bir harfi temsil edecek nesne
-	struct LetterDrop {
+	struct LetterDrop {  // (6)
 		Point2d Position;
 		char    Letters[cDropletterCount][2];
-		bool    IsExist{false};
+		bool    IsExist{false};	// Þu an aktif mi, deðil mi
 		int16_t Speed { 5 };
 		int16_t UpdateCount{ 0 };
 		int16_t InitialAlpha{ 255 };
-		Color   Color {0, 0xFF, 0x41};
+		Color   Color {0, 0xFF, 0x41}; // Matriks yeþili
 	};
 
-	// Kullanilan font ile ilgili veriler
-	struct FontData {
-		int32_t FontWidth{ 12 };
-		int32_t FontHeight{ 20 };
-	}mFontData;
-
-	// Her guncellemede, ne kadarlik bir aydinlanma azaltmasi olacak
-	int16_t mAlphaDecrement{ 2 };
-
-	// Karakteri kac guncellemede bir degistirelim
-	int16_t mWhenToUpdateLetter{ 6 };
-
-	// Her bir sutun icin bir harfin konumunu belirtir
+	// Her bir sutun icin bir harfin konumunu belirtir (6)
 	std::vector<LetterDrop> mDrops;
 
-	// Mersenne twister MT19937
-	std::unique_ptr<std::mt19937> mRandEngine;
+	// Kullanilan font ile ilgili veriler
+	struct FontData {          // (7)
+		int32_t FontWidth{ 14 };
+		int32_t FontHeight{ 20 };
+		std::string FontLabel{ "MatrixFont" };
+		std::string FontPath{ "fonts/MatrixFont.ttf" };
+	}mFontData; // (7)
 
-	// Random sayi kullanim kaynagimiz
+	// Her guncellemede, ne kadarlik bir aydinlanma azaltmasi olacak (8)
+	int16_t mAlphaDecrement{ 2 };
+
+	// Karakteri kac guncellemede bir degistirelim (9)
+	int16_t mWhenToUpdateLetter{ 6 };
+
+	// Mersenne twister MT19937
+	std::unique_ptr<std::mt19937> mRandEngine; // (10)
+
+	// Random sayi kullanim kaynagimiz (10)
 	bool mUseMT{ true };
+
+	// SDL görselleþtirme nesnesi (11)
+	SDL_Renderer* mRenderer{ nullptr };
+
+	// Pencere parametreleri (12)
+	WindowParameter mParameters;
+	
+	// Görselleþtirme nesnesi (13)
+	basic_engine::Painter mPainter;
 private:
-	void UpdateDrops();
-	int32_t RandomInBetween(int32_t a, int32_t b);
+	int32_t RandomInBetween(int32_t a, int32_t b); // (16)
 };
 
 #endif // !FALLING_LETTERS_GRAPHICS_APP_H
 
+/**
+Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
 
-// TODO
-// +Random sayilari daha hizli ve duzgun almaca
-// +Harfleri surekli degistirme
-// +Birden fazla harf icerme
-// +Matrix fontunu kullanma
-// +Droplara omur bicme
-// Ust uste gelen droplar
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */

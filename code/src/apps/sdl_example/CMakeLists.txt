@@ -8,7 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_TTF REQUIRED)
 find_package(GLEW REQUIRED)
 find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
