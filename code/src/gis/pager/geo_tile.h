@@ -21,7 +21,7 @@ namespace basic_engine {
 
 namespace gis {
 	struct GeoTile {
-		TileId mID{ -1, -1 };
+		TileId mID{ -1, -1, 0 };
 		infra::Rectangle<int32_t> mBoundary;
 		basic_engine::Asset* mData{ nullptr };
 	};

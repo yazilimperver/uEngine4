@@ -21,7 +21,6 @@ set(GIS_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gis")
 
 # SDL2 modulleri icin dizin
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
-list(APPEND CMAKE_PREFIX_PATH ${EXT_INCLUDE_FOLDER}/glew-2.2.0)
 
 # CMake dosyalari icin nereye bakalim
 set(SDLFONT_CACHE_DIR "${EXT_INCLUDE_FOLDER}/SDL_FontCache-master")

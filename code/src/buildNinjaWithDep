@@ -1,4 +1,0 @@
-mkdir buildLinux
-cd buildLinux
-cmake .. -G Ninja -Wno-dev
-cd ..

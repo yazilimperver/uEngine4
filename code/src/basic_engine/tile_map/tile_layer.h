@@ -38,7 +38,7 @@ namespace basic_engine {
 	private:
 
 		/** @brief Animasyon iceren paftalara iliskin kontrolleri gerceklestirelim */
-		void CheckTileAnimation(auto& animatedTile, double deltaTimeInMsec);
+		void CheckTileAnimation(AnimatedTile& animatedTile, double deltaTimeInMsec);
 
 		/** @brief Sabit ve animasyon icermeyen paftalar */
 		std::vector<std::unique_ptr<basic_engine::Sprite>> mNonAnimatedSprites;

@@ -80,7 +80,7 @@ namespace basic_engine {
 
 	}
 	
-	void TileLayer::CheckTileAnimation(auto& animatedTile, double deltaTimeInMsec) {
+	void TileLayer::CheckTileAnimation(AnimatedTile& animatedTile, double deltaTimeInMsec) {
 		animatedTile.ElapsedTime += deltaTimeInMsec;
 
 		auto& currentFrameTime = animatedTile.FrameTimesInMsec[animatedTile.ActiveFrame];

@@ -469,3 +469,8 @@ FodyWeavers.xsd
 /code/src/ext/sdl2_libraries/SDL2.tar.gz
 /code/src/ext/sdl2_libraries/GLEW.tar.gz
 /code/src/ext/sdl2_libraries/GLEW.tar.gz
+/code/src/ext/sdl2_linux/SDL2_TTF.tar.gz
+/code/src/ext/sdl2_linux/SDL2_Mixer.tar.gz
+/code/src/ext/sdl2_linux/SDL2_Image.tar.gz
+/code/src/ext/sdl2_linux/SDL2.tar.gz
+/code/src/ext/sdl2_linux/GLEW.tar.gz

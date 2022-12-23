@@ -101,7 +101,7 @@ void FallingLettersGraphicApp::Display(double tickTimeInMsec) {
 			mPainter.Text(drop.Position, Painter::Alignment::Left, drop.Letters[0]);
 
 			for (int32_t i = 1; i < cDropletterCount; i++) {
-				colorToUse = drop.Color;
+				colorToUse = drop.LetterColor;
 				if (drop.InitialAlpha - i * mAlphaDecrement > 0) {
 					colorToUse.A = static_cast<uint8_t>(drop.InitialAlpha - i * mAlphaDecrement);
 					mPainter.AssignPen(Pen{colorToUse});

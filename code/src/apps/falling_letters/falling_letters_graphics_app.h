@@ -46,7 +46,7 @@ protected:
 		int16_t Speed { 5 };
 		int16_t UpdateCount{ 0 };
 		int16_t InitialAlpha{ 255 };
-		Color   Color {0, 0xFF, 0x41}; // Matriks yeþili
+		Color   LetterColor {0, 0xFF, 0x41}; // Matriks yeþili
 	};
 
 	// Her bir sutun icin bir harfin konumunu belirtir (6)

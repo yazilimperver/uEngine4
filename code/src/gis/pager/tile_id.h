@@ -18,6 +18,15 @@ namespace gis {
 		int32_t TileY{ 0 };
 		uint32_t ZoomLevel{ 0 };
 
+		TileId() {
+		}
+
+		TileId(int32_t tileX, int32_t tileY, uint32_t zoomLevel) {
+			TileX = tileX;
+			TileY = tileY;
+			ZoomLevel = zoomLevel;
+		}
+
 		/** @brief Artik bu veri yapisini map ve unordered_map tarzi konteynerlerde kullanabiliriz */
 		bool operator<(const TileId& r) {
 			return LessByPairs(ZoomLevel, r.ZoomLevel, TileX, r.TileX, TileY, r.TileY);
