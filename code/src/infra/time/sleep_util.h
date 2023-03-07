@@ -13,7 +13,14 @@
 
 class SleepUtil {
 public:
+	/** @brief Windows platformuna ozel, hassas bekletme fonksiyonalitesi sunan bir metottur	 */
 	static void USleep(int64_t sleepInUSec);
+
+	/** @brief Platform bagimsiz, hassas bekletme fonksiyonalitesi sunan fonksiyondur
+		       - Sleep API'si ile CPU korunmakta, fakat hassasiyet kaybolmaktadir.
+			   - Spin-Lock ile de hassasiyet basarilmakta fakat CPU harcanmaktadir (temelde while loop icerisinde bekleme)
+			   *  Welford’s algoritmasi kullanilmaktadir. Ref: https://www.wikiwand.com/en/Algorithms_for_calculating_variance#/Welford's_online_algorithm
+		*/
 	static void PreciseSleep(double seconds);
 };
 

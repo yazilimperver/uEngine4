@@ -6,7 +6,8 @@
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 
-#pragma once
+#ifndef THREAD_BASE_H
+#define THREAD_BASE_H
 
 #include <thread>
 #include <atomic>
@@ -25,6 +26,8 @@ protected:
     std::unique_ptr<std::thread> mThread{ nullptr };
     std::atomic<bool> mIsThreadActive{ true };
 };
+
+#endif // THREAD_BASE_H
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
