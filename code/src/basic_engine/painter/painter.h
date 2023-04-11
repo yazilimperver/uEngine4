@@ -26,6 +26,7 @@
 
 /** On tanimlamalar */
 struct FC_Font;
+struct SDL_Texture;
 
 /**
  * @class Painter
@@ -79,6 +80,9 @@ namespace basic_engine {
 		void DrawEllipse(const Point2d& point, int16_t radiusX, int16_t radiusY) const;
 
 		/** @brief Temel sprite cizim API'leri */
+		void DrawTexture(SDL_Texture* texture, const Vector2i& pos, double rot = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		void DrawTexture(SDL_Texture* texture, const Vector2i& pos, int32_t width, int32_t height, double rot = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
+		void DrawTexture(SDL_Texture* texture, const Vector2i& pos, const SDL_Rect& destRect, double rot = 0, SDL_RendererFlip flip = SDL_FLIP_NONE);
 		void DrawSprite(const Sprite* sprite);
 		void DrawSprite(const Sprite* sprite, const SDL_Rect& destRect);
 

@@ -1,31 +1,44 @@
 /**
- * @file pager_service.h.
- * @date 28.08.2022
+ * @file   gis_map_asset.h
+ * @date   4/11/2023
  * @author Yazilimperver
- * @brief Pafta yukleyicilere iliskin disariya sunulacak olan temel servisler
- * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ * @brief
+ * @remark
  */
-#ifndef PAGER_SERVICE_H
-#define PAGER_SERVICE_H
 
-#include <vector>
+#ifndef INC_GIS_MAP_ASSET_H
+#define INC_GIS_MAP_ASSET_H
 
-#include "core_gis/common.h"
+#include "asset/asset.h"
 
-#include "geo_tile.h"
+struct SDL_Texture;
 
-namespace gis {
-	class PagerService {
+namespace gis_asset {
+	class GisMapAsset : public basic_engine::Asset {
 	public:
-		/** @brief Yuklenecek paftalar icin referans alinacak konum */
-		virtual void UpdateReference(const PointInPixels& newCenter, uint32_t zoomLevel) = 0;
+		explicit GisMapAsset(SDL_Texture* texture, int32_t width, int32_t height);
 
-		/** @brief Su an icin gorunur ekran bulunan paftalar  */
-		virtual const std::vector<TileId>& ActiveTiles() const = 0;
+		SDL_Texture* Texture() const;
+
+		/** @brief Veri tipi. */
+		static inline const std::string GisMapAssetTypeStr{ "GisMapAsset" };
+
+		/** @brief Asset bilgilerine iliskin API'ler */
+		virtual const basic_engine::AssetInfo& Info() const override;
+		basic_engine::AssetInfo& InfoRef();
+
+		int32_t Width() const;
+		int32_t Height() const;
+	private:
+		int32_t mWidth{ 0 };
+		int32_t mHeight{ 0 };
+		
+		basic_engine::AssetInfo mInfo;
+		SDL_Texture* mTexture{ nullptr };
 	};
 }
 
-#endif // !PAGER_SERVICE_H
+#endif // !GISMAPASSET
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

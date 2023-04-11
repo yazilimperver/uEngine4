@@ -1,11 +1,11 @@
-/**
+﻿/**
  * @file pager.h.
  * @date 2.07.2022
  * @author Yazilimperver
- * @brief Cografik paftalarin y�klenmesinden sorumlu olan siniftir. Simdilik basit bir kontrol ile paftalar belirlenecektir (TODO: ileride daha akilli pafta yukleme eklenebilir)
+ * @brief Cografik paftalarin yüklenmesinden sorumlu olan siniftir. Simdilik basit bir kontrol ile paftalar belirlenecektir (TODO: ileride daha akilli pafta yukleme eklenebilir)
  * 		  Gorevler:
  *          - Thread pool ile coklu yukleme destegi  
- * 		    - Verilen konum bilgisine g�re pafta hesaplama (bunu tile id calculator uzerinden yapabiliriz
+ * 		    - Verilen konum bilgisine göre pafta hesaplama (bunu tile id calculator uzerinden yapabiliriz
  * 		    - Hangi paftalarin yuklenecegi/silinecegi  
  * 		    - Paftalarin yuklemenin tetiklenmesi  
  * 		  TODO:
@@ -35,11 +35,9 @@ namespace gis {
         TileOrigin Origin() const;
         void SetOrigin(TileOrigin origin);
 
-        virtual const std::vector<TileId>& ActiveTiles() override;
-
-        std::vector<TileId> LastCalculatedTiles();
-        std::vector<TileId> TilesToDispose();
-        std::vector<TileId> TilesToLoad();
+        virtual const std::vector<TileId>&ActiveTiles() const override;
+        const std::vector<TileId>& TilesToDispose() const;
+        const std::vector<TileId>& TilesToLoad() const;
     private:
 
         /** @brief Yeni paftalari hesaplamali miyiz? */
@@ -61,12 +59,17 @@ namespace gis {
         /** @brief Pager icin kullanacagimiz referans konum */
         PagerReference mCenterUsed;
 
-        /** @brief Her bir eksen icin yuklenecek pafta adeti */
+        /** Her bir eksen icin yuklenecek pafta adeti */
         uint32_t mTilePerAxis{3};
 
-        /** @brief En son hesaplanan pafta listesi */
+        /** @brief Mevcut harita goruntusu içerisinde kalan ve en son hesaplanan pafta listesi */
         std::vector<TileId> mLastCalculatedTilesToPage;
+
+        /** @brief Artık goruntulenecek alan içerisinde olmayan ve çıkarılabilecek paftalar 
+                   İlgili paftaların hemen silinp/silinmeyeceğini şimdilik burada kotarmayalım */
         std::vector<TileId> mTilesToDispose;
+        
+        /** @brief Artık goruntulenecek alan içerisinde olmayan paftalar */
         std::vector<TileId> mTilesToLoad;
     };
  }

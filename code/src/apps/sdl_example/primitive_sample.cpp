@@ -9,6 +9,7 @@ PrimitiveSample::PrimitiveSample() {
 		{ {"Simple Graphic App", mSimpleSample},
 		{"Input Sample",  mInputSample},
 		{"Texture Sample", mTextureSample},
+		{"Gis Asset Sample", mGISAssetSample},
 		{"Painter Sample", mPainterSample},
 		{"Sprite Sample", mSpriteSample},
 		{"Tile Map Sample", mTileMapSample},

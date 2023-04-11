@@ -2,6 +2,8 @@
 
 #include <filesystem>
 
+#include "SDL.h"
+
 #include "utility/file_operations.h"
 
 #include "gfx_primitives.h"
@@ -162,6 +164,55 @@ namespace basic_engine {
 			// Elips cercevesi var mi?
 			if (mActivePen.Width() > 0) {
 				thickEllipseRGBA(mRenderer, point.x, point.y, radiusX, radiusY, penColor.R, penColor.G, penColor.B, penColor.A, mActivePen.Width());
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+	}
+
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, double rot, SDL_RendererFlip flip) {
+		if (nullptr != mRenderer) {
+			if (nullptr != texture) {
+				SDL_Rect srcRect;
+				srcRect.x = 0;
+				srcRect.y = 0;
+				SDL_QueryTexture(texture, NULL, NULL, &srcRect.w, &srcRect.h);
+
+				SDL_Rect dstRect = srcRect;
+				dstRect.x = pos.x - static_cast<int>(srcRect.w * 0.5F);
+				dstRect.y = pos.y - static_cast<int>(srcRect.h * 0.5F);
+
+				SDL_RenderCopyEx(mRenderer, texture, &srcRect, &dstRect, rot, nullptr, flip);
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+	}
+
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, int32_t width, int32_t height, double rot, SDL_RendererFlip flip)	{
+		if (nullptr != mRenderer) {
+			if (nullptr != texture) {
+				SDL_Rect srcRect{ 0, 0, width, height };
+				SDL_Rect dstRect{ pos.x - static_cast<int>(srcRect.w * 0.5F), pos.y - static_cast<int>(srcRect.h * 0.5F), width, height };
+				SDL_RenderCopyEx(mRenderer, texture, &srcRect, &dstRect, rot, nullptr, flip);
+			}
+		}
+		else {
+			spdlog::error("SDL Renderer not assigned!");
+		}
+	}
+
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, const SDL_Rect& destRect, double rot, SDL_RendererFlip flip)	{
+		if (nullptr != mRenderer) {
+			if (nullptr != texture) {
+				SDL_Rect srcRect;
+				srcRect.x = 0;
+				srcRect.y = 0;
+				SDL_QueryTexture(texture, NULL, NULL, &srcRect.w, &srcRect.h);
+
+				SDL_RenderCopyEx(mRenderer, texture, &srcRect, &destRect, rot, nullptr, flip);
 			}
 		}
 		else {

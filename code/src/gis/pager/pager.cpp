@@ -84,20 +84,16 @@ namespace gis {
     void Pager::SetOrigin(TileOrigin origin) {
         mTileOrigin = origin;
     }
-    
-    const std::vector<TileId>& Pager::ActiveTiles()    {
-        return std::vector<TileId>();
-    }
 
-    std::vector<TileId> Pager::LastCalculatedTiles() {
+    const std::vector<TileId>& Pager::ActiveTiles() const {
         return mLastCalculatedTilesToPage;
     }
 
-    std::vector<TileId> Pager::TilesToDispose() {
+    const std::vector<TileId>& Pager::TilesToDispose() const {
         return mTilesToDispose;
     }
 
-    std::vector<TileId> Pager::TilesToLoad() {
+    const std::vector<TileId>& Pager::TilesToLoad() const {
         return mTilesToLoad;
     }
     

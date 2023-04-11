@@ -8,6 +8,7 @@ namespace basic_engine {
 	void basic_engine::AssetRepository::RegisterLoader(std::unique_ptr<AssetLoader> loader) {
 		if (!mAssetLoaders.contains(loader->Type()) ){
 
+			// SDL'e ozel ayarlamalari yapalim
 			if (SdlTextureAsset::SdlTextureTypeStr == loader->Type()) {
 				reinterpret_cast<basic_engine::SdlTextureLoader*>(loader.get())->AssignRenderer(mRenderer);
 			}

@@ -19,6 +19,7 @@
 #include "sdl_sprite_sheet_sample.h"
 #include "sdl_tile_map_sample.h"
 #include "sdl_painter_sample.h"
+#include "sdl_gis_asset_sample.h"
 
 class PrimitiveSample : public SdlApplication, public KeyboardEventListener {
 public:
@@ -33,6 +34,7 @@ private:
 	std::shared_ptr<SdlSimpleShape> mSimpleSample{ std::make_shared<SdlSimpleShape>() };
 	std::shared_ptr<SdlInputSample> mInputSample{ std::make_shared<SdlInputSample>() };
 	std::shared_ptr<SdlTextureSample> mTextureSample{ std::make_shared<SdlTextureSample>() };
+	std::shared_ptr<SdlGisAssetSample> mGISAssetSample{ std::make_shared<SdlGisAssetSample>() };
 
 	std::vector< std::pair<std::string, std::shared_ptr<ClientGraphicApplication>> > mSamples;
 

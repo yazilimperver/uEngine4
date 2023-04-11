@@ -3,6 +3,8 @@
  * @date 7.05.2022
  * @author Yazilimperver
  * @brief Motor icerisine kayitlanmis olan `asset` yukleyicileri, `asset` yukleme ve benzeri `asset` servislerini gercekleyen temel siniftir.
+ *		  Su an icin SDL bagimliligimiz mevcut
+ *		  TODO: Thread safety :)
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef ASSET_REPOSITORY

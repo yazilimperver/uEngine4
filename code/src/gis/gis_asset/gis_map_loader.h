@@ -1,34 +1,34 @@
 /**
- * @file pager_service.h.
- * @date 28.08.2022
+ * @file   gis_map_loader.h
+ * @date   4/11/2023
  * @author Yazilimperver
- * @brief Pafta yukleyicilere iliskin disariya sunulacak olan temel servisler
- * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
+ * @brief
+ * @remark
  */
-#ifndef PAGER_SERVICE_H
-#define PAGER_SERVICE_H
 
-#include <vector>
+#ifndef INC_GIS_MAP_LOADER_H
+#define INC_GIS_MAP_LOADER_H
 
-#include "core_gis/common.h"
+#include "asset/asset_loader.h"
 
-#include "geo_tile.h"
+struct SDL_Renderer;
 
-namespace gis {
-	class PagerService {
+namespace gis_asset {
+	class GisMapLoader : public basic_engine::AssetLoader {
 	public:
-		/** @brief Yuklenecek paftalar icin referans alinacak konum */
-		virtual void UpdateReference(const PointInPixels& newCenter, uint32_t zoomLevel) = 0;
-
-		/** @brief Su an icin gorunur ekran bulunan paftalar  */
-		virtual const std::vector<TileId>& ActiveTiles() const = 0;
+		void AssignRenderer(SDL_Renderer* renderer);
+		virtual std::unique_ptr<basic_engine::Asset> Load(std::string_view path, std::string_view label) override;
+		virtual void Dispose(std::unique_ptr<basic_engine::Asset>&) override;
+		virtual basic_engine::AssetType Type() override;
+	protected:
+		SDL_Renderer* mRenderer{ nullptr };
 	};
 }
 
-#endif // !PAGER_SERVICE_H
+#endif	// INC_GIS_MAP_LOADER_H
 
 /**
-Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]
+Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -48,3 +48,5 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
  */
+
+

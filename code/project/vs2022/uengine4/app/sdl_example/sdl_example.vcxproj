@@ -69,6 +69,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_CoreGIS.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -82,6 +83,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_CoreGIS.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -95,6 +97,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_CoreGIS.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -108,6 +111,7 @@
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_BasicEngine.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_glm.props" />
     <Import Project="..\..\..\..\vs_property_sheets\uEngine_tileson.props" />
+    <Import Project="..\..\..\..\vs_property_sheets\uEngine_CoreGIS.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -189,6 +193,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\main.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\primitive_sample.cpp" />
+    <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_gis_asset_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_input_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_painter_sample.cpp" />
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_simple_shape.cpp" />
@@ -198,6 +203,9 @@
     <ClCompile Include="..\..\..\..\..\src\apps\sdl_example\sdl_tile_map_sample.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\basic_engine\asset\asset.vcxproj">
+      <Project>{b6bf4a27-9ac4-4157-bce8-9e19ec045cec}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\basic_engine\basic_engine\basic_engine.vcxproj">
       <Project>{a650f957-9758-47f6-b515-da3b9c6fc4f7}</Project>
     </ProjectReference>
@@ -212,6 +220,9 @@
     </ProjectReference>
     <ProjectReference Include="..\..\basic_engine\tile_map\tile_map.vcxproj">
       <Project>{944760b4-48a0-41e4-bb85-7925dbee1d91}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\gis\gis_asset\gis_asset.vcxproj">
+      <Project>{f76b5907-5b52-4a99-9bfc-583d58ea4c74}</Project>
     </ProjectReference>
     <ProjectReference Include="..\..\infra\sdl_application\sdl_application.vcxproj">
       <Project>{7f58bb25-5a4a-47be-a429-aabf1dafe6ef}</Project>
@@ -228,6 +239,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\primitive_sample.h" />
+    <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_gis_asset_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_input_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_painter_sample.h" />
     <ClInclude Include="..\..\..\..\..\src\apps\sdl_example\sdl_simple_shape.h" />
