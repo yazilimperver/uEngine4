@@ -19,8 +19,10 @@
 #include "application_base/keyboard_event_listener.h"
 #include "application_base/mouse_move_event_listener.h"
 #include "application_base/mouse_event_listener.h"
+#include "application_base/mouse_wheel_event_listener.h"
 #include "application_base/gamepad_event_listener.h"
 #include "application_base/touch_event_handler.h"
+#include "application_base/sdl_event_listener.h"
 #include "application_base/window_parameter_serializer.h"
 
 #include "utility/json_data_parser.h"
@@ -65,8 +67,9 @@ void SdlApplication::Finalize() {
     mKeyboardEventListeners.clear();
     mMouseEventListeners.clear();
     mMouseMoveEventListeners.clear();
+    mMouseWheelEventListeners.clear();
 
-    if (mIsGlEnabled) {
+    if (mSdlParameters.IsGLEnabled) {
         SDL_GL_DeleteContext(mMainGLContext);
     }
     else {
@@ -122,7 +125,7 @@ bool SdlApplication::InitializeSDL() {
     if (nullptr != mWindow) {
         spdlog::info("SDL Initialization is succeeded!\n");
 
-        if (mIsGlEnabled) {
+        if (mSdlParameters.IsGLEnabled) {
             status = this->InitializeOpenGL();
 
             // Vsync settings
@@ -155,21 +158,25 @@ bool SdlApplication::InitializeSDL() {
 }
 
 void SdlApplication::InitializeWindows() {
-    if (mIsGlEnabled) {
-        mSdlParameters.IsDisplayEventLogs = false;
-        mSdlParameters.MajorVersion = 1;
-        mSdlParameters.MinorVersion = 2;    
-        
-        ParseSdlParameters();
+    // Varsayilan degerleri atalim
+    mSdlParameters.IsDisplayEventLogs = false;
+    mSdlParameters.MajorVersion = 1;
+    mSdlParameters.MinorVersion = 2;
+    mSdlParameters.DepthSize = 24;
+
+    ParseSdlParameters();
+
+    if (mSdlParameters.IsGLEnabled) {
 
         mAppWiseSettings.UpdateParameterValue("DisplayEventLogs", mSdlParameters.IsDisplayEventLogs);
         mAppWiseSettings.UpdateParameterValue("SdlMajorVersion", mSdlParameters.MajorVersion);
         mAppWiseSettings.UpdateParameterValue("SdlMinorVersion", mSdlParameters.MinorVersion);
+        mAppWiseSettings.UpdateParameterValue("IsGLEnabled", mSdlParameters.IsGLEnabled);
 
         // Request opengl context
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 2);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, mSdlParameters.MajorVersion);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, mSdlParameters.MinorVersion);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         // Turn on double buffering with a 24bit Z buffer.
@@ -237,10 +244,10 @@ bool SdlApplication::InitializeOpenGL()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
-    glClearColor(mWindowParameters.ClearColor.R,
-        mWindowParameters.ClearColor.G,
-        mWindowParameters.ClearColor.B,
-        mWindowParameters.ClearColor.A);
+    glClearColor(mWindowParameters.ClearColor.GetRedF(),
+        mWindowParameters.ClearColor.GetGreenF(),
+        mWindowParameters.ClearColor.GetBlueF(),
+        mWindowParameters.ClearColor.GetAlphaF());
     return status;
 }
 
@@ -261,6 +268,11 @@ void SdlApplication::HandleSDLEvents() {
 
     // Handle events on queue
     while (SDL_PollEvent(&e) != 0) {
+        
+        // Inform listeners
+        for (auto& listener : mSDLEventListeners) {
+            listener->SDLEvent(&e);
+        }
         switch (e.type) {
             //Touch down
         case SDL_FINGERDOWN: {
@@ -435,11 +447,17 @@ void SdlApplication::HandleSDLEvents() {
             mouseY = e.motion.y;
 
             // Inform listeners
-            for (auto& listener : mMouseMoveEventListeners)
-            {
+            for (auto& listener : mMouseMoveEventListeners) {
                 listener->MouseMoveEvent(mouseX, mouseY);
             }
         }
+        break;
+
+        case SDL_MOUSEWHEEL:
+            // Inform listeners
+            for (auto& listener : mMouseWheelEventListeners) {
+                listener->MouseWheelEvent(e.wheel.x, e.wheel.y);
+            }
         break;
         case SDL_CONTROLLERDEVICEADDED:
         {
@@ -488,6 +506,10 @@ void SdlApplication::RegisterEventListener(MouseMoveEventListener* listener) {
     mMouseMoveEventListeners.push_back(listener);
 }
 
+void SdlApplication::RegisterEventListener(MouseWheelEventListener* listener) {
+    mMouseWheelEventListeners.push_back(listener);
+}
+
 void SdlApplication::RegisterEventListener(GamepadEventListener* listener) {
     mGamepadController.RegisterEventListener(listener);
 }
@@ -497,9 +519,12 @@ void SdlApplication::RegisterEventListener(TouchEventHandler* listener) {
     listener->Initialize(&mTouchService);
 }
 
+void SdlApplication::RegisterEventListener(SDLEventListener* listener) {
+    mSDLEventListeners.push_back(listener);
+}
+
 void SdlApplication::SetTitle(const std::string& title) {
-    if (nullptr != mWindow)
-    {
+    if (nullptr != mWindow) {
         SDL_SetWindowTitle(mWindow, title.c_str());
     }
 }

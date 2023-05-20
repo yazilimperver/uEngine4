@@ -18,7 +18,7 @@ namespace gis_asset {
 	public:
 		void AssignRenderer(SDL_Renderer* renderer);
 		virtual std::unique_ptr<basic_engine::Asset> Load(std::string_view path, std::string_view label) override;
-		virtual void Dispose(std::unique_ptr<basic_engine::Asset>&) override;
+		virtual void Dispose(std::unique_ptr<basic_engine::Asset>) override;
 		virtual basic_engine::AssetType Type() override;
 	protected:
 		SDL_Renderer* mRenderer{ nullptr };

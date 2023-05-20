@@ -59,7 +59,7 @@ namespace basic_engine {
 		if (auto itr = mAssetPool.find(assetHandle); itr != mAssetPool.end()) {
 			auto assetInfo = itr->second->Info();
 			mLoadedAssets.erase(assetInfo.mPath);			
-			mAssetLoaders[assetInfo.mType]->Dispose(itr->second);
+			mAssetLoaders[assetInfo.mType]->Dispose(std::move(itr->second));
 			mAssetPool.erase(assetHandle);
 		}
 	}

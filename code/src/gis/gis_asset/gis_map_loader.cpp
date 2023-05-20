@@ -49,10 +49,12 @@ namespace gis_asset {
         mRenderer = renderer;
     }
 
-    void GisMapLoader::Dispose(std::unique_ptr<basic_engine::Asset>& asset) {
+    void GisMapLoader::Dispose(std::unique_ptr<basic_engine::Asset> asset) {
         GisMapAsset* gisAsset = dynamic_cast<GisMapAsset*>(asset.get());
-        SDL_DestroyTexture(gisAsset->Texture());
-        gisAsset->InfoRef().mStatus = basic_engine::AssetStatus::NotActive;
+        if (nullptr != gisAsset) {
+            SDL_DestroyTexture(gisAsset->Texture());
+            gisAsset->InfoRef().mStatus = basic_engine::AssetStatus::NotActive;
+        }
 	}
 
 	basic_engine::AssetType GisMapLoader::Type()	{

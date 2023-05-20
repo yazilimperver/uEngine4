@@ -27,6 +27,20 @@ namespace infra {
         bool Intersects(const Rectangle<T>& rectangle) const;
         bool Intersects(const Rectangle<T>& rectangle, Rectangle<T>& intersection) const;
 
+        T GetLeft() const {
+            return Left;
+        }
+        T GetRight() const {
+            return (Left + Width);
+        }
+        T GetTop() const {
+            return Top;
+        }
+
+        T GetBottom() const {
+            return (Top + Height);
+        }
+
         T Left;
         T Top;
         T Width;

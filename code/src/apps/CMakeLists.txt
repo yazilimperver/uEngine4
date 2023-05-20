@@ -1,5 +1,6 @@
 ﻿cmake_minimum_required(VERSION 3.10)
 
+add_subdirectory ("gl_example")
 add_subdirectory ("example_app")
 add_subdirectory ("falling_letters")
 add_subdirectory ("cereal_example")

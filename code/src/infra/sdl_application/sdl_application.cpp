@@ -69,15 +69,17 @@ void SdlApplication::Update(double intervalInMsec) {
 }
 
 void SdlApplication::Display(double intervalInMsec) {
+    if (mSdlParameters.IsGLEnabled) {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    }
+
     // Perform display operation
     if (nullptr != mClientGraphicalApplication) {
         // Provide this time for interpolation
         mClientGraphicalApplication->Display(intervalInMsec);
     }
     
-    if (mIsGlEnabled){
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-        glClearColor(0.0f, 0.0f, 1.0f, 1.f);
+    if (mSdlParameters.IsGLEnabled){
         SDL_GL_SwapWindow(mWindow);
     }
     else {

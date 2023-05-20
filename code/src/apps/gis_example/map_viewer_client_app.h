@@ -1,4 +1,4 @@
-/**
+ /**
  * @file map_viewer_client_app.h.
  * @date 10.08.2022
  * @author Yazilimperver

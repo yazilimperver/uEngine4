@@ -1,0 +1,23 @@
+{
+  "Object": {
+    "Title": "GL Example",
+    "Width": 1280,
+    "Height": 720,
+    "Top": 50,
+    "Left": 50,
+    "ClearColor": {
+      "Red": 0,
+      "Green": 0,
+      "Blue": 255,
+      "Alpha": 255
+    },
+    "IsFullScreen": false,
+    "IsVsyncEnabled": false,
+    "DepthSize": 24,
+    "MajorVersion": 1,
+    "MinorVersion": 5,
+    "IsResizable": false,
+    "IsDisplayEventLogs": false,
+    "IsGLEnabled": true
+  }
+}

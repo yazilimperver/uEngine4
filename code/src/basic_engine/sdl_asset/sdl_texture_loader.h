@@ -17,7 +17,7 @@ namespace basic_engine {
 	public:
 		void AssignRenderer(SDL_Renderer* renderer);
 		virtual std::unique_ptr<Asset> Load(std::string_view path, std::string_view label) override;
-		virtual void Dispose(std::unique_ptr<Asset>&) override;
+		virtual void Dispose(std::unique_ptr<Asset>) override;
 		virtual AssetType Type() override;
 	protected:
 		SDL_Renderer* mRenderer{ nullptr };

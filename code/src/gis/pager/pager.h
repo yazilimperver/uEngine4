@@ -16,13 +16,13 @@
 #ifndef PAGER_H_
 #define PAGER_H_
 
-#include "concurrency/basic_thread_pool.h"
-
 #include "pager_service.h"
 #include "pager_reference.h"
 #include "tile_origin.h"
 
 namespace gis {
+    class PagerListener;
+
     class Pager 
         : public PagerService {
     public:
@@ -38,6 +38,10 @@ namespace gis {
         virtual const std::vector<TileId>&ActiveTiles() const override;
         const std::vector<TileId>& TilesToDispose() const;
         const std::vector<TileId>& TilesToLoad() const;
+
+        void AssignListener(PagerListener* listener);
+        void SetTilePerAxis(uint32_t tilePerAxis);
+        uint32_t TilePerAxis() const;
     private:
 
         /** @brief Yeni paftalari hesaplamali miyiz? */
@@ -46,9 +50,6 @@ namespace gis {
         /** @brief Pafta tipi
                    TODO: bu kisimlar tile id calculator icine gidebilir*/
         TileOrigin mTileOrigin{ TileOrigin::Tmz };
-
-        /** @brief Paftalari yuklemek icin kullanacagimiz thread pool */
-        BasicThreadPool mThreadPool;
 
         /** @brief Su an mevcut alan icerisinde bulunan pafta tanimlayicilari */
         std::vector<TileId> mActiveTileIdList;
@@ -71,6 +72,9 @@ namespace gis {
         
         /** @brief Artık goruntulenecek alan içerisinde olmayan paftalar */
         std::vector<TileId> mTilesToLoad;
+
+        /** @brief Pager aktiviteleri dinlemek icin kullanilacak olan arayuz */
+        PagerListener* mPagerListener{ nullptr };
     };
  }
 

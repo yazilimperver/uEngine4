@@ -72,6 +72,48 @@ namespace gis {
         return { pointMin, pointMax };
     }
 
+    PixelRectangle TileTms::PixelBounds() const
+    {
+        auto googleTileInfo = ObtainGoogleTileInfo();
+
+        auto pixelXWest = googleTileInfo.x * cDefaultTileSize;
+        auto pixelYNorth = googleTileInfo.y * cDefaultTileSize;
+
+        auto pixelXEast = (googleTileInfo.x + 1) * cDefaultTileSize;
+        auto pixelYSouth = (googleTileInfo.y + 1) * cDefaultTileSize;
+
+        auto pointBottomLeft = PointInPixels{ pixelXWest, pixelYSouth };
+        auto pointTopRight = PointInPixels{pixelXEast, pixelYNorth};
+
+        return { pointBottomLeft, pointTopRight };
+    }
+
+    PixelRectangle TileTms::PixelBoundsTopLeftBottomRigth() const
+    {
+        auto googleTileInfo = ObtainGoogleTileInfo();
+
+        auto pixelXWest = googleTileInfo.x * cDefaultTileSize;
+        auto pixelYNorth = googleTileInfo.y * cDefaultTileSize;
+
+        auto pixelXEast = (googleTileInfo.x + 1) * cDefaultTileSize;
+        auto pixelYSouth = (googleTileInfo.y + 1) * cDefaultTileSize;
+
+        auto pointTopLeft = PointInPixels{ pixelXWest, pixelYNorth };
+        auto pointBottomRight = PointInPixels{ pixelXEast, pixelYSouth };
+
+        return { pointTopLeft, pointBottomRight };
+    }
+
+    PointInPixels TileTms::PixelCenter() const
+    {
+        auto googleTileInfo = ObtainGoogleTileInfo();
+
+        auto pixelX = (googleTileInfo.x + 0.5) * cDefaultTileSize;
+        auto pixelY = (googleTileInfo.y + 0.5) * cDefaultTileSize;
+
+        return { pixelX, pixelY };
+    }
+
     TmsTileInfo TileTms::TileInfo() const{
         return { mTmsX, mTmsY };
     }

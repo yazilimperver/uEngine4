@@ -16,7 +16,7 @@
 
 namespace gis {
 	class SlippyMapUtil {
-	public:
+	public: 
 		// Converts pixel coordinates in given zoom level of pyramid to geographic
 		static GeoPoint PixelToGeographic(const PointInPixels& inputInPixels, uint32_t zoomLevel);
 

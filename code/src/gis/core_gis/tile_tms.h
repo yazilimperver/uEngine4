@@ -48,6 +48,13 @@ namespace gis {
 
         // Returns bounds of the given tile in latutude/longitude using WGS84 datum
         GeoRectangle GeographicBounds();
+
+        // Returns bounds of the given tile in pixels
+        PixelRectangle PixelBounds() const;
+        PixelRectangle PixelBoundsTopLeftBottomRigth() const;
+        
+        // Returns the center of tile
+        PointInPixels PixelCenter() const;
         
         // Obtain tms tile info
         TmsTileInfo TileInfo() const;

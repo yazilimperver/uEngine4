@@ -221,6 +221,9 @@
     <ProjectReference Include="..\..\basic_engine\tile_map\tile_map.vcxproj">
       <Project>{944760b4-48a0-41e4-bb85-7925dbee1d91}</Project>
     </ProjectReference>
+    <ProjectReference Include="..\..\gis\core_gis\core_gis.vcxproj">
+      <Project>{b87891b1-7729-4e1b-8691-23108f721aa0}</Project>
+    </ProjectReference>
     <ProjectReference Include="..\..\gis\gis_asset\gis_asset.vcxproj">
       <Project>{f76b5907-5b52-4a99-9bfc-583d58ea4c74}</Project>
     </ProjectReference>

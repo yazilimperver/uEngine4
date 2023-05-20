@@ -13,6 +13,7 @@ namespace gis {
 	public:
 		// Silinecek pafta bilgilendirmesi
 		// Yuklenecek pafta bilgilendirmesi
+		virtual void PagedTilesUpdated() = 0;
 	};
 }
 

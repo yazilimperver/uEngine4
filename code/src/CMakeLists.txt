@@ -17,7 +17,7 @@ set(EXT_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/ext")
 set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
 set(BASIC_ENGINE_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/basic_engine")
 set(GIS_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gis")
-
+set(GLDIR_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gl")
 
 # SDL2 modulleri icin dizin
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
@@ -30,6 +30,7 @@ set(THREAD_POOL_DIR "${EXT_INCLUDE_FOLDER}/thread-pool-master")
 set(GLM_DIR "${EXT_INCLUDE_FOLDER}/glm-master")
 set(TILESON_DIR "${EXT_INCLUDE_FOLDER}/tileson-master")
 set(FMT_DIR "${EXT_INCLUDE_FOLDER}/fmt-8.1.1")
+set(IMGUI_DIR "${EXT_INCLUDE_FOLDER}/imgui-master")
 
 set(OpenGL_GL_PREFERENCE LEGACY)
 
@@ -75,6 +76,7 @@ add_subdirectory ("apps")
 # Statik kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("infra")
 add_subdirectory ("gis")
+add_subdirectory ("gl")
 add_subdirectory ("basic_engine")
 
 # Dis kütüphane alt dizinlerini ekleyelim

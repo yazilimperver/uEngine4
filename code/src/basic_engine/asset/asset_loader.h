@@ -21,7 +21,7 @@ namespace basic_engine {
 		/* @brief Sadece ilgili asset'e dair elden cikarma islerini yapacagiz. Sahipligi aktarmadigimiz icin pass by ref!
 		 *		  http://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/
 		 */
-		virtual void Dispose(std::unique_ptr<Asset>&) = 0;
+		virtual void Dispose(std::unique_ptr<Asset>) = 0;
 		virtual AssetType Type() = 0;
 	};
 }

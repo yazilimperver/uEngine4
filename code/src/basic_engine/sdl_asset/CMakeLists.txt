@@ -32,14 +32,7 @@ if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 endif()    
 
 # Statik kutuphane olarak bu projeyi ekliyoruz
-add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
-
-
-# Windows icin bir kac ek tanimlama
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-	# Bu projeyi VS icerisinde ayri bir folderda tutalim
-	set_target_properties(${LIB_NAME} PROPERTIES FOLDER basic_engine)
-endif()    
+add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})   
 
 # kutuphaneleri baglayalim
 target_link_libraries(${LIB_NAME} spdlog_header_only)
@@ -49,3 +42,9 @@ target_link_libraries(${LIB_NAME} SDL2::Image)
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} )
 target_include_directories(${LIB_NAME} PUBLIC .)
+
+# Windows icin bir kac ek tanimlama
+if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
+	# Bu projeyi VS icerisinde ayri bir folderda tutalim
+	set_target_properties(${LIB_NAME} PROPERTIES FOLDER basic_engine)
+endif() 

@@ -48,7 +48,7 @@ namespace basic_engine {
         mRenderer = renderer;
     }
 
-    void SdlTextureLoader::Dispose(std::unique_ptr<Asset>& asset) {
+    void SdlTextureLoader::Dispose(std::unique_ptr<Asset> asset) {
         SdlTextureAsset* sdlTextureAsset = dynamic_cast<SdlTextureAsset*>(asset.get());
         SDL_DestroyTexture(sdlTextureAsset->Texture());
         sdlTextureAsset->InfoRef().mStatus = AssetStatus::NotActive;

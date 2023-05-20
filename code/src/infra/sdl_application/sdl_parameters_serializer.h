@@ -15,12 +15,12 @@
 
 template<class Archive>
 void serialize(Archive& archive, SdlParameters& m) {
-	archive(cereal::make_nvp("Samples", m.Samples),
-		cereal::make_nvp("DepthSize", m.DepthSize),
+	archive(cereal::make_nvp("DepthSize", m.DepthSize),
 		cereal::make_nvp("MajorVersion", m.MajorVersion),
 		cereal::make_nvp("MinorVersion", m.MinorVersion),
 		cereal::make_nvp("IsResizable", m.IsResizable),
-		cereal::make_nvp("IsDisplayEventLogs", m.IsDisplayEventLogs));
+		cereal::make_nvp("IsDisplayEventLogs", m.IsDisplayEventLogs),
+		cereal::make_nvp("IsGLEnabled", m.IsGLEnabled));
 }
 
 #endif // !SDLPARAMETERSSERIALIZER_H

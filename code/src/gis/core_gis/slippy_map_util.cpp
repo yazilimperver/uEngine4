@@ -11,8 +11,10 @@ namespace gis {
 	// Converts pixel coordinates in given zoom level of pyramid to EPSG: 3857
 
 	PointInMeters SlippyMapUtil::PixelToMeter(const PointInPixels& inputInPixels, uint32_t zoomLevel) {
-		return PointInMeters{ inputInPixels.x * GisMetaData::Resolution(zoomLevel) - cOriginShift,
+		PointInMeters meters{ inputInPixels.x * GisMetaData::Resolution(zoomLevel) - cOriginShift,
 			inputInPixels.y * GisMetaData::Resolution(zoomLevel) - cOriginShift };
+
+		return GetSignedMeters(meters, inputInPixels, zoomLevel);
 	}
 
 	GeoPoint SlippyMapUtil::MeterToGeographic(const PointInMeters& input) {
@@ -20,6 +22,7 @@ namespace gis {
 		auto latitude = (input.y / cOriginShift) * 180.0;
 
 		latitude = 180.0 / PI * (2 * atan(exp(latitude * PI / 180.0)) - PI / 2.0);
+
 
 		return { latitude, longitude };
 	}

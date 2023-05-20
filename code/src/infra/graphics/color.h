@@ -30,6 +30,22 @@ public:
     static const Color Cyan;        
     static const Color Transparent; 
 
+    inline float GetRedF() const {
+        return static_cast<float>(R) / 255.0F;
+    }
+
+    inline float GetGreenF() const {
+        return static_cast<float>(G) / 255.0F;
+    }
+
+    inline float GetBlueF() const {
+        return static_cast<float>(B) / 255.0F;
+    }
+
+    inline float GetAlphaF() const{
+        return static_cast<float>(A) / 255.0F;
+    }
+
     // Member data
     uint8_t R; 
     uint8_t G; 

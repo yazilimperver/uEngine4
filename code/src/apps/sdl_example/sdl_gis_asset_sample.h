@@ -1,8 +1,8 @@
-/**
+﻿/**
  * @file   sdl_gis_asset_sample.h
  * @date   4/11/2023
  * @author Yazilimperver
- * @brief
+ * @brief  SDL Paınter sınıfı ve CBS kabiliyetleri kullanılarak TMS ve Google Pafta bilgilerinin gösterilmesine yönelik örnek uygulamadır.
  * @remark
  */
 
@@ -19,6 +19,8 @@
 
 #include "gis_asset/gis_map_asset.h"
 
+#include "core_gis/map_view.h"
+
 struct SDL_Renderer;
 
 class SdlGisAssetSample
@@ -29,12 +31,27 @@ public:
 	virtual void Display(double tickTimeInMsec) override;
 	virtual void Finalize() override;
 protected:
-	SDL_Renderer* mRenderer{ nullptr };
-	WindowParameter mParameters;
-	std::unique_ptr<basic_engine::Asset> mGisAsset;
-	basic_engine::Painter mPainter;
-	Point2d mMapCenter;
 	
+	/** @brief Ornek icin kullanilacak olan bir takim sabitler */
+	const int32_t cTilePerAxis{ 5 };
+	const int32_t cRadius = cTilePerAxis / 2;
+	const int32_t cTileSize{ 256 };
+	const Point2d cScreenCenter{ 320, 240 };
+	const gis::GeoPoint cScreenGeoCenter{ 39.9, 32.5 };
+	const uint32_t cZoomLevel = 10;
+
+	/** @brief Uygulama penceresine yönelik konfigürasyon parametreleri */
+	WindowParameter mParameters;
+
+	/** @brief SDL Renderer nesnesi */
+	SDL_Renderer* mRenderer{ nullptr };
+
+	/** @brief SDL Painter nesnesi */
+	basic_engine::Painter mPainter;
+	
+	/** @brief Pencerenin coğrafik ifadesi için kullanilacak olan nesnedir */
+	std::unique_ptr<gis::MapView> mMapView;
+
 	virtual void KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) override;
 };
 

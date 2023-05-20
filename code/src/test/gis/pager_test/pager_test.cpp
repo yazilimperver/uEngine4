@@ -1,8 +1,16 @@
 #include "gtest/gtest.h"
 
 #include "pager/pager.h"
+#include "pager/gtile_file_calculator.h"
 
 #include "core_gis/gis_meta_data.h"
+
+TEST(GoogleTileCalculator, DoesCalculatorCalculateTileCorrectly) {
+	gis::GTileFileCalculator tileIdCalculator(".png", R"(D:\git_repos\Yazilimperver\uEngine4\assets\map_data\google_raster\)");
+
+	auto tileID = tileIdCalculator.Path(10, 585, 380);
+	ASSERT_STRCASEEQ(tileID.c_str(), R"(D:\git_repos\Yazilimperver\uEngine4\assets\map_data\google_raster\lvl10\585\380.png)");
+}
 
 TEST(Pager, PagerDefaultShouldBeSetCorrectly) {
 	gis::Pager cutInstance;
@@ -97,7 +105,7 @@ TEST(Pager, TilesShouldBeCalculatedWrtCenterCorrectly) {
 	cutInstance.UpdateReference(ankaraPixelPos1, ankaraZoomLevel1);
 	cutInstance.Update();
 
-	auto calculatedTiles = cutInstance.LastCalculatedTiles();
+	auto calculatedTiles = cutInstance.ActiveTiles();
 	std::sort(calculatedTiles.begin(), calculatedTiles.end());
 
 	{

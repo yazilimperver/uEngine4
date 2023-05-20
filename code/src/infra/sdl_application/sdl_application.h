@@ -39,8 +39,10 @@ struct SDL_Renderer;
 class KeyboardEventListener;
 class MouseEventListener;
 class MouseMoveEventListener;
+class MouseWheelEventListener;
 class GamepadEventListener;
 class TouchEventHandler;
+class SDLEventListener;
 
 struct uGamepadButtonData;
 struct uGamepadAxisData;
@@ -55,8 +57,10 @@ public:
     void RegisterEventListener(KeyboardEventListener* listener);
     void RegisterEventListener(MouseEventListener* listener);
     void RegisterEventListener(MouseMoveEventListener* listener);
+    void RegisterEventListener(MouseWheelEventListener* listener);
     void RegisterEventListener(GamepadEventListener* listener);
     void RegisterEventListener(TouchEventHandler* listener);
+    void RegisterEventListener(SDLEventListener* listener);
     
     void SetTitle(const std::string& title);
 
@@ -103,9 +107,6 @@ protected:
     /** @brief SDL dokunma servisi */
     SdlTouchService mTouchService;
 
-    /** @brief SDL OpenGL icin mi kullanilacak */
-    bool mIsGlEnabled{ false };
-
     /** @brief SDL OpenGL context */
     void* mMainGLContext;
 
@@ -119,7 +120,9 @@ protected:
     std::vector<KeyboardEventListener*>  mKeyboardEventListeners;
     std::vector<MouseEventListener*>     mMouseEventListeners;
     std::vector<MouseMoveEventListener*> mMouseMoveEventListeners;
+    std::vector<MouseWheelEventListener*> mMouseWheelEventListeners;
     std::vector<TouchEventHandler*>      mTouchEventListeners;
+    std::vector<SDLEventListener*>       mSDLEventListeners;
 
     /** @brief Gamepad kontrolcüsü */
     SdlGamepadController mGamepadController;

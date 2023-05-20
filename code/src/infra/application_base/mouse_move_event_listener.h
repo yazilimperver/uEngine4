@@ -13,7 +13,7 @@
 
 class MouseMoveEventListener {
 public:
-	virtual void MouseMoveEvent(double x, double y) = 0;
+	virtual void MouseMoveEvent(uint16_t x, uint16_t  y) = 0;
 };
 
 /**

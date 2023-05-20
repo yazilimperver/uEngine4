@@ -38,6 +38,10 @@ public:
 			catch (cereal::RapidJSONException&) {
 				return std::nullopt;
 			}
+			catch (cereal::Exception& e) {
+				std::cout << "Exception! " << e.what();
+				return std::nullopt;
+			}
 		}
 		else {
 			return std::nullopt;

@@ -9,6 +9,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 find_package(SDL2_TTF REQUIRED)
+list(APPEND CMAKE_PREFIX_PATH "D:/git_repos/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/glew-2.2.0")
 find_package(GLEW REQUIRED)
 find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
@@ -44,8 +45,9 @@ add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
 target_link_libraries(${APP_NAME}  painter basic_engine  asset sdl_asset sdl_application tick tile_map time utility sprite_sheet nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${GLEW_LIBRARIES} ${CMAKE_DL_LIBS})
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS})
 
+target_link_libraries(${APP_NAME} GLEW::glew)
 target_link_libraries(${APP_NAME} SDL2::Main)
 target_link_libraries(${APP_NAME} SDL2::Image)
 

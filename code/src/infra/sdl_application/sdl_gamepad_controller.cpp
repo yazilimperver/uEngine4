@@ -16,7 +16,7 @@ void SdlGamepadController::Initialize() {
             controller = SDL_GameControllerOpen(i);
             mControllers.push_back(controller);
 
-           // uEngineInfrastructure::uConsoleLogger::Info("[uSDLApplicationBase] %s.\r\n", SDL_GameControllerMapping(controller));
+           // uConsoleLogger::Info("[uSDLApplicationBase] %s.\r\n", SDL_GameControllerMapping(controller));
         }
     }
 
@@ -72,8 +72,8 @@ void SdlGamepadController::GamepadControllerDeviceAdded(SDL_Event& e) {
                 // Save the joystick id to used in the future events
                 mControllers.push_back(controller);
 
-                // uEngineInfrastructure::uConsoleLogger::Info("[uSDLApplicationBase] A new controller is added. Name is : %s\r\n", SDL_GameControllerName(controller));
-                // uEngineInfrastructure::uConsoleLogger::Info("[uSDLApplicationBase] A new controller is added. Mapping is : %s\r\n", SDL_GameControllerMapping(controller));
+                // uConsoleLogger::Info("[uSDLApplicationBase] A new controller is added. Name is : %s\r\n", SDL_GameControllerName(controller));
+                // uConsoleLogger::Info("[uSDLApplicationBase] A new controller is added. Mapping is : %s\r\n", SDL_GameControllerMapping(controller));
 
                 std::string nameOfController(SDL_GameControllerName(controller));
                 // Inform listeners

@@ -19,6 +19,8 @@ set(HEADER_FILES
 	mouse_buttons.h
 	mouse_event_listener.h
 	mouse_move_event_listener.h
+	mouse_wheel_event_listener.h
+	sdl_event_listener.h
 	touch_action.h
 	touch_data.h
 	touch_event_handler.h

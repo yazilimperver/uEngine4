@@ -13,6 +13,7 @@
 #include "utility/less_by_pairs.h"
 
 namespace gis {
+
 	struct TileId {
 		int32_t TileX{ 0 };
 		int32_t TileY{ 0 };
@@ -48,6 +49,13 @@ namespace gis {
 			left.ZoomLevel != right.ZoomLevel);
 
 	}
+
+	class TileIdHashFunction {
+	public:
+		size_t operator()(const TileId& tile) const {
+			return static_cast<size_t>(pow(2, tile.ZoomLevel) * tile.TileY + tile.TileX);
+		}
+	};
 }
 
 #endif // !TILE_ID_H

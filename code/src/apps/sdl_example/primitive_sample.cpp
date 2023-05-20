@@ -15,7 +15,7 @@ PrimitiveSample::PrimitiveSample() {
 		{"Tile Map Sample", mTileMapSample},
 		{"Spritesheet Sample", mSpriteSheetSample} });
 
-	mClientGraphicalApplication = std::get<1>(mSamples[0]);
+	mClientGraphicalApplication = std::get<1>(mSamples[3]);
 
 	RegisterEventListener(this);
 }
