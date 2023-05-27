@@ -20,19 +20,19 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ❌ | **Github actions kabiliyetinin kazandırılması.** | Yüksek | 
-| ❌ | **Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. **| Yüksek | 
-| ❌ | **Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması. ** | Orta | 
-| ❌ | **Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması. ** | Yüksek | 
-| ✔ | **3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması. ** | Yüksek | 
-| ✔ | **Android için basit bir uygulama hazırlanması. ** | Orta | 
-| ✔ | **Örnekler arasında kolay geçiş sağlanması. ** | Orta | 
-| ✔ | **uEngine4 duyuru yazısı. ** | Orta | 
-| ✔ | **Dizin yapısına ilişkin sayfa. ** | Orta | 
-| ✔ | **2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması.** | Orta | 
-| ✔ | **2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi.** | Orta | 
-| ❌ | **Basit ses kabiliyetinin eklenmesi** | Orta | 
-| ✔ | **IMGUI kütüphanesinin entegre edilmesine yönelik bir kabiliyet eklenmesi** | Düşük | 
+| ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
+| ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
+| ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
+| ❌ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
+| ✔ | 3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması.  | Yüksek | 
+| ✔ | Android için basit bir uygulama hazırlanması.  | Orta | 
+| ✔ | Örnekler arasında kolay geçiş sağlanması.  | Orta | 
+| ✔ | uEngine4 duyuru yazısı.  | Orta | 
+| ✔ | Dizin yapısına ilişkin sayfa.  | Orta | 
+| ✔ | 2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması. | Orta | 
+| ✔ | 2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi. | Orta | 
+| ❌ | Basit ses kabiliyetinin eklenmesi | Orta | 
+| ✔ | IMGUI kütüphanesinin entegre edilmesine yönelik bir kabiliyet eklenmesi | Düşük | 
 
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
@@ -43,12 +43,12 @@ Bu başlık altında ise, temel 2B harita kabiliyetlerine ilişkin planlanan yol
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ✔ | **Katman yönetim mekanizmasının kazandırılması** | Yüksek | 
-| ✔ | **Pager kütüphanesinin düzenlenmesi (listener, vb. hususların netleştirilmesi) ** | Yüksek | 
-| ✔ | **Paftaları hesaplamak için ayrı bir sınıf kullanılmasına yönelik guncelleme** | Düşük | 
-| ✔ | **Paftaları internet üzerinden indirmek için gerekli kabiliyetin geliştirilmesi** | Düşük | 
-| ✔ | **Paftaları diskten yüklenmesi için gerekli kabiliyetin geliştirilmesi** | Düşük | 
-| ✔ | **Paftaların görüntülenmesi için gerekli kabiliyetin geliştirilmesi** | Düşük | 
+| ✔ | Katman yönetim mekanizmasının kazandırılması | Yüksek | 
+| ✔ | Pager kütüphanesinin düzenlenmesi (listener, vb. hususların netleştirilmesi)  | Yüksek | 
+| ✔ | Paftaları hesaplamak için ayrı bir sınıf kullanılmasına yönelik guncelleme | Düşük | 
+| ✔ | Paftaları internet üzerinden indirmek için gerekli kabiliyetin geliştirilmesi | Düşük | 
+| ✔ | Paftaları diskten yüklenmesi için gerekli kabiliyetin geliştirilmesi | Düşük | 
+| ✔ | Paftaların görüntülenmesi için gerekli kabiliyetin geliştirilmesi | Düşük | 
 
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
