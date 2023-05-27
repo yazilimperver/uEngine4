@@ -15,14 +15,23 @@ Elbette bu tarz bir projeyi hayata geçirmek için giriş kısmında belirttiği
 Bu başlık altında, projede belirleyeceğimiz temel kabiliyetlerin geliştirilmesine yönelik yol haritası ortaya konulacaktır.
 Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave kabiliyetler bu bağlamda bu plana ekleniyor olabilir.
 
-### [2B Oyun/Grafik Kabiliyetleri]
-Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliştirmeyi planladığımız kabiliyetleri sıralıyor olacağız.
-
+### [Genel Yapılacaklar ]
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
 | ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
 | ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
 | ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
+| ❌ | Ext kütüphaneleri için konfigürasyon dosyalarının oluşturulması ve betiklerin buna göre güncellenmesi.  | Orta | 
+
+✔ : Gerçeklendi
+🚀: Çalışmaya başlandı
+❌: Henüz başlamadı
+
+### [2B Oyun/Grafik Kabiliyetleri]
+Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliştirmeyi planladığımız kabiliyetleri sıralıyor olacağız.
+
+| Durum | Kalem | Öncelik |
+| :---: | :--- | :---: | 
 | ❌ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
 | ✔ | 3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması.  | Yüksek | 
 | ✔ | Android için basit bir uygulama hazırlanması.  | Orta | 
