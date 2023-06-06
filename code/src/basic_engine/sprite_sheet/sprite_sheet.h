@@ -30,7 +30,7 @@ namespace basic_engine {
 
     class SpriteSheet  {
     public:
-        explicit SpriteSheet(std::string_view spriteSheetConfig, const infra::Rectangle<int32_t>& spriteBoundary, bool paused = false, bool looped = true);
+        explicit SpriteSheet(std::string_view rootPath, std::string_view spriteSheetConfig, const infra::Rectangle<int32_t>& spriteBoundary, bool paused = false, bool looped = true);
 
         /** @brief Ilklendirme sonucu donulecektir. */
         bool Initialize();
@@ -63,9 +63,12 @@ namespace basic_engine {
         void EnableVerticalFlipped();
         void DisableFlip();
     private:
+        std::string GetPath(std::string_view assetPath);
+
         std::optional<SpriteSheetParameters> ParseConfigFile(const std::string& config);
 
         Transformation mTransform;
+        std::string mRootPath;
         std::string mSpriteSheetConfig;
         std::string mCurrentAnimationLabel;
 

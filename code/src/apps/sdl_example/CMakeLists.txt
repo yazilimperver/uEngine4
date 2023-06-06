@@ -16,9 +16,15 @@ find_package(CEREAL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 
+# Asset dizinini ayarlayalim
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/sdl_example_assets/)
+
+configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
+            "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
 
 # Baslik dosyalari
 set(HEADER_FILES
+    configuration.h
 	primitive_sample.h
 	sdl_gis_asset_sample.h
 	sdl_input_sample.h

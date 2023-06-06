@@ -119,7 +119,7 @@ namespace gl {
 			mBackgroundColor.GetBlueF(),
 			mBackgroundColor.GetAlphaF());
 
-		this->SetBrush(g_painterDefaultBrush);
+		this->AssignBrush(g_painterDefaultBrush);
 	}
 
 	void GLBasicPainter::End() {
@@ -379,106 +379,6 @@ namespace gl {
 
 		RestoreState();
 	}
-	/*
-	void GLBasicPainter::DrawTexture(const infra::Rectangle<float>& rect,
-		float* textureCoordinates,
-		const gl::uTextureAsset& texture,
-		const Color& color)
-	{
-		float Left = rect.GetLeft();
-		float Right = rect.GetRight();
-		float Top = rect.GetTop();
-		float Bottom = rect.GetBottom();
-
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture.GetOpenGLTextureId());
-
-		SetColor(color);
-
-		float coordinateArray[8] =
-		{
-			Left, Top,
-			Left, Bottom,
-			Right, Bottom,
-			Right, Top
-		};
-
-		//Enable vertex arrays
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-		//Set vertex data
-		glVertexPointer(2, GL_FLOAT, 0, coordinateArray);
-
-		//Set texture data
-		glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinates);
-
-		SetColor(mActiveBrush.GetColor());
-
-		// Draw quad using vertex data
-		glDrawArrays(GL_QUADS, 0, 4);
-
-		//Disable vertex arrays
-		glDisableClientState(GL_VERTEX_ARRAY);
-
-		glDisable(GL_TEXTURE_2D);
-	}
-
-	const float cTextureCoordinates[8] = {
-		// TLeft
-		0.0F, 0.0F,
-
-		// BLeft
-		0.0F, 1.0F,
-
-		// BRight
-		1.0F, 1.0F,
-
-		// TRight
-		1.0F, 0.0F,
-	};
-
-	void GLBasicPainter::DrawTexture(const infra::Rectangle<float>& rect,
-		const gl::uTextureAsset& texture,
-		const Color& color)
-	{
-		float Left = rect.GetLeft();
-		float Right = rect.GetRight();
-		float Top = rect.GetTop();
-		float Bottom = rect.GetBottom();
-
-		glEnable(GL_TEXTURE_2D);
-		glBindTexture(GL_TEXTURE_2D, texture.GetOpenGLTextureId());
-
-		SetColor(color);
-
-		float coordinateArray[8] =
-		{
-			Left, Top,
-			Left, Bottom,
-			Right, Bottom,
-			Right, Top
-		};
-
-		//Enable vertex arrays
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-
-		//Set vertex data
-		glVertexPointer(2, GL_FLOAT, 0, coordinateArray);
-
-		//Set texture data
-		glTexCoordPointer(2, GL_FLOAT, 0, cTextureCoordinates);
-
-		// Draw quad using vertex data
-		glDrawArrays(GL_QUADS, 0, 4);
-
-		//Disable vertex arrays
-		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_VERTEX_ARRAY);
-
-		glDisable(GL_TEXTURE_2D);
-	}*/
 
 	void GLBasicPainter::DrawGeometry(const SimpleGeometry& geometry) {
 		uint32_t pointCount = geometry.GetPointCount();
@@ -586,43 +486,23 @@ namespace gl {
 		}
 	}
 
-	void GLBasicPainter::SetPen(const Pen& pen)	{
+	void GLBasicPainter::AssignPen(const Pen& pen)	{
 		// If state changes apply it
 		if (mActivePen != pen)	{
 			mActivePen = pen;
 			this->SetPenParameters(false);
 		}
 	}
-	/*
-	void GLBasicPainter::SetFontService(uIFontService* fontService)	{
-		mFontService = fontService;
-	}
 
-	uErrorCode GLBasicPainter::SetActiveFont(const std::string& fontName)	{
-		if (nullptr != mFontService){
-			return mFontService->SetActiveFont(fontName);
-		}
-		else	{
-			return eFailure;
-		}
-	}
-
-	void GLBasicPainter::DisplayText(float x, float y, const std::string text, const infra::Rectangle* textArea , int32_t alignment)
-	{
-		if (nullptr != mFontService)
-		{
-			// Brush should be solid for text rendering
-			this->SetBrush(g_painterDefaultBrush);
-
-			mFontService->DrawProvidedText(x, y, text, mActivePen.GetColor(), textArea, alignment);
-		}
-	}*/
+    Pen GLBasicPainter::ActivePen() const {
+        return mActivePen;
+    }
 
 	void GLBasicPainter::SetBrightness(float brightness) {
 		mBrightness = brightness;
 	}
 
-	void GLBasicPainter::SetBrush(const Brush& brush) {
+	void GLBasicPainter::AssignBrush(const Brush& brush) {
 		if (mActiveBrush != brush) {
 			mActiveBrush = brush;
 
@@ -676,4 +556,7 @@ namespace gl {
 			}
 		}
 	}
+    Brush GLBasicPainter::ActiveBrush() const {
+        return mActiveBrush;
+    }
 }

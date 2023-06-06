@@ -7,6 +7,10 @@
 
 #include "spdlog/spdlog.h"
 
+#include "configuration.h"
+
+// Asset dizini CMake uzerinden veriliyor (ASSET_ROOT_PATH) olacak. Ornekler de bunu kullaniyor olacak
+
 SDL_Texture* SdlTextureSample::LoadTexture(std::string path) {
 	//The final texture
 	SDL_Texture* newTexture = NULL;
@@ -46,7 +50,7 @@ void SdlTextureSample::Initialize(SdlApplication& sdlApplication) {
 	}
 
 	//Load PNG texture
-	mTexture = LoadTexture("texture.png");
+	mTexture = LoadTexture(ASSET_ROOT_PATH + "texture.png");
 	if (mTexture == NULL)	{
 		spdlog::error("Failed to load texture image!");
 	}

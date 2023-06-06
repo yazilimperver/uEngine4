@@ -8,7 +8,11 @@
 
 #include "basic_engine/game.h"
 
+#include "configuration.h"
+
 using namespace basic_engine;
+
+// Asset dizini CMake uzerinden veriliyor (ASSET_ROOT_PATH) olacak. Ornekler de bunu kullaniyor olacak
 
 void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
@@ -16,17 +20,17 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 
 	mPainter.AssignRenderer(mRenderer);
 
-	mPainter.RegisterBasicFont("Font_7_13_Bold", "./7x13B.fnt", 7, 13);
-	mPainter.RegisterBasicFont("Font_10_20", "./10x20.fnt", 10, 20);
+	mPainter.RegisterBasicFont("Font_7_13_Bold", ASSET_ROOT_PATH + "7x13B.fnt", 7, 13);
+	mPainter.RegisterBasicFont("Font_10_20", ASSET_ROOT_PATH + "10x20.fnt", 10, 20);
 
-	mPainter.RegisterFont("FreeSans_Italic_10", "fonts/FreeSans.ttf", 10, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
-	mPainter.RegisterFont("FreeSans_Normal_20", "fonts/FreeSans.ttf", 20);
-	mPainter.RegisterFont("FreeSans_ItalicBold_12", "fonts/FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
+	mPainter.RegisterFont("FreeSans_Italic_10", ASSET_ROOT_PATH + "FreeSans.ttf", 10, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
+	mPainter.RegisterFont("FreeSans_Normal_20", ASSET_ROOT_PATH + "FreeSans.ttf", 20);
+	mPainter.RegisterFont("FreeSans_ItalicBold_12", ASSET_ROOT_PATH + "FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
 
 	// Sprite'i yukleyelim
 	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
-	SpriteParameter params{ "sprite.png", "dragon", 350, 100, SDL_FLIP_NONE };
+	SpriteParameter params{ ASSET_ROOT_PATH + "sprite.png", "dragon", 350, 100, SDL_FLIP_NONE };
 	mSampleSprite = std::make_unique<Sprite>(params);
 
 	SDL_SetRenderDrawBlendMode(mRenderer, SDL_BLENDMODE_BLEND);
@@ -35,7 +39,6 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 void SdlPainterSample::Update(double tickTimeInMsec) {
 }
 
-#include "painter/gfx_primitives.h"
 void SdlPainterSample::Display(double tickTimeInMsec) {
 	//Clear screen
 	SDL_SetRenderDrawColor(mRenderer, 0xFF, 0xFF, 0xFF, 0xFF);
@@ -90,16 +93,16 @@ void SdlPainterSample::Display(double tickTimeInMsec) {
 
 	mPainter.AssignPen(Pen{ Color::Black });
 	mPainter.SetActiveBasicFont("Font_7_13_Bold");
-	mPainter.SimpleText(screenCenter + Point2d{ -300, -240 }, "[Basit] Merhaba Dunya_Siyah");
+	mPainter.BasicText(screenCenter + Point2d{ -300, -240 }, "[Basit] Merhaba Dunya_Siyah");
 
 	mPainter.SetActiveBasicFont("Font_10_20");
 	std::string text{ "Merhaba Dunya_Merkez" };
 	auto fontSizeInfo = mPainter.ActiveBasicFontSizeInfo("Font_10_20");
-	mPainter.SimpleText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "[Basit] Merhaba Dunya_Merkez");
+	mPainter.BasicText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "[Basit] Merhaba Dunya_Merkez");
 
 	mPainter.SetActiveBasicFont("Font_7_13_Bold");
 	mPainter.AssignPen(Pen{ Color::Red });
-	mPainter.SimpleText(screenCenter + Point2d{ +110, +220 }, "[Basit] Merhaba Dunya_Kirmazi");
+	mPainter.BasicText(screenCenter + Point2d{ +110, +220 }, "[Basit] Merhaba Dunya_Kirmazi");
 
 	mPainter.SetActiveFont("FreeSans_Normal_20");
 	mPainter.AssignPen(Pen{ Color::Green });

@@ -1,0 +1,5 @@
+#pragma once
+
+#include <string>
+
+const std::string ASSET_ROOT_PATH = "@EXAMPLE_ASSET_ROOT_PATH@";

@@ -11,9 +11,13 @@
 
 #include "spdlog/spdlog.h"
 
+#include "configuration.h"
+
+// Asset dizini CMake uzerinden veriliyor (ASSET_ROOT_PATH) olacak. Ornekler de bunu kullaniyor olacak
+
 using namespace basic_engine;
 
-constexpr char cSpriteSheetConfigFile[] = "warrior_idle_ssheet.json";
+static const std::string cSpriteSheetConfigFile = "warrior_idle_ssheet.json";
 
 void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
@@ -25,7 +29,7 @@ void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 
 	infra::Rectangle<int32_t> spriteRect{ 0, 0, 128, 128};
 
-	mSampleSpriteSheet = std::make_unique<SpriteSheet>(cSpriteSheetConfigFile, spriteRect, false);
+	mSampleSpriteSheet = std::make_unique<SpriteSheet>(ASSET_ROOT_PATH, cSpriteSheetConfigFile, spriteRect, false);
 	if (!mSampleSpriteSheet->Initialize()) {
 		spdlog::error("Error in sprite sheet initialization. The config file name is: {}", cSpriteSheetConfigFile);
 	}

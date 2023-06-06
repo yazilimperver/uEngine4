@@ -11,7 +11,11 @@
 
 #include "spdlog/spdlog.h"
 
+#include "configuration.h"
+
 using namespace basic_engine;
+
+// Asset dizini CMake uzerinden veriliyor (ASSET_ROOT_PATH) olacak. Ornekler de bunu kullaniyor olacak
 
 void SdlSpriteSample::Initialize(SdlApplication& sdlApplication) {
 	mRenderer = sdlApplication.GetSdlRenderer();
@@ -23,7 +27,7 @@ void SdlSpriteSample::Initialize(SdlApplication& sdlApplication) {
 
 	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
-	SpriteParameter params{ "sprite.png", "dragon", static_cast<int32_t>(mParameters.Width) /2, static_cast<int32_t>(mParameters.Height) / 2, SDL_FLIP_NONE};
+	SpriteParameter params{ ASSET_ROOT_PATH + "sprite.png", "dragon", static_cast<int32_t>(mParameters.Width) /2, static_cast<int32_t>(mParameters.Height) / 2, SDL_FLIP_NONE};
 
 	mSampleSprite = std::make_unique<Sprite>(params);
 

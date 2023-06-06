@@ -38,6 +38,5 @@ void SdlSimpleShape::Display(double tickTimeInMsec) {
 	}
 }
 
-void SdlSimpleShape::Finalize()
-{
+void SdlSimpleShape::Finalize() {
 }

@@ -242,10 +242,10 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::SimpleText(const Point2d& point, std::string_view text) {
+	void Painter::BasicText(const Point2d& upperLeft, std::string_view text) {
 		if (nullptr != mRenderer) {
 			auto penColor = mActivePen.PenColor();
-			stringRGBA(mRenderer, point.x, point.y, text.data(), penColor.R, penColor.G, penColor.B, penColor.A);
+			stringRGBA(mRenderer, upperLeft.x, upperLeft.y, text.data(), penColor.R, penColor.G, penColor.B, penColor.A);
 		}
 		else {
 			spdlog::error("SDL Renderer not assigned!");

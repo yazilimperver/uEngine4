@@ -14,23 +14,24 @@ namespace basic_engine {
 
     std::string GetLayerTypeString(tson::LayerType type);
 
-    TileMap::TileMap(std::string_view tileMapFile)
-        :mTileMapFile{ tileMapFile.data() } {
-
+    TileMap::TileMap(std::string_view rootPath, std::string_view tileMapFile)
+        :mRootPath{rootPath}
+        , mTileMapFile{ tileMapFile } {
     }
-
+     
 	bool TileMap::Initialize() {
 		std::vector<tson::Layer> mLayers;
 
         tson::Tileson t;
 		// dosya bazýnda sýkýþtýrýlmýþ olan haritalar için kullanýlabilir
         //mTileMap = t.parse(mTileMapFile, std::make_unique<tson::Lzma>());
-        mTileMap = t.parse(mTileMapFile);
+        mTileMap = t.parse(GetPath(mTileMapFile));
         
         if (mTileMap->getStatus() == tson::ParseStatus::OK) {
             spdlog::info("Tilemap file parse succeded! File name: {}", mTileMapFile);
 
 			// Onden tilesetleri ve geri planlari yukleyebiliriz
+			// Burada verilen pathler girilen ana dosya dizinine goreceli olarak kullanilacaktir
 			for (auto& tileset : mTileMap->getTilesets()) {
 				auto path = GetPath(tileset.getImage().string());
 				auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, path, tileset.getName());
@@ -101,7 +102,7 @@ namespace basic_engine {
 	}
 
 	std::string TileMap::GetPath(std::string_view assetPath) {
-		return mRootPath + std::string(assetPath.data());
+		return mRootPath + std::string(assetPath);
 	}
 
     std::string GetLayerTypeString(tson::LayerType type) {

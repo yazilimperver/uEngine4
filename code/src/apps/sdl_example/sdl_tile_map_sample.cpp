@@ -10,7 +10,12 @@
 
 #include "spdlog/spdlog.h"
 
+#include "configuration.h"
+
+// Asset dizini CMake uzerinden veriliyor (ASSET_ROOT_PATH) olacak. Ornekler de bunu kullaniyor olacak
+// 
 using namespace basic_engine;
+
 
 void SdlTileMapSample::Initialize(SdlApplication& sdlApplication){
 	mSdlApplication = &sdlApplication;
@@ -26,7 +31,7 @@ void SdlTileMapSample::Initialize(SdlApplication& sdlApplication){
 
 	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
-	mSampleTileMap = std::make_unique<basic_engine::TileMap>("./tilemap/example/example.tmj");
+	mSampleTileMap = std::make_unique<basic_engine::TileMap>(ASSET_ROOT_PATH + "tilemap/example/", "example.tmj");
 	mSampleTileMap->Initialize();
 
 	targetPos = { static_cast<int32_t>(mParameters.Width) * 0.5F, static_cast<int32_t>(mParameters.Height) * 0.5F };

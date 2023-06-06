@@ -5,8 +5,6 @@
 
 #include "spdlog/spdlog.h"
 
-// Inherited via ClientGraphicApplication
-
 void SdlInputSample::Initialize(SdlApplication& sdlApplication) {
 	static bool isInitialized{ false };
 

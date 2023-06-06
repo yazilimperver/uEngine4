@@ -28,70 +28,58 @@ namespace gl {
 	class uIFontService;
 
 	//! Either uses shader based rendering or traditional opengl calls based on derived classes
-    class GLBasicPainter
-    {
+    class GLBasicPainter {
 	public:
 		//! Initialize opengl rendering
-		virtual void InitializePainter();
+		void InitializePainter();
 
 		//! The start/end of opengl rendering
 		//! Some common settings happens here
-		virtual void Begin();
-		virtual void End();
+		void Begin();
+		void End();
 
 		//! Basic settings
-		virtual void SetAliasingMode(AliasMode mode);
-		virtual void SetDepthTest(bool enableStatus);
-		virtual void SetBackgroundColor(const Color& color);
-		virtual void SetPen(const Pen& pen);
-		virtual void SetBrush(const Brush& brush);
+		void SetAliasingMode(AliasMode mode);
+		void SetDepthTest(bool enableStatus);
+		void SetBackgroundColor(const Color& color);
+		void AssignPen(const Pen& pen);
+        Pen ActivePen() const;
+		void AssignBrush(const Brush& brush);
+        Brush ActiveBrush() const;
 		
 		//! Orthographic projection setting
-		virtual void SetDisplayExtent(double left, double right, double bottom, double top);
-		virtual void SetOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
+		void SetDisplayExtent(double left, double right, double bottom, double top);
+		void SetOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
 
 		//! Transformation matrix API
-		virtual void Rotate(float rotation);
-		virtual void Translate(float tx, float ty);
-		virtual void Translate(const glm::vec2& translation);
-		virtual void Scale(float sx, float sy);
-		virtual void ResetTransform();
-		virtual void SaveState();
-		virtual void RestoreState();
+		void Rotate(float rotation);
+		void Translate(float tx, float ty);
+		void Translate(const glm::vec2& translation);
+		void Scale(float sx, float sy);
+		void ResetTransform();
+		void SaveState();
+		void RestoreState();
 
 		//! Primitive rendering API with specific geometry classes
-		virtual void DrawLine(const Line& line);
-		virtual void DrawPoint(const Point& point);
-		virtual void DrawPoint(const glm::vec2& point);
-		virtual void DrawRect(const infra::Rectangle<float>& rect);
-		virtual void DrawPolyline(Polygon& polygon, bool isLoop = false);
-		virtual void DrawPolygon(Polygon& polygon);
-		virtual void DrawConcavePolygon(Polygon& polygon);
-		virtual void DrawEllipse(const Point& center, float rx, float ry);
+		void DrawLine(const Line& line);
+		void DrawPoint(const Point& point);
+		void DrawPoint(const glm::vec2& point);
+		void DrawRect(const infra::Rectangle<float>& rect);
+		void DrawPolyline(Polygon& polygon, bool isLoop = false);
+		void DrawPolygon(Polygon& polygon);
+		void DrawConcavePolygon(Polygon& polygon);
+		void DrawEllipse(const Point& center, float rx, float ry);
 		
 		//! Stenciling
-		virtual void BeginClippingArea();
-		virtual void EndClippingArea();
-		virtual void ResetClippingArea();
+		void BeginClippingArea();
+		void EndClippingArea();
+		void ResetClippingArea();
 
-		//! Font rendering API
-		/*virtual void SetFontService(uIFontService* fontService);
-		virtual uErrorCode SetActiveFont(const std::string& fontName);
-		virtual void DisplayText(float x, float y, const std::string text, const infra::Rectangle* textArea = nullptr, int32_t alignment = uFontAlignment::eFONT_ALIGNMENT_LEFT);
-		*/
-		//! Texture rendering API
-		/*
-		virtual void DrawTexture(const infra::Rectangle<float>& rect, const uTextureAsset& texture, const Color& color = Color(Color::White));
-		virtual void DrawTexture(const infra::Rectangle<float>& rect,
-			float* textureCoordinates,
-			const gl::uTextureAsset& texture,
-			const Color& color = Color(Color::White));
-		*/
 		//! Brightness
 		void SetBrightness(float brightness);
 
 		//! With generic geometry class for GIS like applications.
-		virtual void DrawGeometry(const SimpleGeometry& geometry);
+		void DrawGeometry(const SimpleGeometry& geometry);
 	protected:
 		//! Set current color
 		void SetColor(const Color& color);
