@@ -1,6 +1,6 @@
-# uEngine4
+# uEngine4 nedir?
 
-www.yazilimperver.com sayfasında paylaştığım konuları içeren, C++ ile basit grafik, oyun ve dahi harita uygulaması geliştirmek isteyenlere yol göstermek, ilk adım olmak ve fikir vermek için geliştirilen bir kütüphanedir. Tabi ki Unreal Engine'i andırdığı doğrudur (isim olarak 😊), fakat pek alakası yoktur. Tamamen amatör bir ruhla yazılmakla birlikte belirli bir standart ve kuralları da barındırması hedeflenmektedir.
+www.yazilimperver.com sayfasında paylaştığım konuları içeren, C++ ile görselleştirme, 2B grafik, oyun ve harita benzeri etkileşimli uygulamalar geliştirmek isteyenlere yol göstermek, ilk adım olmak ve fikir vermek için geliştirilen bir kütüphanedir.
 
 Daha önce, OpenGL, SFML, SDL2 derken birçok C++ tabanlı görselleştirme kütüphanesini, çoklu platformlar için görsel uygulamalar geliştirmede kullandım. Hatta, benzerlerini de profesyonel hayatta geliştirdim. Şu bir gerçek ki, bu işlere yeni başlayan arkadaşlar için, bu kütüphanelerin sunulan API'lerini anlayıp, zihinlerindeki projeleri hemen hayata geçirmeleri özellikle OpenGL ve SDL kullanılması durumunda biraz vakit alabiliyor, SFML belki diğerlerinden bir tık önde olabilir. Bu kütüphane ile birlikte bu ilk eşiği kolay bir şekilde atlatıp, Godot ve benzeri üst seviye bir araç da kullanmadan ama çok da alt seviyeye inmeden ve tabi ki **C++ kullanarak** bu ve benzeri uygulamaları geliştirmenize yardımcı olmak (İleride farklı dillere de belki göz atarız).
 
@@ -15,20 +15,33 @@ Elbette bu tarz bir projeyi hayata geçirmek için giriş kısmında belirttiği
 Bu başlık altında, projede belirleyeceğimiz temel kabiliyetlerin geliştirilmesine yönelik yol haritası ortaya konulacaktır.
 Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave kabiliyetler bu bağlamda bu plana ekleniyor olabilir.
 
+### [Genel Yapılacaklar ]
+| Durum | Kalem | Öncelik |
+| :---: | :--- | :---: | 
+| ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
+| ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
+| ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
+| ❌ | Ext kütüphaneleri için konfigürasyon dosyalarının oluşturulması ve betiklerin buna göre güncellenmesi.  | Orta | 
+
+✔ : Gerçeklendi
+🚀: Çalışmaya başlandı
+❌: Henüz başlamadı
+
 ### [2B Oyun/Grafik Kabiliyetleri]
 Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliştirmeyi planladığımız kabiliyetleri sıralıyor olacağız.
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ✔ | **3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması. ** | Yüksek | 
-| ✔ | **Android için basit bir uygulama hazırlanması. ** | Orta | 
-| ✔ | **Örnekler arasında kolay geçiş sağlanması. ** | Orta | 
-| ✔ | **uEngine4 duyuru yazısı. ** | Orta | 
-| ✔ | **Dizin yapısına ilişkin sayfa. ** | Orta | 
-| ❌ | **2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması.** | Orta | 
-| ❌ | **2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi.** | Orta | 
-| ❌ | **Basit ses kabiliyetinin eklenmesi** | Orta | 
-| ❌  | **IMGUI kütüphanesinin entegre edilmesine yönelik bir kabiliyet eklenmesi** | Düşük | 
+| ❌ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
+| ✔ | 3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması.  | Yüksek | 
+| ✔ | Android için basit bir uygulama hazırlanması.  | Orta | 
+| ✔ | Örnekler arasında kolay geçiş sağlanması.  | Orta | 
+| ✔ | uEngine4 duyuru yazısı.  | Orta | 
+| ✔ | Dizin yapısına ilişkin sayfa.  | Orta | 
+| ✔ | 2B Platform oyunu için daha kapsamlı bir "tilemap"'in hazırlanması. | Orta | 
+| ✔ | 2B Platform oyunu için basit bir animatik karakterinin örneğe eklenmesi. | Orta | 
+| ❌ | Basit ses kabiliyetinin eklenmesi | Orta | 
+| ✔ | IMGUI kütüphanesinin entegre edilmesine yönelik bir kabiliyet eklenmesi | Düşük | 
 
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
@@ -39,11 +52,12 @@ Bu başlık altında ise, temel 2B harita kabiliyetlerine ilişkin planlanan yol
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ❌ | **[Pager kütüphanesinin düzenlenmesi (listener, vb. hususların netleştirilmesi)] ** | Yüksek | 
-| ❌ | **[Paftaları hesaplamak için ayrı bir sınıf kullanılmasına yönelik guncelleme]** | Düşük | 
-| ❌ | **[Paftaları internet üzerinden indirmek için gerekli kabiliyetin geliştirilmesi]** | Düşük | 
-| ❌ | **[Paftaları diskten yüklenmesi için gerekli kabiliyetin geliştirilmesi]** | Düşük | 
-| ❌ | **[Paftaların görüntülenmesi için gerekli kabiliyetin geliştirilmesi]** | Düşük | 
+| ✔ | Katman yönetim mekanizmasının kazandırılması | Yüksek | 
+| ✔ | Pager kütüphanesinin düzenlenmesi (listener, vb. hususların netleştirilmesi)  | Yüksek | 
+| ✔ | Paftaları hesaplamak için ayrı bir sınıf kullanılmasına yönelik guncelleme | Düşük | 
+| ✔ | Paftaları internet üzerinden indirmek için gerekli kabiliyetin geliştirilmesi | Düşük | 
+| ✔ | Paftaları diskten yüklenmesi için gerekli kabiliyetin geliştirilmesi | Düşük | 
+| ✔ | Paftaların görüntülenmesi için gerekli kabiliyetin geliştirilmesi | Düşük | 
 
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
