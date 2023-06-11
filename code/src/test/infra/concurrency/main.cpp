@@ -31,6 +31,9 @@ int main(int argc, char** argv) {
     // initialize
     ::testing::InitGoogleTest(&argc, argv);
 
+    // Filtre
+    ::testing::GTEST_FLAG(filter) = "StdActiveObject*";
+
     // run
     return RUN_ALL_TESTS();
 }

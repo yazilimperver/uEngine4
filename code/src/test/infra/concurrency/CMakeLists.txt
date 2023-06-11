@@ -5,6 +5,7 @@ set(APP_NAME concurrency_test)
 
 # Kaynak kod dosyalari
 set(SOURCE_FILES basic_thread_pool_test.cpp
+    std_active_object_test.cpp
     main.cpp)
 
 # Kaynak ve oluþturma dizinlerini otomatik olarak baslik dosyasi dizinine ekler

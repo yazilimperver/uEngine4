@@ -6,6 +6,7 @@ set(LIB_NAME concurrency)
 # Baslik dosyalari
 set(HEADER_FILES
 	active_object.h
+    std_active_object.h
 	thread_base.h
 	basic_thread_pool.h
 	thread_pool.h
@@ -17,6 +18,7 @@ source_group("Header Files" FILES ${HEADER_FILES})
 # Kaynak kod dosyalari
 set(SOURCE_FILES
     active_object.cpp
+    std_active_object.cpp
     thread_base.cpp
 	basic_thread_pool.cpp
 	thread_pool.cpp
