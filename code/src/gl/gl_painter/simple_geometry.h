@@ -18,8 +18,7 @@
 #include "geometry_type.h"
 
 namespace gl {
-
-	//! Will be used for 2D rendering both for geographic and Cartesian points
+    /** @brief   2B cografik ve kartezyen geometri cizimleri icin kullanilabilecek bir sinif */
     class SimpleGeometry {
 	public:
 		explicit SimpleGeometry(GeometryType geometryType);
@@ -44,30 +43,28 @@ namespace gl {
 		void CalculateEnvelope();
 
 		uint32_t  GetPointCount() const;
-		
-		// Check geometry's convexity
-		bool CheckConvexness() const;
 
-		// Return the calculated convexity of polygon 
+        /** @brief  Geometri ic/dis bukeylik kontrolu yapan fonksiyonlar */
+		bool CheckConvexness() const;
 		bool IsConvex() const;
 
 		void  SetIsConvex(bool val);
 
 	protected:
 
-		/** @brief   Type of the geometry */
+		/** @brief   Geometri tipi */
 		GeometryType mGeometryType;
 
-		/** @brief   True if has z coordinate, false if not */
+		/** @brief   Z kordinati var mi */
 		bool mHasZ;
 
-		/** @brief   True if is convex, false if not */
+		/** @brief   Dis bukey mi */
 		bool mIsConvex;
 
-		/** @brief   Envelope of this geometry */
+		/** @brief   Geometrinin zarfi */
 		Envelope mEnvelope;
 
-		/** @brief   The point array */
+		/** @brief   Geometri nokta dizisi */
 		std::vector<glm::vec3> mGeometryPoints;
     };
 }

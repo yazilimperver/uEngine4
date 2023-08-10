@@ -27,14 +27,25 @@ namespace gis {
 			return (GetLayerStatus() == LayerStatus::Visible);
 		}
 		virtual bool Initialize() = 0;
-		virtual LayerStatus GetLayerStatus() const = 0;
-		virtual void SetLayerStatus(LayerStatus status) = 0;
-		virtual std::string GetLayerName() const = 0;
-		virtual void SetLayerName(std::string_view layerName) = 0;
  		virtual std::shared_ptr<LayerRenderer> Get2DRenderer() = 0;
 		virtual std::shared_ptr<LayerController> Get2DController() = 0;
 		virtual LayerType GetLayerType() = 0;
 		virtual bool HasLayerLabelDisplay() const = 0;
+        virtual std::string GetLayerName() const {
+            return mLayerName;
+        }
+        virtual void SetLayerName(std::string_view layerName) {
+            mLayerName = layerName;
+        }
+        virtual LayerStatus GetLayerStatus() const {
+            return mLayerStatus;
+        }
+        virtual void SetLayerStatus(LayerStatus status) {
+            mLayerStatus = status;
+        }
+    protected:
+        LayerStatus mLayerStatus{ LayerStatus::Visible };
+        std::string mLayerName{ "NoNameProvided" };
 	};
 }
 

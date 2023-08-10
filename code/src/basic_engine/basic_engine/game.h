@@ -16,7 +16,7 @@
 namespace basic_engine {
 	class Game {
 	public:
-		static AssetService& GetAssetService();
+		static infra::AssetService& GetAssetService();
 		static Camera& GameCamera();
 		static void AssignWindowParameters(const WindowParameter& parameters);
 		static const WindowParameter& WindowParameters();

@@ -1,5 +1,6 @@
 # Include sub-projects.
 add_subdirectory ("application_base")
+add_subdirectory ("asset")
 add_subdirectory ("concurrency")
 add_subdirectory ("data_structures")
 add_subdirectory ("graphics")

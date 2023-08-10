@@ -63,8 +63,6 @@ namespace basic_engine {
         void EnableVerticalFlipped();
         void DisableFlip();
     private:
-        std::string GetPath(std::string_view assetPath);
-
         std::optional<SpriteSheetParameters> ParseConfigFile(const std::string& config);
 
         Transformation mTransform;

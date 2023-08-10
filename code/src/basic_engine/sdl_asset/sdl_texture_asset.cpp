@@ -4,7 +4,6 @@
 
 namespace basic_engine {
 	SdlTextureAsset::SdlTextureAsset(){ 
-		mInfo.mType = SdlTextureTypeStr;
 	}
 
 	void SdlTextureAsset::AssignTexture(SDL_Texture* texture) {
@@ -19,11 +18,11 @@ namespace basic_engine {
 		return mTexture;
 	}
 
-	const AssetInfo& SdlTextureAsset::Info() const {
+	const infra::AssetInfo& SdlTextureAsset::Info() const {
 		return mInfo;
 	}
 
-	AssetInfo& SdlTextureAsset::InfoRef() {
+    infra::AssetInfo& SdlTextureAsset::InfoRef() {
 		return mInfo;
 	}
 
@@ -34,4 +33,9 @@ namespace basic_engine {
 	int32_t SdlTextureAsset::Height() const {
 		return mHeight;
 	}
+    bool SdlTextureAsset::IsValid() const {
+        return (nullptr != mTexture)
+            && ((infra::AssetInfo::Status::LoadSuccessful == mInfo.mStatus)
+                || (infra::AssetInfo::Status::Active == mInfo.mStatus));
+    }
 }

@@ -44,7 +44,7 @@ unset(CMAKE_CXX_IMPLICIT_INCLUDE_DIRECTORIES)
 add_library(${LIB_NAME} STATIC ${HEADER_FILES} ${SOURCE_FILES})
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GLEW_INCLUDE_DIRS} ${GLM_DIR} .)
+target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER} ${DEVIL_DIR}/include  ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLEW_INCLUDE_DIRS} ${GLM_DIR} .)
 target_include_directories(${LIB_NAME} PUBLIC ${CMAKE_SYSROOT}/usr/include ${CEREAL_INCLUDE_DIRS})
 
 # Windows icin bir kac ek tanimlama

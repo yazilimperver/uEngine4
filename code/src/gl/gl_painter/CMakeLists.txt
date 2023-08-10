@@ -28,6 +28,10 @@ pen.h
 pen_stippling_data.h
 pen_style.h
 simple_geometry.h
+gl_font.h
+gl_texture.h
+vertex_data2d.h
+gl_sprite_sheet.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -41,6 +45,9 @@ gl_basic_painter.cpp
 gl_support.cpp
 pen.cpp
 simple_geometry.cpp
+gl_font.cpp
+gl_texture.cpp
+gl_sprite_sheet.cpp
 )
 
 # Kaynak dosya grubu (VS altindaki filtre gibi)
@@ -65,5 +72,5 @@ endif()
 target_link_libraries(${LIB_NAME} spdlog_header_only)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${LIB_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GLM_DIR} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS} ${CEREAL_INCLUDE_DIRS} ${BASIC_ENGINE_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} )
-target_include_directories(${LIB_NAME} PUBLIC .)
+target_include_directories(${LIB_NAME} PUBLIC ${DEVIL_DIR}/include  ${INFRA_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER} ${GLM_DIR} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS} ${CEREAL_INCLUDE_DIRS} ${BASIC_ENGINE_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} )
+target_include_directories(${LIB_NAME} PUBLIC ${FREETYPE_INCLUDE_DIRS} .)

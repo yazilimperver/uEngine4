@@ -22,7 +22,7 @@ public:
 	std::optional<std::any> GetParameterValue(const std::string& paramName);
 
 	template <typename T>
-	bool GetParameterValue(const std::string& paramName, T& paramValue);
+	bool GetParameterValue(const std::string& paramName, T& paramValue) const;
 
 	void Clear();
 protected:
@@ -30,7 +30,7 @@ protected:
 };
 
 template <typename T>
-bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue) {
+bool ParameterSet::GetParameterValue(const std::string& paramName, T& paramValue) const {
 	bool isValueExist{ false };
 
 	if (auto itr = mParameters.find(paramName); itr != mParameters.end()) {

@@ -57,8 +57,10 @@ target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${FMT_INCLUDE_DIRS} ${GLEW
 target_link_libraries(${APP_NAME} SDL2::Main)
 target_link_libraries(${APP_NAME} SDL2::Image)
 target_link_libraries(${APP_NAME} SDL2::TTF)
+target_link_libraries(${APP_NAME} ${CURL_LIBRARIES})
 
 # Baslik dosyalarinin yolunu ekleyelim
+target_include_directories(${APP_NAME} PUBLIC ${CURL_INCLUDE_DIR})
 target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR})
 target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
 

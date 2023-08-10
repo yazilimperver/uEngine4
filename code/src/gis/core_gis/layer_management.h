@@ -15,7 +15,9 @@
 #include <unordered_map>
 
 #include "map_view.h"
+
 #include "layer_service.h"
+#include "layer_iterator.h"
 
 class SdlApplication;
 
@@ -24,7 +26,8 @@ namespace gis {
 	enum class LayerStatus;
 
 	class LayerManagement
-		: public LayerService	{
+		: public LayerService
+		, public LayerIterator 	{
 	public:
 
 		/** @brief   Katman yoneticisini ilklendirelim */
@@ -38,9 +41,6 @@ namespace gis {
 
 		/** @brief   Cografik katman ekleyelim */
 		virtual void AddLayer(std::shared_ptr<Layer> Layer) override;
-
-		/** @brief   Katman fabrikasi kullanilarak katman ekleme fonksiyonu */
-		virtual void CreateLayer(std::string_view layerName, std::string_view layerType) override;
 
 		/** @brief   Fabrikasi kayit ediliyor */
 		virtual void RegisterLayerFactory(std::unique_ptr<LayerFactory> layerFactory) override;
@@ -57,7 +57,17 @@ namespace gis {
 		/** @brief   Her katman icin ortak olarak kullanilacak olan veriler */
 		void SetMapView(std::shared_ptr<gis::MapView> mapView);
 		void SetSDLApplication(SdlApplication* sdlApplication);
+		void SetLayerConfigurationPath(std::string_view path);
+
+		/** @brief  Katmanlara iterator oruntusu ile erismek uzere sunulacak olan API'lerdir */
+		virtual void ResetIterator() override;
+		virtual void Next() override;
+		virtual bool IsDone() const override;
+		virtual std::shared_ptr<Layer> Current() override;
 	protected:
+		/** @brief   Full pathname of the layer configuration file */
+		std::string mLayerConfigurationPath;
+
 		bool mIsInitialized = false;
 		SdlApplication* mSDLApplication{ nullptr };
 		
@@ -67,6 +77,10 @@ namespace gis {
 		/** @brief   Olusturulan/kaydedilen katmanlar */
 		std::vector<std::shared_ptr<Layer>> mLayers;
 
+		/** @brief   Iterator ile kullanilan mevcut katman */
+		using LayerIteratorType = std::vector<std::shared_ptr<Layer>>::iterator;
+		LayerIteratorType mCurrentLayerItr;
+
 		/** @brief   Etiket iceren kaydedilen katmanlar */
 		std::vector<std::shared_ptr<Layer>> mLayersWithLabel;
 	
@@ -75,6 +89,9 @@ namespace gis {
 
 		/** @brief   Katmanin genel cografik veriler icin kullanacagi harita gorunumu */
 		std::shared_ptr<gis::MapView> mMapView{ nullptr };
+
+		// Inherited via LayerService
+		virtual void CreateLayer(std::string_view factoryName, ParameterSet layerType) override;
 	};
 }
 

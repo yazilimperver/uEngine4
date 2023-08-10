@@ -15,7 +15,7 @@
 #include "pager/tile_id.h"
 #include "gis_asset/gis_map_asset.h"
 
-using GisRasterTileHashDictionary = std::unordered_map<gis::TileId, std::unique_ptr<basic_engine::Asset>, gis::TileIdHashFunction>;
+using GisRasterTileHashDictionary = std::unordered_map<gis::TileId, std::shared_ptr<infra::Asset>, gis::TileIdHashFunction>;
 
 #endif	// INC_RASTER_COMMON_H
 

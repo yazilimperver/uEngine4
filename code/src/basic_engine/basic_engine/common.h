@@ -13,10 +13,10 @@
 
 #include "glm/glm.hpp"
 
-typedef glm::tvec2<int32_t>  Vector2i;
-typedef glm::tvec2<uint32_t> Vector2u;
-typedef glm::tvec2<float>    Vector2f;
-typedef glm::tvec2<double>   Vector2d;
+using Vector2i = glm::tvec2<int32_t>;
+using Vector2u = glm::tvec2<uint32_t>;
+using Vector2f = glm::tvec2<float>;
+using Vector2d = glm::tvec2<double>;
 
 #endif // !BASICENGINECOMMON
 

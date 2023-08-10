@@ -37,7 +37,7 @@ namespace gl {
 	}
 
 	void ColorRamp::GetColor(int32_t value, Color& color)	{
-		// At least there must be two values otherwise color ramp is invalid.
+		// En az iki deger girilmis olmali
 		if (mAltitudeValues.size() > 1) {
 			double minValue = 0.0;
 			double maxValue = 0.0;
@@ -76,7 +76,6 @@ namespace gl {
 		endValue = mAltitudeValues[index + 1];
 
 		for (int32_t i = 0; i < mMaxColorTableSize; ++i) {
-			// if color
 			if (currentValue > endValue) {
 				index++;
 
@@ -87,7 +86,6 @@ namespace gl {
 				endColor = mColors[index + 1];
 			}
 
-			// Calculate interpolated color.
 			int32_t startRed = startColor.R;
 			int32_t startGreen = startColor.G;
 			int32_t startBlue = startColor.B;

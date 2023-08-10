@@ -10,7 +10,7 @@
 #include "utility/unique_id_generator.h"
 
 namespace gis_asset {
-    std::unique_ptr<basic_engine::Asset> GisMapLoader::Load(std::string_view path, std::string_view label) {
+    std::shared_ptr<infra::Asset> GisMapLoader::Load(std::string_view path, std::string_view label) {
         if (nullptr == mRenderer){
             spdlog::error("SDL renderer is not assigned!");
             
@@ -32,12 +32,13 @@ namespace gis_asset {
         int32_t width, height;
         SDL_QueryTexture(texture, NULL, NULL, &width, &height);
 
-        auto newAsset = std::make_unique<GisMapAsset>(texture, width, height);
+        auto newAsset = std::make_shared<GisMapAsset>(texture, width, height);
 
         newAsset->InfoRef().mHandle = UniqueIDGenerator::GetNextID();
-        newAsset->InfoRef().mStatus = basic_engine::AssetStatus::LoadSuccessful;
+        newAsset->InfoRef().mStatus = infra::AssetStatus::LoadSuccessful;
         newAsset->InfoRef().mPath = path.data();
         newAsset->InfoRef().mLabel = label.data();
+        newAsset->InfoRef().mLoaderHandle = mAssetLoaderHandle;
 
         // SDL_Surface'tan kurtulalim
         SDL_FreeSurface(surface);
@@ -49,15 +50,15 @@ namespace gis_asset {
         mRenderer = renderer;
     }
 
-    void GisMapLoader::Dispose(std::unique_ptr<basic_engine::Asset> asset) {
+    void GisMapLoader::Dispose(std::shared_ptr<infra::Asset> asset) {
         GisMapAsset* gisAsset = dynamic_cast<GisMapAsset*>(asset.get());
         if (nullptr != gisAsset) {
             SDL_DestroyTexture(gisAsset->Texture());
-            gisAsset->InfoRef().mStatus = basic_engine::AssetStatus::NotActive;
+            gisAsset->InfoRef().mStatus = infra::AssetStatus::NotActive;
         }
 	}
 
-	basic_engine::AssetType GisMapLoader::Type()	{
+	infra::AssetLoaderName GisMapLoader::Name()	{
 		return GisMapAsset::GisMapAssetTypeStr;
 	}
 }

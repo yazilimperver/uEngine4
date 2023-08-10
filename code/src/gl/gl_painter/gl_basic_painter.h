@@ -11,9 +11,16 @@
 
 #include <cstdint>
 
+#include <memory>
+#include <unordered_map>
+
 #include "graphics/color.h"
 #include "graphics/rectangle.h"
 #include "graphics/polygon.h"
+
+#include "asset/asset.h"
+
+#include "glm/glm.hpp"
 
 #include "brush.h"
 #include "pen.h"
@@ -22,37 +29,37 @@
 class Line;
 class Point;
 
+using Vector2f = glm::tvec2<float>;
+
 namespace gl {
 	class SimpleGeometry;
-	class uTextureAsset;
-	class uIFontService;
+	class TextureAsset;
+	class GLFont;
 
-	//! Either uses shader based rendering or traditional opengl calls based on derived classes
-    class GLBasicPainter {
+	class GLBasicPainter {
 	public:
-		//! Initialize opengl rendering
-		void InitializePainter();
+		/** @brief   GL Painter ilklendirmeleri icin kullanilacak API */
+		virtual void InitializePainter();
 
-		//! The start/end of opengl rendering
-		//! Some common settings happens here
+		/** @brief   OpenGL cizimi baslangic/son kisimlari
+                     Bir takim state ayarlamalari burada yapiliyor*/
 		void Begin();
 		void End();
 
-		//! Basic settings
-		void SetAliasingMode(AliasMode mode);
+		/** @brief   Temel OpenGL ayarlamalarina iliskin API */
+        void SetAliasingMode(AliasMode mode);
 		void SetDepthTest(bool enableStatus);
 		void SetBackgroundColor(const Color& color);
-		void AssignPen(const Pen& pen);
-        Pen ActivePen() const;
-		void AssignBrush(const Brush& brush);
-        Brush ActiveBrush() const;
+		void SetPen(const Pen& pen);
+		void SetBrush(const Brush& brush);
 		
-		//! Orthographic projection setting
-		void SetDisplayExtent(double left, double right, double bottom, double top);
+		/** @brief   Ortografik projeksiyon ayarlari */
+        void SetDisplayExtent(double left, double right, double bottom, double top);
 		void SetOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
 
-		//! Transformation matrix API
-		void Rotate(float rotation);
+		
+        /** @brief   OpenGL Painter transformasyon API'si */
+        void Rotate(float rotation);
 		void Translate(float tx, float ty);
 		void Translate(const glm::vec2& translation);
 		void Scale(float sx, float sy);
@@ -60,62 +67,75 @@ namespace gl {
 		void SaveState();
 		void RestoreState();
 
-		//! Primitive rendering API with specific geometry classes
-		void DrawLine(const Line& line);
+		/** @brief   Temel geometri cizim API'leri */
+        void DrawLine(const Line& line);
 		void DrawPoint(const Point& point);
 		void DrawPoint(const glm::vec2& point);
 		void DrawRect(const infra::Rectangle<float>& rect);
-		void DrawPolyline(Polygon& polygon, bool isLoop = false);
-		void DrawPolygon(Polygon& polygon);
-		void DrawConcavePolygon(Polygon& polygon);
+		void DrawPolyline(infra::Polygon& polygon, bool isLoop = false);
+		void DrawPolygon(infra::Polygon& polygon);
+		void DrawConcavePolygon(infra::Polygon& polygon);
 		void DrawEllipse(const Point& center, float rx, float ry);
 		
-		//! Stenciling
-		void BeginClippingArea();
+		/** @brief   Stencil API'leri */
+        void BeginClippingArea();
 		void EndClippingArea();
 		void ResetClippingArea();
 
-		//! Brightness
-		void SetBrightness(float brightness);
+		/** @brief   Font API'leri */
+        bool SetActiveFont(std::string_view fontLabel);
+        bool RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size = 12);
 
-		//! With generic geometry class for GIS like applications.
-		void DrawGeometry(const SimpleGeometry& geometry);
+        /** @brief Basit metin cizmi API'si */
+        void SimpleText(const glm::vec2& point, std::string_view text);
+
+		/** @brief   Doku cizim API'leri */
+        void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height, const Color& color = Color(Color::White));
+		void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height, float* textureCoordinates, const Color& color = Color(Color::White));
+		
+        /** @brief   Parlaklik API'si*/
+        void SetBrightness(float brightness);
+
+		/** @brief   CBS benzeri jenerik geometri cizimleri icin kullanilacak API */
+        virtual void DrawGeometry(const SimpleGeometry& geometry);
 	protected:
-		//! Set current color
+		/** @brief   Renk atama API'si*/
 		void SetColor(const Color& color);
 
-		//! Circle geometry preparation
+		/** @brief   Cember geometri ilklendirme */
 		void InitializeCircleGeometry();
 		void SetPenParameters(bool isStroke) const;
 
-		//! Last binding texture id
+        /** @brief Temel font bilgileri */
+        std::string mActiveFontLabel{ "Default" };
+        std::shared_ptr<GLFont> mActiveFontInstance{ nullptr };
+        std::unordered_map<std::string, std::shared_ptr<GLFont>> mFonts;
+
+		/** @brief   En son aktif olan doku tanimlayicisi */
 		uint32_t mLastBindedTextureId;
 
-		//! Current aliasing mode
+		/** @brief   Mevcut aliasing durumu */
 		gl::AliasMode mAliasMode;
 
-		//! Is painter initialized and ready to paint
+		/** @brief   Painter ilklendirme durumu */
 		bool mIsInitialized;
 
-		//! Pre-calculated circle
-		Polygon mCircleGeometry;
+		/** @brief   Onceden hesaplanan cember geometrisi */
+		infra::Polygon mCircleGeometry;
 
-		//! Active GL and GLStroke Pen
+		/** @brief   Aktif kalem */
 		Pen mActivePen;
 
-		//! Active GL Brush
+		/** @brief   Aktif firca */
 		Brush mActiveBrush;
 
-		//! Background color
+		/** @brief   Arka plan rengi */
 		Color mBackgroundColor;
 
-		//! Font service
-		uIFontService* mFontService;
+		/** @brief   Son atanan parlaklik ekran faktoru [0.0 to 2.0] */
+        float mBrightness;
 
-		//! Brightness factor of the screen ranges [0.0 to 2.0]
-		float mBrightness;
-
-		//! Last set stencil value
+		/** @brief   Son atanan stencil degeri */
 		uint32_t mCurrentStencilValue;
     };
 }

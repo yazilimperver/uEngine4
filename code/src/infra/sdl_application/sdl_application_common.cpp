@@ -6,6 +6,12 @@
 #include <GL/gl.h>
 #include <SDL.h>
 
+#undef _UNICODE
+#define ILUT_USE_OPENGL	// This MUST be defined before calling the DevIL headers or we don't get OpenGL functionality
+#include <IL/il.h>
+#include <IL/ilu.h>
+#include <IL/ilut.h>
+
 #include "spdlog/spdlog.h"
 
 #include "application_base/window_parameter.h"
@@ -27,6 +33,11 @@
 
 #include "utility/json_data_parser.h"
 #include "sdl_application/sdl_parameters_serializer.h"
+
+#include "sdl_asset/sdl_texture_loader.h"
+#include "gl_core_loaders/dds_texture_loader.h"
+#include "gl_core_loaders/stb_image_loader.h"
+#include "gl_core_loaders/generic_texture_loader.h"
 
 using namespace std::chrono;
 
@@ -57,10 +68,32 @@ bool SdlApplication::Initialize() {
     mAppWiseSettings.UpdateParameterValue("IsVSYNCEnabled", mWindowParameters.IsVSYNCEnabled);
 
     result = this->InitializeSDL();
+
+    // Initialize all DevIL functionality for 
+    ilutRenderer(ILUT_OPENGL);
+    ilInit();
+    iluInit();
+
+    //Check for error
+    ILenum ilError = ilGetError();
+    if (ilError != IL_NO_ERROR) {
+        spdlog::error("Error initializing DevIL! %s\n", iluErrorString(ilError));
+    }
+
+    // Temel yukleme siniflarini kaydedelim
+    mAssetRepository.AssignRenderer(mRenderer);
+    mAssetRepository.RegisterLoader(std::make_shared<basic_engine::SdlTextureLoader>());
+    mAssetRepository.RegisterLoader(std::make_shared<gl::DDSTextureLoader>());
+    mAssetRepository.RegisterLoader(std::make_shared<gl::GenericTextureLoader>());
+    mAssetRepository.RegisterLoader(std::make_shared<gl::STBImageLoader>());
     
     spdlog::info("SDL Application initialization completed!");
 
     return result;
+}
+
+infra::AssetService& SdlApplication::AssetService() {
+    return mAssetRepository;
 }
 
 void SdlApplication::Finalize() {
@@ -160,7 +193,7 @@ bool SdlApplication::InitializeSDL() {
 void SdlApplication::InitializeWindows() {
     // Varsayilan degerleri atalim
     mSdlParameters.IsDisplayEventLogs = false;
-    mSdlParameters.MajorVersion = 1;
+    mSdlParameters.MajorVersion = 3;
     mSdlParameters.MinorVersion = 2;
     mSdlParameters.DepthSize = 24;
 
@@ -174,10 +207,11 @@ void SdlApplication::InitializeWindows() {
         mAppWiseSettings.UpdateParameterValue("IsGLEnabled", mSdlParameters.IsGLEnabled);
 
         // Request opengl context
+        //SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, mSdlParameters.MajorVersion);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, mSdlParameters.MinorVersion);
-        SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 
         // Turn on double buffering with a 24bit Z buffer.
         // May need to change this to 16 or 32
@@ -263,8 +297,8 @@ void SdlApplication::HandleSDLEvents() {
     TouchAction touchAction;
     TouchData touchData;
 
-    uint16_t mouseX = 0U;
-    uint16_t mouseY = 0U;
+    int32_t mouseX = 0;
+    int32_t mouseY = 0;
 
     // Handle events on queue
     while (SDL_PollEvent(&e) != 0) {
@@ -537,6 +571,10 @@ SDL_Window* SdlApplication::GetSdlWindow() {
     return mWindow;
 }
 
+SDL_GLContext SdlApplication::GetGlContext() {
+    return mMainGLContext;
+}
+
 infra::Rectangle<int32_t>& SdlApplication::GetViewport() {
     return mRenderViewport;
 }
@@ -551,6 +589,10 @@ void SdlApplication::UpdateGraphicApplication(std::shared_ptr<ClientGraphicAppli
 
 WindowParameter& SdlApplication::GetWindowParametrs() {
     return mWindowParameters;
+}
+
+SdlParameters& SdlApplication::GetSDLParameters() {
+    return mSdlParameters;
 }
 
 void SdlApplication::SetFullScreen(bool isFullscreen) {

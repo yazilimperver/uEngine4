@@ -16,36 +16,37 @@
 #include "line.h"
 #include "envelope.h"
 
-class  Polygon {
-public:
-	uint32_t GetPointCount() const;
-	std::optional<glm::vec2> GetPoint(uint16_t index) const;
+namespace infra {
+    class  Polygon {
+    public:
+        uint32_t GetPointCount() const;
+        std::optional<glm::vec2> GetPoint(uint16_t index) const;
 
-	void Append(const glm::vec2& point);
-	void RemoveLastPoint();
-	void RemoveAt(uint16_t index);
-	std::optional<Envelope> GetEnvelope();
-	void CalculateEnvelope();
-	bool Intersect(const Polygon& polygon);
-	bool IsPointInsidePolygon(const glm::vec2& point);
-	bool IsInsidePolygon(const glm::vec2& point);
-	bool IsInsidePolygon(const Polygon& polygon);
+        void Append(const glm::vec2& point);
+        void RemoveLastPoint();
+        void RemoveAt(uint16_t index);
+        std::optional<Envelope> GetEnvelope();
+        void CalculateEnvelope();
+        bool Intersect(const Polygon& polygon);
+        bool IsPointInsidePolygon(const glm::vec2& point);
+        bool IsInsidePolygon(const glm::vec2& point);
+        bool IsInsidePolygon(const Polygon& polygon);
 
-	//calculates if polygon is convex/concave
-	bool IsConvex() const;
+        //calculates if polygon is convex/concave
+        bool IsConvex() const;
 
-	glm::vec2* GetPointPtr();
-	void Clear();
+        glm::vec2* GetPointPtr();
+        void Clear();
 
-	std::vector<glm::vec2>& GetPoints();
-	void SetPoints(std::vector<glm::vec2> val);
-protected:
+        std::vector<glm::vec2>& GetPoints();
+        void SetPoints(std::vector<glm::vec2> val);
+    protected:
 
-private:
-	std::vector<glm::vec2> mPoints;
-	Envelope mEnvelope;
-};
-
+    private:
+        std::vector<glm::vec2> mPoints;
+        Envelope mEnvelope;
+    };
+}
 #endif	// INC_POLYGON_H
 
 /**

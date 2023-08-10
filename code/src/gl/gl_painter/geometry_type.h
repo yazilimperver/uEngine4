@@ -11,9 +11,8 @@
 
 #include <cstdint>
 
-namespace gl
-{
-	//! 2d/2.5d geometry types (GDAL is taken as basis for types)
+namespace gl {
+    /** @brief   GDAL benzeri kutuphaneler icin kullanilabilecek 2b/2.5B geometri tipleri */
     enum class GeometryType : uint32_t {
 		eGT_UNKNOWN = 0,
 		eGT_POINT = 1,

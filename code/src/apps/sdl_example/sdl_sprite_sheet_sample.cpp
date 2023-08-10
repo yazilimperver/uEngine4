@@ -24,7 +24,7 @@ void SdlSpriteSheetSample::Initialize(SdlApplication& sdlApplication) {
 	mParameters = sdlApplication.GetWindowParametrs();
 
 	sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));
-	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
+	dynamic_cast<infra::AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 
 	infra::Rectangle<int32_t> spriteRect{ 0, 0, 128, 128};

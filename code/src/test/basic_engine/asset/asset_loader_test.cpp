@@ -15,8 +15,7 @@ TEST(SdlTextureAsset, AssetInfoDefaultParams) {
 
 	ASSERT_EQ(instance.Texture(), nullptr);
 	ASSERT_EQ(instance.Info().mHandle, 0);
-	ASSERT_EQ(instance.Info().mStatus, AssetStatus::NotActive);
-	ASSERT_STREQ(instance.Info().mType.c_str(), "SdlTexture");
+	ASSERT_EQ(instance.Info().mStatus, infra::AssetInfo::Status::NotActive);
 	ASSERT_STREQ(instance.Info().mLabel.c_str(), "");
 	ASSERT_STREQ(instance.Info().mPath.c_str(), "");
 }
@@ -43,7 +42,7 @@ TEST(SdlTextureAssetLoader, AssetInfoDefaultParams) {
         SDL_Log("Failed to create Renderer: %s", SDL_GetError());
     }
 
-	AssetRepository assetRepository;
+	infra::AssetRepository assetRepository;
 	assetRepository.RegisterLoader(std::move(sdlTextureLoader));
 
     auto textureHandle = assetRepository.LoadAsset(SdlTextureAsset::SdlTextureTypeStr, "tree.png", "testImage");  

@@ -1,5 +1,4 @@
 ﻿# Include sub-projects.
-add_subdirectory ("asset")
 add_subdirectory ("basic_engine")
 add_subdirectory ("sdl_asset")
 add_subdirectory ("painter")

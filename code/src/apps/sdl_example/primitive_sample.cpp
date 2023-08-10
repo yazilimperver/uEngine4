@@ -15,13 +15,13 @@ PrimitiveSample::PrimitiveSample() {
 		{"Tile Map Sample", mTileMapSample},
 		{"Spritesheet Sample", mSpriteSheetSample} });
 
-	mClientGraphicalApplication = std::get<1>(mSamples[4]);
+	mClientGraphicalApplication = std::get<1>(mSamples[7]);
 
 	RegisterEventListener(this);
 }
 
 void PrimitiveSample::KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) {
-	static auto sampleIndex{ 0 };
+	static auto sampleIndex{ 7 };
 
 	if (InputActions::PressAction == action) {
 		if (KeyboardCodes::KEY_F12 == key) {

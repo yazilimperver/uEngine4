@@ -14,17 +14,17 @@
 #include "raster_common.h"
 #include "layer_controller.h"
 
-#include "gis_asset/gis_map_asset.h"
-#include "gis_asset/gis_map_loader.h"
-
 #include "pager/pager.h"
 #include "pager/pager_listener.h"
 #include "pager/gtile_file_calculator.h"
 
 class SdlApplication;
 
+namespace infra {
+    class AssetService;
+}
+
 namespace gis {
-    class RasterSDLRenderer;
 
     class RasterController 
         : public LayerController
@@ -34,9 +34,13 @@ namespace gis {
         virtual bool Initialize() override;
         virtual void Update() override;
 
+        void SetLoaderName(std::string_view name);
+        void SetTileSize(uint32_t tileSize);
+        void SetSourceInfo(bool isOnline, std::string_view path, std::string_view extension);
+
+        void SetAssetSerivce(infra::AssetService* assetService);
         void SetSDLApplication(SdlApplication* sdlApplication);
         void SetMapView(std::shared_ptr<gis::MapView> mapView);
-        void SetRasterRenderer(std::shared_ptr<RasterSDLRenderer> renderer);
        
         std::shared_ptr<gis::Pager> GetPager();
         const GisRasterTileHashDictionary* GetRasterTileAssets() const;
@@ -50,17 +54,22 @@ namespace gis {
         /** @brief   Pager'in tetikleyen fonksiyon */
         void TriggerPager();
 
+        /** @brief   Piksel cinsidnden pafta boyutu */
+        uint32_t mTileSize{ 256 };
+
         /** @brief   The tile per axis */
         int32_t mTilePerAxis{ 5 };
+        
+        /** @brief   Pafta kaynak bilgileri*/
+        bool mIsOnline{ false };
+        std::string mPath;
+        std::string mExtension;
 
         /** @brief   The sdl application */
         SdlApplication* mSDLApplication{ nullptr };
 
         /** @brief   True if is initialized, false if not */
         bool mIsInitialized{ false };
-
-        /** @brief   The raster renderer */
-        std::shared_ptr<RasterSDLRenderer> mRasterRenderer{ nullptr };
 
         /** @brief   Yuklenecek paftalar */
         std::shared_ptr<gis::Pager> mPager{ nullptr };
@@ -71,8 +80,12 @@ namespace gis {
         /** @brief   Katmanin genel cografik veriler icin kullanacagi harita gorunumu */
         std::shared_ptr<gis::MapView> mMapView{ nullptr };
 
-        /** @brief   Raster pafta yukleme */
-        gis_asset::GisMapLoader mMapLoader;
+        /** @brief   Raster katmani icin kullanilacak olan yukleyici sinifin ismi ve kotaricisidir */
+        std::string mLoaderName{ "STBImageLoader" };
+        AssetLoaderHandle mLoaderHandle{ -1 };
+
+        /** @brief   Asset servisi */
+        infra::AssetService* mAssetService{ nullptr };
 
         /** @brief   Yuklenen paftalarin tutulacagi liste */
         GisRasterTileHashDictionary mRasterAssets;

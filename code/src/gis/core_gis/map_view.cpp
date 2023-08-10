@@ -1,7 +1,8 @@
 #include "map_view.h"
 
 #include "slippy_map_util.h"
-#include "fmt/core.h"
+#define FMT_HEADER_ONLY
+#include "fmt/format.h"
 
 namespace gis {
 	MapView::MapView(uint32_t winWidth, uint32_t winHeight, GeoPoint viewCenter, uint32_t zoomLevel)

@@ -10,7 +10,7 @@
 #define INC_BRUSH_STYLE_H
 
 namespace gl {
-	//! will be used for brush style (polygon stippling patterns)
+	//! Firca stili icin kullanilacaktir
 	enum class BrushStyle : int32_t {
 		NoBrush,
 		SolidPattern,

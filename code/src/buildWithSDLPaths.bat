@@ -12,6 +12,7 @@ set SDL2_IMAGE_PATH="SDL2_image-2.6.2"
 set SDL2_TTF_PATH="SDL2_ttf-2.20.1"
 set SDL2_NET_PATH="SDL2_net-2.2.0"
 set GLEW_PATH="glew-2.2.0"
+set FTYPE2_PATH="D:/git_repos/Yazilimperver/uEngine4/code/src/ext/freetype-master/build"
 set GLEW_FULL_PATH="D:/git_repos/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/glew-2.2.0"
 
 cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G "Visual Studio 17 2022" -A x64 ..  -DSDL2_PATH=%ROOT_EXT_PATH%/%SDL2_PATH%^
@@ -19,6 +20,7 @@ cmake -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON -G "Visual Studio 17 2022" -A x64 ..  -DS
  -DSDL2_IMAGE_PATH=%ROOT_EXT_PATH%/%SDL2_IMAGE_PATH%^
  -DSDL2_TTF_PATH=%ROOT_EXT_PATH%/%SDL2_TTF_PATH%^
  -DSDL2_NET_PATH=%ROOT_EXT_PATH%/%SDL2_NET_PATH%^
+ -DFREETYPE_DIR=%FTYPE2_PATH%^
  -DGLEW_DIR=%GLEW_FULL_PATH% -Wno-dev
 
 REM -DGLEW_DIR=%ROOT_EXT_PATH%/%GLEW_PATH% -Wno-dev

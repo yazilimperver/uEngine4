@@ -3,7 +3,7 @@
  * @date 9.05.2022
  * @author Yazilimperver
  * @brief  SDL tarafindan kullanilabilecek olan dokulari temsil eden 'asset' sinifidir.
- * 		   Resimler icin SDL_Image sinifi kullanilmaktadir.
+ *            Resimler icin SDL_Image sinifi kullanilmaktadir.
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef SDLTEXTUREASSET
@@ -14,29 +14,32 @@
 struct SDL_Texture;
 
 namespace basic_engine {
-	class SdlTextureAsset : public Asset {
-	public:
-		SdlTextureAsset();
+    class SdlTextureAsset 
+        : public infra::Asset {
+    public:
+        /** @brief Veri tipi. */
+        static inline const std::string SdlTextureTypeStr{ "SdlTexture" };
 
-		/** @brief Olusturulan SDL doku nesnesini aktaralim*/
-		void AssignTexture(SDL_Texture* texture);
-		SDL_Texture* Texture() const;
+        SdlTextureAsset();
 
-		/** @brief Veri tipi. */
-		static inline const std::string SdlTextureTypeStr{ "SdlTexture" };
+        /** @brief Olusturulan SDL doku nesnesini aktaralim*/
+        void AssignTexture(SDL_Texture* texture);
+        SDL_Texture* Texture() const;
 
-		/** @brief Asset bilgilerine iliskin API'ler */
-		virtual const AssetInfo& Info() const override;
-		AssetInfo& InfoRef();
+        /** @brief Asset bilgilerine iliskin API'ler */
+        virtual const infra::AssetInfo& Info() const override;
+        infra::AssetInfo& InfoRef();
 
-		int32_t Width() const;
-		int32_t Height() const;
-	private:
-		int32_t mWidth{ 0 };
-		int32_t mHeight{ 0 };
-		AssetInfo mInfo;
-		SDL_Texture* mTexture{ nullptr };
-	};
+        int32_t Width() const;
+        int32_t Height() const;
+
+        virtual bool IsValid() const override;
+    private:
+        int32_t mWidth{ 0 };
+        int32_t mHeight{ 0 };
+        infra::AssetInfo mInfo;
+        SDL_Texture* mTexture{ nullptr };
+    };
 }
 
 #endif // !SDLTEXTUREASSET

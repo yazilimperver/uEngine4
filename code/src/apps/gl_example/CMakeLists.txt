@@ -60,12 +60,21 @@ add_custom_command(
 target_include_directories(${APP_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER})
 target_include_directories(${APP_NAME} PRIVATE ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
 
+
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} PRIVATE asset basic_engine gl_painter graphics sdl_application tick time utility nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} PRIVATE ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS} ${FREEGLUT_LIBRARIES})
+target_link_libraries(${APP_NAME} PRIVATE asset gl_painter graphics sdl_asset sdl_application im_gui tick time gl_texture utility gl_core_loaders nlohmann_json spdlog_header_only)
+
+target_link_libraries(${APP_NAME} PRIVATE ${OPENGL_LIBRARIES} ${CMAKE_DL_LIBS} ${FREEGLUT_LIBRARIES} ${DEVIL_DIR}/lib/x64/Release/DevIL.lib ${DEVIL_DIR}/lib/x64/Release/ILU.lib  ${DEVIL_DIR}/lib/x64/Release/ILUT.lib)
+
 target_link_libraries(${APP_NAME} PRIVATE GLEW::glew)
 target_link_libraries(${APP_NAME} PRIVATE SDL2::Main)
 target_link_libraries(${APP_NAME} PRIVATE SDL2::Image )
+
+if(WIN32)
+	target_link_libraries(${APP_NAME} PRIVATE ${FREETYPE_LIBRARY} )
+else()
+	target_link_libraries(${APP_NAME} PRIVATE freetype)
+endif()
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)

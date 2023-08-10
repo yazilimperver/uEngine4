@@ -2,7 +2,8 @@
  * @file   color_ramp.h
  * @date   4/23/2023
  * @author Yazilimperver
- * @brief
+ * @brief  Rolyef harita ya da analiz ciktilarinin renklendirilmesi icin kullanilabilecek siniftir.
+ *         Renkler arasi interpolasyon yapilir.
  * @remark
  */
 
@@ -16,28 +17,28 @@
 namespace gl {
     class ColorRamp {
 		ColorRamp(int32_t maxColorTableSize = 1024);
-		// Adds a color to color ramp and binds color with a value. 
-		// For every added color to ColorRamp it generates color table within interpolated colors.
+
+        /** @brief   Colorramp için verilen degere renk eklenir */
 		void AddColor(int32_t value, const Color& color);
 
-		// Returns a interpolated color related to given value.
+        /** @brief   Interpole edilen renk donulur */
 		void GetColor(int32_t value, Color& color);
 	private:
 		void GenerateColorTable();
 
-		// Max color table size
+		/** @brief   En fazla izin verilen renk adeti */
 		int32_t mMaxColorTableSize;
 
-		// Keeps values used for color interpolation.
+		/** @brief   Interpolasyon icin kullanilacak irtifa degerleri */
 		std::vector<int32_t> mAltitudeValues;
 
-		// Keeps added colors used for color interpolation.
+		/** @brief   Interpolasyon icin kullanilacak ana irtifa renkler */
 		std::vector<Color> mColors;
 
-		// Keeps colors interpolated from added colors to ColorRamp
+		/** @brief   Ana irtifa renkleri arasini doldurmak icin kullanilacak renkler */
 		std::vector<Color> mColorTable;
 
-		// Lastly generated min and max values
+		/** @brief   Min/maksimum degerler. */
 		double mMinValue;
 		double mMaxValue;
 		double mMaxMindDiffValue;

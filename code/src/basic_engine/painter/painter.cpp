@@ -171,7 +171,7 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, double rot, SDL_RendererFlip flip) {
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& centerPos, double rot, SDL_RendererFlip flip) {
 		if (nullptr != mRenderer) {
 			if (nullptr != texture) {
 				SDL_Rect srcRect;
@@ -180,8 +180,8 @@ namespace basic_engine {
 				SDL_QueryTexture(texture, NULL, NULL, &srcRect.w, &srcRect.h);
 
 				SDL_Rect dstRect = srcRect;
-				dstRect.x = pos.x - static_cast<int>(srcRect.w * 0.5F);
-				dstRect.y = pos.y - static_cast<int>(srcRect.h * 0.5F);
+				dstRect.x = centerPos.x - static_cast<int>(srcRect.w * 0.5F);
+				dstRect.y = centerPos.y - static_cast<int>(srcRect.h * 0.5F);
 
 				SDL_RenderCopyEx(mRenderer, texture, &srcRect, &dstRect, rot, nullptr, flip);
 			}
@@ -191,11 +191,11 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, int32_t width, int32_t height, double rot, SDL_RendererFlip flip)	{
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& centerPos, int32_t width, int32_t height, double rot, SDL_RendererFlip flip)	{
 		if (nullptr != mRenderer) {
 			if (nullptr != texture) {
 				SDL_Rect srcRect{ 0, 0, width, height };
-				SDL_Rect dstRect{ pos.x - static_cast<int>(srcRect.w * 0.5F), pos.y - static_cast<int>(srcRect.h * 0.5F), width, height };
+				SDL_Rect dstRect{ centerPos.x - static_cast<int>(srcRect.w * 0.5F), centerPos.y - static_cast<int>(srcRect.h * 0.5F), width, height };
 				SDL_RenderCopyEx(mRenderer, texture, &srcRect, &dstRect, rot, nullptr, flip);
 			}
 		}
@@ -204,7 +204,7 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& pos, const SDL_Rect& destRect, double rot, SDL_RendererFlip flip)	{
+	void Painter::DrawTexture(SDL_Texture* texture, const Vector2i& centerPos, const SDL_Rect& destRect, double rot, SDL_RendererFlip flip)	{
 		if (nullptr != mRenderer) {
 			if (nullptr != texture) {
 				SDL_Rect srcRect;
@@ -242,10 +242,10 @@ namespace basic_engine {
 		}
 	}
 
-	void Painter::BasicText(const Point2d& upperLeft, std::string_view text) {
+	void Painter::SimpleText(const Point2d& point, std::string_view text) {
 		if (nullptr != mRenderer) {
 			auto penColor = mActivePen.PenColor();
-			stringRGBA(mRenderer, upperLeft.x, upperLeft.y, text.data(), penColor.R, penColor.G, penColor.B, penColor.A);
+			stringRGBA(mRenderer, point.x, point.y, text.data(), penColor.R, penColor.G, penColor.B, penColor.A);
 		}
 		else {
 			spdlog::error("SDL Renderer not assigned!");
@@ -254,7 +254,7 @@ namespace basic_engine {
 
 
 	bool Painter::SetActiveFont(std::string_view fontLabel)	{
-		std::string label{ fontLabel.data() };
+		std::string label{ static_cast<std::string>(fontLabel) };
 		bool isFontFound{ false };
 		if (mFonts.contains(label)) {
 			mActiveFont = label;
@@ -265,6 +265,8 @@ namespace basic_engine {
 	}
 
 	bool Painter::RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size, FontStyle style)	{
+        bool result = false;
+
 		if (nullptr != mRenderer) {
 			std::unique_ptr<FontData> fontData = std::make_unique<FontData>();
 			fontData->Font  = FC_CreateFont();
@@ -277,6 +279,7 @@ namespace basic_engine {
 			if (result != 0) {
 				std::string label{ fontLabel.data() };
 				mFonts.emplace(label, std::move(fontData));
+                result = true;
 			}
 			else {
 				FC_FreeFont(fontData->Font);
@@ -286,7 +289,7 @@ namespace basic_engine {
 		else {
 			spdlog::error("SDL Renderer not assigned!");
 		}
-		return false;
+		return result;
 	}
 
 	std::pair<uint32_t, uint32_t> Painter::ActiveBasicFontSizeInfo(std::string_view fontLabel) const {

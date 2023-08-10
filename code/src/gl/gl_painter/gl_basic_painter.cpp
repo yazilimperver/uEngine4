@@ -1,5 +1,7 @@
 #include "gl_basic_painter.h"
 
+#include "spdlog/spdlog.h"
+
 #include "graphics/line.h"
 #include "graphics/point.h"
 #include "graphics/polygon_triangulator.h"
@@ -9,16 +11,16 @@
 #include "pen_stippling_data.h"
 #include "brush_stippling_data.h"
 
-//#include <Font/uIFontService.h>
-//#include <Texture/uTextureAsset.h>
+#include "gl_font.h"
+#include "gl_texture/texture_asset.h"
 
 const uint32_t cNumberOfSegmentInCircle = 36U;
 
 namespace gl {
-	//! For opaque image rendering
+	//! Opak imaj gosterimi icin kullanilacak renk
 	Color g_whiteColor(Color::White);
 
-	//! Default brush
+	//! Varsayilan firca
 	Brush g_painterDefaultBrush(Color::White);
 	
 	void GLBasicPainter::SetColor(const Color& color) {
@@ -26,28 +28,25 @@ namespace gl {
 	}
 
 	void GLBasicPainter::InitializePainter() {
-		// Image manager plugin association
-		// Font renderer plugin association
-		// Basic primitive preparation
 		this->InitializeCircleGeometry();
 
 		glEnable(GL_BLEND);
 		glDisable(GL_DEPTH_TEST);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-		//Set antialiasing/multisampling
+		// Antialiasing/multisampling
 		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 		glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 		glDisable(GL_LINE_SMOOTH);
 		glDisable(GL_POLYGON_SMOOTH);
 		glDisable(GL_MULTISAMPLE);
 
-		// Enable stippling patterns (line/fill styles)
+		// Stippling oruntulerini aktiflestirelim (line/fill styles)
 		glEnable(GL_LINE_STIPPLE);
 		glEnable(GL_POLYGON_STIPPLE);
 
 
-		//! Default lighting parameters
+		//! Varsayilan isik ayarlari
 		GLfloat aLightpos[] = { 1.0F, 1.0F, 1.0F, 0.0F };
 		GLfloat aAmbientColor[] = { 0.3F, 0.3F, 0.3F, 1.0F };
 		GLfloat aDifuseColor[] = { 0.2F, 0.2F, 0.2F, 1.0F };
@@ -55,9 +54,7 @@ namespace gl {
 		glLightfv(GL_LIGHT0, GL_AMBIENT, aAmbientColor);
 		glLightfv(GL_LIGHT0, GL_DIFFUSE, aDifuseColor);
 
-		// Enable smoothing line and polygons by default
-		glEnable(GL_LINE_SMOOTH);
-		glEnable(GL_POLYGON_SMOOTH);
+		// Cizgi ve poliogon duzeltme ayarlari
 		glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
 		glHint(GL_POLYGON_SMOOTH_HINT, GL_NICEST);
 
@@ -71,23 +68,16 @@ namespace gl {
 	}
 
 	void GLBasicPainter::Begin() {
-		// Clear buffers
+		// Tamponlari temizleyelim
 		glClear(GL_COLOR_BUFFER_BIT |
 			GL_DEPTH_BUFFER_BIT |
 			GL_STENCIL_BUFFER_BIT);
 
-		// Clear stencil buffer with given value
+		// Verilen deger ile stencil tamponunu temizleyelim
 		glClearStencil(0x0);
 
-		// Enable vertex array usage e.g. draw arrays, elements
 		glEnableClientState(GL_VERTEX_ARRAY);
 
-		// Enable blending with default function GL_FUNC_ADD
-		// e.g. red = sR * sA + dR * (1 - sA) where source is newly drawn and dest. is already drawn
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-		//Start alias mode
 		switch (mAliasMode)
 		{
 		case AliasMode::Aliased:
@@ -109,7 +99,7 @@ namespace gl {
 			break;
 		}
 
-		// Enable blending with default function GL_FUNC_ADD
+		// Blending fonksiyon ayarlamasi
 		// e.g. red = sR * sA + dR * (1 - sA) where source is newly drawn and dest. is already drawn
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -119,25 +109,11 @@ namespace gl {
 			mBackgroundColor.GetBlueF(),
 			mBackgroundColor.GetAlphaF());
 
-		this->AssignBrush(g_painterDefaultBrush);
+		this->SetBrush(g_painterDefaultBrush);
 	}
 
 	void GLBasicPainter::End() {
-		this->ResetTransform();
-		if (mBrightness > 1) {
-			glBlendFunc(GL_DST_COLOR, GL_ONE);
-			glColor3f(mBrightness - 1, mBrightness - 1, mBrightness - 1);
-		}
-		else {
-			glBlendFunc(GL_ZERO, GL_SRC_COLOR);
-			glColor3f(mBrightness, mBrightness, mBrightness);
-		}
-
-		// Revert important opengl states
 		glDisableClientState(GL_VERTEX_ARRAY);
-		glDisable(GL_BLEND);
-
-		// Trigger gl commands
 		glFlush();
 	}
 
@@ -157,6 +133,42 @@ namespace gl {
 	void GLBasicPainter::ResetClippingArea() {
 		glDisable(GL_STENCIL_TEST);
 	}
+
+    bool GLBasicPainter::SetActiveFont(std::string_view fontLabel) {
+        std::string label{ static_cast<std::string>(fontLabel) };
+        bool isFontFound{ false };
+        if (mFonts.contains(label)) {
+            mActiveFontLabel = label;
+            mActiveFontInstance = mFonts[label];
+            isFontFound = true;
+        }
+
+        return isFontFound;
+    }
+
+    bool GLBasicPainter::RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size) {
+        bool result = false;
+
+        std::shared_ptr<GLFont> fontToRegister = std::make_shared<GLFont>();
+        if (fontToRegister->LoadFreeType(static_cast<std::string>(fontPath), size)) {
+            std::string label{ static_cast<std::string>(fontLabel) };
+            mFonts.emplace(label, fontToRegister);
+            result = true;
+            spdlog::info("SDL Font {} registration succeed!");
+        }
+        else {
+            spdlog::error("SDL Font register failed!");
+        }
+
+        return result;
+    }
+
+    void GLBasicPainter::SimpleText(const glm::vec2& point, std::string_view text) {
+        if (nullptr != mActiveFontInstance) {
+            SetColor(mActivePen.GetColor());
+            mActiveFontInstance->RenderText(point.x, point.y, text);
+        }
+    }
 
 	void GLBasicPainter::SetBackgroundColor(const Color& color) {
 		mBackgroundColor = color;
@@ -281,25 +293,20 @@ namespace gl {
 			right, bottom
 		};
 
-		//Enable vertex arrays
 		glEnableClientState(GL_VERTEX_ARRAY);
-
-		//Set vertex data
 		glVertexPointer(2, GL_FLOAT, 0, coordinateArray);
 
 		SetColor(mActiveBrush.GetColor());
 
-		// Draw quad using vertex data
-		glDrawArrays(GL_QUADS, 0, 4);
+        glDrawArrays(GL_QUADS, 0, 4);
 
 		SetColor(mActivePen.GetColor());
 		glDrawArrays(GL_LINE_LOOP, 0, 4);
 
-		//Disable vertex arrays
 		glDisableClientState(GL_VERTEX_ARRAY);
 	}
 
-	void GLBasicPainter::DrawPolyline(Polygon& polygon, bool isLoop) {
+	void GLBasicPainter::DrawPolyline(infra::Polygon& polygon, bool isLoop) {
 		if (false == mActivePen.HasStroke()) {
 			SetColor(mActivePen.GetColor());
 			glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), polygon.GetPointPtr());
@@ -326,7 +333,7 @@ namespace gl {
 		}
 	}
 
-	void GLBasicPainter::DrawPolygon(Polygon& polygon) {
+	void GLBasicPainter::DrawPolygon(infra::Polygon& polygon) {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		SetColor(mActiveBrush.GetColor());
 		glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), polygon.GetPointPtr());
@@ -337,10 +344,10 @@ namespace gl {
 		}
 	}
 
-	void GLBasicPainter::DrawConcavePolygon(Polygon& polygon)
+	void GLBasicPainter::DrawConcavePolygon(infra::Polygon& polygon)
 	{
 		std::vector<glm::vec2> results;
-		Polygon triangulatePolygon;
+        infra::Polygon triangulatePolygon;
 
 		if (false == PolygonTriangulator::Triangulate(polygon.GetPoints(), results)) {
 			triangulatePolygon.SetPoints(results);
@@ -380,6 +387,89 @@ namespace gl {
 		RestoreState();
 	}
 
+	void GLBasicPainter::DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height,
+		float* textureCoordinates,
+		const Color& color)	{
+		float Left = centerPos.x - width * 0.5F;
+		float Right = Left + width;
+		float Top = centerPos.y - height * 0.5F;
+		float Bottom = Top + height;
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture->GetOpenGLTextureId());
+
+		SetColor(color);
+
+		float coordinateArray[8] = {
+			Left, Top,
+			Left, Bottom,
+			Right, Bottom,
+			Right, Top
+		};
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		glVertexPointer(2, GL_FLOAT, 0, coordinateArray);
+		glTexCoordPointer(2, GL_FLOAT, 0, textureCoordinates);
+
+		SetColor(mActiveBrush.GetColor());
+
+		glDrawArrays(GL_QUADS, 0, 4);
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+
+		glDisable(GL_TEXTURE_2D);
+	}
+
+	const float cTextureCoordinates[8] = {
+		// Ust Sol
+		0.0F, 0.0F,
+
+		// Alt sol
+		0.0F, 1.0F,
+
+		// Alt sag
+		1.0F, 1.0F,
+
+		// Ust Sag
+		1.0F, 0.0F,
+	};
+
+	void GLBasicPainter::DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height,
+		const Color& color) {
+        float Left = centerPos.x - width * 0.5F;
+        float Right = Left + width;
+        float Top = centerPos.y - height * 0.5F;
+        float Bottom = Top + height;
+
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture->GetOpenGLTextureId());
+
+		SetColor(color);
+
+		float coordinateArray[8] =
+		{
+			Left, Top,
+			Left, Bottom,
+			Right, Bottom,
+			Right, Top
+		};
+
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		glVertexPointer(2, GL_FLOAT, 0, coordinateArray);
+		glTexCoordPointer(2, GL_FLOAT, 0, cTextureCoordinates);
+
+		glDrawArrays(GL_QUADS, 0, 4);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+
+        glBindTexture(GL_TEXTURE_2D, 0);
+		glDisable(GL_TEXTURE_2D);
+	}
+
 	void GLBasicPainter::DrawGeometry(const SimpleGeometry& geometry) {
 		uint32_t pointCount = geometry.GetPointCount();
 
@@ -397,7 +487,6 @@ namespace gl {
 
 			case GeometryType::eGT_LINESTRING:
 			case GeometryType::eGT_LINESTRING25D: {
-				// By default we will use stroke
 				this->SetPenParameters(true);
 				this->SetColor(mActivePen.GetColor(true));
 				glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3), geometry.GetPointPtr());
@@ -418,7 +507,6 @@ namespace gl {
 				glDrawArrays(GL_POLYGON, 0, geometry.GetPointCount());
 
 				if (PenStyle::NoPen != mActivePen.GetPenStyle()) {
-					// By default we will use stroke
 					this->SetPenParameters(true);
 					this->SetColor(mActivePen.GetColor(true));
 					glVertexPointer(3, GL_FLOAT, sizeof(glm::vec3), geometry.GetPointPtr());
@@ -486,23 +574,18 @@ namespace gl {
 		}
 	}
 
-	void GLBasicPainter::AssignPen(const Pen& pen)	{
-		// If state changes apply it
+	void GLBasicPainter::SetPen(const Pen& pen)	{
 		if (mActivePen != pen)	{
 			mActivePen = pen;
 			this->SetPenParameters(false);
 		}
 	}
 
-    Pen GLBasicPainter::ActivePen() const {
-        return mActivePen;
-    }
-
 	void GLBasicPainter::SetBrightness(float brightness) {
 		mBrightness = brightness;
 	}
 
-	void GLBasicPainter::AssignBrush(const Brush& brush) {
+	void GLBasicPainter::SetBrush(const Brush& brush) {
 		if (mActiveBrush != brush) {
 			mActiveBrush = brush;
 
@@ -556,7 +639,4 @@ namespace gl {
 			}
 		}
 	}
-    Brush GLBasicPainter::ActiveBrush() const {
-        return mActiveBrush;
-    }
 }

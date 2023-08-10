@@ -14,12 +14,12 @@
 struct SDL_Renderer;
 
 namespace gis_asset {
-	class GisMapLoader : public basic_engine::AssetLoader {
+	class GisMapLoader : public infra::AssetLoader {
 	public:
 		void AssignRenderer(SDL_Renderer* renderer);
-		virtual std::unique_ptr<basic_engine::Asset> Load(std::string_view path, std::string_view label) override;
-		virtual void Dispose(std::unique_ptr<basic_engine::Asset>) override;
-		virtual basic_engine::AssetType Type() override;
+		virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
+		virtual void Dispose(std::shared_ptr<infra::Asset>) override;
+		virtual infra::AssetLoaderName Name() override;
 	protected:
 		SDL_Renderer* mRenderer{ nullptr };
 	};

@@ -1,5 +1,7 @@
 #include "gtest/gtest.h"
 
+#include <algorithm>
+
 #include "pager/pager.h"
 #include "pager/gtile_file_calculator.h"
 

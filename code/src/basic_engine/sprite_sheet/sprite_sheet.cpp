@@ -12,7 +12,7 @@
 namespace basic_engine {
     SpriteSheet::SpriteSheet(std::string_view rootPath, std::string_view spriteSheetConfig, const infra::Rectangle<int32_t>& spriteBoundary, bool paused, bool looped)
         : mCurrentAnimation{ nullptr }
-        , mRootPath{rootPath}
+        , mRootPath{ rootPath }
         , mSpriteSheetConfig{ spriteSheetConfig }
         , mDestinationRect {spriteBoundary.Left, spriteBoundary.Top, spriteBoundary.Width, spriteBoundary.Height }
         , mCurrentFrameIndex{ 0 }
@@ -40,15 +40,11 @@ namespace basic_engine {
         mIsVerticalFlipped = false; mIsHorizontalFlipped = false;  mRenderFlip = SDL_FLIP_NONE; 
     }
 
-    std::string SpriteSheet::GetPath(std::string_view assetPath) {
-        return mRootPath + std::string(assetPath);
-    }
-
     std::optional<SpriteSheetParameters> SpriteSheet::ParseConfigFile(const std::string& config) {
         // Json dosyasini okuyalim
-        if (!config.empty()) {
+        if (!mSpriteSheetConfig.empty()) {
             JsonDataParser<basic_engine::SpriteSheetParameters> jsonParser;
-            return jsonParser.Deserialize(config);
+            return jsonParser.Deserialize(config); 
         }
         else {
             spdlog::error("No spritesheet config file is provided!");
@@ -58,7 +54,7 @@ namespace basic_engine {
 
     bool SpriteSheet::Initialize() {
         bool isInitialized{ false };
-        if (auto parameters = ParseConfigFile(GetPath(mSpriteSheetConfig)); parameters.has_value()) {
+        if (auto parameters = ParseConfigFile(mRootPath + mSpriteSheetConfig); parameters.has_value()) {
             mLastUsedParameters = parameters.value();
 
             mFrameTime = TimeInMSec{ mLastUsedParameters.FrameTime };
@@ -66,7 +62,7 @@ namespace basic_engine {
             // oncelikle ana doku dosyalarini okuyalim
             for (auto& texturePair : mLastUsedParameters.TextureFiles) {
                 auto textureLabel = texturePair.first;
-                auto texturePath = GetPath(texturePair.second);
+                auto texturePath = mRootPath + texturePair.second;
                 auto textHandle = Game::GetAssetService().LoadAsset(SdlTextureAsset::SdlTextureTypeStr, texturePath, textureLabel);
 
                 if (textHandle.has_value()) {

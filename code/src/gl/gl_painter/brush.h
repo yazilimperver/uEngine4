@@ -14,10 +14,8 @@
 #include "brush_style.h"
 #include "graphics/color.h"
 
-namespace gl
-{
-    class Brush
-    {
+namespace gl {
+    class Brush  {
 	public:
 		Brush();
 		Brush(const Color& color, BrushStyle brushStyle = BrushStyle::SolidPattern);

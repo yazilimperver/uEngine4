@@ -13,6 +13,7 @@
 #include <string_view>
 
 class SdlApplication;
+class ParameterSet;
 
 namespace gis {
     class MapView; 
@@ -20,7 +21,7 @@ namespace gis {
     class LayerFactory {
     public:
         virtual std::string LayerType() const = 0;
-        virtual std::shared_ptr<Layer> CreateLayer(std::string_view layerName) = 0;
+        virtual std::shared_ptr<Layer> CreateLayer(const ParameterSet layerParameters) = 0;
         virtual void SetSDLApplication(SdlApplication* sdlApplication) = 0;
         virtual void SetMapView(std::shared_ptr<gis::MapView> mapView) = 0;
     };

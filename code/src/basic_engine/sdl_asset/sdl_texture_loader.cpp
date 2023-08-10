@@ -10,8 +10,8 @@
 #include "utility/unique_id_generator.h"
 
 namespace basic_engine {
-    std::unique_ptr<Asset> SdlTextureLoader::Load(std::string_view path, std::string_view label) {
-        auto newAsset = std::make_unique<SdlTextureAsset>();
+    std::shared_ptr<infra::Asset> SdlTextureLoader::Load(std::string_view path, std::string_view label) {
+        auto newAsset = std::make_shared<SdlTextureAsset>();
 
         if (nullptr == mRenderer){
             spdlog::error("SDL renderer is not assigned!");
@@ -34,27 +34,30 @@ namespace basic_engine {
         newAsset->AssignTexture(texture);
 
         newAsset->InfoRef().mHandle = UniqueIDGenerator::GetNextID();
-        newAsset->InfoRef().mStatus = AssetStatus::LoadSuccessful;
-        newAsset->InfoRef().mPath = path.data();
-        newAsset->InfoRef().mLabel = label.data();
+        newAsset->InfoRef().mStatus = infra::AssetStatus::LoadSuccessful;
+        newAsset->InfoRef().mPath = static_cast<std::string>(path);
+        newAsset->InfoRef().mLabel = static_cast<std::string>(label);
+        newAsset->InfoRef().mLoaderHandle = mAssetLoaderHandle;
 
         // SDL_Surface'tan kurtulalim
         SDL_FreeSurface(surface);
 
-		return std::move(newAsset);
+		return newAsset;
 	}
 
     void SdlTextureLoader::AssignRenderer(SDL_Renderer* renderer) {
         mRenderer = renderer;
     }
 
-    void SdlTextureLoader::Dispose(std::unique_ptr<Asset> asset) {
+    void SdlTextureLoader::Dispose(std::shared_ptr<infra::Asset> asset) {
         SdlTextureAsset* sdlTextureAsset = dynamic_cast<SdlTextureAsset*>(asset.get());
-        SDL_DestroyTexture(sdlTextureAsset->Texture());
-        sdlTextureAsset->InfoRef().mStatus = AssetStatus::NotActive;
+        if (nullptr != sdlTextureAsset) {
+            SDL_DestroyTexture(sdlTextureAsset->Texture());
+            sdlTextureAsset->InfoRef().mStatus = infra::AssetStatus::NotActive;
+        }
 	}
 
-	AssetType SdlTextureLoader::Type()	{
+    infra::AssetLoaderName SdlTextureLoader::Name()	{
 		return SdlTextureAsset::SdlTextureTypeStr;
 	}
 }

@@ -13,15 +13,16 @@
 struct SDL_Renderer;
 
 namespace basic_engine {
-	class SdlTextureLoader : public AssetLoader {
-	public:
-		void AssignRenderer(SDL_Renderer* renderer);
-		virtual std::unique_ptr<Asset> Load(std::string_view path, std::string_view label) override;
-		virtual void Dispose(std::unique_ptr<Asset>) override;
-		virtual AssetType Type() override;
-	protected:
-		SDL_Renderer* mRenderer{ nullptr };
-	};
+    class SdlTextureLoader 
+        : public infra::AssetLoader {
+    public:
+        void AssignRenderer(SDL_Renderer* renderer);
+        virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
+        virtual void Dispose(std::shared_ptr<infra::Asset>) override;
+        virtual infra::AssetLoaderName Name() override;
+    protected:
+        SDL_Renderer* mRenderer{ nullptr };
+    };
 }
 
 #endif // !SDLTEXTURELOADER

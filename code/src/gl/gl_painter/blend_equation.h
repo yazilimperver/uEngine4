@@ -17,8 +17,7 @@ namespace gl {
      *
      * @brief    brief Enumeration of the blending equations
      *          
-     *           The equations are mapped directly to their OpenGL equivalents, specified by
-     *           glBlendEquation() or glBlendEquationSeparate().
+     *           OpenGL blend fonksiyon denklemi, glBlendEquation()/glBlendEquationSeparate().
      */
     enum class uBlendEquation : int32_t {
 		Add = 0x8006,            ///< Pixel = Src * SrcFactor + Dst * DstFactor

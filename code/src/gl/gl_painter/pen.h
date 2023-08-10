@@ -15,8 +15,7 @@
 
 #include "pen_style.h"
 
-namespace gl
-{
+namespace gl {
     class Pen {
 	public:
 		Pen();

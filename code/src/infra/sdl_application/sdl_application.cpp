@@ -13,6 +13,8 @@
 
 #include "application_base/client_graphic_application.h"
 
+#include "asset/asset_repository.h"
+
 using namespace std::chrono;
 
 void SdlApplication::Start() {

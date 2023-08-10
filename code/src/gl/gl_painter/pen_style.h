@@ -12,7 +12,7 @@
 #include <cstdint>
 
 namespace gl {
-	//! will be used for line style (line stippling patterns)
+	/** @brief  Cizgi stili icin kullanilabilecek degerler */
 	enum class PenStyle : int32_t {
 		NoPen,
 		SolidLine,

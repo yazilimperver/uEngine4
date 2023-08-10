@@ -14,7 +14,7 @@
 struct SDL_Texture;
 
 namespace gis_asset {
-	class GisMapAsset : public basic_engine::Asset {
+	class GisMapAsset : public infra::Asset {
 	public:
 		explicit GisMapAsset(SDL_Texture* texture, int32_t width, int32_t height);
 
@@ -24,16 +24,17 @@ namespace gis_asset {
 		static inline const std::string GisMapAssetTypeStr{ "GisMapAsset" };
 
 		/** @brief Asset bilgilerine iliskin API'ler */
-		virtual const basic_engine::AssetInfo& Info() const override;
-		basic_engine::AssetInfo& InfoRef();
+		virtual const infra::AssetInfo& Info() const override;
+		infra::AssetInfo& InfoRef();
 
 		int32_t Width() const;
 		int32_t Height() const;
+        virtual bool IsValid() const;
 	private:
 		int32_t mWidth{ 0 };
 		int32_t mHeight{ 0 };
 		
-		basic_engine::AssetInfo mInfo;
+		infra::AssetInfo mInfo;
 		SDL_Texture* mTexture{ nullptr };
 	};
 }

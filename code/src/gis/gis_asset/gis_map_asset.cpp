@@ -7,18 +7,17 @@ namespace gis_asset {
 		mTexture = texture;
 		mWidth = width;
 		mHeight = height;
-		mInfo.mType = GisMapAssetTypeStr;
 	}
 
 	SDL_Texture* GisMapAsset::Texture() const {
 		return mTexture;
 	}
 
-	const basic_engine::AssetInfo& GisMapAsset::Info() const {
+	const infra::AssetInfo& GisMapAsset::Info() const {
 		return mInfo;
 	}
 
-	basic_engine::AssetInfo& GisMapAsset::InfoRef() {
+	infra::AssetInfo& GisMapAsset::InfoRef() {
 		return mInfo;
 	}
 
@@ -29,4 +28,7 @@ namespace gis_asset {
 	int32_t GisMapAsset::Height() const {
 		return mHeight;
 	}
+    bool GisMapAsset::IsValid() const {
+        return mTexture != nullptr;
+    }
 }

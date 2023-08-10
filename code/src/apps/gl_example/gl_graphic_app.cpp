@@ -47,8 +47,8 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
 	
 	mBasicPainter.Begin();
 	mBasicPainter.ResetTransform();
-	mBasicPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3 });
-	mBasicPainter.AssignBrush(Brush{ Color::Blue });
+	mBasicPainter.SetPen(Pen{ PenStyle::SolidLine, Color::Red, 3 });
+	mBasicPainter.SetBrush(Brush{ Color::Blue });
 
 	mBasicPainter.Translate(glm::vec2{ winWidth / 2.f, winHeight / 2.f });
 	mBasicPainter.SaveState();
@@ -57,16 +57,16 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
 	mBasicPainter.RestoreState();
 
 	constexpr float radius = 50.0f;
-	mBasicPainter.AssignBrush(Brush{ Color::Green });
+	mBasicPainter.SetBrush(Brush{ Color::Green });
 	mBasicPainter.DrawEllipse(Point{ -winWidth / 2.f, -winHeight / 2.f }, radius, radius);
 
-	mBasicPainter.AssignBrush(Brush{ Color::Yellow });
+	mBasicPainter.SetBrush(Brush{ Color::Yellow });
 	mBasicPainter.DrawEllipse(Point{ -winWidth / 2.f, winHeight / 2.f }, radius, radius);
 
-	mBasicPainter.AssignBrush(Brush{ Color::Red });
+	mBasicPainter.SetBrush(Brush{ Color::Red });
 	mBasicPainter.DrawEllipse(Point{ winWidth / 2.f, winHeight / 2.f }, radius, radius);
 
-	mBasicPainter.AssignBrush(Brush{ Color::Magenta });
+	mBasicPainter.SetBrush(Brush{ Color::Magenta });
 	mBasicPainter.DrawEllipse(Point{ winWidth / 2.f, -winHeight / 2.f }, radius, radius);
 
 	mBasicPainter.End();

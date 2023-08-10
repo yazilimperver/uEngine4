@@ -16,14 +16,18 @@
 
 #include "layer_factory.h"
 
+class ParameterSet;
+
 namespace gis {
 	enum class LayerStatus;
 	class Layer;
 
     class LayerService {
+	public:
+		
 		//! Add a geographic layer
 		virtual void AddLayer(std::shared_ptr<Layer> layer) = 0;
-		virtual void CreateLayer(std::string_view layerName, std::string_view layerType) = 0;
+		virtual void CreateLayer(std::string_view factoryName, ParameterSet layerMetadata) = 0;
 		virtual void RegisterLayerFactory(std::unique_ptr<LayerFactory> layerFactory) = 0;
 
 		//! Get layer
@@ -35,6 +39,11 @@ namespace gis {
 		virtual std::optional<int32_t> GetLayerHandle(const std::string& layerName) = 0;
 		virtual void SetLayerStatus(const std::string& layerName, LayerStatus layerStatus) = 0;
 		virtual void SetLayerStatus(int32_t layerHandle, LayerStatus layerStatus) = 0;
+
+		virtual void ResetIterator() = 0;
+		virtual void Next() = 0;
+		virtual bool IsDone() const = 0;
+		virtual std::shared_ptr<Layer> Current() = 0;
     };
 }
 

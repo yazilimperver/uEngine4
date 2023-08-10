@@ -14,6 +14,8 @@
 #include <atomic>
 #include <memory>
 
+#include "asset/asset_repository.h"
+
 #include "application_base/application_base.h"
 #include "application_base/window_parameter.h"
 #include "application_base/client_graphic_application.h"
@@ -65,16 +67,20 @@ public:
     void SetTitle(const std::string& title);
 
     WindowParameter& GetWindowParametrs();
+    SdlParameters& GetSDLParameters();
 
     // SDL yardimcilari
     SDL_Renderer* GetSdlRenderer();
     SDL_Window* GetSdlWindow();
+    void* GetGlContext();
 
     // Gosterim alanini donelim
     infra::Rectangle<int32_t>& GetViewport();
 
     // Mevcut grafik uygulamasini yenisi ile degistirmek icin kullanilacak fonksiyon
     void UpdateGraphicApplication(std::shared_ptr<ClientGraphicApplication> newApplication);
+
+    infra::AssetService& AssetService();
 protected:
     //! An upper bound is given for update (i.e. multiple updates per tick and one display)
     //! Constant Game Speed independent of Variable FPS
@@ -150,6 +156,9 @@ protected:
 
     /** @brief Uygulama capinda paylasilacak olan ayarlar */
     ParameterSet mAppWiseSettings;
+
+    /** @brief Uygulama tarafindan kullanilabilecek asset reposu */
+    infra::AssetRepository mAssetRepository;
 };
 
 #endif // !SDL_APPLICATION_H

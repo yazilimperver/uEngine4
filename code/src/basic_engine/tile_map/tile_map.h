@@ -33,8 +33,8 @@ namespace tson {
 namespace basic_engine {
 	class TileMap {
 	public:
-		TileMap(std::string_view rootPath, std::string_view tileMapFile);
-		bool Initialize();
+		TileMap(std::string_view tileMapFile);
+		bool Initialize(std::string_view rootPath = "./tilemap/example/");
 		void InitializeObjectLayer(tson::Layer& layer);
 		void InitializeTileLayer(tson::Layer& layer);
 		void InitializeImageLayer(tson::Layer& layer);

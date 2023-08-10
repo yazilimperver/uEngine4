@@ -44,8 +44,8 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME}  painter basic_engine  asset sdl_asset sdl_application tick tile_map time utility sprite_sheet nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS})
+target_link_libraries(${APP_NAME}  painter basic_engine  asset sdl_asset sdl_application tick tile_map time gl_texture utility sprite_sheet gl_core_loaders nlohmann_json spdlog_header_only)
+target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS} ${DEVIL_DIR}/lib/x64/Release/DevIL.lib ${DEVIL_DIR}/lib/x64/Release/ILU.lib  ${DEVIL_DIR}/lib/x64/Release/ILUT.lib)
 
 target_link_libraries(${APP_NAME} GLEW::glew)
 target_link_libraries(${APP_NAME} SDL2::Main)

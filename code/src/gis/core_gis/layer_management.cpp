@@ -5,6 +5,9 @@
 #include "Layer.h"
 #include "layer_controller.h"
 #include "layer_renderer.h"
+#include "layer_configurator.h"
+
+#include "utility/parameter_set.h"
 
 #include "spdlog/spdlog.h"
 
@@ -12,13 +15,18 @@ namespace gis {
 	bool LayerManagement::Initialize() {
 		mIsInitialized = true;
 
+		LayerConfigurator configurator(this);
+		configurator.Configure(mLayerConfigurationPath);
+
 		// Katmanlari ilklendirelim
 		for (auto& layer : mLayers) {
 			if (false == layer->Initialize()) {
 				spdlog::info("Layer {} initialization failed!", layer->GetLayerName());
 			}
 		}
-
+		
+		ResetIterator();
+		
 		return mIsInitialized;
 	}
 
@@ -72,15 +80,6 @@ namespace gis {
 					mLayersWithLabel.push_back(Layer);
 				}
 			}
-		}
-	}
-
-	void LayerManagement::CreateLayer(std::string_view layerName, std::string_view layerType) {
-		auto layerTypeStr = static_cast<std::string>(layerType);
-
-		if ( mLayerFactories.contains(layerTypeStr) ) {
-			auto layerNameStr = static_cast<std::string>(layerName);
-			AddLayer(mLayerFactories[layerTypeStr]->CreateLayer(layerNameStr));
 		}
 	}
 
@@ -154,9 +153,47 @@ namespace gis {
 	
 	void LayerManagement::SetMapView(std::shared_ptr<gis::MapView> mapView) {
 		mMapView = mapView;
+		
+		for (auto& layerFactory : mLayerFactories) {
+			layerFactory.second->SetMapView(mMapView);
+		}
 	}
 
 	void LayerManagement::SetSDLApplication(SdlApplication* sdlApplication) {
 		mSDLApplication = sdlApplication;
+
+		for (auto& layerFactory : mLayerFactories) {
+			layerFactory.second->SetSDLApplication(mSDLApplication);
+		}
+	}
+
+	void LayerManagement::SetLayerConfigurationPath(std::string_view path) {
+		mLayerConfigurationPath = static_cast<std::string>(path);
+	}
+
+	void LayerManagement::ResetIterator() {
+		mCurrentLayerItr = mLayers.begin();
+	}
+
+	void LayerManagement::Next() {
+		mCurrentLayerItr++;
+	}
+
+	bool LayerManagement::IsDone() const {
+		return (mCurrentLayerItr == mLayers.end());
+	}
+	
+	std::shared_ptr<Layer> LayerManagement::Current() {
+		return *mCurrentLayerItr;
+	}
+	
+	void LayerManagement::CreateLayer(std::string_view factoryName, ParameterSet layerMetadata) {
+		std::string factoryNameStr;
+
+		layerMetadata.GetParameterValue<std::string>("LayerFactory", factoryNameStr);
+
+		if (mLayerFactories.contains(factoryNameStr)) {
+			AddLayer(mLayerFactories[factoryNameStr]->CreateLayer(layerMetadata));
+		}
 	}
 }

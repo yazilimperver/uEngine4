@@ -28,7 +28,7 @@ void SdlPainterSample::Initialize(SdlApplication& sdlApplication) {
 	mPainter.RegisterFont("FreeSans_ItalicBold_12", ASSET_ROOT_PATH + "FreeSans.ttf", 12, Painter::FontStyle::Bold | Painter::FontStyle::Italic);
 
 	// Sprite'i yukleyelim
-	dynamic_cast<AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
+	dynamic_cast<infra::AssetRepository&>(Game::GetAssetService()).AssignRenderer(mRenderer);
 	Game::GetAssetService().RegisterLoader(std::move(std::make_unique<SdlTextureLoader>()));
 	SpriteParameter params{ ASSET_ROOT_PATH + "sprite.png", "dragon", 350, 100, SDL_FLIP_NONE };
 	mSampleSprite = std::make_unique<Sprite>(params);
@@ -93,16 +93,16 @@ void SdlPainterSample::Display(double tickTimeInMsec) {
 
 	mPainter.AssignPen(Pen{ Color::Black });
 	mPainter.SetActiveBasicFont("Font_7_13_Bold");
-	mPainter.BasicText(screenCenter + Point2d{ -300, -240 }, "[Basit] Merhaba Dunya_Siyah");
+	mPainter.SimpleText(screenCenter + Point2d{ -300, -240 }, "[Basit] Merhaba Dunya_Siyah");
 
 	mPainter.SetActiveBasicFont("Font_10_20");
 	std::string text{ "Merhaba Dunya_Merkez" };
 	auto fontSizeInfo = mPainter.ActiveBasicFontSizeInfo("Font_10_20");
-	mPainter.BasicText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "[Basit] Merhaba Dunya_Merkez");
+	mPainter.SimpleText(screenCenter - Point2d{ text.size() /2 * fontSizeInfo.first, fontSizeInfo.second/2 }, "[Basit] Merhaba Dunya_Merkez");
 
 	mPainter.SetActiveBasicFont("Font_7_13_Bold");
 	mPainter.AssignPen(Pen{ Color::Red });
-	mPainter.BasicText(screenCenter + Point2d{ +110, +220 }, "[Basit] Merhaba Dunya_Kirmazi");
+	mPainter.SimpleText(screenCenter + Point2d{ +110, +220 }, "[Basit] Merhaba Dunya_Kirmazi");
 
 	mPainter.SetActiveFont("FreeSans_Normal_20");
 	mPainter.AssignPen(Pen{ Color::Green });
