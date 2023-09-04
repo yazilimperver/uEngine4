@@ -26,7 +26,8 @@ public:
     static const Color Green;       
     static const Color Blue;        
     static const Color Yellow;      
-    static const Color Magenta;     
+    static const Color Magenta;
+    static const Color Orange;
     static const Color Cyan;        
     static const Color Transparent; 
 
@@ -157,6 +158,7 @@ inline constexpr Color Color::White(255, 255, 255);
 inline constexpr Color Color::Red(255, 0, 0);
 inline constexpr Color Color::Green(0, 255, 0);
 inline constexpr Color Color::Blue(0, 0, 255);
+inline constexpr Color Color::Orange(255, 128, 0);
 inline constexpr Color Color::Yellow(255, 255, 0);
 inline constexpr Color Color::Magenta(255, 0, 255);
 inline constexpr Color Color::Cyan(0, 255, 255);

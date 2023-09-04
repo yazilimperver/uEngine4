@@ -21,6 +21,7 @@ namespace gl {
 		Pen();
 		explicit Pen(const Color& color);
 
+        // TODO: Argumanlari strok ile benzer sira yapalim
 		Pen(PenStyle penStyle,
 			const Color& color,
 			float width,
@@ -53,7 +54,6 @@ namespace gl {
 		PenStyle mStrokePenStyle;
 		float mWidth;
 		float mStrokeWidth;
-		float mStrokePenWidth;
 		Color mColor;
 		Color mStrokeColor;
     };

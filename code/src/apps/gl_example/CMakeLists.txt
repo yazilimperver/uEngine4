@@ -8,14 +8,21 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-list(APPEND CMAKE_PREFIX_PATH "D:/git_repos/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/glew-2.2.0")
+list(APPEND CMAKE_PREFIX_PATH "${EXT_INCLUDE_FOLDER}/ext/sdl2_libraries/glew-2.2.0")
 find_package(GLEW REQUIRED)
 find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
 find_package(OpenGL REQUIRED)
 
+# Asset dizinini ayarlayalim
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/gl_example_assets/)
+
+configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
+             "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
+
 # Baslik dosyalari
 set(HEADER_FILES
+    configuration.h
 	gl_example.h
 	gl_graphic_app.h
 )

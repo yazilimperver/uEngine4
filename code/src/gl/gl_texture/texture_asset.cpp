@@ -223,7 +223,7 @@ namespace gl {
         return mTextureInfo.IsEverBinded;
     }
 
-    void TextureAsset::BindTexture() { 
+    void TextureAsset::BindTexture() const { 
         if (true == this->IsValid()) {
             // a new texture is going to be binded for the first time
             if (false == mTextureInfo.IsEverBinded) {

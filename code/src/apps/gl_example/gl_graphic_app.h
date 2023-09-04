@@ -29,9 +29,12 @@ public:
 	virtual void Display(double tickTimeInMsec) override;
 	virtual void Finalize() override;
 protected:
+    bool mEnableRotatingCubeExample{false};
 	SDL_Renderer* mRenderer{ nullptr };
+    SdlApplication* mSDLApplication{ nullptr };
+    std::optional<AssetHandle> mTextureAssetHandle;
 	WindowParameter mParameters;
-	gl::GLBasicPainter mBasicPainter;
+	gl::GLBasicPainter mPainter;
 	virtual void KeyboardEvent(KeyboardCodes key, int32_t scancode, InputActions action, KeyboardModifier mods) override;
 };
 

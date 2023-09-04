@@ -157,10 +157,6 @@ namespace gl {
                 isLoadSuccess = false;
             }
 
-            glBindTexture(GL_TEXTURE_2D, TextureID());
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
-
             // Bosluk degiskenlerini ayarlayalim
             mSpace      = static_cast<float>(cellW / 2.0F);
             mNewLine    = static_cast<float>(aBottom - top);
@@ -289,10 +285,6 @@ namespace gl {
                     spdlog::error("Unable to create texture from generated bitmap font!\n");
                     error = 0xA2;
                 }
-                
-                glBindTexture(GL_TEXTURE_2D, TextureID());
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
-                glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 
                 // Bosluk degiskenlerini ayarlayalim
                 mSpace = static_cast<float>(cellW / 2.0F);
@@ -342,7 +334,7 @@ namespace gl {
             glBindBuffer(GL_ARRAY_BUFFER, mVertexDataBuffer);
             glTexCoordPointer(2, GL_FLOAT, sizeof(VertexData2D), (GLvoid*)offsetof(VertexData2D, TexCoord));
             glVertexPointer(2, GL_FLOAT, sizeof(VertexData2D), (GLvoid*)offsetof(VertexData2D, Position));
-
+          
             for (int32_t i = 0; i < text.length(); ++i) {
                 // Bosluk
                 if (text[i] == ' ') {
@@ -368,7 +360,6 @@ namespace gl {
             }
 
             // GL cizim bufferlarini ve dokuyu sifirlayalim
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
             glBindBuffer(GL_ARRAY_BUFFER, 0);
             glBindTexture(GL_TEXTURE_2D, 0);
             glDisable(GL_TEXTURE_2D);

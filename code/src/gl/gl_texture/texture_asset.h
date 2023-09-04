@@ -55,7 +55,6 @@ namespace gl {
         bool IsValid() const;
 
         uint32_t GetOpenGLTextureId() const;
-        TextureAssetHandle GetTextureHandle();
         virtual const infra::AssetInfo& Info() const override;
         infra::AssetInfo& InfoRef();
 
@@ -64,14 +63,14 @@ namespace gl {
 
         //! Bind texture to opengl
         bool IsTextureBinded();
-        void BindTexture();
+        void BindTexture() const;
 
     protected:
 
         infra::AssetInfo mInfo;
 
-        //! Ortak kullanilabilecek havuzdan alinacak doku bilgisi
-        TextureInfo mTextureInfo;
+        //! Ortak kullanilabilecek havuzdan alinacak doku bilgisi!  
+        mutable TextureInfo mTextureInfo;
 
         //! Raw image data
         std::vector<uint8_t> mRawData;

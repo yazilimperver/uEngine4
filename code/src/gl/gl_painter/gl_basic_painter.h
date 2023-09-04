@@ -32,115 +32,113 @@ class Point;
 using Vector2f = glm::tvec2<float>;
 
 namespace gl {
-	class SimpleGeometry;
-	class TextureAsset;
-	class GLFont;
+    class SimpleGeometry;
+    class TextureAsset;
+    class GLFont;
 
-	class GLBasicPainter {
-	public:
-		/** @brief   GL Painter ilklendirmeleri icin kullanilacak API */
-		virtual void InitializePainter();
+    class GLBasicPainter {
+    public:
+        /** @brief   GL Painter ilklendirmeleri icin kullanilacak API */
+        virtual void InitializePainter();
 
-		/** @brief   OpenGL cizimi baslangic/son kisimlari
+        /** @brief   OpenGL cizimi baslangic/son kisimlari
                      Bir takim state ayarlamalari burada yapiliyor*/
-		void Begin();
-		void End();
+        void Begin();
+        void End();
 
-		/** @brief   Temel OpenGL ayarlamalarina iliskin API */
-        void SetAliasingMode(AliasMode mode);
-		void SetDepthTest(bool enableStatus);
-		void SetBackgroundColor(const Color& color);
-		void SetPen(const Pen& pen);
-		void SetBrush(const Brush& brush);
-		
-		/** @brief   Ortografik projeksiyon ayarlari */
+        /** @brief   Temel OpenGL ayarlamalarina iliskin API */
+        void SetDepthTest(bool enableStatus);
+        void SetBackgroundColor(const Color& color);
+        void AssignPen(const Pen& pen);
+        void AssignBrush(const Brush& brush);
+        
+        /** @brief   Ortografik projeksiyon ayarlari */
         void SetDisplayExtent(double left, double right, double bottom, double top);
-		void SetOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
-
-		
+        void SetOrtho(double left, double right, double bottom, double top, double zNear, double zFar);
+        
         /** @brief   OpenGL Painter transformasyon API'si */
         void Rotate(float rotation);
-		void Translate(float tx, float ty);
-		void Translate(const glm::vec2& translation);
-		void Scale(float sx, float sy);
-		void ResetTransform();
-		void SaveState();
-		void RestoreState();
+        void Translate(float tx, float ty);
+        void Translate(const glm::vec2& translation);
+        void Scale(float sx, float sy);
+        void ResetTransform();
+        void SaveState();
+        void RestoreState();
 
-		/** @brief   Temel geometri cizim API'leri */
+        /** @brief   Temel geometri cizim API'leri */
         void DrawLine(const Line& line);
-		void DrawPoint(const Point& point);
-		void DrawPoint(const glm::vec2& point);
-		void DrawRect(const infra::Rectangle<float>& rect);
-		void DrawPolyline(infra::Polygon& polygon, bool isLoop = false);
-		void DrawPolygon(infra::Polygon& polygon);
-		void DrawConcavePolygon(infra::Polygon& polygon);
-		void DrawEllipse(const Point& center, float rx, float ry);
-		
-		/** @brief   Stencil API'leri */
+        void DrawPoint(const Point& point);
+        void DrawPoint(const glm::vec2& point);
+        void DrawRectangle(const infra::Rectangle<float>& rect);
+        void DrawPolyline(infra::Polygon& polygon, bool isLoop = false);
+        void DrawPolygon(infra::Polygon& polygon);
+        void DrawConcavePolygon(infra::Polygon& polygon);
+        void DrawEllipse(const Point& center, float rx, float ry);
+        
+        /** @brief   Stencil API'leri */
         void BeginClippingArea();
-		void EndClippingArea();
-		void ResetClippingArea();
+        void EndClippingArea();
+        void ResetClippingArea();
 
-		/** @brief   Font API'leri */
+        /** @brief   Font API'leri */
         bool SetActiveFont(std::string_view fontLabel);
         bool RegisterFont(std::string_view fontLabel, std::string_view fontPath, uint32_t size = 12);
 
         /** @brief Basit metin cizmi API'si */
         void SimpleText(const glm::vec2& point, std::string_view text);
 
-		/** @brief   Doku cizim API'leri */
-        void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height, const Color& color = Color(Color::White));
-		void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height, float* textureCoordinates, const Color& color = Color(Color::White));
-		
+        /** @brief   Doku cizim API'leri */
+        void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height);
+        void DrawTexture(const gl::TextureAsset* texture, const Vector2f& centerPos, float width, float height, float* textureCoordinates);
+        
         /** @brief   Parlaklik API'si*/
         void SetBrightness(float brightness);
 
-		/** @brief   CBS benzeri jenerik geometri cizimleri icin kullanilacak API */
+        /** @brief   CBS benzeri jenerik geometri cizimleri icin kullanilacak API */
         virtual void DrawGeometry(const SimpleGeometry& geometry);
-	protected:
-		/** @brief   Renk atama API'si*/
-		void SetColor(const Color& color);
+    protected:
+        /** @brief   Renk atama API'si*/
+        void SetColor(const Color& color);
 
-		/** @brief   Cember geometri ilklendirme */
-		void InitializeCircleGeometry();
-		void SetPenParameters(bool isStroke) const;
+        /** @brief   Cember geometri ilklendirme */
+        void InitializeCircleGeometry();
+        void SetPenParameters(bool isStroke) const;
 
         /** @brief Temel font bilgileri */
         std::string mActiveFontLabel{ "Default" };
         std::shared_ptr<GLFont> mActiveFontInstance{ nullptr };
         std::unordered_map<std::string, std::shared_ptr<GLFont>> mFonts;
 
-		/** @brief   En son aktif olan doku tanimlayicisi */
-		uint32_t mLastBindedTextureId;
+        /** @brief   En son aktif olan doku tanimlayicisi */
+        uint32_t mLastBindedTextureId;
 
-		/** @brief   Mevcut aliasing durumu */
-		gl::AliasMode mAliasMode;
+        /** @brief   Painter ilklendirme durumu */
+        bool mIsInitialized;
 
-		/** @brief   Painter ilklendirme durumu */
-		bool mIsInitialized;
+        /** @brief   Onceden hesaplanan cember geometrisi */
+        infra::Polygon mCircleGeometry;
 
-		/** @brief   Onceden hesaplanan cember geometrisi */
-		infra::Polygon mCircleGeometry;
+        /** @brief   Aktif kalem */
+        Pen mActivePen;
 
-		/** @brief   Aktif kalem */
-		Pen mActivePen;
+        /** @brief   Aktif firca */
+        Brush mActiveBrush;
 
-		/** @brief   Aktif firca */
-		Brush mActiveBrush;
+        /** @brief   Arka plan rengi */
+        Color mBackgroundColor;
 
-		/** @brief   Arka plan rengi */
-		Color mBackgroundColor;
-
-		/** @brief   Son atanan parlaklik ekran faktoru [0.0 to 2.0] */
+        /** @brief   Son atanan parlaklik ekran faktoru [0.0 to 2.0] */
         float mBrightness;
 
-		/** @brief   Son atanan stencil degeri */
-		uint32_t mCurrentStencilValue;
+        /** @brief   Son atanan stencil degeri */
+        uint32_t mCurrentStencilValue;
+
+        /** @brief   Surucuye gore cizgi genislik sinirlarini kontrol edelim[ 2] */
+        float mLineWidthRange[2];
     };
 }
 
-#endif	// INC_GL_BASIC_PAINTER_H
+#endif    // INC_GL_BASIC_PAINTER_H
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

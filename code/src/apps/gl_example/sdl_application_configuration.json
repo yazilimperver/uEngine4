@@ -1,8 +1,8 @@
 {
   "Object": {
     "Title": "GL Example",
-    "Width": 1280,
-    "Height": 720,
+    "Width": 640,
+    "Height": 480,
     "Top": 50,
     "Left": 50,
     "ClearColor": {

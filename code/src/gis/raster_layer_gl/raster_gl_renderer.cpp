@@ -63,8 +63,8 @@ void gis::RasterGLRenderer ::DisplayGeometry() {
                 static_cast<float>(mTileSize) };
 
             if (true == mEnableDebugInfo) {
-                mGLPainter->SetPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Blue, 3 });
-                mGLPainter->DrawRect(tileRect);
+                mGLPainter->AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Blue, 3 });
+                mGLPainter->DrawRectangle(tileRect);
             }
 
             gis::TileId tileToDisplay{ googleTileX, googleTileY, zoomLevel };
@@ -85,7 +85,7 @@ void gis::RasterGLRenderer ::DisplayGeometry() {
                 char tileStr[128];
                 sprintf(tileStr, "GGL:<%d, %d>", googleTileX, googleTileY);
                 
-                mGLPainter->SetPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Red, 3 });
+                mGLPainter->AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Red, 3 });
                 mGLPainter->SimpleText({ tileRect.Left + mTileSize * 0.25, tileRect.Top + mTileSize * 0.45 }, tileStr);
             }
 

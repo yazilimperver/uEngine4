@@ -14,7 +14,7 @@ namespace gl {
 		, mStyleFactor(styleFactor)
 		, mStrokeColor(strokeColor)
 		, mStrokePenStyle(strokeStyle)
-		, mStrokePenWidth(strokeWidth)	{
+		, mStrokeWidth(strokeWidth)	{
 	}
 
 	Pen::Pen()
@@ -23,7 +23,7 @@ namespace gl {
 		, mColor(Color::Black)
 		, mStyleFactor(1)
 		, mStrokePenStyle(PenStyle::SolidLine)
-		, mStrokePenWidth(0.0F)
+		, mStrokeWidth(0.0F)
 		, mStrokeColor(Color::Black)	{
 	}
 
@@ -32,7 +32,7 @@ namespace gl {
 		, mPenStyle(PenStyle::SolidLine)
 		, mWidth(1.0F)
 		, mStrokePenStyle(PenStyle::SolidLine)
-		, mStrokePenWidth(0.0F)
+		, mStrokeWidth(0.0F)
 		, mStrokeColor(Color::Black)	{
 	}
 
@@ -63,7 +63,7 @@ namespace gl {
 
 	float Pen::GetWidth(bool isStroke) const {
 		if (true == isStroke) {
-			return mStrokePenWidth;
+			return mStrokeWidth;
 		}
 		else {
 			return mWidth;
@@ -72,7 +72,7 @@ namespace gl {
 
 	void Pen::SetWidth(float width, bool isStroke) {
 		if (true == isStroke) {
-			mStrokePenWidth = width;
+			mStrokeWidth = width;
 		}
 		else {
 			mWidth = width;
@@ -107,7 +107,7 @@ namespace gl {
 			(mWidth == rhs.mWidth) &&
 			(mColor == rhs.mColor) &&
 			(mStrokePenStyle == rhs.mStrokePenStyle) &&
-			(mStrokePenWidth == rhs.mStrokePenWidth) &&
+			(mStrokeWidth == rhs.mStrokeWidth) &&
 			(mStrokeColor == rhs.mStrokeColor));
 	}
 
