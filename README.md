@@ -19,6 +19,7 @@ Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave k
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
 | ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
+| ❌ | Ext kütüphaneler için CMake konfigürasyon dosyalarının hazırlanması. | Yüksek | 
 | ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
 | ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
 | ❌ | Ext kütüphaneleri için konfigürasyon dosyalarının oluşturulması ve betiklerin buna göre güncellenmesi.  | Orta | 
@@ -32,7 +33,7 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ❌ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
+| ✔ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
 | ✔ | 3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması.  | Yüksek | 
 | ✔ | Android için basit bir uygulama hazırlanması.  | Orta | 
 | ✔ | Örnekler arasında kolay geçiş sağlanması.  | Orta | 
@@ -112,8 +113,10 @@ Eğer windows ya da android için bu kütüphaneyi kullanmayı planlıyorsanız.
 Vs2022 projesi içerisinde Android için kullanmanız için hazır bir proje de bulunmakta. Henüz, örneği çok detaylandıramadım ama meraklılar için faydalı bir ilk basamak olacağını düşünüyorum.
 
 ## Örnekler
+İnşallah zamanla daha fazla örnek olacak ama şu an için aşağıdaki örnekler bulunmakta. 
 
-İnşallah zamanla daha fazla örnek olacak ama şu an için aşağıdaki örnekler bulunmakta. Bu örnekler "apps/sdl_example" altında bulunmakta:
+### ** SDL Example **
+Bu örneğe ilişkin dosyalar "apps/sdl_example" altında bulunmakta:
 * **[Simple Graphic App]** - SDL2 penceresi ve temel çizimlerin gösterilmesi
 * **[Input Sample]** - SdlApplication sınıfı üzerinden klavye girdilerinin ve benzeri olay dinleyicilerinin nasıl kullanılacağına yönelik bir örnek
 * **[Texture Sample]** - SDL2 doku mekanizmasının kullanılmasına yönelilk bir örnek
@@ -121,6 +124,9 @@ Vs2022 projesi içerisinde Android için kullanmanız için hazır bir proje de 
 * **[Sprite Sample]** - Sprite sınıfının kullanımına ilişkin bir örnek
 * **[Tile Map Sample]** - Tiled uygulamasının .json uzantılı çıktılarının görselleştirilmesi için kullanılabilecek TileMap sınıflarının kullanımına yönelik yine kapsamlı bir örnek
 * **[Spritesheet Sample]** - Animatik gösterimler yapabilmenize olanak sağlayacak olan basic_engine::SpriteSheet sınıfına ilişkin örnek
+
+### ** GL Example **
+Bu örneğe ilişkin dosyalar "apps/gl_example" dizini altında bulunmaktadır. Bu proje ile temelde BasicGLPainter sınıfının kabiliyetleri gösterilmektedir. 
 
 Bu örneklerin aslında her bir bir ya da bir kaç yazılık içerik barındırmakta ama pek acelemiz yok açıkçası. Sayfamdaki yazılar ile bu örnekleri de detaylı irdeliyor olacağız.
 
