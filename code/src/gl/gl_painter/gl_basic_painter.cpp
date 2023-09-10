@@ -90,16 +90,20 @@ namespace gl {
     }
 
     void GLBasicPainter::BeginClippingArea() {
+        glColorMask(GL_FALSE, GL_FALSE, GL_FALSE, GL_FALSE);
+        glDepthMask(GL_FALSE);
         glEnable(GL_STENCIL_TEST);
-        glStencilFunc(GL_NOTEQUAL, mCurrentStencilValue, 0xFF);
+        glStencilFunc(GL_ALWAYS, mCurrentStencilValue, ~0);
         glStencilMask(0xFF);
         glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
     }
 
     void GLBasicPainter::EndClippingArea()
     {
-        glStencilFunc(GL_EQUAL, mCurrentStencilValue, 0xFF);
-        mCurrentStencilValue = mCurrentStencilValue << 1;
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glDepthMask(GL_TRUE);
+        glStencilFunc(GL_NOTEQUAL, mCurrentStencilValue, ~0);
+        glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
     }
 
     void GLBasicPainter::ResetClippingArea() {

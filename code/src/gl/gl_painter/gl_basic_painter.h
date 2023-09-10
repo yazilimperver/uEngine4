@@ -96,6 +96,9 @@ namespace gl {
 
         /** @brief   CBS benzeri jenerik geometri cizimleri icin kullanilacak API */
         virtual void DrawGeometry(const SimpleGeometry& geometry);
+
+        /** @brief   Son atanan stencil degeri */
+        uint32_t mCurrentStencilValue{ 1 };
     protected:
         /** @brief   Renk atama API'si*/
         void SetColor(const Color& color);
@@ -129,9 +132,6 @@ namespace gl {
 
         /** @brief   Son atanan parlaklik ekran faktoru [0.0 to 2.0] */
         float mBrightness;
-
-        /** @brief   Son atanan stencil degeri */
-        uint32_t mCurrentStencilValue;
 
         /** @brief   Surucuye gore cizgi genislik sinirlarini kontrol edelim[ 2] */
         float mLineWidthRange[2];

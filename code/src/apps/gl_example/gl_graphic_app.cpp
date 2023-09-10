@@ -128,6 +128,13 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 1 });
     mPainter.AssignBrush(Brush{ Color::Yellow });
     mPainter.DrawRectangle(infra::Rectangle<float>{ screenCenter.x + 100 , screenCenter.y + 50, 100, 50 });
+    
+    // Delikli bir cember de cizebilir mi? Elbette
+    mPainter.BeginClippingArea();
+    mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y - 150 }, 50, 50);
+    mPainter.EndClippingArea();
+    mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y - 150 }, 100, 100);
+    mPainter.ResetClippingArea();
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3, 1, Color::Black, PenStyle::SolidLine, 7 });
     mPainter.AssignBrush(Brush{ Color::Transparent });

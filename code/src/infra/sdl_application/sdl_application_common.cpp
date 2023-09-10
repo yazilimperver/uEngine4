@@ -216,6 +216,7 @@ void SdlApplication::InitializeWindows() {
         // Turn on double buffering with a 24bit Z buffer.
         // May need to change this to 16 or 32
         SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
+        SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 1);
         SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
 
         // Create sdl window
