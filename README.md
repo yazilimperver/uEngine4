@@ -19,6 +19,7 @@ Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave k
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
 | ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
+| ❌ | Ext kütüphaneler için CMake konfigürasyon dosyalarının hazırlanması. | Yüksek | 
 | ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
 | ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
 | ❌ | Ext kütüphaneleri için konfigürasyon dosyalarının oluşturulması ve betiklerin buna göre güncellenmesi.  | Orta | 
@@ -32,7 +33,7 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
-| ❌ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
+| ✔ | Asset yönetim mantığının refaktör edilmesi ve yükleyici sınıfların çeşitliliğinin arttırılması.  | Yüksek | 
 | ✔ | 3. parti bileşenlerin linux ve windows için otomatik olarak çekilerek oluşturulması.  | Yüksek | 
 | ✔ | Android için basit bir uygulama hazırlanması.  | Orta | 
 | ✔ | Örnekler arasında kolay geçiş sağlanması.  | Orta | 
