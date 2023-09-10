@@ -31,7 +31,7 @@ namespace gl {
     }
 
     void GLBasicPainter::InitializePainter() {
-        this->InitializeCircleGeometry();
+        InitializeCircleGeometry();
 
         // Blending ayarlarini yapalim
         glEnable(GL_BLEND);
@@ -42,8 +42,7 @@ namespace gl {
         glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
         glEnable(GL_LINE_SMOOTH);
 
-        // Polygon smooth fill durumlari icin cizgileri gorunur kilar
-        // TODO: Kullanilan yerlerde blending'i kapatabiliriz
+        // Polygon smooth fill durumlari icin cizgileri gorunur kilar TODO: Kullanilan yerlerde blending'i kapatabiliriz
         glDisable(GL_POLYGON_SMOOTH);
 
         // Stippling oruntulerini aktiflestirelim (line/fill styles)
@@ -418,6 +417,9 @@ namespace gl {
         float Right = Left + width;
         float Top = centerPos.y - height * 0.5F;
         float Bottom = Top + height;
+
+        // Oncelikle bu resim yuklenmemis olma ihtimaline karsi GPU bellegine alalim
+        texture->BindTexture();
 
         glEnable(GL_TEXTURE_2D);
         glBindTexture(GL_TEXTURE_2D, texture->GetOpenGLTextureId());

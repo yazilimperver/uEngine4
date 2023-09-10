@@ -206,8 +206,7 @@ void SdlApplication::InitializeWindows() {
         mAppWiseSettings.UpdateParameterValue("SdlMinorVersion", mSdlParameters.MinorVersion);
         mAppWiseSettings.UpdateParameterValue("IsGLEnabled", mSdlParameters.IsGLEnabled);
 
-        // Request opengl context
-        //SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
+        // OpenGL context'ini SDL'den alalim, bunun icin de OPENGL surum bilgilerini geciriyoruz
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, mSdlParameters.MajorVersion);

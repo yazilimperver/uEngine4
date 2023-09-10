@@ -38,10 +38,20 @@ void GLGraphicApp::Initialize(SdlApplication& sdlApplication) {
     mPainter.InitializePainter();
     mPainter.SetDisplayExtent(0, mParameters.Width, mParameters.Height, 0);
 
+    // Doku yukleme icin ilgili yukleyicinin tanimlayicisini alalim
+    // Alternatif 1
+    mTextureAssetHandle = sdlApplication.AssetService().LoadAsset("STBImageLoader", ASSET_ROOT_PATH + "sprite.png", "dragon");
+    
+    /* Alternatif 2
     auto loaderHandle = sdlApplication.AssetService().LoaderHandle("STBImageLoader");
 
     if (loaderHandle.has_value()) {
         mTextureAssetHandle = sdlApplication.AssetService().LoadAsset(loaderHandle.value(), ASSET_ROOT_PATH + "sprite.png", "dragon");
+    }
+    */
+
+    if (!mTextureAssetHandle.has_value()) {
+        spdlog::error("The provided asset load error!");
     }
 
     sdlApplication.RegisterEventListener(static_cast<KeyboardEventListener*>(this));    
@@ -91,8 +101,7 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
     
     if (mTextureAssetHandle.has_value()) {
         auto textureAsset = std::static_pointer_cast<gl::TextureAsset>(mSDLApplication->AssetService().SharedAsset(mTextureAssetHandle.value()));
-        textureAsset->BindTexture();
-
+        
         // Resmi renklendirmek icin :)
         mPainter.AssignBrush(Brush{ Color::White });
         mPainter.DrawTexture(textureAsset.get(), Vector2f{100, 420}, 120, 120);
@@ -153,12 +162,12 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
     mPainter.SimpleText(screenCenter + glm::vec2{ -300, -240 }, "[Text] Merhaba Dunya_Siyah");
     
     mPainter.SetActiveFont("FreeSans_20");
-    std::string text{ "Merhaba Dunya_Merkez" };
+    std::string text{ "[Text] Merhaba Dunya_Merkez" };
     mPainter.AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Blue, 2 });
-    mPainter.SimpleText(screenCenter - glm::vec2{ text.size() / 2 * 10, 10/ 2 }, "[Text] Merhaba Dunya_Merkez");
+    mPainter.SimpleText(screenCenter - glm::vec2{ text.size() / 2 * 10, 10 / 2 }, text);
         
     mPainter.SetActiveFont("FreeSans_13");
-    mPainter.AssignPen(Pen{ gl::PenStyle::SolidLine, Color::Blue, 1 });
+    mPainter.AssignPen(Pen{ gl::PenStyle::SolidLine, Color::Red, 1 });
     mPainter.SimpleText(screenCenter + glm::vec2{ +110, +220 }, "[Text] Merhaba Dunya_Kirmazi");
 
     mPainter.End();
