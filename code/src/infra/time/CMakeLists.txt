@@ -10,6 +10,8 @@ set(HEADER_FILES
 	sleep_util.h
 	stop_watch.h
 	timestamp.h
+    timer.h
+    threaded_timer.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -21,6 +23,8 @@ set(SOURCE_FILES
 	sleep_util.cpp
     stop_watch.cpp
     timestamp.cpp
+    timer.cpp
+    threaded_timer.cpp
  )
 
 # Kaynak dosya grubu (VS altindaki filtre gibi)

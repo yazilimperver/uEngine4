@@ -59,55 +59,124 @@ void GLGraphicApp::Initialize(SdlApplication& sdlApplication) {
 void GLGraphicApp::Update(double tickTimeInMsec) {
 }
 
-void GLGraphicApp::Display(double tickTimeInMsec) {
 
+void GLGraphicApp::Display(double tickTimeInMsec) {
     mPainter.Begin();
-    constexpr glm::vec2 screenCenter{ 320, 240 };
+    //TransformationExample();
+    //StencilExample();
+    PrimitivesExample();   
+    mPainter.End();
+}
+
+void GLGraphicApp::TransformationExample() {
+    // Ekranin ortasi
+    glm::vec2 screenCenter{ mParameters.Width / 2, mParameters.Height / 2 };
+
+    // Donusumleri sifirliyoruz (sol ust 0, 0 olacak sekilde)
+    mPainter.ResetTransform();
+
+    // Mevcut donusum durumunu/matrisini sakla
+    mPainter.SaveState();
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 2 });
+    mPainter.AssignBrush(Brush{ Color::Green });
+
+    // Donme animasyonu bilesenleri
+    static float rotationInDegree = 0;
+    rotationInDegree += 0.01f;
+    rotationInDegree = fmod(rotationInDegree, 360.0f);
+
+    // Boyutlandirma animasyonu bilesenleri
+    static float scale = 1.0;
+    static float increment = 0.0001F;
+    scale += increment;
+    if (scale > 2.0F || scale < -2.0F)
+        increment *= (-1);
+
+    // Asagidakilerin siralamasinia degistirerek nasil bir etkisi oldugunu gorebilirsin
+    mPainter.Translate(glm::vec2{screenCenter.x, screenCenter.y});
+    mPainter.Rotate(rotationInDegree);
+    mPainter.Scale(scale, scale);
+
+    // Asagida da cizdirdigimiz dikdortgen mevcut
+    mPainter.DrawRectangle({ -50, -50, 100, 100 });
+
+    //  Son saklanan donusum durumu/matrisini geri yukle
+    mPainter.RestoreState();
+}
+
+void GLGraphicApp::StencilExample() {
+    // Donusumleri sifirliyoruz (sol ust 0, 0 olacak sekilde)
+    mPainter.ResetTransform();
+
+    // Ekranin ortasi
+    glm::vec2 screenCenter{ mParameters.Width / 2, mParameters.Height / 2 };
+
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 3 });
+    mPainter.AssignBrush(Brush{ Color::Yellow });
+
+    // Ortasinda cember deligi olan bir dikdortgen cizebilir miyiz? Elbette
+    // Once maskeleyecimiz kismi cizdiriyoruz
+    mPainter.BeginClippingArea();
+    mPainter.DrawEllipse(glm::vec2{ screenCenter.x, screenCenter.y}, 50, 50);
+    mPainter.EndClippingArea();
+
+    // Sonra maskelemek icin olan cizimi yapiyoruz
+    mPainter.AssignBrush(Brush{ Color::Green });
+    mPainter.Translate(glm::vec2{screenCenter.x, screenCenter.y});
+    mPainter.DrawRectangle({ -100, -100, 200, 200 });
+    mPainter.ResetClippingArea();
+
+    //  Son saklanan donusum durumu/matrisini geri yukle
+    mPainter.RestoreState();
+}
+
+void GLGraphicApp::PrimitivesExample() {
+    glm::vec2 screenCenter{ mParameters.Width / 2, mParameters.Height / 2 };
 
     mPainter.ResetTransform();
     mPainter.SaveState();
 
-        static float rotationInDegree = 0;
-        rotationInDegree += 0.01f;
-        rotationInDegree = fmod(rotationInDegree, 360.0f);
+    static float rotationInDegree = 0;
+    rotationInDegree += 0.01f;
+    rotationInDegree = fmod(rotationInDegree, 360.0f);
 
-        float winWidth{ static_cast<float>(mParameters.Width) };
-        float winHeight{ static_cast<float>(mParameters.Height) };
+    float winWidth{ static_cast<float>(mParameters.Width) };
+    float winHeight{ static_cast<float>(mParameters.Height) };
 
-        constexpr float radius = 50.0f;
-        mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 2 });
-        mPainter.AssignBrush(Brush{ Color::Green });
-        mPainter.DrawEllipse(Point{ screenCenter.x - winWidth / 2.f, screenCenter.y - winHeight / 2.f }, radius, radius);
+    constexpr float radius = 50.0f;
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 2 });
+    mPainter.AssignBrush(Brush{ Color::Green });
+    mPainter.DrawEllipse(Point{ screenCenter.x - winWidth / 2.f, screenCenter.y - winHeight / 2.f }, radius, radius);
 
-        mPainter.AssignBrush(Brush{Color::Orange, BrushStyle::HalfTonePattern});
-        mPainter.DrawEllipse(Point{ screenCenter.x - winWidth / 2.f, screenCenter.y + winHeight / 2.f }, radius, radius);
+    mPainter.AssignBrush(Brush{ Color::Orange, BrushStyle::HalfTonePattern });
+    mPainter.DrawEllipse(Point{ screenCenter.x - winWidth / 2.f, screenCenter.y + winHeight / 2.f }, radius, radius);
 
-        mPainter.AssignBrush(Brush{ Color::Red , BrushStyle::DensePattern });
-        mPainter.DrawEllipse(Point{ screenCenter.x + winWidth / 2.f, screenCenter.y + winHeight / 2.f }, radius, radius);
+    mPainter.AssignBrush(Brush{ Color::Red , BrushStyle::DensePattern });
+    mPainter.DrawEllipse(Point{ screenCenter.x + winWidth / 2.f, screenCenter.y + winHeight / 2.f }, radius, radius);
 
-        mPainter.AssignBrush(Brush{ Color::Blue, BrushStyle::CrossPattern});
-        mPainter.DrawEllipse(Point{ screenCenter.x + winWidth / 2.f, screenCenter.y - winHeight / 2.f }, radius, radius);
+    mPainter.AssignBrush(Brush{ Color::Blue, BrushStyle::CrossPattern });
+    mPainter.DrawEllipse(Point{ screenCenter.x + winWidth / 2.f, screenCenter.y - winHeight / 2.f }, radius, radius);
 
-        mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3 });
-        mPainter.AssignBrush(Brush{ Color::Blue, BrushStyle::DiagonalCrossPattern });
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3 });
+    mPainter.AssignBrush(Brush{ Color::Blue, BrushStyle::DiagonalCrossPattern });
 
-        mPainter.Translate(glm::vec2{screenCenter.x, screenCenter.y - 120 });
-        mPainter.SaveState();
-            mPainter.Rotate(rotationInDegree);
-            mPainter.DrawRectangle({ -50, -50, 100, 100 });
-        mPainter.RestoreState();
+    mPainter.Translate(glm::vec2{screenCenter.x, screenCenter.y - 120 });
+    mPainter.SaveState();
+    mPainter.Rotate(rotationInDegree);
+    mPainter.DrawRectangle({ -50, -50, 100, 100 });
+    mPainter.RestoreState();
 
     mPainter.RestoreState();
-    
+
     if (mTextureAssetHandle.has_value()) {
         auto textureAsset = std::static_pointer_cast<gl::TextureAsset>(mSDLApplication->AssetService().SharedAsset(mTextureAssetHandle.value()));
-        
+
         // Resmi renklendirmek icin :)
         mPainter.AssignBrush(Brush{ Color::White });
-        mPainter.DrawTexture(textureAsset.get(), Vector2f{100, 420}, 120, 120);
+        mPainter.DrawTexture(textureAsset.get(), Vector2f{ 100, 420 }, 120, 120);
     }
 
-    mPainter.AssignPen(Pen{PenStyle::SolidLine, Color::Black, 3});
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 3 });
     mPainter.AssignBrush(Brush{ Color::Magenta });
     mPainter.DrawEllipse(glm::vec2{ screenCenter.x, screenCenter.y }, 100, 50);
 
@@ -130,14 +199,14 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Blue, 1, 1, Color::Green, PenStyle::SolidLine, 15 });
     mPainter.DrawLine(Line{ screenCenter + glm::vec2{ -100, -80 }, screenCenter + glm::vec2{ 100, 50 - 80 } });
-    
+
     mPainter.AssignPen(Pen{ PenStyle::DotLine, Color::Yellow, 3, 1, Color::Black, PenStyle::SolidLine, 7 });
     mPainter.DrawLine(Line{ screenCenter + glm::vec2{ -100, -120 }, screenCenter + glm::vec2{ 100, 50 - 120 } });
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 1 });
     mPainter.AssignBrush(Brush{ Color::Yellow });
-    mPainter.DrawRectangle(infra::Rectangle<float>{ screenCenter.x + 100 , screenCenter.y + 50, 100, 50 });
-    
+    mPainter.DrawRectangle(infra::Rectangle<float>{ screenCenter.x + 100, screenCenter.y + 50, 100, 50 });
+
     // Delikli bir cember de cizebilir mi? Elbette
     mPainter.BeginClippingArea();
     mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y - 150 }, 50, 50);
@@ -147,7 +216,7 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3, 1, Color::Black, PenStyle::SolidLine, 7 });
     mPainter.AssignBrush(Brush{ Color::Transparent });
-    mPainter.DrawRectangle(infra::Rectangle<float>{ screenCenter.x + 100 , screenCenter.y + 150, 100, 50 });
+    mPainter.DrawRectangle(infra::Rectangle<float>{ screenCenter.x + 100, screenCenter.y + 150, 100, 50 });
 
     std::vector polygon = { glm::vec2{150, 250}, glm::vec2{200, 300}, glm::vec2{175, 350}, glm::vec2{125, 350}, glm::vec2{100, 300}, glm::vec2{150, 250} };
 
@@ -160,17 +229,15 @@ void GLGraphicApp::Display(double tickTimeInMsec) {
     mPainter.AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Black, 1 });
     mPainter.SetActiveFont("FreeSans_13");
     mPainter.SimpleText(screenCenter + glm::vec2{ -300, -240 }, "[Text] Merhaba Dunya_Siyah");
-    
+
     mPainter.SetActiveFont("FreeSans_20");
     std::string text{ "[Text] Merhaba Dunya_Merkez" };
     mPainter.AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Blue, 2 });
     mPainter.SimpleText(screenCenter - glm::vec2{ text.size() / 2 * 10, 10 / 2 }, text);
-        
+
     mPainter.SetActiveFont("FreeSans_13");
     mPainter.AssignPen(Pen{ gl::PenStyle::SolidLine, Color::Red, 1 });
     mPainter.SimpleText(screenCenter + glm::vec2{ +110, +220 }, "[Text] Merhaba Dunya_Kirmazi");
-
-    mPainter.End();
 }
 
 void GLGraphicApp::Finalize() {

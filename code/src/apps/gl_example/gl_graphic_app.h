@@ -26,9 +26,13 @@ class GLGraphicApp
 public:
 	virtual void Initialize(SdlApplication& sdlApplication) override;
 	virtual void Update(double tickTimeInMsec) override;
-	virtual void Display(double tickTimeInMsec) override;
+    virtual void Display(double tickTimeInMsec) override;
 	virtual void Finalize() override;
 protected:
+    void TransformationExample();
+    void StencilExample();
+    void PrimitivesExample();
+
     bool mEnableRotatingCubeExample{false};
 	SDL_Renderer* mRenderer{ nullptr };
     SdlApplication* mSDLApplication{ nullptr };

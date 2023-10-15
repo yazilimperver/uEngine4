@@ -16,6 +16,11 @@ public:
 
     void SetFPSParameters(double theTargetFps, uint32_t reportInterval);
 
+    /**
+     * @brief   Temel FPS sinirlamasinin kotarilmasindan sorumlu olan siniftir
+     * @returns Bir onceki frame zamani ve tick zaman toplami
+     */
+
     std::chrono::milliseconds FPSCheck();
 
     double GetCurrentFps() const;

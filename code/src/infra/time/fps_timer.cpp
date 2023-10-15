@@ -26,8 +26,7 @@ milliseconds FPSTimer::FPSCheck() {
 
 	mFrameEndTime = high_resolution_clock::now();
 
-	nanoseconds durat = mFrameEndTime - mFrameStartTime;
-	mFrameDuration = duration_cast<milliseconds>(durat);
+	mFrameDuration = duration_cast<milliseconds>(mFrameEndTime - mFrameStartTime);
 
 	if (true == mIsReportingEnabled) {
 		if ((mFrameEndTime - mLastReportTime) > mReportInterval) {

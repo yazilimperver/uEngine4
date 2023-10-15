@@ -4,8 +4,7 @@
 #include "gl_example.h"
 
 int main() {
-	GLExample sdlApp;
-
+    GLExample sdlApp;
 	sdlApp.Start();
 	 
 	return 0;
