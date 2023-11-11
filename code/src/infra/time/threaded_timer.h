@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file threaded_timer.h.
  * @date 7.03.2023
  * @author Yazilimperver
@@ -14,9 +14,17 @@
 class ThreadedTimer {
 public:
     virtual ~ThreadedTimer();
+    
+    //! @brief Milisaniye cinsinden verilen süre geçince function'ı çağıracak olan zamanlayıcı API'sidir
     void OneShot(auto function, int32_t delayInMsec);
+
+    //! @brief Milisaniye cinsinden verilen sürede bir function'ı çağıracak olan zamanlayıcı API'sidir
     void Periodic(auto function, int32_t intervalInMsec);
+    
+    //! @brief Zamanlayıcı threadini sonlandırmak için kullanılacak olan API'dir
     void Stop();
+
+    //! @brief Zamanlayıcı threadini sonlanmasını beklemek için kullanılacak olan API'dir
     void WaitForCompletion();
 
 protected:
@@ -24,54 +32,29 @@ protected:
     std::unique_ptr<std::thread> mThread{ nullptr };
 };
 
-ThreadedTimer::~ThreadedTimer() {
-    mActive.store(false);
 
-    if (nullptr != mThread) {
-        if (mThread->joinable()) {
-            mThread->join();
-        }
-    }
-}
+#endif	// INC_THREADED_TIMER_H
 
-void ThreadedTimer::OneShot(auto function, int32_t delayInMsec) {
-    mActive = true;
-    mThread = std::make_unique<std::thread>([=]() {
-        if (!mActive.load())
-            return;
-        SleepUtil::PreciseSleep(delayInMsec / 1000.0);
+/**
+Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]
 
-        if (!mActive.load())
-            return;
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-        function();
-    });
-}
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-void ThreadedTimer::Periodic(auto function, int32_t intervalInMsec) {
-    mActive = true;
-    mThread = std::make_unique<std::thread>([=]() {
-        while (mActive.load()) {
-            SleepUtil::PreciseSleep(intervalInMsec / 1000.0);
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+ */
 
-            if (!mActive.load())
-                return;
 
-            function();
-        }
-    });
-}
-
-void ThreadedTimer::Stop() {
-    mActive = false;
-}
-
-void ThreadedTimer::WaitForCompletion() {
-    if (nullptr != mThread) {
-        if (mThread->joinable()) {
-            mThread->join();
-        }
-    }
-}
-
-#endif // !THREADED_TIMER_H

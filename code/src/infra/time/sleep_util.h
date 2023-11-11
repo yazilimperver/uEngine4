@@ -13,7 +13,7 @@
 
 class SleepUtil {
 public:
-	/** @brief Windows platformuna ozel, hassas bekletme fonksiyonalitesi sunan bir metottur	 */
+	/** @brief Windows platformuna ozel, hassas bekletme (mikro saniye) sunan bir metottur	 */
 	static void USleep(int64_t sleepInUSec);
 
 	/** @brief Platform bagimsiz, hassas bekletme fonksiyonalitesi sunan fonksiyondur

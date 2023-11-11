@@ -18,32 +18,10 @@ class StoppableTimer {
 public:
 
     StoppableTimer() {}
-    ~StoppableTimer() {
-        Stop();
-    }
+    ~StoppableTimer();
 
-    void Start(std::chrono::milliseconds const& duration, std::function<void(void)> const& callback) {
-        // Restart gibi de cagirmak icin kullanalim
-        Stop();
-        mShouldStop = false;
-
-        mThread = std::thread([=]() {
-            auto lock = std::unique_lock<std::mutex>(mMutex);
-            mCV.wait_for(lock, duration, [this]() { return mShouldStop.load(); });
-
-            if (!mShouldStop)
-                callback();
-        });
-    }
-
-    void Stop()    {
-        mShouldStop = true;
-        mCV.notify_one();
-
-       if (mThread.joinable()) {
-            mThread.join();
-        }
-    }
+    void Start(std::chrono::milliseconds const& duration, std::function<void(void)> const& callback);
+    void Stop();
 
 private:
 

@@ -2,7 +2,7 @@
  * @file fps_timer.h.
  * @date 21.03.2022
  * @author Yazilimperver
- * @brief 
+ * @brief Temel FPS sinirlamasinin kotarilmasindan sorumlu olan siniftir
  * @remark Copyright (c) 2022, Check Bottom For Copyright Notice <yazilimpervergs@gmail.com>
  */
 #ifndef FPSTIMER_H__

@@ -9,9 +9,9 @@ set(HEADER_FILES
 	fps_timer.h
 	sleep_util.h
 	stop_watch.h
-	timestamp.h
-    timer.h
+    stoppable_timer.h
     threaded_timer.h
+	timestamp.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -19,11 +19,13 @@ source_group("Header Files" FILES ${HEADER_FILES})
 
 # Kaynak kod dosyalari
 set(SOURCE_FILES
+	chrono_util.cpp
     fps_timer.cpp
 	sleep_util.cpp
     stop_watch.cpp
+    stoppable_timer.cpp
+    threaded_timer.cpp
     timestamp.cpp
-    timer.cpp
     threaded_timer.cpp
  )
 
