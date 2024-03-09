@@ -117,7 +117,7 @@ void GLGraphicApp::StencilExample() {
     // Ortasinda cember deligi olan bir dikdortgen cizebilir miyiz? Elbette
     // Once maskeleyecimiz kismi cizdiriyoruz
     mPainter.BeginClippingArea();
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x, screenCenter.y}, 50, 50);
+    mPainter.DrawEllipse(Point(screenCenter.x, screenCenter.y), 50, 50);
     mPainter.EndClippingArea();
 
     // Sonra maskelemek icin olan cizimi yapiyoruz
@@ -178,15 +178,15 @@ void GLGraphicApp::PrimitivesExample() {
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 3 });
     mPainter.AssignBrush(Brush{ Color::Magenta });
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x, screenCenter.y }, 100, 50);
+    mPainter.DrawEllipse(Point{ screenCenter.x, screenCenter.y }, 100, 50);
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 3 });
     mPainter.AssignBrush(Brush{ Color::Cyan, BrushStyle::CheckPattern });
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y }, 50, 50);
+    mPainter.DrawEllipse(Point{ screenCenter.x + 200, screenCenter.y }, 50, 50);
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Green, 3 });
     mPainter.AssignBrush(Brush{ Color::Blue, BrushStyle::DotPattern });
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x - 200, screenCenter.y }, 50, 50);
+    mPainter.DrawEllipse(Point{ screenCenter.x - 200, screenCenter.y }, 50, 50);
 
     mPainter.AssignPen(Pen{ PenStyle::DoubleDotLine, Color::Orange, 5 });
     mPainter.DrawLine(Line{ screenCenter + glm::vec2{-100, 40}, screenCenter + glm::vec2{ 100, 90 } });
@@ -209,9 +209,9 @@ void GLGraphicApp::PrimitivesExample() {
 
     // Delikli bir cember de cizebilir mi? Elbette
     mPainter.BeginClippingArea();
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y - 150 }, 50, 50);
+    mPainter.DrawEllipse(Point{ screenCenter.x + 200, screenCenter.y - 150 }, 50, 50);
     mPainter.EndClippingArea();
-    mPainter.DrawEllipse(glm::vec2{ screenCenter.x + 200, screenCenter.y - 150 }, 100, 100);
+    mPainter.DrawEllipse(Point{ screenCenter.x + 200, screenCenter.y - 150 }, 100, 100);
     mPainter.ResetClippingArea();
 
     mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3, 1, Color::Black, PenStyle::SolidLine, 7 });
@@ -222,9 +222,11 @@ void GLGraphicApp::PrimitivesExample() {
 
     infra::Polygon polygonToDisplay;
     polygonToDisplay.SetPoints(polygon);
-    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Black, 1 });
+    mPainter.AssignPen(Pen{ PenStyle::SolidLine, Color::Red, 3 });
     mPainter.AssignBrush(Brush{ Color::Orange });
-    mPainter.DrawPolygon(polygonToDisplay);
+    //mPainter.DrawPolygon(polygonToDisplay);
+    mPainter.DrawPolyline(polygonToDisplay);
+
 
     mPainter.AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Black, 1 });
     mPainter.SetActiveFont("FreeSans_13");

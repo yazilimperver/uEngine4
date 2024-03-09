@@ -16,51 +16,51 @@
 class  Line {
 public:
 	Line(void);
-	Line(const glm::vec2& point1, const glm::vec2& point2);
-	Line(float x1,
-		float y1,
-		float x2,
-		float y2);
+	Line(const glm::dvec2& point1, const glm::dvec2& point2);
+	Line(double x1,
+		double y1,
+		double x2,
+		double y2);
 	~Line(void);
 
-	glm::vec2 GetPoint1() const;
-	glm::vec2 GetPoint2() const;
-	void SetPoint1(const glm::vec2& point);
-	void SetPoint2(const glm::vec2& point);
+	glm::dvec2 GetPoint1() const;
+	glm::dvec2 GetPoint2() const;
+	void SetPoint1(const glm::dvec2& point);
+	void SetPoint2(const glm::dvec2& point);
 
 	// use the line itself given point and return
 	// projection result, intersection point and proportion of projected point on line
 	// [0, 1] in case of within, outside otherwise
-	ProjectionResult Project(glm::vec2& pointToProject,
-		glm::vec2& intersectionPoint,
-		float& proportion);
+	ProjectionResult Project(glm::dvec2& pointToProject,
+		glm::dvec2& intersectionPoint,
+		double& proportion);
 
-	float GetX1() const;
-	float GetX2() const;
-	float GetY1() const;
-	float GetY2() const;
+	double GetX1() const;
+	double GetX2() const;
+	double GetY1() const;
+	double GetY2() const;
 
-	float InnerProduct(const Line line);
+	double InnerProduct(const Line line);
 
-	void SetPoints(const glm::vec2& point1, const glm::vec2& point2);
-	void SetLine(float x1,
-		float y1,
-		float x2,
-		float y2);
+	void SetPoints(const glm::dvec2& point1, const glm::dvec2& point2);
+	void SetLine(double x1,
+		double y1,
+		double x2,
+		double y2);
 	bool Intersect(const Line& otherLine);
-	bool Intersect(const glm::vec2& center, float dRadius);
-	IntersectionResult Intersect(const Line& otherLine, glm::vec2& intersection);
+	bool Intersect(const glm::dvec2& center, double dRadius);
+	IntersectionResult Intersect(const Line& otherLine, glm::dvec2& intersection);
 
-	glm::vec2 GetMidPoint();
+	glm::dvec2 GetMidPoint();
 
 protected:
-	float Magnitude(const glm::vec2& point1, const glm::vec2& point2);
+	double Magnitude(const glm::dvec2& point1, const glm::dvec2& point2);
 
 	//! Line start point
-	glm::vec2 mPoint1;
+	glm::dvec2 mPoint1;
 
 	//! Line end point
-	glm::vec2 mPoint2;
+	glm::dvec2 mPoint2;
 };
 
 #endif	// INC_LINE_H

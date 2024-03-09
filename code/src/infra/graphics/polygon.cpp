@@ -63,6 +63,7 @@ namespace infra {
 
         //left vertex
         p1 = mPoints[0];
+        p2 = mPoints[1];
 
         //check all rays
         for (int i = 1; i <= N; ++i)

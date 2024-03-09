@@ -16,7 +16,6 @@
 
 #include "pager/pager.h"
 #include "pager/pager_listener.h"
-#include "pager/gtile_file_calculator.h"
 
 class SdlApplication;
 
@@ -25,6 +24,7 @@ namespace infra {
 }
 
 namespace gis {
+    class TileNameCalculator;
 
     class RasterController 
         : public LayerController
@@ -44,6 +44,8 @@ namespace gis {
        
         std::shared_ptr<gis::Pager> GetPager();
         const GisRasterTileHashDictionary* GetRasterTileAssets() const;
+
+        void AssignTileIDCalculator(std::shared_ptr<gis::TileNameCalculator> tileNameCalculator);
     private:
         /** @brief   Inherited via PagerListener */
         virtual void PagedTilesUpdated() override;
@@ -75,7 +77,7 @@ namespace gis {
         std::shared_ptr<gis::Pager> mPager{ nullptr };
 
         /** @brief   Pafta tanimlayici hesaplayicisi */
-        std::shared_ptr<gis::GTileFileCalculator> mTileIdCalculator{ nullptr };
+        std::shared_ptr<gis::TileNameCalculator> mTileIdCalculator{ nullptr };
 
         /** @brief   Katmanin genel cografik veriler icin kullanacagi harita gorunumu */
         std::shared_ptr<gis::MapView> mMapView{ nullptr };

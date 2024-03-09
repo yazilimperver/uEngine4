@@ -13,6 +13,7 @@ find_package(CEREAL REQUIRED)
 
 # Baslik dosyalari
 set(LAYER_FILES
+    custom_layer_metadata.h
 	layer_status.h
 	layer_renderer.h
 	layer.h
@@ -30,12 +31,14 @@ set(LAYER_FILES
 	layer_configurator_serializer.h
 	layer_factory.h
 	raster_layer_metadata.h
+    vector_layer_metadata.h
 	raster_controller.h
 	raster_controller.cpp
 )
 
 set(CORE_FILES
 	common.h
+	layer.cpp
 	geo_point.h
 	gis_meta_data.h
 	map_view.h

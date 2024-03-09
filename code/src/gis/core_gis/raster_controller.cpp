@@ -4,6 +4,8 @@
 
 #include "sdl_application/sdl_application.h"
 
+#include "pager/tile_name_calculator.h"
+
 using namespace basic_engine;
 
 bool gis::RasterController::IsInitialized() {
@@ -41,7 +43,6 @@ bool gis::RasterController::Initialize() {
             mPager = std::make_shared<gis::Pager>();
 
             DetermineTileCount();
-            mTileIdCalculator = std::make_unique<gis::GTileFileCalculator>(mExtension, mPath);
 
             // Pager'a iliskin ayarlamalari yapalim
             mPager->AssignListener(this);
@@ -97,6 +98,10 @@ std::shared_ptr<gis::Pager> gis::RasterController::GetPager() {
 
 const GisRasterTileHashDictionary* gis::RasterController::GetRasterTileAssets() const {
     return &mRasterAssets;
+}
+
+void gis::RasterController::AssignTileIDCalculator(std::shared_ptr<gis::TileNameCalculator> tileNameCalculator) {
+    mTileIdCalculator = tileNameCalculator;
 }
 
 void gis::RasterController::PagedTilesUpdated() {

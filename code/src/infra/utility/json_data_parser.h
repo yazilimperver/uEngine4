@@ -35,7 +35,8 @@ public:
 
 				return parsedData;
 			}
-			catch (cereal::RapidJSONException&) {
+			catch (cereal::RapidJSONException& e) {
+                std::cout << "Exception! " << e.what();
 				return std::nullopt;
 			}
 			catch (cereal::Exception& e) {

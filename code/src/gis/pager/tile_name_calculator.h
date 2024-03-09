@@ -15,14 +15,19 @@
 namespace gis {
     class TileNameCalculator {
     public:
-        TileNameCalculator(std::string_view  extension, std::string_view root = "") 
-            : mExtension(extension.data())
-            , mRoot(root.data()){
-        }
+        TileNameCalculator(std::string_view  extension, std::string_view root );
 
         /** @brief Paftalarin ismini almak icin kullanilacak olan fonksiyondur */
         virtual std::string Path(uint32_t zoomLevel, uint32_t row, uint32_t col) const = 0;
 
+        /** @brief Hangi katman tipi icin hangi isimlendirme kullanilacagini belirlemek icin donulecek isim */
+        virtual std::string LayerType() const = 0;
+
+        std::string Root() const;
+        std::string Extension() const;
+
+        void SetRoot(std::string_view root);
+        void SetExtension(std::string_view extension);
     protected:
         /** @brief Paftalarin uzantisi */
         std::string mExtension;

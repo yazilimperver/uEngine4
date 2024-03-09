@@ -15,9 +15,11 @@
 
 namespace gis {
     class LayerIterator {
+    public:
         virtual void ResetIterator() = 0;
         virtual void Next() = 0;
         virtual bool IsDone() const = 0;
+        virtual unsigned int Size() const = 0;
         virtual std::shared_ptr<Layer> Current() = 0;
     };
 }

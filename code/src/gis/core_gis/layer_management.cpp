@@ -7,193 +7,239 @@
 #include "layer_renderer.h"
 #include "layer_configurator.h"
 
+#include "sdl_application/sdl_application.h"
+
 #include "utility/parameter_set.h"
 
 #include "spdlog/spdlog.h"
 
 namespace gis {
-	bool LayerManagement::Initialize() {
-		mIsInitialized = true;
+    bool LayerManagement::Initialize() {
+        mIsInitialized = true;
 
-		LayerConfigurator configurator(this);
-		configurator.Configure(mLayerConfigurationPath);
+        LayerConfigurator configurator(this);
+        configurator.Configure(mLayerConfigurationPath);
 
-		// Katmanlari ilklendirelim
-		for (auto& layer : mLayers) {
-			if (false == layer->Initialize()) {
-				spdlog::info("Layer {} initialization failed!", layer->GetLayerName());
-			}
-		}
-		
-		ResetIterator();
-		
-		return mIsInitialized;
-	}
+        // Katmanlari ilklendirelim
+        for (auto& layer : mLayers) {
+            if (false == layer->Initialize()) {
+                spdlog::info("Layer {} initialization failed!", layer->Name());
+            }
+        }
+        
+        ResetIterator();
+        
+        return mIsInitialized;
+    }
 
-	void LayerManagement::Update()	{
-		auto itr = mLayers.cbegin();
-		while(itr != mLayers.cend()){
-			if ((*itr)->GetLayerStatus() != LayerStatus::NotActive)	{
-				auto controller = (*itr)->Get2DController();
-				controller->Update();
-			}	
+    void LayerManagement::Update()    {
+        // Katman islerini burada hallediyoruz
+        while (!mLayerOps.IsEmpty()) {
+            std::pair<LayerOp, unsigned int> opToConsume;
+            mLayerOps.Pop(opToConsume);
+            if (opToConsume.first == LayerOp::MoveUp) {
+                if (opToConsume.second >= 1) {
+                    auto itr_i = std::next(mLayers.begin(), opToConsume.second);
+                    auto itr_j = std::next(mLayers.begin(), opToConsume.second - 1);
 
-			itr++;
-		}
-	}
+                    std::iter_swap(itr_i, itr_j);
+                }
+            }
+            else if (opToConsume.first == LayerOp::MoveDown) {
+                if (opToConsume.second < (mLayers.size() - 1)) {
+                    auto itr_i = std::next(mLayers.begin(), opToConsume.second);
+                    auto itr_j = std::next(mLayers.begin(), opToConsume.second + 1);
 
-	void LayerManagement::Display() {
+                    std::iter_swap(itr_i, itr_j);
+                }
+            }
+        }
 
-		//! Geometry display pass
-		auto itr = mLayers.cbegin();
-		while (itr != mLayers.cend()) {
-			if (true == (*itr)->IsLayerVisible()) {
-				auto renderer = (*itr)->Get2DRenderer();
-				renderer->DisplayGeometry();
-			}
+        // Ilk cizilen arkada kalacagiz icin geriden geliyoruz
+        for (const auto& layer : mLayers) {
+            if (layer->Status() != LayerStatus::NotActive) {
+                auto controller = layer->Controller();
+                
+                if (nullptr != controller)
+                    controller->Update();
+            }    
+        } 
+    } 
 
-			itr++;
-		}
+    void LayerManagement::Display() {
+        // UI disindaki katmanlari once cizdirelim
+        // Ilk cizilen arkada kalacagiz icin geriden geliyoruz
+        for (const auto& layer : mLayers) {
+            if (true == layer->IsLayerVisible()
+                && 
+                LayerType::UI != layer->Type()) {
+                auto renderer = layer->Renderer();
+                
+                if (nullptr != renderer)
+                    renderer->DisplayGeometry();
+            }
+        }
 
-		// Label display pass
-		auto labelItr = mLayersWithLabel.cbegin();
-		
-		while (labelItr != mLayersWithLabel.cend())	{
-			if (true == (*labelItr)->IsLayerVisible()) {
-				auto renderer = (*labelItr)->Get2DRenderer();
-				renderer->DisplayLabel();
-			}
+        // Label display pass
+        // Ilk cizilen arkada kalacagiz icin geriden geliyoruz
+        for (const auto& layer : mLayers) {
+            if (true == layer->IsLayerVisible()
+                &&
+                true == layer->HasLabelDisplay()
+                &&
+                LayerType::UI != layer->Type()) {
+                auto renderer = layer->Renderer();
 
-			labelItr++;
-		}
-	}
+                if (nullptr != renderer)
+                    renderer->DisplayLabel();
+            }
+        }
 
-	void LayerManagement::AddLayer(std::shared_ptr<Layer> Layer)	{
-		if (Layer != nullptr)  {
-			auto itr = mRegisteredLayers.find(Layer->GetLayerName());
+        // UI katmanlari cizdirelim
+        if (mPreUIHook != nullptr)
+            mPreUIHook(mSDLParams.IsGLEnabled);
 
-			if (itr == mRegisteredLayers.end()) {
-				mLayers.push_back(Layer);
-				mRegisteredLayers[Layer->GetLayerName()] = Layer;
+        for (const auto& layer : mLayers) {
+            if (true == layer->IsLayerVisible()
+                &&
+                LayerType::UI == layer->Type()) {
+                auto renderer = layer->Renderer();
 
-				if (Layer->HasLayerLabelDisplay()) {
-					mLayersWithLabel.push_back(Layer);
-				}
-			}
-		}
-	}
+                if (nullptr != renderer)
+                    renderer->DisplayLabel();
+            }
+        }
 
-	void LayerManagement::RegisterLayerFactory(std::unique_ptr<LayerFactory> layerFactory) {
-		auto layerTypeStr = static_cast<std::string>(layerFactory->LayerType());
+        if (mPostUIHook != nullptr)
+            mPostUIHook(mSDLParams.IsGLEnabled);
+    }
 
-		mLayerFactories[layerTypeStr] = std::move(layerFactory);
-		mLayerFactories[layerTypeStr]->SetMapView(mMapView);
-		mLayerFactories[layerTypeStr]->SetSDLApplication(mSDLApplication);
-	}
+    void LayerManagement::AddLayer(SharedLayer layer, uint32_t priority) {
+        if (layer != nullptr)  {
+            auto layerIndex = priority;
 
-	std::optional<std::shared_ptr<Layer>> LayerManagement::GetLayer(const std::string& layerName) {
-		auto itr = std::find_if(mLayers.begin(), mLayers.end(), [layerName](std::shared_ptr<Layer> item) {
-			return (layerName == item->GetLayerName());
-		});
+            if (layerIndex > static_cast<uint32_t>(mLayers.size())) {
+                layerIndex = static_cast<uint32_t>(mLayers.size());
+            }
+            mLayers.insert(mLayers.begin() + layerIndex, layer);
+        }
+        else {
+            spdlog::error("Null layer is provided for add!");
+        }
+    }
 
-		if (itr != mLayers.end()) {
-			return *itr;
-		}
-		else {
-			return std::nullopt;
-		}
-	}
+    void LayerManagement::RegisterLayerFactory(std::unique_ptr<LayerFactory> layerFactory) {
+        auto layerTypeStr = static_cast<std::string>(layerFactory->LayerType());
 
-	std::optional<std::shared_ptr<Layer>> LayerManagement::GetLayer(int32_t layerHandle) {
-		if (layerHandle < static_cast<int32_t>(mLayers.size())) {
-			return mLayers[layerHandle];
-		}
-		else {
-			return std::nullopt;
-		}
-	}
+        mLayerFactories[layerTypeStr] = std::move(layerFactory);
+        mLayerFactories[layerTypeStr]->SetMapView(mMapView);
+        mLayerFactories[layerTypeStr]->SetSDLApplication(mSDLApplication);
+        mLayerFactories[layerTypeStr]->SetLayerIterator(this);
+        mLayerFactories[layerTypeStr]->SetLayerService(this);
+    }
 
-	std::optional<LayerStatus> LayerManagement::GetLayerStatus(int32_t layerHandle) {
-		if (layerHandle < static_cast<int32_t>(mLayers.size()))	{
-			return mLayers[layerHandle]->GetLayerStatus();
-		}
-		else {
-			return std::nullopt;
-		}
-	}
+    void LayerManagement::SetPreUIDisplayHook(std::function<void(bool)> hookFunc) {
+        mPreUIHook = hookFunc;
+    }
 
-	std::optional<LayerStatus> LayerManagement::GetLayerStatus(const std::string& layerName)	{
-		auto itr = mRegisteredLayers.find(layerName);
+    void LayerManagement::SetPostUIDisplayHook(std::function<void(bool)> hookFunc) {
+        mPostUIHook = hookFunc;
+    }
 
-		if (itr != mRegisteredLayers.end()){
-			return itr->second->GetLayerStatus();
-		}
-		else {
-			return std::nullopt;
-		}
-	}
+    std::optional<LayerService::SharedLayer> LayerManagement::Layer(std::string_view layerName) {
+        if (auto itr = FindLayerByName(layerName); itr != mLayers.end()) {
+            return *itr;
+        }
+        else {
+            return std::nullopt;
+        }
+    }
 
-	std::optional<int32_t> LayerManagement::GetLayerHandle(const std::string& layerName) {
-		return 0;
-	}
+    std::optional<LayerStatus> LayerManagement::Status(std::string_view layerName)    {
+        if (auto itr = FindLayerByName(layerName); itr != mLayers.end()) {
+            return (*itr)->Status();
+        }
+        else {
+            return std::nullopt;
+        }
+    }
 
-	void LayerManagement::SetLayerStatus(const std::string& layerName, LayerStatus layerStatus) {
-		auto itr = mRegisteredLayers.find(layerName);
+    void LayerManagement::SetStatus(std::string_view layerName, LayerStatus layerStatus) {
+        if (auto itr = FindLayerByName(layerName); itr != mLayers.end()) {
+            return (*itr)->SetStatus(layerStatus);
+        }
+    }
+    
+    void LayerManagement::SetMapView(std::shared_ptr<gis::MapView> mapView) {
+        mMapView = mapView;
+        
+        for (auto& layerFactory : mLayerFactories) {
+            layerFactory.second->SetMapView(mMapView);
+        }
+    }
 
-		if (itr != mRegisteredLayers.end()) {
-			itr->second->SetLayerStatus(layerStatus);
-		}
-	}
+    void LayerManagement::SetSDLApplication(SdlApplication* sdlApplication) {
+        mSDLApplication = sdlApplication;
+        mSDLParams = mSDLApplication->GetSDLParameters();
 
-	void LayerManagement::SetLayerStatus(int32_t layerHandle, LayerStatus layerStatus)	{
-		if (layerHandle < static_cast<int32_t>(mLayers.size()))	{
-			layerStatus = mLayers[layerHandle]->GetLayerStatus();
-		}
-	}
-	
-	void LayerManagement::SetMapView(std::shared_ptr<gis::MapView> mapView) {
-		mMapView = mapView;
-		
-		for (auto& layerFactory : mLayerFactories) {
-			layerFactory.second->SetMapView(mMapView);
-		}
-	}
+        for (auto& layerFactory : mLayerFactories) {
+            layerFactory.second->SetSDLApplication(mSDLApplication);
+        }
+    }
 
-	void LayerManagement::SetSDLApplication(SdlApplication* sdlApplication) {
-		mSDLApplication = sdlApplication;
+    void LayerManagement::SetLayerConfigurationPath(std::string_view path) {
+        mLayerConfigurationPath = static_cast<std::string>(path);
+    }
 
-		for (auto& layerFactory : mLayerFactories) {
-			layerFactory.second->SetSDLApplication(mSDLApplication);
-		}
-	}
+    void LayerManagement::ResetIterator() {
+        mCurrentLayerIndex = 0;
+    }
 
-	void LayerManagement::SetLayerConfigurationPath(std::string_view path) {
-		mLayerConfigurationPath = static_cast<std::string>(path);
-	}
+    void LayerManagement::Next() {
+        mCurrentLayerIndex++;
 
-	void LayerManagement::ResetIterator() {
-		mCurrentLayerItr = mLayers.begin();
-	}
+        if (mCurrentLayerIndex >= mLayers.size()){
+            mCurrentLayerIndex = static_cast<int>(mLayers.size());
+        }
+    }
 
-	void LayerManagement::Next() {
-		mCurrentLayerItr++;
-	}
+    bool LayerManagement::IsDone() const {
+        return mCurrentLayerIndex >= mLayers.size();
+    }
+    
+    LayerService::SharedLayer LayerManagement::Current() {
+        return mLayers[mCurrentLayerIndex];
+    }
 
-	bool LayerManagement::IsDone() const {
-		return (mCurrentLayerItr == mLayers.end());
-	}
-	
-	std::shared_ptr<Layer> LayerManagement::Current() {
-		return *mCurrentLayerItr;
-	}
-	
-	void LayerManagement::CreateLayer(std::string_view factoryName, ParameterSet layerMetadata) {
-		std::string factoryNameStr;
+    std::vector<LayerService::SharedLayer>::iterator LayerManagement::FindLayerByName(std::string_view layerName) {
+        return std::find_if(mLayers.begin(), mLayers.end(), [layerName](SharedLayer item) {
+            return (layerName == item->Name());
+            });
+    }
+    
+    void LayerManagement::CreateLayer(std::string_view factoryName, ParameterSet layerMetadata) {
+        std::string factoryNameStr;
+        uint32_t priority;
 
-		layerMetadata.GetParameterValue<std::string>("LayerFactory", factoryNameStr);
+        layerMetadata.GetParameterValue<std::string>("LayerFactory", factoryNameStr);
+        layerMetadata.GetParameterValue<uint32_t>("Priority", priority);
 
-		if (mLayerFactories.contains(factoryNameStr)) {
-			AddLayer(mLayerFactories[factoryNameStr]->CreateLayer(layerMetadata));
-		}
-	}
+        if (mLayerFactories.contains(factoryNameStr)) {
+            AddLayer(mLayerFactories[factoryNameStr]->CreateLayer(layerMetadata), priority);
+        }
+    }
+
+    unsigned int LayerManagement::Size() const {
+        return static_cast<unsigned int>(mLayers.size());
+    }
+    
+    void LayerManagement::MoveUp(int layerIndexToMove) {
+        auto opToAdd = std::make_pair<LayerOp, unsigned int>(LayerOp::MoveUp, layerIndexToMove);
+        mLayerOps.Push(opToAdd);
+    }
+
+    void LayerManagement::MoveDown(int layerIndexToMove) {
+        auto opToAdd = std::make_pair<LayerOp, unsigned int>(LayerOp::MoveDown, layerIndexToMove);
+        mLayerOps.Push(opToAdd);
+    }
 }

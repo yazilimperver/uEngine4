@@ -59,6 +59,7 @@ namespace gl {
         /** @brief   OpenGL Painter transformasyon API'si */
         void Rotate(float rotation);
         void Translate(float tx, float ty);
+        void Translate(double tx, double ty);
         void Translate(const glm::vec2& translation);
         void Scale(float sx, float sy);
         void ResetTransform();
@@ -71,6 +72,7 @@ namespace gl {
         void DrawPoint(const glm::vec2& point);
         void DrawRectangle(const infra::Rectangle<float>& rect);
         void DrawPolyline(infra::Polygon& polygon, bool isLoop = false);
+        void DrawPolylineRaw(double* polyline, uint32_t pointCount, bool isLoop = false);
         void DrawPolygon(infra::Polygon& polygon);
         void DrawConcavePolygon(infra::Polygon& polygon);
         void DrawEllipse(const Point& center, float rx, float ry);

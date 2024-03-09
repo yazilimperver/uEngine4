@@ -14,16 +14,23 @@
 
 class SdlApplication;
 class ParameterSet;
+class TileNameCalculator;
 
 namespace gis {
+    class LayerService;
+    class LayerIterator;
+    class TileNameFactory;
     class MapView; 
     class Layer;
     class LayerFactory {
     public:
         virtual std::string LayerType() const = 0;
         virtual std::shared_ptr<Layer> CreateLayer(const ParameterSet layerParameters) = 0;
+        virtual void SetLayerIterator(LayerIterator* iterator) = 0;
+        virtual void SetLayerService(LayerService* service) = 0;
         virtual void SetSDLApplication(SdlApplication* sdlApplication) = 0;
         virtual void SetMapView(std::shared_ptr<gis::MapView> mapView) = 0;
+        virtual void RegisterTileNameFactory(std::string_view layerType, std::shared_ptr<TileNameFactory> factory) = 0;
     };
 }
 #endif	// INC_LAYER_FACTORY_H

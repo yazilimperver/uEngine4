@@ -12,6 +12,7 @@ namespace gis {
 		, mZoomLevel{ zoomLevel }
 		, mCenterTmsTile{ TileTms::GeographicToTile(viewCenter, zoomLevel) }{		
 		SetZoomLevel(zoomLevel);
+		mViewCenterInPixels = SlippyMapUtil::GeographicToPixel(mGeogViewCenter, mZoomLevel);
 	}
 
 	void MapView::SetZoomLevel(uint32_t zoom) {
@@ -59,6 +60,8 @@ namespace gis {
 		mGeogViewCenter = SlippyMapUtil::PixelToGeographic(mViewCenterInPixels, mZoomLevel);
 		mViewCenterInMeter = SlippyMapUtil::PixelToMeter(mViewCenterInPixels, mZoomLevel);
 		mCenterTmsTile = TileTms::PixelToTile(mViewCenterInPixels, mZoomLevel);
+		mWindowTopLeftInPixels.x = mViewCenterInPixels.x - (mWinWidth / 2);
+		mWindowTopLeftInPixels.y = mViewCenterInPixels.y - (mWinHeight / 2);
 	}
 
 	void MapView::MoveInPixel(int32_t x, int32_t y)	{
@@ -88,6 +91,26 @@ namespace gis {
 	GeoPoint MapView::CenterInGeographic() const {
 		return mGeogViewCenter;
 	}
+
+    GeoRectangle MapView::GeographicBoundary() const {        
+        auto center = mViewCenterInPixels;
+        center.x -= (mWinWidth / 2);
+        center.y += (mWinHeight/2);
+        auto guneyBati = SlippyMapUtil::PixelToGeographic(center, mZoomLevel);
+
+        center.x += (mWinWidth);
+        center.y -= (mWinHeight);
+        auto kuzeyDogu = SlippyMapUtil::PixelToGeographic(center, mZoomLevel);
+
+        return GeoRectangle{ guneyBati, kuzeyDogu };
+    }
+
+    bool MapView::IsInside(const PointInPixels& point) const {
+        return (point.x > 0)
+            && (point.x < mWinWidth)
+            && (point.y < mWinHeight)
+            && (point.y > 0);
+    }
 
 	uint32_t MapView::WinWidth() const {
 		return mWinWidth;

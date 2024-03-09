@@ -17,9 +17,8 @@ namespace gis {
     class GTileFileCalculator
         : public TileNameCalculator {
     public:
-        GTileFileCalculator(std::string_view  extension, std::string_view root = "")
-            : TileNameCalculator(extension, root){ }
-
+        GTileFileCalculator(std::string_view  extension, std::string_view root);
+        virtual std::string LayerType() const override;
         virtual std::string Path(uint32_t zoomLevel, uint32_t row, uint32_t col) const override;
     };
 }

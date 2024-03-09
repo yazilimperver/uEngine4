@@ -16,8 +16,10 @@ set(HEADER_FILES
 	tile_id.h
 	tile_loader.h
 	tile_origin.h
+    tile_name_factory.h
 	tile_name_calculator.h
 	gtile_file_calculator.h
+    google_tile_name_factory.h
 )
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
@@ -27,6 +29,8 @@ source_group("Header Files" FILES ${HEADER_FILES})
 set(SOURCE_FILES
 	pager.cpp
 	pager_reference.cpp
+    tile_name_calculator.cpp
+    google_tile_name_factory.cpp
 	gtile_file_calculator.cpp
  )
 

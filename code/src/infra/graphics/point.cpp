@@ -1,70 +1,70 @@
 #include "point.h"
 
-extern bool IsEqual(float first, float second);
+extern bool IsEqual(double first, double second);
 
 Point::Point() : mPoint{ 0.0F, 0.0F }{
 }
 
-Point::Point(const glm::vec2& pnt) : mPoint{ pnt }
+Point::Point(const glm::dvec2& pnt) : mPoint{ pnt }
 {
 
 }
 
-Point::Point(float x, float y) : mPoint{ x, y }
+Point::Point(double x, double y) : mPoint{ x, y }
 {
 
 }
 
-float Point::GetX() const
+double Point::GetX() const
 {
 	return mPoint.x;
 }
 
-float Point::GetY() const
+double Point::GetY() const
 {
 	return mPoint.y;
 }
 
-void Point::SetXY(float x, float y)
+void Point::SetXY(double x, double y)
 {
 	mPoint.x = x;
 	mPoint.y = y;
 }
 
-void Point::SetX(float x)
+void Point::SetX(double x)
 {
 	mPoint.x = x;
 }
 
-void Point::SetY(float y)
+void Point::SetY(double y)
 {
 	mPoint.y = y;
 }
 
-glm::vec2 Point::GetPoint() const
+glm::dvec2 Point::GetPoint() const
 {
 	return mPoint;
 }
 
-void Point::SetPoint(const glm::vec2& point)
+void Point::SetPoint(const glm::dvec2& point)
 {
 	mPoint = point;
 }
 
-float Point::GetAngle(const Point& pnt) const
+double Point::GetAngle(const Point& pnt) const
 {
 	return atan2(pnt.mPoint[1] - mPoint[1], pnt.mPoint[0] - mPoint[0]);
 }
 
-float Point::GetDistance(const Point& pnt) const
+double Point::GetDistance(const Point& pnt) const
 {
-	float diffX = (pnt.mPoint[0] - mPoint[0]);
-	float diffY = (pnt.mPoint[1] - mPoint[1]);
+	double diffX = (pnt.mPoint[0] - mPoint[0]);
+	double diffY = (pnt.mPoint[1] - mPoint[1]);
 
 	return sqrt(diffX*diffX + diffY*diffY);
 }
 
-Point Point::ShiftPoint(float angleInRad, float distance) const
+Point Point::ShiftPoint(double angleInRad, double distance) const
 {
 	Point pointToShift;
 	pointToShift.SetX(distance*cos(angleInRad) + mPoint.x);
@@ -73,7 +73,7 @@ Point Point::ShiftPoint(float angleInRad, float distance) const
 	return pointToShift;
 }
 
-glm::vec2* Point::GetPointPtr()
+glm::dvec2* Point::GetPointPtr()
 {
 	return &mPoint;
 }
@@ -101,7 +101,7 @@ const Point Point::operator-() const
 	return Point(-mPoint[0], -mPoint[1]);
 }
 
-float Point::operator*(const Point& rhs) const
+double Point::operator*(const Point& rhs) const
 {
 	return mPoint[0] * rhs.mPoint[0] + mPoint[1] * rhs.mPoint[1] + mPoint[2] * rhs.mPoint[2];
 }
@@ -116,12 +116,12 @@ const Point Point::operator+(const Point& point) const
 	return Point(mPoint[0] + point.GetX(), mPoint[1] + point.GetY());
 }
 
-const Point Point::operator*(const float value) const
+const Point Point::operator*(const double value) const
 {
 	return Point(mPoint[0] * value, mPoint[1] * value);
 }
 
-const Point Point::operator/(const float denumerator) const
+const Point Point::operator/(const double denumerator) const
 {
 	return Point(mPoint[0] / denumerator, mPoint[1] / denumerator);
 }

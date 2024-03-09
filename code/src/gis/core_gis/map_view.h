@@ -30,7 +30,11 @@ namespace gis {
 		const PointInPixels& CenterInPixels() const;
 		const PointInMeters& CenterInMeter() const;
 		GeoPoint CenterInGeographic() const;
-		
+        // Bottom left, top right
+        GeoRectangle GeographicBoundary() const;
+
+        bool IsInside(const PointInPixels& point) const;
+
 		uint32_t WinWidth() const;
 		uint32_t WinHeight() const;
 
@@ -39,6 +43,7 @@ namespace gis {
 		
 		double Scale() const;
 		
+        // Metre cinsinden cozunurluk
 		double Resolution() const;
 
 		void SetRotation(double rotInAngle);

@@ -206,7 +206,8 @@ void SdlApplication::InitializeWindows() {
         mAppWiseSettings.UpdateParameterValue("SdlMinorVersion", mSdlParameters.MinorVersion);
         mAppWiseSettings.UpdateParameterValue("IsGLEnabled", mSdlParameters.IsGLEnabled);
 
-        // OpenGL context'ini SDL'den alalim, bunun icin de OPENGL surum bilgilerini geciriyoruz
+        // Request opengl context
+        //SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_FORWARD_COMPATIBLE_FLAG);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
         SDL_GL_SetAttribute(SDL_GL_ACCELERATED_VISUAL, 1);
         SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, mSdlParameters.MajorVersion);
@@ -456,6 +457,10 @@ void SdlApplication::HandleSDLEvents() {
             else if (SDL_BUTTON_MIDDLE == e.button.button)
             {
                 mouseButton = MouseButtons::MouseButtonMiddle;
+            }
+            else
+            {
+                mouseButton = static_cast<MouseButtons>(e.button.button);
             }
 
             if (e.type == SDL_MOUSEBUTTONDOWN)

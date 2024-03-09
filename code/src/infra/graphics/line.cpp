@@ -1,22 +1,24 @@
 #include "line.h"
 
+#include <limits>
+
 Line::Line(void)
 	: mPoint1(0, 0)
 	, mPoint2(0, 0)
 {
 }
 
-Line::Line(const glm::vec2& point1, const glm::vec2& point2)
+Line::Line(const glm::dvec2& point1, const glm::dvec2& point2)
 	: mPoint1(point1)
 	, mPoint2(point2)
 {
 
 }
 
-Line::Line(float x1,
-	float y1,
-	float x2,
-	float y2)
+Line::Line(double x1,
+	double y1,
+	double x2,
+	double y2)
 	: mPoint1(x1, y1)
 	, mPoint2(x2, y2)
 {
@@ -27,16 +29,16 @@ Line::~Line(void)
 {
 }
 
-void Line::SetPoints(const glm::vec2& point1, const glm::vec2& point2)
+void Line::SetPoints(const glm::dvec2& point1, const glm::dvec2& point2)
 {
 	mPoint1 = point1;
 	mPoint2 = point2;
 }
 
-void Line::SetLine(float x1,
-	float y1,
-	float x2,
-	float y2)
+void Line::SetLine(double x1,
+	double y1,
+	double x2,
+	double y2)
 {
 	mPoint1.x = x1;
 	mPoint1.y = y1;
@@ -44,80 +46,80 @@ void Line::SetLine(float x1,
 	mPoint2.y = y2;
 }
 
-glm::vec2 Line::GetPoint1() const
+glm::dvec2 Line::GetPoint1() const
 {
 	return mPoint1;
 }
 
-void Line::SetPoint1(const glm::vec2& point)
+void Line::SetPoint1(const glm::dvec2& point)
 {
 	mPoint1 = point;
 }
 
-glm::vec2 Line::GetPoint2() const
+glm::dvec2 Line::GetPoint2() const
 {
 	return mPoint2;
 }
 
-void Line::SetPoint2(const glm::vec2& point)
+void Line::SetPoint2(const glm::dvec2& point)
 {
 	mPoint2 = point;
 }
 
-float Line::GetX1() const
+double Line::GetX1() const
 {
 	return mPoint1.x;
 }
 
-float Line::GetX2() const
+double Line::GetX2() const
 {
 	return mPoint2.x;
 }
 
-float Line::GetY1() const
+double Line::GetY1() const
 {
 	return mPoint1.y;
 }
 
-float Line::GetY2() const
+double Line::GetY2() const
 {
 	return mPoint2.y;
 }
 
-float Line::Magnitude(const glm::vec2& point1, const glm::vec2& point2)
+double Line::Magnitude(const glm::dvec2& point1, const glm::dvec2& point2)
 {
-	glm::vec2 pointDiff = point2 - point1;
-	float result = sqrt(pointDiff.x * pointDiff.x
+	glm::dvec2 pointDiff = point2 - point1;
+	double result = sqrt(pointDiff.x * pointDiff.x
 		+ pointDiff.y * pointDiff.y);
 
 	return result;
 }
 
-glm::vec2 Line::GetMidPoint()
+glm::dvec2 Line::GetMidPoint()
 {
-	return (mPoint1 + mPoint2) * 0.5f;
+	return (mPoint1 + mPoint2) * 0.5;
 }
 
-float Line::InnerProduct(const Line line)
+double Line::InnerProduct(const Line line)
 {
-	glm::vec2 pointDiff1 = mPoint2 - mPoint1;
-	glm::vec2 pointDiff2 = line.mPoint2 - line.mPoint1;
+	glm::dvec2 pointDiff1 = mPoint2 - mPoint1;
+	glm::dvec2 pointDiff2 = line.mPoint2 - line.mPoint1;
 
 	return pointDiff1.x * pointDiff2.x + pointDiff1.y * pointDiff2.y;
 }
 
-bool Line::Intersect(const glm::vec2& center, float dRadius)
+bool Line::Intersect(const glm::dvec2& center, double dRadius)
 {
 	Line lineF(center, mPoint1);
 
-	float dAValue = InnerProduct((*this));
+	double dAValue = InnerProduct((*this));
 
-	float dBValue = 2.0F * lineF.InnerProduct((*this));
-	float dCValue = lineF.InnerProduct(lineF) - dRadius * dRadius;
+	double dBValue = 2.0F * lineF.InnerProduct((*this));
+	double dCValue = lineF.InnerProduct(lineF) - dRadius * dRadius;
 
-	float dDiscriminant = dBValue * dBValue - 4.0F * dAValue * dCValue;
+	double dDiscriminant = dBValue * dBValue - 4.0 * dAValue * dCValue;
 
-	if (dDiscriminant < 0.0F)
+	if (dDiscriminant < 0.0)
 	{
 		return false;
 		// no intersection
@@ -132,8 +134,8 @@ bool Line::Intersect(const glm::vec2& center, float dRadius)
 		// either solution may be on or off the ray so need to test both
 		// t1 is always the smaller value, because BOTH discriminant and
 		// a are nonnegative.
-		float dRoot1 = (-dBValue - dDiscriminant) / (2.0F * dAValue);
-		float dRoot2 = (-dBValue + dDiscriminant) / (2.0F * dAValue);
+		double dRoot1 = (-dBValue - dDiscriminant) / (2.0 * dAValue);
+		double dRoot2 = (-dBValue + dDiscriminant) / (2.0 * dAValue);
 
 		// 3x HIT cases:
 		//          -o->             --|-->  |            |  --|->
@@ -170,26 +172,26 @@ bool Line::Intersect(const glm::vec2& center, float dRadius)
 	}
 }
 
-bool IsEqual(float first, float second) {
+bool IsEqual(double first, double second) {
 	bool equality = false;
 
-	if (abs(first - second) < FLT_EPSILON)	{
+	if (abs(first - second) < std::numeric_limits<double>::epsilon())	{
 		equality = true;
 	}
 
 	return equality;
 }
 
-ProjectionResult Line::Project(glm::vec2& pointToProject,
-	glm::vec2& intersectionPoint,
-	float& proportion) {
+ProjectionResult Line::Project(glm::dvec2& pointToProject,
+	glm::dvec2& intersectionPoint,
+	double& proportion) {
 	ProjectionResult result = ProjectionResult::ePR_WITHINLINE;
 
-	float U = 0.0F;
-	float LineMag = Magnitude(mPoint1, mPoint2);
+	double U = 0.0F;
+	double LineMag = Magnitude(mPoint1, mPoint2);
 
-	glm::vec2 pointStartDiff;
-	glm::vec2 EndStartDiff;
+	glm::dvec2 pointStartDiff;
+	glm::dvec2 EndStartDiff;
 
 	if (IsEqual(LineMag, 0.0F))	{
 		U = 0.0F;
@@ -220,16 +222,16 @@ ProjectionResult Line::Project(glm::vec2& pointToProject,
 }
 
 bool Line::Intersect(const Line& otherLine) {
-	float d;
-	float ra, rb, x, y;
-	float ax1 = mPoint1.x;
-	float ay1 = mPoint1.y;
-	float ax2 = mPoint2.x;
-	float ay2 = mPoint2.y;
-	float bx1 = otherLine.mPoint1.x;
-	float by1 = otherLine.mPoint1.y;
-	float bx2 = otherLine.mPoint2.x;
-	float by2 = otherLine.mPoint2.y;
+	double d;
+	double ra, rb, x, y;
+	double ax1 = mPoint1.x;
+	double ay1 = mPoint1.y;
+	double ax2 = mPoint2.x;
+	double ay2 = mPoint2.y;
+	double bx1 = otherLine.mPoint1.x;
+	double by1 = otherLine.mPoint1.y;
+	double bx2 = otherLine.mPoint2.x;
+	double by2 = otherLine.mPoint2.y;
 
 	d = ((ax2 - ax1)*(by1 - by2) - (ay2 - ay1)*(bx1 - bx2));
 
@@ -278,22 +280,22 @@ bool Line::Intersect(const Line& otherLine) {
 	return true;			
 }
 
-IntersectionResult Line::Intersect(const Line& otherLine, glm::vec2& intersection) {
+IntersectionResult Line::Intersect(const Line& otherLine, glm::dvec2& intersection) {
 	IntersectionResult result = IntersectionResult::eIR_NOT_INTERSECT;
 
-	glm::vec2 myp2minusp1 = mPoint2 - mPoint1;
-	glm::vec2 otherp2minusp1 = otherLine.mPoint2 - otherLine.mPoint1;
-	glm::vec2 myp1minusotherp1 = mPoint1 - otherLine.mPoint1;
+	glm::dvec2 myp2minusp1 = mPoint2 - mPoint1;
+	glm::dvec2 otherp2minusp1 = otherLine.mPoint2 - otherLine.mPoint1;
+	glm::dvec2 myp1minusotherp1 = mPoint1 - otherLine.mPoint1;
 
-	float denom =
+	double denom =
 		(otherp2minusp1.y * myp2minusp1.x) -
 		(otherp2minusp1.x * myp2minusp1.y);
 
-	float nume_a =
+	double nume_a =
 		(otherp2minusp1.x * myp1minusotherp1.y) -
 		(otherp2minusp1.y * myp1minusotherp1.x);
 
-	float nume_b =
+	double nume_b =
 		(myp2minusp1.x * myp1minusotherp1.y) -
 		(myp2minusp1.y * myp1minusotherp1.x);
 
@@ -308,8 +310,8 @@ IntersectionResult Line::Intersect(const Line& otherLine, glm::vec2& intersectio
 		}
 	}
 	else {
-		float ua = nume_a / denom;
-		float ub = nume_b / denom;
+		double ua = nume_a / denom;
+		double ub = nume_b / denom;
 
 		if ((ua >= 0.0F) && (ua <= 1.0F) && (ub >= 0.0F) && (ub <= 1.0F)) {
 			// Get the intersection point.

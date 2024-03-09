@@ -186,6 +186,12 @@ namespace gl {
         glTranslatef(tx, ty, 0);
     }
 
+    void GLBasicPainter::Translate(double tx, double ty)
+    {
+        glMatrixMode(GL_MODELVIEW);
+        glTranslated(tx, ty, 0);
+    }
+
     void GLBasicPainter::Translate(const glm::vec2& translation)    {
         glMatrixMode(GL_MODELVIEW);
         glTranslatef(translation.x, translation.y, 0);
@@ -216,8 +222,8 @@ namespace gl {
             SetColor(mActivePen.GetColor());
 
             glBegin(GL_LINES);
-            glVertex2f(line.GetX1(), line.GetY1());
-            glVertex2f(line.GetX2(), line.GetY2());
+            glVertex2d(line.GetX1(), line.GetY1());
+            glVertex2d(line.GetX2(), line.GetY2());
             glEnd();
         }
         else {
@@ -225,16 +231,16 @@ namespace gl {
             SetColor(mActivePen.GetColor(true));
 
             glBegin(GL_LINES);
-            glVertex2f(line.GetX1(), line.GetY1());
-            glVertex2f(line.GetX2(), line.GetY2());
+            glVertex2d(line.GetX1(), line.GetY1());
+            glVertex2d(line.GetX2(), line.GetY2());
             glEnd();
 
             SetPenParameters(false);
             SetColor(mActivePen.GetColor(false));
 
             glBegin(GL_LINES);
-            glVertex2f(line.GetX1(), line.GetY1());
-            glVertex2f(line.GetX2(), line.GetY2());
+            glVertex2d(line.GetX1(), line.GetY1());
+            glVertex2d(line.GetX2(), line.GetY2());
             glEnd();
         }
     }
@@ -243,7 +249,7 @@ namespace gl {
         SetColor(mActivePen.GetColor());
 
         glBegin(GL_POINTS);
-        glVertex2f(point.GetX(), point.GetY());
+        glVertex2d(point.GetX(), point.GetY());
         glEnd();
     }
 
@@ -282,11 +288,12 @@ namespace gl {
     }
 
     void GLBasicPainter::DrawPolyline(infra::Polygon& polygon, bool isLoop) {
+        glEnableClientState(GL_VERTEX_ARRAY);
         if (false == mActivePen.HasStroke()) {
             SetColor(mActivePen.GetColor());
             glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), polygon.GetPointPtr());
 
-            if (true == isLoop)    {
+            if (true == isLoop) {
                 glDrawArrays(GL_LINE_LOOP, 0, polygon.GetPointCount());
             }
             else {
@@ -306,6 +313,40 @@ namespace gl {
             glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), polygon.GetPointPtr());
             glDrawArrays(GL_LINE_STRIP, 0, polygon.GetPointCount());
         }
+        glDisableClientState(GL_VERTEX_ARRAY);
+    }
+
+    void GLBasicPainter::DrawPolylineRaw(double* polyline, uint32_t pointCount, bool isLoop) {
+        glEnableClientState(GL_VERTEX_ARRAY);
+        if (nullptr == polyline) {
+            return;
+        }
+
+        if (false == mActivePen.HasStroke()) {
+            SetColor(mActivePen.GetColor());
+            glVertexPointer(2, GL_DOUBLE, sizeof(glm::dvec2), polyline);
+
+            if (true == isLoop) {
+                glDrawArrays(GL_LINE_LOOP, 0, pointCount);
+            }
+            else {
+                glDrawArrays(GL_LINE_STRIP, 0, pointCount);
+            }
+        }
+        else {
+            this->SetPenParameters(true);
+            this->SetColor(mActivePen.GetColor(true));
+
+            glVertexPointer(2, GL_DOUBLE, sizeof(glm::dvec2), polyline);
+            glDrawArrays(GL_LINE_STRIP, 0, pointCount);
+
+            this->SetPenParameters(false);
+            this->SetColor(mActivePen.GetColor(false));
+
+            glVertexPointer(2, GL_DOUBLE, sizeof(glm::dvec2), polyline);
+            glDrawArrays(GL_LINE_STRIP, 0, pointCount);
+        }
+        glDisableClientState(GL_VERTEX_ARRAY);
     }
 
     void GLBasicPainter::DrawPolygon(infra::Polygon& polygon) {
@@ -313,6 +354,7 @@ namespace gl {
         SetColor(mActiveBrush.GetColor());
         glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), polygon.GetPointPtr());
         glDrawArrays(GL_POLYGON, 0, polygon.GetPointCount());
+        glDisableClientState(GL_VERTEX_ARRAY);
 
         if (PenStyle::NoPen != mActivePen.GetPenStyle()) {
             DrawPolyline(polygon, true);
@@ -331,6 +373,7 @@ namespace gl {
             SetColor(mActiveBrush.GetColor());
             glVertexPointer(2, GL_FLOAT, sizeof(glm::vec2), triangulatePolygon.GetPointPtr());
             glDrawArrays(GL_TRIANGLES, 0, triangulatePolygon.GetPointCount());
+            glDisableClientState(GL_VERTEX_ARRAY);
 
             if (PenStyle::NoPen != mActivePen.GetPenStyle()) {
                 DrawPolyline(polygon, true);

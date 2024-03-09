@@ -12,10 +12,13 @@
 #include <utility>
 #include <cstdint>
 #include <string>
+#include <memory>
 #include <string_view>
 
 #include "layer_type.h"
 #include "layer_status.h"
+
+#include "utility/parameter_set.h"
 
 namespace gis {
 	class LayerRenderer;
@@ -23,27 +26,20 @@ namespace gis {
 
 	class Layer	{
 	public:
-		bool IsLayerVisible() const {
-			return (GetLayerStatus() == LayerStatus::Visible);
-		}
+		bool IsLayerVisible() const;
 		virtual bool Initialize() = 0;
- 		virtual std::shared_ptr<LayerRenderer> Get2DRenderer() = 0;
-		virtual std::shared_ptr<LayerController> Get2DController() = 0;
-		virtual LayerType GetLayerType() = 0;
-		virtual bool HasLayerLabelDisplay() const = 0;
-        virtual std::string GetLayerName() const {
-            return mLayerName;
-        }
-        virtual void SetLayerName(std::string_view layerName) {
-            mLayerName = layerName;
-        }
-        virtual LayerStatus GetLayerStatus() const {
-            return mLayerStatus;
-        }
-        virtual void SetLayerStatus(LayerStatus status) {
-            mLayerStatus = status;
-        }
+ 		virtual std::shared_ptr<LayerRenderer> Renderer() = 0;
+		virtual std::shared_ptr<LayerController> Controller() = 0;
+		virtual LayerType Type() = 0;
+		virtual bool HasLabelDisplay() const = 0;
+        virtual std::string Name() const;
+        virtual void SetName(std::string_view layerName);
+        virtual LayerStatus Status() const;
+        virtual void SetStatus(LayerStatus status);
+        virtual void SetMetadata(const ParameterSet& layerMetadata);
+        ParameterSet Metadata() const;
     protected:
+        ParameterSet mLayerMetadata;
         LayerStatus mLayerStatus{ LayerStatus::Visible };
         std::string mLayerName{ "NoNameProvided" };
 	};

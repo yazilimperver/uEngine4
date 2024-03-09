@@ -14,7 +14,8 @@
 namespace gis{
 	enum class LayerType : int32_t	{
 		Raster,
-		Vector,
+        Vector,
+        UI,     // ImGUI Katmanlari
 		Custom
 	};
 }

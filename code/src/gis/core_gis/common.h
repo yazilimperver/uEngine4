@@ -32,6 +32,8 @@ typedef glm::tvec2<int32_t>  PointInPixels;
 typedef glm::tvec2<int32_t>  TmsTileInfo;
 typedef glm::tvec2<int32_t>  GoogleTileInfo;
 
+// Guney bati ile kuzey dogu kordinatlari tutulur
+// Bottom left, top right
 typedef std::tuple<gis::GeoPoint, gis::GeoPoint> GeoRectangle;
 typedef std::tuple<PointInMeters, PointInMeters> MercatorRectangle;
 typedef std::tuple<PointInPixels, PointInPixels> PixelRectangle;

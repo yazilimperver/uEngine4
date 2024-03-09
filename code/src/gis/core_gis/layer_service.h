@@ -13,6 +13,7 @@
 #include <string>
 #include <optional>
 #include <string_view>
+#include <functional>
 
 #include "layer_factory.h"
 
@@ -24,26 +25,27 @@ namespace gis {
 
     class LayerService {
 	public:
-		
+        /** @brief   Temel tipler */
+        using SharedLayer = std::shared_ptr<Layer>;
+        using LayerIteratorType = std::vector<SharedLayer>::iterator;
+
+        virtual void MoveUp(int layerIndexToMove) = 0;
+        virtual void MoveDown(int layerIndexToMove) = 0;
+
 		//! Add a geographic layer
-		virtual void AddLayer(std::shared_ptr<Layer> layer) = 0;
+		virtual void AddLayer(SharedLayer layer, uint32_t priority) = 0;
 		virtual void CreateLayer(std::string_view factoryName, ParameterSet layerMetadata) = 0;
 		virtual void RegisterLayerFactory(std::unique_ptr<LayerFactory> layerFactory) = 0;
 
+        //! Katman tiplerine gore butun cizimlar oncesi ve sonrasi yapilacaklar icin ilgili metotlarin gecirelim
+        virtual void SetPreUIDisplayHook(std::function<void(bool)> hookFunc) = 0;
+        virtual void SetPostUIDisplayHook(std::function<void(bool)> hookFunc) = 0;
+
 		//! Get layer
-		virtual std::optional<std::shared_ptr<Layer>> GetLayer(const std::string& layerName) = 0;
-		virtual std::optional<std::shared_ptr<Layer>> GetLayer(int32_t layerHandle) = 0;
+		virtual std::optional<std::shared_ptr<Layer>> Layer(std::string_view layerName) = 0;
 
-		virtual std::optional<LayerStatus> GetLayerStatus(int32_t layerHandle) = 0;
-		virtual std::optional<LayerStatus> GetLayerStatus(const std::string& layerName) = 0;
-		virtual std::optional<int32_t> GetLayerHandle(const std::string& layerName) = 0;
-		virtual void SetLayerStatus(const std::string& layerName, LayerStatus layerStatus) = 0;
-		virtual void SetLayerStatus(int32_t layerHandle, LayerStatus layerStatus) = 0;
-
-		virtual void ResetIterator() = 0;
-		virtual void Next() = 0;
-		virtual bool IsDone() const = 0;
-		virtual std::shared_ptr<Layer> Current() = 0;
+		virtual std::optional<LayerStatus> Status(std::string_view layerName) = 0;
+		virtual void SetStatus(std::string_view layerName, LayerStatus layerStatus) = 0;
     };
 }
 

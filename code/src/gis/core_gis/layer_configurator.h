@@ -13,6 +13,8 @@
 
 namespace gis {
     struct RasterLayerMetadata;
+    struct VectorLayerMetadata;
+    struct CustomLayerMetadata;
     class LayerService;
 
     class LayerConfigurator {
@@ -21,6 +23,8 @@ namespace gis {
         void Configure(std::string_view layerConfigurationPath);
     private:
         void CreateLayer(const RasterLayerMetadata& metadata);
+        void CreateLayer(const VectorLayerMetadata& metadata);
+        void CreateLayer(const CustomLayerMetadata& metadata);
         LayerService* mLayerService{ nullptr };
     };
 }

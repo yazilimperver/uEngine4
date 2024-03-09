@@ -1,13 +1,13 @@
 /**
- * @file   raster_metadata.h
+ * @file   raster_layer_metadata.h
  * @date   5/20/2023
  * @author Yazilimperver
  * @brief
  * @remark
  */
 
-#ifndef INC_RASTER_METADATA_H
-#define INC_RASTER_METADATA_H
+#ifndef INC_RASTER_LAYER_METADATA_H
+#define INC_RASTER_LAYER_METADATA_H
 
 #include <cstdint>
 #include <string>
@@ -32,7 +32,7 @@ namespace gis {
         std::string Extension;
     };
 }
-#endif	// INC_RASTER_METADATA_H
+#endif	// INC_RASTER_LAYER_METADATA_H
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

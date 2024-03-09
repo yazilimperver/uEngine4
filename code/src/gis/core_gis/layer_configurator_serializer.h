@@ -10,6 +10,8 @@
 #define INC_LAYER_CONFIGURATOR_SERIALIZER_H
 
 #include "raster_layer_metadata.h"
+#include "vector_layer_metadata.h"
+#include "custom_layer_metadata.h"
 #include "layer_configuration.h"
 
 #include <cereal/archives/json.hpp>
@@ -17,35 +19,60 @@
 #include <cereal/types/string.hpp>
 
 namespace gis {
-	template<class Archive>
-	void serialize(Archive& archive, gis::RasterLayerMetadata& m) {
+    template<class Archive>
+    void serialize(Archive& archive, gis::RasterLayerMetadata& m) {
+        auto tileType = static_cast<int32_t>(m.TileType);
 
-		auto tileType = static_cast<int32_t>(m.TileType);
-
-		archive(cereal::make_nvp("LayerFactory", m.LayerFactory), 
-			cereal::make_nvp("TileType", tileType),
-			cereal::make_nvp("IsOnline", m.IsOnline),
-			cereal::make_nvp("InitialVisibility", m.InitialVisibility),
+        archive(cereal::make_nvp("LayerFactory", m.LayerFactory), 
+            cereal::make_nvp("TileType", tileType),
+            cereal::make_nvp("IsOnline", m.IsOnline),
+            cereal::make_nvp("InitialVisibility", m.InitialVisibility),
             cereal::make_nvp("TileSize", m.TileSize),
-			cereal::make_nvp("UseGLRenderer", m.UseGLRenderer),
-			cereal::make_nvp("MinZoomLevel", m.MinZoomLevel),
-			cereal::make_nvp("MaxZoomLevel", m.MaxZoomLevel),
-			cereal::make_nvp("Priority", m.Priority),
-			cereal::make_nvp("Transparency", m.Transparency),
-			cereal::make_nvp("Path", m.Path),
-			cereal::make_nvp("Name", m.Name),
-			cereal::make_nvp("Extension", m.Extension));
+            cereal::make_nvp("UseGLRenderer", m.UseGLRenderer),
+            cereal::make_nvp("MinZoomLevel", m.MinZoomLevel),
+            cereal::make_nvp("MaxZoomLevel", m.MaxZoomLevel),
+            cereal::make_nvp("Priority", m.Priority),
+            cereal::make_nvp("Transparency", m.Transparency),
+            cereal::make_nvp("Path", m.Path),
+            cereal::make_nvp("Name", m.Name),
+            cereal::make_nvp("Extension", m.Extension));
 
-		m.TileType = static_cast<gis::TileType>(tileType);
-	}
+        m.TileType = static_cast<gis::TileType>(tileType);
+    }
 
-	template<class Archive>
-	void serialize(Archive& archive, gis::LayerConfiguration& m) {
-		archive(cereal::make_nvp("RasterLayers", m.RasterLayers));
-	}
+    template<class Archive>
+    void serialize(Archive& archive, gis::VectorLayerMetadata& m) {
+        archive(cereal::make_nvp("LayerFactory", m.LayerFactory),
+            cereal::make_nvp("IsOnline", m.IsOnline),
+            cereal::make_nvp("InitialVisibility", m.InitialVisibility),
+            cereal::make_nvp("UseGLRenderer", m.UseGLRenderer),
+            cereal::make_nvp("MinZoomLevel", m.MinZoomLevel),
+            cereal::make_nvp("MaxZoomLevel", m.MaxZoomLevel),
+            cereal::make_nvp("Priority", m.Priority),
+            cereal::make_nvp("Transparency", m.Transparency),
+            cereal::make_nvp("Path", m.Path),
+            cereal::make_nvp("Name", m.Name),
+            cereal::make_nvp("LabelFieldName", m.LabelFieldName),
+            cereal::make_nvp("Extension", m.Extension));
+    }
+
+    template<class Archive>
+    void serialize(Archive& archive, gis::CustomLayerMetadata& m) {
+        archive(cereal::make_nvp("LayerFactory", m.LayerFactory),
+            cereal::make_nvp("InitialVisibility", m.InitialVisibility),
+            cereal::make_nvp("Priority", m.Priority),
+            cereal::make_nvp("Name", m.Name));
+    }
+
+    template<class Archive>
+    void serialize(Archive& archive, gis::LayerConfiguration& m) {
+        archive(cereal::make_nvp("RasterLayers", m.RasterLayers));
+        archive(cereal::make_nvp("VectorLayers", m.VectorLayers));
+        archive(cereal::make_nvp("CustomLayers", m.CustomLayers));
+    }
 }
 
-#endif	// INC_LAYER_CONFIGURATOR_SERIALIZER_H
+#endif    // INC_LAYER_CONFIGURATOR_SERIALIZER_H
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

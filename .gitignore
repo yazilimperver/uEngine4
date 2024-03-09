@@ -33,6 +33,9 @@
 *.out
 *.app
 
+# Harita verileri
+assets/map_data/*
+
 # Cikti dizini
 code/src/out/*
 
@@ -435,6 +438,7 @@ FodyWeavers.xsd
 *.msix
 *.msm
 *.msp
+
 
 # JetBrains Rider
 *.sln.iml
