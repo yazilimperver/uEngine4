@@ -1,0 +1,19 @@
+set(GRAPHIC_FILES
+    graphics/color.h	
+    graphics/color_serializer.h
+    graphics/common.h
+    graphics/envelope.h
+    graphics/rectangle.h
+    graphics/rectangle_serializer.h
+    graphics/line.h
+    graphics/point.h
+    graphics/polygon.h
+    graphics/polygon_triangulator.h
+    graphics/intersection_result.h
+    graphics/projection_result.h
+	graphics/envelope.cpp
+	graphics/line.cpp
+	graphics/point.cpp
+	graphics/polygon.cpp
+	graphics/polygon_triangulator.cpp
+)

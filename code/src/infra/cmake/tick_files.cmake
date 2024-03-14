@@ -1,0 +1,13 @@
+set(TICK_FILES
+    tick/fps_ticker.h
+    tick/game_ticker.h
+    tick/graphical_tickable.h
+    tick/periodic_ticker.h
+    tick/sdl_app_ticker.h
+    tick/tick_data.h
+    tick/tickable.h
+    tick/fps_ticker.cpp
+    tick/game_ticker.cpp
+    tick/periodic_ticker.cpp
+    tick/sdl_app_ticker.cpp
+)

@@ -1,99 +1,96 @@
-﻿cmake_minimum_required(VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
-# Proje ismimiz. Bu VS kullanimi durumunda solutiona karsilik gelmekte
-# Alt CMakeLists.txt icerisinden bu dizine `ApplicationMonitorTool_SOURCE_DIR` ile erisebiliriz
-project(uEngine4)
+# CMake ile ilgili daha deyali log icin asagidaki satiri acmamiz gerekiyor
+#set(CMAKE_FIND_DEBUG_MODE 1)
 
-# Otomatik surum ile ilgili konfigurasyon dosyasi olusturalim
-set(PROJECT_NAME "uEngine4 Library")
-set(CMAKE_PROJECT_VERSION_MAJOR 4)
-set(CMAKE_PROJECT_VERSION_MINOR 0)
-set(CMAKE_PROJECT_VERSION_PATCH 0)
+# https://cmake.org/cmake/help/latest/policy/CMP0135.html ilgili policy aktiflestirmek icin
+cmake_policy(SET CMP0135 NEW)
 
-# Temel dizin animlamalarini yapalim
-set(EXT_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/ext")
+# cmake konfigurasyon dizini
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
-# Baslik dosyalarini ayri tutma kararimiz isiginda ilgili dizinleri ekleyelim
-set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
-set(BASIC_ENGINE_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/basic_engine")
-set(GIS_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gis")
-set(GLDIR_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gl")
-set(FREETYPE_INCLUDE_DIRS "${EXT_INCLUDE_FOLDER}/freetype-master/include")
+if(WIN32)
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2-2.30.1/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2_image-2.8.2/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/glew-2.2.0")
+endif()
 
+# Ortak cmake betiklerini alalim
+include(StandardOptions)    # Standard ayarlar
+include(InsourceGuard)      # Source icerisinde buildi onleme
 
-# SDL2 modulleri icin dizin
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake/sdl2)
+# Proje ismi, surum ve dil ayarlari
+project(uengine4
+    VERSION   1.0.0
+    LANGUAGES C CXX
+)
 
-# CMake dosyalari icin nereye bakalim
-set(SDLFONT_CACHE_DIR "${EXT_INCLUDE_FOLDER}/SDL_FontCache-master")
-set(FREEGLUT_DIR "${EXT_INCLUDE_FOLDER}/freeglut-2.8.0")
-set(CEREAL_DIR "${EXT_INCLUDE_FOLDER}/cereal-1.3.2")
-set(THREAD_POOL_DIR "${EXT_INCLUDE_FOLDER}/thread-pool-master")
-set(GLM_DIR "${EXT_INCLUDE_FOLDER}/glm-master")
-set(TILESON_DIR "${EXT_INCLUDE_FOLDER}/tileson-master")
-set(FMT_DIR "${EXT_INCLUDE_FOLDER}/fmt-8.1.1")
-set(IMGUI_DIR "${EXT_INCLUDE_FOLDER}/imgui-master")
-set(DEVIL_DIR "${EXT_INCLUDE_FOLDER}/devIL-1.8.0")
-set(STB_DIR "${EXT_INCLUDE_FOLDER}/stb_image-2.28")
-set(FREETYPE_DIR  "${EXT_INCLUDE_FOLDER}/freetype-master")
-set(FREETYPE_LIBRARY "${EXT_INCLUDE_FOLDER}/freetype-master/build/Debug/freetyped.lib")
-
-
-set(OpenGL_GL_PREFERENCE LEGACY)
-
-# Projeleri organize ederken dizinleri kullanmayi seciyioruz
-set_property(GLOBAL PROPERTY USE_FOLDERS ON)
-
-# Tepe Cmake dosyasinda C++ standardini eklyelim
+# Tepe Cmake dosyasinda C++ standardini eklyelim (projeler arasi uyumsuzlugun onune gecelim)
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-# Debug derleme çıktıları sonuna d ekleyelim
-set(CMAKE_DEBUG_POSTFIX d)
+# OS Spesifik isler, proje tanimindan sonra olmali
+include(TargetOSSetup)
+include(CompilerOptions)
+include(FolderOptions)
+include(OpenGLOptions)
+
+# Projeleri organize ederken dizinleri kullanmayi seciyioruz
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 # Dizinleri ortaklama icin boyle bir yontem izleyebiliriz
-foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
-    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
-    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
-    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
-    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/out )
-endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
-
-# CMake üzerinden test kabiliyetlerini aktifleştirmek
-enable_testing()
-
-# GTesti sisteme kurmaya gerek yok 
-# Diger ayarlar icin https://github.com/google/googletest/blob/master/CMakeLists.txt goz atabilirsiniz
-set(INSTALL_GTEST OFF CACHE INTERNAL "")
+#foreach( OUTPUTCONFIG ${CMAKE_CONFIGURATION_TYPES} )
+#    string( TOUPPER ${OUTPUTCONFIG} OUTPUTCONFIG )
+#    set( CMAKE_ARCHIVE_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
+#    set( CMAKE_LIBRARY_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/lib )
+#    set( CMAKE_RUNTIME_OUTPUT_DIRECTORY_${OUTPUTCONFIG} ${CMAKE_SOURCE_DIR}/out )
+#endforeach( OUTPUTCONFIG CMAKE_CONFIGURATION_TYPES )
 
 # If you only include this third party in PRIVATE source files, you do not need to install it
 # when your main project gets installed.
 set(JSON_Install OFF CACHE INTERNAL "")
 
-# Windows uzerinde calisma zamani hatalarini almamak icin bunu ekliyoruz.
-# Varsayılan olarak, yeni Visual Studio projeleri C çalışma zamanlarını dinamik olarak birbirine bağlar 
-# ancak GoogleTest bunları statik olarak bağlar. Bu durumda asağıdakine benzer hatalar alabilirsiniz:
-# "error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MT_StaticRelease' doesn't match value 'MD_DynamicRelease'"
-set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+if(BUILD_TESTING)
+     # CMake üzerinden test kabiliyetlerini aktifleştirmek
+     enable_testing()
+
+     # GTesti sisteme kurmaya gerek yok 
+     # Diger ayarlar icin https://github.com/google/googletest/blob/master/CMakeLists.txt goz atabilirsiniz
+     set(INSTALL_GTEST OFF CACHE INTERNAL "")
+     # Windows uzerinde calisma zamani hatalarini almamak icin bunu ekliyoruz.
+     # Varsayılan olarak, yeni Visual Studio projeleri C çalışma zamanlarını dinamik olarak birbirine bağlar 
+     # ancak GoogleTest bunları statik olarak bağlar. Bu durumda asağıdakine benzer hatalar alabilirsiniz:
+     # "error LNK2038: mismatch detected for 'RuntimeLibrary': value 'MT_StaticRelease' doesn't match value 'MD_DynamicRelease'"
+     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+endif()
+
+if(TARGET_OS STREQUAL "Windows")
+     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
+
+# SPDLogu indirelim
+include(FetchContent)
+FetchContent_Declare(
+     spdlog
+     GIT_REPOSITORY https://github.com/gabime/spdlog.git
+     GIT_TAG        v1.8.2)
+
+FetchContent_MakeAvailable(spdlog)
 
 # Uygulama alt dizinlerini ekleyelim
-add_subdirectory ("apps")
+# add_subdirectory ("apps")
 
 # Statik kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("infra")
-add_subdirectory ("gis")
-add_subdirectory ("gl")
-add_subdirectory ("basic_engine")
+#add_subdirectory ("gis")
+#add_subdirectory ("gl")
+#add_subdirectory ("basic_engine")
 
 # Dis kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("ext")
 
-# Test projelerini ekleyelim
-add_subdirectory ("test")
-
-if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
-     message(STATUS "Windows icin yazilim olusturma dosyalari hazirlaniyor.")
-elseif (CMAKE_SYSTEM_NAME STREQUAL "Linux")
-     message(STATUS "Linux icin yazilim olusturma dosyalari hazirlaniyor.")    
+if(BUILD_TESTING)
+     # Test projelerini ekleyelim
+     add_subdirectory ("test")
 endif()

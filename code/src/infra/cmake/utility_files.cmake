@@ -1,0 +1,18 @@
+set(UTILITY_FILES
+    utility/file_operations.h
+    utility/json_data_parser.h
+    utility/parameter_set.h
+    utility/perf_utils.h
+    utility/property_item.h
+    utility/statistics.h
+    utility/type_name.h
+    utility/less_by_pairs.h
+    utility/unique_id_generator.h
+    utility/less_by_pairs.cpp
+    utility/file_operations.cpp
+    utility/statistics.cpp
+    utility/property_item.cpp
+    utility/perf_utils.cpp
+    utility/parameter_set.cpp
+    utility/unique_id_generator.cpp	
+)

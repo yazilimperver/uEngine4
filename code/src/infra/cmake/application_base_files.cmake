@@ -1,0 +1,24 @@
+set(APP_BASE_FILES
+    application_base/application_base.h
+    application_base/client_graphic_application.h
+    application_base/finger_data.h
+    application_base/gamepad_axis_data.h
+    application_base/gamepad_button_data.h
+    application_base/gamepad_data.h
+    application_base/gamepad_event_listener.h
+    application_base/input_actions.h
+    application_base/keyboard_codes.h
+    application_base/keyboard_event_listener.h
+    application_base/keyboard_modifiers.h
+    application_base/mouse_buttons.h
+    application_base/mouse_event_listener.h
+    application_base/mouse_move_event_listener.h
+    application_base/mouse_wheel_event_listener.h
+    application_base/sdl_event_listener.h
+    application_base/touch_action.h
+    application_base/touch_data.h
+    application_base/touch_event_handler.h
+    application_base/touch_service.h
+    application_base/window_parameter.h
+    application_base/window_parameter_serializer.h
+)

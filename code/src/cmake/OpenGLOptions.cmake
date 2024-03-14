@@ -1,0 +1,1 @@
+set(OpenGL_GL_PREFERENCE LEGACY)

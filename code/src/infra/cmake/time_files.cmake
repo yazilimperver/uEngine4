@@ -1,0 +1,17 @@
+set(TIME_FILES
+    time/chrono_util.h
+    time/fps_timer.h
+    time/sleep_util.h
+    time/stop_watch.h
+    time/stoppable_timer.h
+    time/threaded_timer.h
+    time/timestamp.h
+    time/chrono_util.cpp
+    time/fps_timer.cpp
+    time/sleep_util.cpp
+    time/stop_watch.cpp
+    time/stoppable_timer.cpp
+    time/threaded_timer.cpp
+    time/timestamp.cpp
+    time/threaded_timer.cpp
+)

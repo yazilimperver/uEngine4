@@ -1,0 +1,11 @@
+set(SDL_APPLICATION_FILES
+    sdl_application/sdl_application.h
+    sdl_application/sdl_gamepad_controller.h
+    sdl_application/sdl_parameters.h
+    sdl_application/sdl_parameters_serializer.h
+    sdl_application/sdl_touch_service.h
+    sdl_application/sdl_application.cpp
+    sdl_application/sdl_application_common.cpp
+    sdl_application/sdl_gamepad_controller.cpp
+    sdl_application/sdl_touch_service.cpp
+)

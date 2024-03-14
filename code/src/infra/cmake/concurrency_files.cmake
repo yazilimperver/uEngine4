@@ -1,0 +1,12 @@
+set(CONCURRENCY_FILES
+    concurrency/active_object.h
+    concurrency/std_active_object.h
+    concurrency/thread_base.h
+    concurrency/basic_thread_pool.h
+    concurrency/thread_pool.h
+    concurrency/active_object.cpp
+    concurrency/std_active_object.cpp
+    concurrency/thread_base.cpp
+	concurrency/basic_thread_pool.cpp
+	concurrency/thread_pool.cpp
+)
