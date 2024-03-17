@@ -1,6 +1,7 @@
 #include "game_ticker.h"
 
 #include <chrono>
+#include <thread>
 
 #include "spdlog/spdlog.h"
 
@@ -95,7 +96,7 @@ void GameTicker::FixFpsLoop() {
         sleepTime = nextTickTime - GetTimeInMSec();
 
         if (sleepTime > 0) {
-            this_thread::sleep_for(milliseconds(sleepTime));
+            std::this_thread::sleep_for(milliseconds(sleepTime));
         }
 
         current = high_resolution_clock::now();

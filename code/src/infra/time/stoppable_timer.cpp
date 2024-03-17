@@ -9,7 +9,7 @@ void StoppableTimer::Start(std::chrono::milliseconds const& duration, std::funct
     Stop();
     mShouldStop = false;
 
-    mThread = std::thread([=]() {
+    mThread = std::thread([=, this]() {
         auto lock = std::unique_lock<std::mutex>(mMutex);
         mCV.wait_for(lock, duration, [this]() { return mShouldStop.load(); });
 

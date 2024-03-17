@@ -97,13 +97,14 @@ inline void StdActiveObject::PostEvent(Function&& eventHandler, Args && ...args)
 
 template<typename Function, typename Duration, typename ...Args>
 inline uint64_t StdActiveObject::PostOneTimeTimerEvent(Function eventHandler, const Duration& duration, Args && ...args) {
+    uint64_t unTimerId = unUniqueID;
+    
 #if __cplusplus >= 202002L
     auto timerEventFunc = [eventHandler = std::move(eventHandler), &args...]() mutable {
-        std::invoke(function, args...);
+        std::invoke(eventHandler, args...);
     };
 #else        
     // C++ 17 icin ise std::tie ile bir takla gerekiyor
-    uint64_t unTimerId = unUniqueID;
     auto timerEventFunc = [this, unTimerId, eventHandler = std::move(eventHandler), argsTuple = std::tie(args...)]() mutable {
         std::apply(eventHandler, argsTuple);
         mOneShotTimerThreads[unTimerId].join();
@@ -127,7 +128,7 @@ inline uint64_t StdActiveObject::PostPeriodicTimerEvent(Function eventHandler, c
     // C++ 20 de asagidaki gibi de olabiliyor
 #if __cplusplus >= 202002L
     auto timerEventFunc = [eventHandler = std::move(eventHandler), &args...]() mutable {
-        std::invoke(function, args...);
+        std::invoke(eventHandler, args...);
     };
 #else        
     // C++ 17 icin ise std::tie ile bir takla gerekiyor
