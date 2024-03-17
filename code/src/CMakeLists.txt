@@ -84,7 +84,7 @@ FetchContent_MakeAvailable(spdlog)
 # Statik kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("infra")
 add_subdirectory ("gl")
-#add_subdirectory ("gis")
+add_subdirectory ("gis")
 #add_subdirectory ("basic_engine")
 
 # Dis kütüphane alt dizinlerini ekleyelim

@@ -10,9 +10,9 @@
 #define INC_LAYER_CONFIGURATION_H
 
 #include <vector>
-#include <raster_layer_metadata.h>
-#include <vector_layer_metadata.h>
-#include <custom_layer_metadata.h>
+#include "raster_layer_metadata.h"
+#include "vector_layer_metadata.h"
+#include "custom_layer_metadata.h"
 
 namespace gis {
     struct LayerConfiguration {

@@ -1,0 +1,19 @@
+set(PAGER_FILES
+    pager/geo_tile.h
+    pager/pager.h
+    pager/pager_listener.h
+    pager/pager_reference.h
+    pager/pager_service.h
+    pager/tile_id.h
+    pager/tile_loader.h
+    pager/tile_origin.h
+    pager/tile_name_factory.h
+    pager/tile_name_calculator.h
+    pager/gtile_file_calculator.h
+    pager/google_tile_name_factory.h
+    pager/pager.cpp
+    pager/pager_reference.cpp
+    pager/tile_name_calculator.cpp
+    pager/google_tile_name_factory.cpp
+    pager/gtile_file_calculator.cpp
+)

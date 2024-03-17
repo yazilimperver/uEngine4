@@ -1,7 +1,6 @@
 #include "map_view.h"
 
 #include "slippy_map_util.h"
-#define FMT_HEADER_ONLY
 #include "fmt/format.h"
 
 namespace gis {

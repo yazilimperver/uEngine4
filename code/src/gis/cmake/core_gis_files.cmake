@@ -1,0 +1,35 @@
+set(CORE_GIS_FILES
+    core_gis/custom_layer_metadata.h
+    core_gis/layer_status.h
+    core_gis/layer_renderer.h
+    core_gis/layer.h
+    core_gis/layer_iterator.h
+    core_gis/layer_management.h
+    core_gis/layer_service.h
+    core_gis/layer_status.h
+    core_gis/layer_renderer.h
+    core_gis/layer_controller.h
+    core_gis/layer_type.h
+    core_gis/layer_management.cpp
+    core_gis/layer_configurator.h
+    core_gis/layer_configurator.cpp
+    core_gis/layer_configuration.h
+    core_gis/layer_configurator_serializer.h
+    core_gis/layer_factory.h
+    core_gis/raster_layer_metadata.h
+    core_gis/vector_layer_metadata.h
+    core_gis/raster_controller.h
+    core_gis/raster_controller.cpp
+    core_gis/common.h
+    core_gis/layer.cpp
+    core_gis/geo_point.h
+    core_gis/gis_meta_data.h
+    core_gis/map_view.h
+    core_gis/slippy_map_util.h
+    core_gis/tile_tms.h
+    core_gis/geo_point.cpp
+    core_gis/main.cpp
+    core_gis/map_view.cpp
+    core_gis/slippy_map_util.cpp
+    core_gis/tile_tms.cpp
+)
