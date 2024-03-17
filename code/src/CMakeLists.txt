@@ -12,7 +12,7 @@ set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 if(WIN32)
     list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2-2.30.1/cmake")
     list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2_image-2.8.2/cmake")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/glew-2.2.0")
+    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/freetype-master")
 endif()
 
 # Ortak cmake betiklerini alalim
@@ -83,8 +83,8 @@ FetchContent_MakeAvailable(spdlog)
 
 # Statik kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("infra")
+add_subdirectory ("gl")
 #add_subdirectory ("gis")
-#add_subdirectory ("gl")
 #add_subdirectory ("basic_engine")
 
 # Dis kütüphane alt dizinlerini ekleyelim

@@ -1,0 +1,9 @@
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/install/strip.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/install/local.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/install.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/list_install_components.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/rebuild_cache.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/edit_cache.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/showfont.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/glfont.dir
+/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build/CMakeFiles/SDL2_ttf.dir

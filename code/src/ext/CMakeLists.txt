@@ -4,9 +4,17 @@ endif()
 
 add_subdirectory(json-develop)
 add_subdirectory(fmt-8.1.1)
+add_subdirectory(glm)
+
+add_definitions(-DGLEW_STATIC)
+add_subdirectory(glew-cmake)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	# Bu projeyi VS icerisinde ayri bir folderda tutalim
+	set_target_properties(libglew_static PROPERTIES FOLDER ext/glew)
+	set_target_properties(libglew_shared PROPERTIES FOLDER ext/glew)
+	set_target_properties(spdlog PROPERTIES FOLDER ext/spdlog)
+	set_target_properties(glm PROPERTIES FOLDER ext/glm)
 	set_target_properties(fmt PROPERTIES FOLDER ext/fmt)
 	set_target_properties(nlohmann_json PROPERTIES FOLDER ext/json-develop)
 	set_target_properties(gmock PROPERTIES FOLDER ext/GoogleTest)

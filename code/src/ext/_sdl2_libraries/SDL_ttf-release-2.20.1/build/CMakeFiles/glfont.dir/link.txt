@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/glfont.dir/glfont.c.o  -o glfont  -Wl,-rpath,/mnt/d/GitRepository/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/SDL_ttf-release-2.20.1/build:/usr/local/lib /usr/lib/x86_64-linux-gnu/libGL.so libSDL2_ttf-2.0.so.0.2000.1 /usr/local/lib/libSDL2main.a /usr/local/lib/libSDL2-2.0.so.0.2400.0 

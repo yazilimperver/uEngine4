@@ -4,15 +4,13 @@ cmake_minimum_required (VERSION 3.23)
 # Kaynak dosyalari icin hazirlanan ..._files.cmake dosyalarini bulmasi icin ekledik
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(CEREAL REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(GLEW REQUIRED)
 
 # Isimlendirme
 set(TARGET_NAME infra)
 
-# Application Base Dosyalari
+# CMake modul dosyaları
 include(application_base_files)
 include(asset_files)
 include(concurrency_files)
@@ -48,10 +46,11 @@ add_library(${TARGET_NAME} STATIC ${IMGUI_FILES} ${APP_BASE_FILES} ${ASSET_FILES
 
 # kutuphaneleri baglayalim
 target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only
-                                             SDL2::SDL2 SDL2_image::SDL2_image)
+                                             SDL2::SDL2 SDL2_image::SDL2_image libglew_static
+                                             glm::glm-header-only)
 
 # Baslik dosyalarinin yolunu ekleyelim (ImGUI backendleri icin dizin eklenmistir)
-target_include_directories(${TARGET_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIRS} ${GLM_DIR}
+target_include_directories(${TARGET_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${CEREAL_DIR}/include 
                                                   ${INFRA_INCLUDE_FOLDER}/im_gui  
                                                   ${GLDIR_INCLUDE_FOLDER} ${DEVIL_DIR}/include 
-                                                  ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLEW_INCLUDE_DIRS})
+                                                  ${BASIC_ENGINE_INCLUDE_FOLDER})

@@ -13,7 +13,7 @@ ThreadedTimer::~ThreadedTimer() {
 
 void ThreadedTimer::OneShot(auto function, int32_t delayInMsec) {
     mActive = true;
-    mThread = std::make_unique<std::thread>([=]() {
+    mThread = std::make_unique<std::thread>([=, this]() {
         if (!mActive.load())
             return;
         SleepUtil::PreciseSleep(delayInMsec / 1000.0);
@@ -27,7 +27,7 @@ void ThreadedTimer::OneShot(auto function, int32_t delayInMsec) {
 
 void ThreadedTimer::Periodic(auto function, int32_t intervalInMsec) {
     mActive = true;
-    mThread = std::make_unique<std::thread>([=]() {
+    mThread = std::make_unique<std::thread>([=, this]() {
         while (mActive.load()) {
             SleepUtil::PreciseSleep(intervalInMsec / 1000.0);
 

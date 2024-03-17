@@ -1,0 +1,9 @@
+set(GL_TEXTURE_FILES
+    gl_texture/pixel_format.h
+    gl_texture/pixel_type.h
+    gl_texture/texture_asset.h
+    gl_texture/texture_bpp.h
+    gl_texture/texture_common.h
+    gl_texture/texture_info.h
+    gl_texture/texture_asset.cpp
+)

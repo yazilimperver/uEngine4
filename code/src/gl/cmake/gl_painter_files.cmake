@@ -1,0 +1,30 @@
+set(GL_PAINTER_FILES
+    gl_painter/alias_mode.h
+    gl_painter/blend_equation.h
+    gl_painter/blend_factor.h
+    gl_painter/brush.h
+    gl_painter/brush_stippling_data.h
+    gl_painter/brush_style.h
+    gl_painter/color_ramp.h
+    gl_painter/geometry_type.h
+    gl_painter/gl_basic_painter.h
+    gl_painter/gl_include.h
+    gl_painter/gl_support.h
+    gl_painter/pen.h
+    gl_painter/pen_stippling_data.h
+    gl_painter/pen_style.h
+    gl_painter/simple_geometry.h
+    gl_painter/gl_font.h
+    gl_painter/gl_texture.h
+    gl_painter/vertex_data2d.h
+    gl_painter/gl_sprite_sheet.h
+    gl_painter/brush.cpp
+    gl_painter/color_ramp.cpp
+    gl_painter/gl_basic_painter.cpp
+    gl_painter/gl_support.cpp
+    gl_painter/pen.cpp
+    gl_painter/simple_geometry.cpp
+    gl_painter/gl_font.cpp
+    gl_painter/gl_texture.cpp
+    gl_painter/gl_sprite_sheet.cpp
+)
