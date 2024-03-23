@@ -4,7 +4,7 @@
 
 namespace gl {
     GLSpriteSheet::GLSpriteSheet() {
-        mVertexDataBuffer = NULL;
+        mVertexDataBuffer = 0;
     }
 
     GLSpriteSheet::~GLSpriteSheet()  {
@@ -137,9 +137,9 @@ namespace gl {
     }
 
     void GLSpriteSheet::FreeSheet()  {
-        if (mVertexDataBuffer != NULL)  {
+        if (mVertexDataBuffer != 0)  {
             glDeleteBuffers(1, &mVertexDataBuffer);
-            mVertexDataBuffer = NULL;
+            mVertexDataBuffer = 0;
         }
 
         if (mIndexBuffers.size() != 0)  {
@@ -156,7 +156,7 @@ namespace gl {
     }
 
     void GLSpriteSheet::RenderSprite(int32_t index) {
-        if (mVertexDataBuffer != NULL)  {
+        if (mVertexDataBuffer != 0)  {
             glEnable(GL_TEXTURE_2D);
             glBindTexture(GL_TEXTURE_2D, TextureID());
 

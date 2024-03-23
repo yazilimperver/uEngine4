@@ -37,4 +37,4 @@ target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image s
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${TARGET_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER}
-                                                 ${CEREAL_DIR}/include)
+                                                 ${CEREAL_INCLUDE_DIR})

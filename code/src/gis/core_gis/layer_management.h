@@ -63,7 +63,7 @@ namespace gis {
         /** @brief   Katman servisleri */      
         virtual void MoveUp(int layerIndexToMove) override;
         virtual void MoveDown(int layerIndexToMove) override;
-        virtual std::optional<SharedLayer> Layer(std::string_view layerName);
+        virtual std::optional<SharedLayer> GetLayer(std::string_view layerName);
         virtual std::optional<LayerStatus> Status(std::string_view layerName);
         virtual void SetStatus(std::string_view layerName, LayerStatus layerStatus);
         

@@ -171,7 +171,7 @@ namespace gl {
     }
 
     bool GLFont::LoadFreeType(std::string_view path, GLuint pixelSize) {
-        FT_Error error = NULL;
+        FT_Error error = 0;
         
         error = FT_Init_FreeType(&mLibrary);
         if (error) {
@@ -230,7 +230,7 @@ namespace gl {
                     }
                     else {
                         spdlog::error("Unable to load glyph. FreeType error:%X\n", error);
-                        error = NULL;
+                        error = 0;
                     }
                 }
 
@@ -303,7 +303,7 @@ namespace gl {
         }
 
         FT_Done_FreeType(mLibrary);
-        return error == NULL;
+        return error == 0;
     }
 
     void GLFont::FreeFont()  {

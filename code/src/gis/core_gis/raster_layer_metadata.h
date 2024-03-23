@@ -6,8 +6,8 @@
  * @remark
  */
 
-#ifndef INC_RASTER_LAYER_METADATA_H
-#define INC_RASTER_LAYER_METADATA_H
+#ifndef RASTER_LAYER_METADATA
+#define RASTER_LAYER_METADATA
 
 #include <cstdint>
 #include <string>
@@ -18,7 +18,7 @@ namespace gis {
     //! Represent SDL parameters
     struct RasterLayerMetadata {
         std::string LayerFactory;
-        TileType TileType{ TileType::XYZ };
+        gis::TileType TileType{ TileType::XYZ };
         bool IsOnline{false};
         bool InitialVisibility{ true };
         bool UseGLRenderer{ true }; // false ise SDL kullanilacak
@@ -32,7 +32,7 @@ namespace gis {
         std::string Extension;
     };
 }
-#endif	// INC_RASTER_LAYER_METADATA_H
+#endif /* RASTER_LAYER_METADATA */
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

@@ -9,11 +9,12 @@
 //! TODO: Check for android
 #ifdef WIN32
     #include <Windows.h>
-    #include <GL/glew.h>
 #endif
 
+#include <GL/glew.h>
+
 #ifndef ANDROID
-    #include <GL/GL.h>
+    #include <GL/gl.h>
 #else
     #include <GLES2/gl2.h>
     #include <GLES/glext.h>
@@ -151,6 +152,8 @@ namespace gl {
             mTextureInfo.IsRepeated = isRepeated;
 #ifdef ANDROID
             static bool textureEdgeClamp = true;
+#elif __linux__            
+            static bool textureEdgeClamp = GL_SGIS_texture_edge_clamp != 0;
 #else
             static bool textureEdgeClamp = GLEW_EXT_texture_edge_clamp != 0;
 #endif
@@ -179,6 +182,9 @@ namespace gl {
     bool TextureAsset::GenerateMipmap()  {
 #ifdef ANDROID
         if (!GL_OES_framebuffer_object)
+            return false;
+#elif __linux__   
+        if (!GL_EXT_framebuffer_object)
             return false;
 #else
         if (!GLEW_EXT_framebuffer_object)

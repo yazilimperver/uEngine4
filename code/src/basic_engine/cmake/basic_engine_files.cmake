@@ -1,0 +1,12 @@
+set(BASIC_ENGINE_FILES
+    basic_engine/camera.h
+    basic_engine/common.h
+    basic_engine/game.h
+    basic_engine/sprite.h
+    basic_engine/sprite_parameter.h
+    basic_engine/transformation.h
+    basic_engine/camera.cpp
+    basic_engine/game.cpp
+    basic_engine/sprite.cpp
+    basic_engine/transformation.cpp
+)

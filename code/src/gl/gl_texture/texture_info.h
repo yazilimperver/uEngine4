@@ -21,10 +21,10 @@ namespace gl {
         bool               IsEverBinded = false;
         uint32_t           Width = 1;
         uint32_t           Height = 1;
-        PixelType          PixelType;
-        PixelFormat        PixelFormat;
+        gl::PixelType      PixelType;
+        gl::PixelFormat    PixelFormat;
         // TODO internal pixel format
-        TextureBPP         BPP;
+        gl::TextureBPP     BPP;
         bool               IsCompressed;
         bool               HasMipmap = false;
         uint32_t           MipMapCount = 0;

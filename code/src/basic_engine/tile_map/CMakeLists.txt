@@ -13,7 +13,8 @@ set(HEADER_FILES
 	layer.h
 	object_layer.h
 	tile_layer.h
-	tile_map.h)
+	tile_map.h
+)
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
 source_group("Header Files" FILES ${HEADER_FILES})
@@ -24,7 +25,8 @@ set(SOURCE_FILES
 	image_layer.cpp
 	object_layer.cpp
 	tile_layer.cpp
-	tile_map.cpp )
+	tile_map.cpp 
+)
 
 # Kaynak dosya grubu (VS altindaki filtre gibi)
 source_group("Source Files" FILES ${SOURCE_FILES})

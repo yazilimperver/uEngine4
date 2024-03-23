@@ -146,7 +146,7 @@ namespace gis {
         mPostUIHook = hookFunc;
     }
 
-    std::optional<LayerService::SharedLayer> LayerManagement::Layer(std::string_view layerName) {
+    std::optional<LayerService::SharedLayer> LayerManagement::GetLayer(std::string_view layerName) {
         if (auto itr = FindLayerByName(layerName); itr != mLayers.end()) {
             return *itr;
         }

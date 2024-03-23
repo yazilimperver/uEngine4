@@ -13,7 +13,8 @@ set(HEADER_FILES
 	common.h
 	sprite_sheet.h
 	sprite_sheet_parameters.h
-	sprite_sheet_serializer.h)
+	sprite_sheet_serializer.h
+)
 
 # Baslik dosya grubu (VS altindaki filtre gibi)
 source_group("Header Files" FILES ${HEADER_FILES})

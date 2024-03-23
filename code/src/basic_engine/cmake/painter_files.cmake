@@ -1,0 +1,16 @@
+set(PAINTER_FILES
+    painter/brush.h
+    painter/common.h
+    painter/gfx_primitives.h
+    painter/gfx_primitives_font.h
+    painter/image_filter.h
+    painter/painter.h
+    painter/pen.h
+    painter/roto_zoom.h
+    painter/brush.cpp
+    painter/gfx_primitives.cpp
+    painter/image_filter.cpp
+    painter/painter.cpp
+    painter/pen.cpp
+    painter/roto_zoom.cpp
+)

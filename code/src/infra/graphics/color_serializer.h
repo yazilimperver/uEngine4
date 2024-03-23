@@ -10,7 +10,7 @@
 #define COLOR_SERIALIZER
 
 #include "color.h"
-#include <cereal/archives/json.hpp>
+#include "cereal/archives/json.hpp"
 
 template<class Archive>
 void serialize(Archive& archive, Color& m) {

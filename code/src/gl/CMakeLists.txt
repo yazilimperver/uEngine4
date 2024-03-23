@@ -3,7 +3,7 @@
 # Kaynak dosyalari icin hazirlanan ..._files.cmake dosyalarini bulmasi icin ekledik
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
-find_package(FREETYPE REQUIRED)
+find_package(Freetype REQUIRED)
 
 # Isimlendirme
 set(TARGET_NAME gl)
@@ -28,5 +28,6 @@ add_library(${TARGET_NAME} STATIC ${GL_CORE_LOADER_FILES} ${GL_PAINTER_FILES} ${
 target_link_libraries(${TARGET_NAME} PRIVATE spdlog_header_only libglew_static glm::glm-header-only Freetype::Freetype)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${TARGET_NAME} PUBLIC ${STB_DIR} ${DEVIL_DIR}/include ${INFRA_INCLUDE_FOLDER} 
+target_include_directories(${TARGET_NAME} PUBLIC ${GLUT_INCLUDE_DIRS} ${STB_DIR} ${DEVIL_INCLUDE_DIR} 
+                                                 ${INFRA_INCLUDE_FOLDER} 
                                                  ${GLDIR_INCLUDE_FOLDER})

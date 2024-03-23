@@ -10,6 +10,7 @@
 #ifndef INC_TILE_NAME_CALCULATOR_H
 #define INC_TILE_NAME_CALCULATOR_H
 
+#include <string>
 #include <string_view>
 
 namespace gis {

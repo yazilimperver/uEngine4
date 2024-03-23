@@ -13,7 +13,7 @@
 
 #ifndef ANDROID
 	#include <Gl/glew.h>
-	#include <GL/GL.h>
+	#include <GL/gl.h>
 #else
 	#include <GLES/gl.h>
 #endif

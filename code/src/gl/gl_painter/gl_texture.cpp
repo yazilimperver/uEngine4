@@ -14,7 +14,7 @@ namespace gl {
     GLTexture::GLTexture() {
         // Temel verileri sifirlayalim
         mTextureID = 0;
-        mPixelFormat = NULL;
+        mPixelFormat = 0;
 
         // Resim boyutlarini verelim
         mImageWidth = 0;
@@ -165,7 +165,7 @@ namespace gl {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, cDefaultTextureWrapMode);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, cDefaultTextureWrapMode);
 
-            glBindTexture(GL_TEXTURE_2D, NULL);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
             GLenum error = glGetError();
             if (error != GL_NO_ERROR)      {
@@ -212,7 +212,7 @@ namespace gl {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, cDefaultTextureWrapMode);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, cDefaultTextureWrapMode);
 
-        glBindTexture(GL_TEXTURE_2D, NULL);
+        glBindTexture(GL_TEXTURE_2D, 0);
 
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
@@ -345,7 +345,7 @@ namespace gl {
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, cDefaultTextureWrapMode);
             glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, cDefaultTextureWrapMode);
             
-            glBindTexture(GL_TEXTURE_2D, NULL);
+            glBindTexture(GL_TEXTURE_2D, 0);
             
             GLenum error = glGetError();
             if (error != GL_NO_ERROR) {
@@ -442,8 +442,7 @@ namespace gl {
         mImageHeight = 0;
         mTextureWidth = 0;
         mTextureHeight = 0;
-
-        mPixelFormat = NULL;
+        mPixelFormat = 0;
     }
 
     bool GLTexture::RetrieveTextureData() {
@@ -458,7 +457,7 @@ namespace gl {
 
             glBindTexture(GL_TEXTURE_2D, mTextureID);
             glGetTexImage(GL_TEXTURE_2D, 0, mPixelFormat, GL_UNSIGNED_BYTE, &mPixels32[0]);
-            glBindTexture(GL_TEXTURE_2D, NULL);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
             return true;
         }
@@ -475,7 +474,7 @@ namespace gl {
             mPixels32.clear();
             mPixels8.clear();
 
-            glBindTexture(GL_TEXTURE_2D, NULL);
+            glBindTexture(GL_TEXTURE_2D, 0);
 
             return true;
         }
@@ -650,8 +649,8 @@ namespace gl {
             glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIBOID);
             glBufferData(GL_ELEMENT_ARRAY_BUFFER, 4 * sizeof(GLuint), iData, GL_DYNAMIC_DRAW);
 
-            glBindBuffer(GL_ARRAY_BUFFER, NULL);
-            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, NULL);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
         }
     }
 

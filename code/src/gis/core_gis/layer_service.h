@@ -6,8 +6,8 @@
  * @remark
  */
 
-#ifndef INC_LAYER_SERVICE_H
-#define INC_LAYER_SERVICE_H
+#ifndef LAYER_SERVICE
+#define LAYER_SERVICE
 
 #include <cstdint>
 #include <string>
@@ -42,14 +42,14 @@ namespace gis {
         virtual void SetPostUIDisplayHook(std::function<void(bool)> hookFunc) = 0;
 
 		//! Get layer
-		virtual std::optional<std::shared_ptr<Layer>> Layer(std::string_view layerName) = 0;
+		virtual std::optional<std::shared_ptr<gis::Layer>> GetLayer(std::string_view layerName) = 0;
 
-		virtual std::optional<LayerStatus> Status(std::string_view layerName) = 0;
+		virtual std::optional<gis::LayerStatus> Status(std::string_view layerName) = 0;
 		virtual void SetStatus(std::string_view layerName, LayerStatus layerStatus) = 0;
     };
 }
 
-#endif	// INC_LAYER_SERVICE_H
+#endif /* LAYER_SERVICE */
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]
