@@ -4,6 +4,7 @@ cmake_minimum_required (VERSION 3.23)
 # Kaynak dosyalari icin hazirlanan ..._files.cmake dosyalarini bulmasi icin ekledik
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
+find_package(GLEW REQUIRED)
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
 
@@ -45,8 +46,8 @@ add_library(${TARGET_NAME} STATIC ${IMGUI_FILES} ${APP_BASE_FILES} ${ASSET_FILES
 
 
 # kutuphaneleri baglayalim
-target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only
-                                             SDL2::SDL2 SDL2_image::SDL2_image libglew_static
+target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only ${CMAKE_DL_LIBS} 
+                                             SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew
                                              glm::glm-header-only)
 
 # Baslik dosyalarinin yolunu ekleyelim (ImGUI backendleri icin dizin eklenmistir)

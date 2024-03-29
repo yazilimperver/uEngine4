@@ -12,7 +12,7 @@
 #include <cstdint>
 
 #ifndef ANDROID
-	#include <Gl/glew.h>
+	#include <GL/glew.h>
 	#include <GL/gl.h>
 #else
 	#include <GLES/gl.h>

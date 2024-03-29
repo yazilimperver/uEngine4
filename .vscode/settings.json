@@ -88,6 +88,18 @@
         "bitset": "cpp",
         "ranges": "cpp",
         "span": "cpp",
-        "*.ipp": "cpp"
+        "*.ipp": "cpp",
+        "cfenv": "cpp",
+        "cinttypes": "cpp",
+        "codecvt": "cpp",
+        "coroutine": "cpp",
+        "csetjmp": "cpp",
+        "csignal": "cpp",
+        "cwctype": "cpp",
+        "future": "cpp",
+        "memory_resource": "cpp",
+        "shared_mutex": "cpp",
+        "source_location": "cpp",
+        "strstream": "cpp"
     }
 }

@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
 # Isimlendirme
 set(APP_NAME example_app)

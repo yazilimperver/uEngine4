@@ -6,8 +6,8 @@
  * @remark
  */
 
-#ifndef INC_DDS_TEXTURE_LOADER_H
-#define INC_DDS_TEXTURE_LOADER_H
+#ifndef DDS_TEXTURE_LOADER
+#define DDS_TEXTURE_LOADER
 
 #include <cstdint>
 
@@ -17,13 +17,14 @@ namespace gl {
 	class DDSTextureLoader
 		: public infra::AssetLoader {
 	public:		
+        DDSTextureLoader(){}
         virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
         virtual void Dispose(std::shared_ptr<infra::Asset>) override;
         virtual infra::AssetLoaderName Name() override;
     };
 }
 
-#endif	// INC_DDS_TEXTURE_LOADER_H
+#endif /* DDS_TEXTURE_LOADER */
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

@@ -4,6 +4,7 @@
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 find_package(Freetype REQUIRED)
+find_package(GLEW REQUIRED)
 
 # Isimlendirme
 set(TARGET_NAME gl)
@@ -25,7 +26,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_library(${TARGET_NAME} STATIC ${GL_CORE_LOADER_FILES} ${GL_PAINTER_FILES} ${GL_TEXTURE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${TARGET_NAME} PRIVATE spdlog_header_only libglew_static glm::glm-header-only Freetype::Freetype)
+target_link_libraries(${TARGET_NAME} PRIVATE spdlog_header_only GLEW::glew glm::glm-header-only Freetype::Freetype)
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${TARGET_NAME} PUBLIC ${GLUT_INCLUDE_DIRS} ${STB_DIR} ${DEVIL_INCLUDE_DIR} 

@@ -6,8 +6,8 @@
  * @remark
  */
 
-#ifndef INC_GENERIC_TEXTURE_LOADER_H
-#define INC_GENERIC_TEXTURE_LOADER_H
+#ifndef GENERIC_TEXTURE_LOADER
+#define GENERIC_TEXTURE_LOADER
 
 #include <cstdint>
 
@@ -17,13 +17,14 @@ namespace gl {
     class GenericTextureLoader
         : public infra::AssetLoader {
     public:
+        GenericTextureLoader() = default;
         virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
         virtual void Dispose(std::shared_ptr<infra::Asset>) override;
         virtual infra::AssetLoaderName Name() override;
     };
 }
 
-#endif	// INC_GENERIC_TEXTURE_LOADER_H
+#endif /* GENERIC_TEXTURE_LOADER */
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

@@ -366,7 +366,7 @@ namespace gl {
         std::vector<glm::vec2> results;
         infra::Polygon triangulatePolygon;
 
-        if (false == PolygonTriangulator::Triangulate(polygon.GetPoints(), results)) {
+    /*    if (false == PolygonTriangulator::Triangulate(polygon.GetPoints(), results)) {
             triangulatePolygon.SetPoints(results);
 
             glEnableClientState(GL_VERTEX_ARRAY);
@@ -382,6 +382,7 @@ namespace gl {
         else {
             this->DrawPolygon(polygon);
         }
+        */
     }
 
     void GLBasicPainter::DrawEllipse(const Point& center, float rx, float ry) {

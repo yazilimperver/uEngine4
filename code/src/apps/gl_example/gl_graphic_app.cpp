@@ -1,7 +1,5 @@
 ﻿#include "gl_graphic_app.h"
 
-#include <GL/glut.h>
-
 #include "SDL.h"
 
 #include "spdlog/spdlog.h"
@@ -33,7 +31,7 @@ void GLGraphicApp::Initialize(SdlApplication& sdlApplication) {
     mPainter.RegisterFont("FreeSans_20", ASSET_ROOT_PATH + R"(FreeSans.ttf)", 20);
     mPainter.RegisterFont("DefaultLazyFont_12", ASSET_ROOT_PATH + R"(lazy.ttf)", 20);
     mPainter.SetActiveFont("FreeSans_10");
-
+   
     mPainter.SetBackgroundColor(Color::White);
     mPainter.InitializePainter();
     mPainter.SetDisplayExtent(0, mParameters.Width, mParameters.Height, 0);
@@ -42,6 +40,7 @@ void GLGraphicApp::Initialize(SdlApplication& sdlApplication) {
     // Alternatif 1
     mTextureAssetHandle = sdlApplication.AssetService().LoadAsset("STBImageLoader", ASSET_ROOT_PATH + "sprite.png", "dragon");
     
+    printf("Asset root path: %s\n\n", ASSET_ROOT_PATH.c_str());
     /* Alternatif 2
     auto loaderHandle = sdlApplication.AssetService().LoaderHandle("STBImageLoader");
 
@@ -226,7 +225,6 @@ void GLGraphicApp::PrimitivesExample() {
     mPainter.AssignBrush(Brush{ Color::Orange });
     //mPainter.DrawPolygon(polygonToDisplay);
     mPainter.DrawPolyline(polygonToDisplay);
-
 
     mPainter.AssignPen(gl::Pen{ gl::PenStyle::SolidLine, Color::Black, 1 });
     mPainter.SetActiveFont("FreeSans_13");

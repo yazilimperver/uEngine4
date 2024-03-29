@@ -17,6 +17,7 @@ namespace gl {
 	class STBImageLoader
         : public infra::AssetLoader {
     public:
+        STBImageLoader(){}
         virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
         virtual void Dispose(std::shared_ptr<infra::Asset>) override;
         virtual infra::AssetLoaderName Name() override;

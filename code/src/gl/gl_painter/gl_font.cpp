@@ -175,7 +175,8 @@ namespace gl {
         
         error = FT_Init_FreeType(&mLibrary);
         if (error) {
-            printf("FreeType error:%X", error);
+
+            spdlog::error("FreeType error:{}", error);
             return false;
         }
 
@@ -276,7 +277,7 @@ namespace gl {
                 // Okunan piksellerden dokuyu olusturalim
                 if (LoadTextureFromPixels8()) {
                     // Vertex buffer'i sprite sheet verisinden olusturalim
-                    if (!GenerateDataBuffer(SpriteOrigin::TopLeft))  {
+                   if (!GenerateDataBuffer(SpriteOrigin::TopLeft))  {
                         spdlog::error("Unable to create vertex buffer for bitmap font!");
                         error = 0xA2;
                     }

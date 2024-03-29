@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
 # Isimlendirme
 set(APP_NAME gl_example)
@@ -8,17 +8,15 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-list(APPEND CMAKE_PREFIX_PATH "${EXT_INCLUDE_FOLDER}/ext/sdl2_libraries/glew-2.2.0")
+find_package(Freetype REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(FREEGLUT REQUIRED)
-find_package(CEREAL REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # Asset dizinini ayarlayalim
 set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/gl_example_assets/)
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
-             "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
+                "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
 
 # Baslik dosyalari
 set(HEADER_FILES
@@ -49,7 +47,6 @@ source_group("Config Files" FILES ${CONFIG_FILES})
 
 # Windows icin bir kac ek tanimlama
 if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 	add_definitions(-DLIBSDL2_GFX_DLL_IMPORT)
 endif()   
 
@@ -64,28 +61,13 @@ add_custom_command(
 )
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER})
-target_include_directories(${APP_NAME} PRIVATE ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
-
+target_include_directories(${APP_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER}
+											   ${CEREAL_INCLUDE_DIRS})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} PRIVATE asset gl_painter graphics sdl_asset sdl_application im_gui tick time gl_texture utility gl_core_loaders nlohmann_json spdlog_header_only)
-
-target_link_libraries(${APP_NAME} PRIVATE ${OPENGL_LIBRARIES} ${CMAKE_DL_LIBS} ${FREEGLUT_LIBRARIES} ${DEVIL_DIR}/lib/x64/Release/DevIL.lib ${DEVIL_DIR}/lib/x64/Release/ILU.lib  ${DEVIL_DIR}/lib/x64/Release/ILUT.lib)
-
-target_link_libraries(${APP_NAME} PRIVATE GLEW::glew)
-target_link_libraries(${APP_NAME} PRIVATE SDL2::Main)
-target_link_libraries(${APP_NAME} PRIVATE SDL2::Image )
-
-if(WIN32)
-	target_link_libraries(${APP_NAME} PRIVATE ${FREETYPE_LIBRARY} )
-else()
-	target_link_libraries(${APP_NAME} PRIVATE freetype)
-endif()
+target_link_libraries(${APP_NAME} PRIVATE glm::glm-header-only infra gl nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} 
+										Freetype::Freetype SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew 
+										${OPENGL_LIBS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
-
-# Debug/release farki icin
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_RELEASE ${APP_NAME} )
