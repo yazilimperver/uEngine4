@@ -478,3 +478,4 @@ FodyWeavers.xsd
 /code/src/ext/sdl2_linux/SDL2_Image.tar.gz
 /code/src/ext/sdl2_linux/SDL2.tar.gz
 /code/src/ext/sdl2_linux/GLEW.tar.gz
+code/src/ext/freetype-master/buildLinux/*
