@@ -46,7 +46,7 @@ set(CONFIG_FILES
 source_group("Config Files" FILES ${CONFIG_FILES})
 
 # Windows icin bir kac ek tanimlama
-if(WIN32)
+if(TARGET_OS STREQUAL "Windows")
 	add_definitions(-DLIBSDL2_GFX_DLL_IMPORT)
 endif()   
 
@@ -54,15 +54,8 @@ endif()
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
 # Konfigurasyon dosyasini da kopyalayalim
-add_custom_command(
-    TARGET ${APP_NAME} POST_BUILD 
-    COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/sdl_application_configuration.json" "${CMAKE_CURRENT_BINARY_DIR}/"
-    COMMENT "Copying sdl_application_configuration.json to build directory"
-)
-
-# Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${GLDIR_INCLUDE_FOLDER}
-											   ${CEREAL_INCLUDE_DIRS})
+COPY_SDL_CONFIG_FILE(${APP_NAME})
+COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
 target_link_libraries(${APP_NAME} PRIVATE glm::glm-header-only infra gl nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} 

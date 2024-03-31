@@ -25,8 +25,7 @@ source_group("Source Files" FILES ${SOURCE_FILES})
 # Calistirilabilir dosya olarak bu projeyi ekliyoruz
 add_executable(${APP_NAME} ${DATA_FILES} ${SOURCE_FILES})
 
-# Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIR})
+target_link_libraries(${APP_NAME} infra spdlog_header_only)
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)

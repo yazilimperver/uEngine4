@@ -37,6 +37,7 @@ include(TargetOSSetup)
 include(CompilerOptions)
 include(FolderOptions)
 include(OpenGLOptions)
+include(CommonFunctions)
 
 # Projeleri organize ederken dizinleri kullanmayi seciyioruz
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)

@@ -27,20 +27,13 @@ source_group("Source Files" FILES ${SOURCE_FILES})
 # Calistirilabilir dosya olarak bu projeyi ekliyoruz
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
+# Konfigurasyon dosyasini da kopyalayalim
+COPY_WIN_DLLS(${APP_NAME})
+
 # kutuphaneleri baglayalim
 #  ${CMAKE_DL_LIBS}'i kontrol edelim
-target_link_libraries(${APP_NAME} infra spdlog_header_only nlohmann_json ${CMAKE_DL_LIBS} )
-target_link_libraries(${APP_NAME} SDL2::SDL2 SDL2::SDL2main)
-
-# Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER})
+target_link_libraries(${APP_NAME} infra spdlog_header_only nlohmann_json ${CMAKE_DL_LIBS}           
+                                  SDL2::SDL2 SDL2::SDL2main)
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
-
-#if(WIN32)
-#	add_custom_command(TARGET ${APP_NAME} POST_BUILD   # Adds a post-build event to ${APP_NAME}
-#	    COMMAND ${CMAKE_COMMAND} -E copy_if_different  # which executes "cmake - E copy_if_different..."
-#	        "${SDL2_DLL_PATH}" 					       # <--this is in-file
-#	         $<TARGET_FILE_DIR:${APP_NAME}>)           # <--this is out-file path
-#endif()	         

@@ -51,7 +51,7 @@ target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only
                                              glm::glm-header-only)
 
 # Baslik dosyalarinin yolunu ekleyelim (ImGUI backendleri icin dizin eklenmistir)
-target_include_directories(${TARGET_NAME} PRIVATE ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIR}
+target_include_directories(${TARGET_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIR}
                                                   ${INFRA_INCLUDE_FOLDER}/im_gui  
                                                   ${GLDIR_INCLUDE_FOLDER} ${DEVIL_INCLUDE_DIR}
                                                   ${BASIC_ENGINE_INCLUDE_FOLDER})

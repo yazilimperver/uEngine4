@@ -1,8 +1,4 @@
 # Include sub-projects.
-#add_subdirectory ("core_gis")
-#add_subdirectory ("gis_asset")
-#add_subdirectory ("pager")
-
 cmake_minimum_required (VERSION 3.23)
 
 # Kaynak dosyalari icin hazirlanan ..._files.cmake dosyalarini bulmasi icin ekledik

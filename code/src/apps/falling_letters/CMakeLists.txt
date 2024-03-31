@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
 # Isimlendirme
 set(APP_NAME falling_letters)
@@ -8,16 +8,21 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(SDL2_TTF REQUIRED)
-list(APPEND CMAKE_PREFIX_PATH "D:/git_repos/Yazilimperver/uEngine4/code/src/ext/sdl2_libraries/glew-2.2.0")
+find_package(SDL2_ttf REQUIRED)
+find_package(Freetype REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(FREEGLUT REQUIRED)
-find_package(CEREAL REQUIRED)
 find_package(OpenGL REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 
+# Asset dizinini ayarlayalim
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/falling_letters_assets/)
+
+configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
+                "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
+
 # Baslik dosyalari
 set(HEADER_FILES
+    configuration.h
 	falling_letters_app.h
 	falling_letters_graphics_app.h
 )
@@ -35,35 +40,20 @@ set(SOURCE_FILES
 # Kaynak dosya grubu (VS altindaki filtre gibi)
 source_group("Source Files" FILES ${SOURCE_FILES})
 
-# Windows icin bir kac ek tanimlama
-if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif()   
-
 # Calistirilabilir dosya olarak bu projeyi ekliyoruz
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
+# Konfigurasyon dosyasini da kopyalayalim
+COPY_SDL_CONFIG_FILE(${APP_NAME})
+COPY_WIN_DLLS(${APP_NAME})
+
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME}  painter basic_engine  asset sdl_asset sdl_application tick tile_map time gl_texture utility sprite_sheet gl_core_loaders nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS} ${DEVIL_DIR}/lib/x64/Release/DevIL.lib ${DEVIL_DIR}/lib/x64/Release/ILU.lib  ${DEVIL_DIR}/lib/x64/Release/ILUT.lib)
-
-target_link_libraries(${APP_NAME} GLEW::glew)
-target_link_libraries(${APP_NAME} SDL2::Main)
-target_link_libraries(${APP_NAME} SDL2::Image)
-
-if(WIN32)
-	target_link_libraries(${APP_NAME} SDL2::TTF)
-else()
-	target_link_libraries(${APP_NAME} SDL2::TTF freetype)
-endif()
+target_link_libraries(${APP_NAME} glm::glm-header-only basic_engine infra gl nlohmann_json spdlog_header_only
+ 								  ${CMAKE_DL_LIBS} ${OPENGL_LIBS}  ${SDL_FONT_CACHE_LIBRARIES} 
+                                  Freetype::Freetype SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf GLEW::glew)
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR})
-target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${CEREAL_INCLUDE_DIRS} ${SDL_FONT_CACHE_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
-
-# Debug/release farki icin
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_RELEASE ${APP_NAME} )

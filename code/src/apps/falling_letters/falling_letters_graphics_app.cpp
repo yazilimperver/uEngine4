@@ -7,6 +7,8 @@
 
 #include "falling_letters_graphics_app.h"
 
+#include "configuration.h"
+
 using namespace basic_engine;
 
 void FallingLettersGraphicApp::Initialize(SdlApplication& sdlApplication) {
@@ -16,7 +18,8 @@ void FallingLettersGraphicApp::Initialize(SdlApplication& sdlApplication) {
 	// Painter'a muhakkak renderer'i gecirmeliyiz
 	mPainter.AssignRenderer(mRenderer);
 
-	// Kullanacagimiz font (13)
+    // Kullanacagimiz font (13)
+    mFontData.FontPath = ASSET_ROOT_PATH + "fonts/MatrixFont.ttf";
 	mPainter.RegisterFont(mFontData.FontLabel, mFontData.FontPath, 20, Painter::FontStyle::Bold);
 	mPainter.SetActiveFont(mFontData.FontLabel);
 
