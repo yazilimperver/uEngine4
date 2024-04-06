@@ -16,7 +16,7 @@
 namespace infra {
 	class AssetLoader {
 	public:
-		virtual std::shared_ptr<Asset> Load(std::string_view path, std::string_view label) = 0;
+		virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) = 0;
 
 		/* @brief Sadece ilgili asset'e dair elden cikarma islerini yapacagiz. Sahipligi aktarmadigimiz icin pass by ref!
 		 *		  http://herbsutter.com/2013/06/05/gotw-91-solution-smart-pointer-parameters/
@@ -34,7 +34,7 @@ namespace infra {
 	};
 }
 
-#endif
+#endif /* ASSET_LOADER */
 
 /**
 Copyright (c) [2022][Yazilimperver - yazilimpervergs@gmail.com]

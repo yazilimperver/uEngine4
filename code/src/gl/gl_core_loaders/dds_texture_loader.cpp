@@ -31,9 +31,10 @@ const uint32_t DDS_MIPMAP_COUNT_OFFSET = 24U;
 const uint32_t DDS_FOURE_CC_OFFSET = 80U;
 
 namespace gl {
-	const std::string gLoaderExtension = ".dds";
+	const static std::string gLoaderExtension = ".dds";
 	const static std::string gLoaderName("DDSTextureLoader");
 
+    
     infra::AssetLoaderName DDSTextureLoader::Name() {
         return gLoaderName;
     }

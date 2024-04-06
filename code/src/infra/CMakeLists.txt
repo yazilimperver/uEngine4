@@ -46,12 +46,14 @@ add_library(${TARGET_NAME} STATIC ${IMGUI_FILES} ${APP_BASE_FILES} ${ASSET_FILES
 
 
 # kutuphaneleri baglayalim
-target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only ${CMAKE_DL_LIBS} 
-                                             SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew
-                                             glm::glm-header-only)
+target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog fmt::fmt-header-only GLEW::glew glm::glm-header-only)
+target_link_libraries(${TARGET_NAME} PUBLIC  SDL2::SDL2 SDL2_image::SDL2_image)
 
 # Baslik dosyalarinin yolunu ekleyelim (ImGUI backendleri icin dizin eklenmistir)
 target_include_directories(${TARGET_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${CEREAL_INCLUDE_DIR}
                                                   ${INFRA_INCLUDE_FOLDER}/im_gui  
                                                   ${GLDIR_INCLUDE_FOLDER} ${DEVIL_INCLUDE_DIR}
                                                   ${BASIC_ENGINE_INCLUDE_FOLDER})
+
+# Bu projeyi VS icerisinde ayri bir folderda tutalim
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER _libs)

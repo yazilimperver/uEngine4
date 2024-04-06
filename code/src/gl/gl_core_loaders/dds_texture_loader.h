@@ -17,7 +17,6 @@ namespace gl {
 	class DDSTextureLoader
 		: public infra::AssetLoader {
 	public:		
-        DDSTextureLoader(){}
         virtual std::shared_ptr<infra::Asset> Load(std::string_view path, std::string_view label) override;
         virtual void Dispose(std::shared_ptr<infra::Asset>) override;
         virtual infra::AssetLoaderName Name() override;

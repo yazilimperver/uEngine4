@@ -4,9 +4,11 @@ function(COPY_SDL_CONFIG_FILE ARG_APP_NAME)
         COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/sdl_application_configuration.json" "${CMAKE_CURRENT_BINARY_DIR}/"
         COMMENT "Copying sdl_application_configuration.json to build directory"
     )
-endfunction()    
+endfunction()     
+
 
 function(COPY_WIN_DLLS ARG_APP_NAME)
+if(TARGET_OS STREQUAL "Windows")
     file(GLOB DLLS_TO_COPY
     "${EXT_FOLDER}/dll/*.dll"
     )
@@ -18,4 +20,5 @@ function(COPY_WIN_DLLS ARG_APP_NAME)
                 COMMAND ${CMAKE_COMMAND} -E copy_if_different ${DllToCopy} "${CMAKE_CURRENT_BINARY_DIR}/"
                 COMMENT "Copying dll: ${DllToCopy}")
     endforeach()
+endif()    
 endfunction()    

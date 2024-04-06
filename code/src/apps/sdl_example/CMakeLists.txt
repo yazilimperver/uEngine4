@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
 # Isimlendirme
 set(APP_NAME sdl_example)
@@ -8,11 +8,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(SDL2_TTF REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(Freetype REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(FREEGLUT REQUIRED)
 find_package(CEREAL REQUIRED)
-find_package(OpenGL REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 
 # Asset dizinini ayarlayalim
@@ -55,35 +54,24 @@ set(SOURCE_FILES
 # Kaynak dosya grubu (VS altindaki filtre gibi)
 source_group("Source Files" FILES ${SOURCE_FILES})
 
-# Windows icin bir kac ek tanimlama
-if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif()   
-
 # Calistirilabilir dosya olarak bu projeyi ekliyoruz
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
+# Konfigurasyon dosyasini da kopyalayalim
+COPY_WIN_DLLS(${APP_NAME})
+
+add_custom_command(
+	TARGET ${APP_NAME} POST_BUILD 
+	COMMAND ${CMAKE_COMMAND} -E copy "${CMAKE_CURRENT_SOURCE_DIR}/SampleSpriteSheetConfig.json" "${CMAKE_CURRENT_BINARY_DIR}/"
+	COMMENT "Copying SampleSpriteSheetConfig.json to build directory"
+)
+
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} asset basic_engine core_gis gis_asset painter sdl_application tick tile_map time sdl_asset gl_texture utility sprite_sheet gl_core_loaders nlohmann_json spdlog_header_only)
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${SDL_FONT_CACHE_LIBRARIES} ${CMAKE_DL_LIBS} ${DEVIL_DIR}/lib/x64/Release/DevIL.lib ${DEVIL_DIR}/lib/x64/Release/ILU.lib  ${DEVIL_DIR}/lib/x64/Release/ILUT.lib)
-
-target_link_libraries(${APP_NAME} GLEW::glew)
-target_link_libraries(${APP_NAME} SDL2::Main)
-target_link_libraries(${APP_NAME} SDL2::Image)
-
-if(WIN32)
-	target_link_libraries(${APP_NAME} SDL2::TTF)
-else()
-	target_link_libraries(${APP_NAME} SDL2::TTF freetype)
-endif()
+target_link_libraries(${APP_NAME} infra gl gis basic_engine spdlog_header_only
+								  ${OPENGL_LIBS} ${CMAKE_DL_LIBS} ${SDL_FONT_CACHE_LIBRARIES})
 
 # Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER} ${BASIC_ENGINE_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR})
-target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
+target_include_directories(${APP_NAME} PUBLIC ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR} ${CEREAL_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
-
-# Debug/release farki icin
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_RELEASE ${APP_NAME} )

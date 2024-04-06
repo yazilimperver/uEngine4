@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.10)
+﻿cmake_minimum_required (VERSION 3.23)
 
 # Isimlendirme
 set(APP_NAME sdl_map_example)
@@ -8,12 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(SDL2 REQUIRED)
 find_package(SDL2_image REQUIRED)
-find_package(SDL2_ttf REQUIRED)
 find_package(GLEW REQUIRED)
-find_package(FREEGLUT REQUIRED)
-find_package(CEREAL REQUIRED)
-find_package(OpenGL REQUIRED)
-find_package(SDLFONT_CACHE REQUIRED)
 
 # Baslik dosyalari
 set(HEADER_FILES
@@ -39,34 +34,20 @@ set(SOURCE_FILES
 # Kaynak dosya grubu (VS altindaki filtre gibi)
 source_group("Source Files" FILES ${SOURCE_FILES})
 
-# Windows icin bir kac ek tanimlama
-if(WIN32)
-    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
-endif()   
-
 # Calistirilabilir dosya olarak bu projeyi ekliyoruz
 add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 
+# Konfigurasyon dosyasini da kopyalayalim
+COPY_WIN_DLLS(${APP_NAME})
+
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} asset sdl_asset basic_engine core_gis painter nlohmann_json sdl_application time tick utility spdlog_header_only)
+target_link_libraries(${APP_NAME} glm::glm-header-only infra gis nlohmann_json spdlog_header_only
+								  ${OPENGL_LIBS}
+								  SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew)
+
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	target_link_libraries(${APP_NAME} curl) 
 endif()
-target_link_libraries(${APP_NAME} ${OPENGL_LIBRARIES} ${FMT_INCLUDE_DIRS} ${GLEW_LIBRARIES}  ${CMAKE_DL_LIBS})
-
-target_link_libraries(${APP_NAME} SDL2::Main)
-target_link_libraries(${APP_NAME} SDL2::Image)
-target_link_libraries(${APP_NAME} SDL2::TTF)
-target_link_libraries(${APP_NAME} ${CURL_LIBRARIES})
-
-# Baslik dosyalarinin yolunu ekleyelim
-target_include_directories(${APP_NAME} PUBLIC ${CURL_INCLUDE_DIR})
-target_include_directories(${APP_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER} ${SDL_FONT_CACHE_INCLUDE_DIRS} ${TILESON_DIR})
-target_include_directories(${APP_NAME} PUBLIC ${OPENGL_INCLUDE_DIRS}  ${CEREAL_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${FREEGLUT_INCLUDE_DIRS})
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)
-
-# Debug/release farki icin
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_DEBUG ${APP_NAME}d )
-set_target_properties(${APP_NAME} PROPERTIES OUTPUT_NAME_RELEASE ${APP_NAME} )       

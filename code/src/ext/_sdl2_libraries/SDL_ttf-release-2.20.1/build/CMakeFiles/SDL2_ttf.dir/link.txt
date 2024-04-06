@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC   -shared -Wl,-soname,libSDL2_ttf-2.0.so.0 -o libSDL2_ttf-2.0.so.0.2000.1 CMakeFiles/SDL2_ttf.dir/SDL_ttf.c.o  -Wl,-rpath,/usr/local/lib: /usr/local/lib/libSDL2-2.0.so.0.2400.0 /usr/lib/x86_64-linux-gnu/libfreetype.so 

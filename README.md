@@ -19,10 +19,8 @@ Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave k
 | Durum | Kalem | Öncelik |
 | :---: | :--- | :---: | 
 | ❌ | Github actions kabiliyetinin kazandırılması. | Yüksek | 
-| ❌ | Ext kütüphaneler için CMake konfigürasyon dosyalarının hazırlanması. | Yüksek | 
-| ❌ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
+| ✔ | Github üzerinde Issue sayfasının kullanılırr hale getirilmesi. | Yüksek | 
 | ❌ | Çoklu platform desteği sunan *plug-in* mekanizmasının kazandırılması.  | Orta | 
-| ❌ | Ext kütüphaneleri için konfigürasyon dosyalarının oluşturulması ve betiklerin buna göre güncellenmesi.  | Orta | 
 
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
@@ -100,6 +98,14 @@ Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
 
 ### Linux
 
+Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
+1. Öncelikle git yüklendiğinden emin olalım, kurulu değilse kuralım,
+    * sudo apt install git
+2. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
+    * sudo apt install cmake
+3. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
+    * sudo apt install cmake
+
 Linux için de benzer bir şekilde /code/src dizini altındaki "PrepareSDL2ForLinux.sh" betiği, SDL kütüphaneleri ve diğer üçüncü parti bağımlılıkların indirilmesi, bunların derlenmesi, kurulması ve son olarak da uygulamanın, Ninja aracı ile oluşturulmasına yönelik gerekli dosyaları oluşturmasından sorumludur.
 
 SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForLinux.sh"** betiğini düzenleyebilirsiniz.
@@ -108,9 +114,7 @@ Linux için bu betikler, gerekli araçları kurmakta, SDL, Glew kütüphanelerin
 
 ## Visual Studio Projesi
 
-Eğer windows ya da android için bu kütüphaneyi kullanmayı planlıyorsanız. Sizler için Visual Studio 2022 projelerini de hazırladım. Temelde, Cmake ile oluşturulanlar ile birebir olsa da, ufak tefek farklılıklar olabilir. 3. parti kütüphane, cmake ya da benzeri araçlar ile uğraşmayı istemeyenler içib bu seçenek iyi bir tercih olabilir. Elbette tek sebep bu değil 😁
-
-Vs2022 projesi içerisinde Android için kullanmanız için hazır bir proje de bulunmakta. Henüz, örneği çok detaylandıramadım ama meraklılar için faydalı bir ilk basamak olacağını düşünüyorum.
+Son yapılan CMake güncellemesi ile birlikte ayrı olarak idame ettiğim VS2022 projesini artık çıkarıyorum.
 
 ## Örnekler
 İnşallah zamanla daha fazla örnek olacak ama şu an için aşağıdaki örnekler bulunmakta. 
@@ -127,6 +131,7 @@ Bu örneğe ilişkin dosyalar "apps/sdl_example" altında bulunmakta:
 
 ### ** GL Example **
 Bu örneğe ilişkin dosyalar "apps/gl_example" dizini altında bulunmaktadır. Bu proje ile temelde BasicGLPainter sınıfının kabiliyetleri gösterilmektedir. 
+Bu örnek içerisinde SDL Example'da bulunan kabiliyetlerin tamamen OpenGL kullanılarak nasıl yapılabileceği gösterilmiştir.
 
 Bu örneklerin aslında her bir bir ya da bir kaç yazılık içerik barındırmakta ama pek acelemiz yok açıkçası. Sayfamdaki yazılar ile bu örnekleri de detaylı irdeliyor olacağız.
 
@@ -136,10 +141,20 @@ uEngine4 için izlenen kodlama standardına [buradan](https://github.com/yazilim
 
 ## Kullanılan Araç ve Kütüphaneler
 
+* [SDL2, SDL2 Image, SDL2 TTF](https://https://www.libsdl.org/) - Çoklu platform desteği bulunan alt seviye girdi/çıktı, grafik, ses ve benzeri donanımlara yönelik soyutlama sunan kütüphaneler.
+* [Curl](https://curl.se/libcurl/) - Birçok protokol (FTP, HTTP, vs) üzerinden veri transferi için kullanılabilecek, çok platform destekleyen kütüphanedir.
 * [CMake](https://cmake.org/) - Açık kaynaklı, çoklu platformlar için yazılım oluşturma, test ve paketleme alt yapısı sunan araçtır.
 * [Tiled](https://www.mapeditor.org/) - Tiled ücretsiz ve açık kaynak kodlu, kullanımı kolay ve esnek bir oyun seviye düzenleyici aracıdır.
 * [Cereal](https://uscilab.github.io/cereal/) - C++ 11 uyumlu JSON, XML ve "binary" formatta serileştirme olanağı sunan tek başlıktan oluşan bir kütüphanedir.
-
+* [DevIL](https://openil.sourceforge.net/) - Çoklu platform desteği sunan ve OpenGL/Windows GDI, SDL ve benzeri görselleştirme kütüphanelerini destekleyen, resim dosyası okuma, kaydetme ve dönüştürme kabiliyetleri sunan bir kütüphanedir.
+* [FMT](https://fmt.dev/latest/index.html) - Açık kaynaklı formatlama kütüphanesi (C++ 20 ile birlikte sunulacak olan std::format'ı C++ 11 ile sunar).
+* [Freetype](https://freetype.org/) - Çoklu platform için sunulan font/metin görselleştirme kütüphanesi.
+* [GLEW](https://glew.sourceforge.net/) - OpenGL "extension"'larını tespit etmek için kullanılan, tak başlık dosyasından oluşan, çok platform destekli C++ kütüphanesidir.
+* [GLM](https://github.com/g-truc/glm) - Başlık dosyalarından oluşan ve GLSL (OpenGL shading language) kurallarına uyan matematik kütüphanesidir.
+* [GoogleTest](https://github.com/google/googletest) - Google tarafından geliştirilen birim test kütüphanesidir
+* [IMGUI](https://github.com/ocornut/imgui) - Bir çok görselleştirme kütüphanesi ile kullanılabilen, basit kullanıcı arayüzü kütüphanesidir.
+* [JSON](https://github.com/nlohmann/json) - Modern C++ kabiliyetlerini destekleyen JSON kütüphanesi.
+* [STBImage](https://github.com/nothings/stb/blob/master/stb_image.h) - Tek başlık dosyasından oluşan ve resim yüklemek için kullanılabilecek dosya.
 
 ## Nasıl Katkı Sağlarım?
 

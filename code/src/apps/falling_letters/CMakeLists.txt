@@ -48,9 +48,9 @@ COPY_SDL_CONFIG_FILE(${APP_NAME})
 COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} glm::glm-header-only basic_engine infra gl nlohmann_json spdlog_header_only
- 								  ${CMAKE_DL_LIBS} ${OPENGL_LIBS}  ${SDL_FONT_CACHE_LIBRARIES} 
-                                  Freetype::Freetype SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf GLEW::glew)
+target_link_libraries(${APP_NAME} infra gl basic_engine spdlog_header_only
+ 								  ${CMAKE_DL_LIBS} ${OPENGL_LIBS}  ${SDL_FONT_CACHE_LIBRARIES}
+)
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${APP_NAME} PUBLIC ${CEREAL_INCLUDE_DIRS} ${SDL_FONT_CACHE_INCLUDE_DIRS})

@@ -28,9 +28,12 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_library(${TARGET_NAME} STATIC ${CORE_GIS_FILES} ${PAGER_FILES} ${GIS_ASSET_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${TARGET_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image spdlog_header_only 
-                                             glm::glm-header-only fmt-header-only)
+target_link_libraries(${TARGET_NAME} PRIVATE infra spdlog_header_only fmt-header-only)
+target_link_libraries(${TARGET_NAME} PUBLIC glm::glm-header-only SDL2::SDL2 SDL2_image::SDL2_image)
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${TARGET_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_INCLUDE_FOLDER}
                                                  ${CEREAL_INCLUDE_DIR})
+                                                 
+# Bu projeyi VS icerisinde ayri bir folderda tutalim
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER _libs)

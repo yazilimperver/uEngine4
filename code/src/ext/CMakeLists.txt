@@ -6,14 +6,9 @@ add_subdirectory(json-develop)
 add_subdirectory(fmt-8.1.1)
 add_subdirectory(glm)
 
-set(FREEGLUT_BUILD_DEMOS OFF)
-set(FREEGLUT_BUILD_STATIC_LIBS ON)
-add_subdirectory(freeglut)
-
 if (CMAKE_SYSTEM_NAME STREQUAL "Windows")
 	# Bu projeyi VS icerisinde ayri bir folderda tutalim
 	set_target_properties(spdlog PROPERTIES FOLDER ext/spdlog)
-	set_target_properties(freeglut_static PROPERTIES FOLDER ext/freeglut_static)
 	set_target_properties(glm PROPERTIES FOLDER ext/glm)
 	set_target_properties(fmt PROPERTIES FOLDER ext/fmt)
 	set_target_properties(nlohmann_json PROPERTIES FOLDER ext/json-develop)

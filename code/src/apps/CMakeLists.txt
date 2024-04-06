@@ -1,9 +1,7 @@
-﻿cmake_minimum_required(VERSION 3.10)
-
-add_subdirectory ("cereal_example")
+﻿add_subdirectory ("cereal_example")
 add_subdirectory ("example_app")
 add_subdirectory ("gl_example")
 add_subdirectory ("falling_letters")
 add_subdirectory ("gis_example")
-#add_subdirectory ("sdl_map_example")
-#add_subdirectory ("sdl_example")
+add_subdirectory ("sdl_map_example")
+add_subdirectory ("sdl_example")

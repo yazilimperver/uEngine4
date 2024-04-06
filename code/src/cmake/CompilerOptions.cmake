@@ -24,6 +24,7 @@ else(MSVC)
       -Wall
       -Wextra
       -Wpedantic
+      -gdwarf-2 -gstrict-dwarf
       $<$<CONFIG:RELEASE>:-O2>
       $<$<CONFIG:DEBUG>:-O0 -g -p -pg>)
 
