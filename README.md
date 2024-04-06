@@ -102,7 +102,11 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
 1. Öncelikle git yüklendiğinden emin olalım, kurulu değilse kuralım,
     * sudo apt install git
 2. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
-    * sudo apt install cmake
+    * CMake preset'ler için güncel CMake'in kurulması önemli ör https://github.com/Kitware/CMake/releases/download/v3.29.1/cmake-3.29.1-linux-x86_64.sh indirilebilir
+    * sudo mkdir /opt/cmake
+    * sudo sh cmake-3.29.1-linux-x86_64.sh --prefix=/opt/cmake
+    * sudo ln -s /opt/cmake/cmake-3.29.1-linux-x86_64/bin/cmake /usr/local/bin/cmake
+    * cmake --version ile versyion kontrolü (3.23 ve üzeri olmalı)
 3. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
     * sudo apt install cmake
 
