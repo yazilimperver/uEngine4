@@ -7,7 +7,7 @@
 cmake_policy(SET CMP0135 NEW)
 
 # cmake konfigurasyon dizini
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})   
 
 if(WIN32)
     list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2-2.30.1/cmake")
