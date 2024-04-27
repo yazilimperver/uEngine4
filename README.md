@@ -100,15 +100,65 @@ Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
 
 Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
 1. Öncelikle git yüklendiğinden emin olalım, kurulu değilse kuralım,
-    * sudo apt install git
-2. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
-    * CMake preset'ler için güncel CMake'in kurulması önemli ör https://github.com/Kitware/CMake/releases/download/v3.29.1/cmake-3.29.1-linux-x86_64.sh indirilebilir
-    * sudo mkdir /opt/cmake
-    * sudo sh cmake-3.29.1-linux-x86_64.sh --prefix=/opt/cmake
-    * sudo ln -s /opt/cmake/cmake-3.29.1-linux-x86_64/bin/cmake /usr/local/bin/cmake
-    * cmake --version ile versyion kontrolü (3.23 ve üzeri olmalı)
-3. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
-    * sudo apt install cmake
+    * `sudo apt install git`
+2. Ninja yüklendiğinen emin olalım, kurulu değilse kuralım,
+    * `sudo apt install ninja`
+3. Derleme araclarini kuralim
+    * `sudo apt install build-essential`
+4. CMake yüklendiğinen emin olalım, kurulu değilse kuralım,
+    * `sudo apt-get install cmake`
+5. Repoyu indirelim,
+    * `git clone https://github.com/yazilimperver/uEngine4.git`
+    * `git submodule update --init --recursive` ile diger repolari da alalim
+6. OpenGL kutuphanelerini kuralim
+   1. `sudo apt-get install libxmu-dev libxi-dev libgl-dev -y`
+7. Glew'u kuralim
+   * `sudo apt-get install libglew-dev`
+8. SDL Kütüphanelerinin kurulması
+    * cd code/src/ext/sdl2
+    * `wget https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-2.30.2.tar.gz` 
+    * tar -xvf SDL2-2.30.2.tar.gz
+    * cd SDL2-2.30.2
+    * mkdir build
+    * cd build
+    * cmake .. -DCMAKE_BUILD_TYPE=Release
+    * cmake --build . --config Release --parallel
+    * sudo cmake --install . --config Release
+9. SDL Image Kütüphanelerinin kurulması
+    * cd code/src/ext/sdl2
+    * `wget https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-2.8.2.tar.gz` 
+    * tar -xvf SDL2_image-2.8.2.tar.gz
+    * cd SDL2_image-2.8.2
+    * mkdir build
+    * cd build
+    * cmake .. -DCMAKE_BUILD_TYPE=Release
+    * cmake --build . --config Release --parallel
+    * sudo cmake --install . --config Release
+10. SDL TTF Kütüphanelerinin kurulması
+    * sudo apt-get install libfreetype-dev
+    * sudo apt-get install libjpeg-dev
+    * cd code/src/ext/sdl2
+    * `wget https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.22.0.tar.gz` 
+    * tar -xvf SDL2_ttf-2.22.0.tar.gz
+    * cd SDL2_image-2.8.2
+    * mkdir build
+    * cd build
+    * cmake .. -DCMAKE_BUILD_TYPE=Release
+    * cmake --build . --config Release --parallel
+    * sudo cmake --install . --config Release
+11. DevIL kütüphanelerinin kurulması
+    * cd code/src/ext
+    * wget https://github.com/DentonW/DevIL/archive/refs/tags/v1.8.0.tar.gz
+    * tar -xvf v1.8.0.tar.gz
+    * cd DevIL-1.8.0/DevIL
+    * mkdir build
+    * cd build
+    * cmake .. -DCMAKE_BUILD_TYPE=Release
+    * cmake --build . --config Release --parallel
+    * sudo cmake --install . --config Release
+12. curl kütüphanesini kuralım
+    * sudo apt install libcurl4-openssl-dev
+
 
 Linux için de benzer bir şekilde /code/src dizini altındaki "PrepareSDL2ForLinux.sh" betiği, SDL kütüphaneleri ve diğer üçüncü parti bağımlılıkların indirilmesi, bunların derlenmesi, kurulması ve son olarak da uygulamanın, Ninja aracı ile oluşturulmasına yönelik gerekli dosyaları oluşturmasından sorumludur.
 
