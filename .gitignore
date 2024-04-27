@@ -452,3 +452,6 @@ FodyWeavers.xsd
 /code/src/build_ninja/*
 /code/src/ext/spdlog-1.13.0/install/*
 /code/src/ext/sdl2/*
+code/src/apps/falling_letters/configuration.h
+code/src/apps/gl_example/configuration.h
+code/src/apps/sdl_example/configuration.h

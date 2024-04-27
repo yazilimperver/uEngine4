@@ -109,7 +109,7 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
     * `sudo apt-get install cmake`
 5. Repoyu indirelim,
     * `git clone https://github.com/yazilimperver/uEngine4.git`
-    * `git submodule update --init --recursive` ile diger repolari da alalim
+    * `git submodule update --recursive --remote` ile diger repolari da alalim
 6. OpenGL kutuphanelerini kuralim
    1. `sudo apt-get install libxmu-dev libxi-dev libgl-dev -y`
 7. Glew'u kuralim
@@ -136,7 +136,7 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
     * cd code/src/ext/sdl2
     * `wget https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.22.0.tar.gz` 
     * tar -xvf SDL2_ttf-2.22.0.tar.gz
-    * cd SDL2_image-2.8.2
+    * cd SDL2_ttf-2.22.0
     * cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
     * cmake --build build --config Release --parallel
     * sudo cmake --install build --config Release
