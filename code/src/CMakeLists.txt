@@ -39,6 +39,28 @@ include(FolderOptions)
 include(OpenGLOptions)
 include(CommonFunctions)
 
+# CCache'e yonelik ekleme
+find_program(ccache_exe  ccache) 
+
+if(ccache_exe )
+    message("CCACHE is found")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+
+    # CCache icin windows debug ve RelWithDebugInfo ayarlar
+    if (MSVC)
+        foreach(config DEBUG RELWITHDEBINFO)
+            foreach(lang C CXX)
+                set(flags_var "CMAKE_${lang}_FLAGS_${config}")
+                string(REPLACE "/Zi" "/Z7" ${flags_var} "${${flags_var}}")
+                set(${flags_var} "${${flags_var}}" PARENT_SCOPE)
+            endforeach()
+        endforeach()
+    endif()
+else(ccache_exe )
+    message("CCACHE is NOT found")
+endif(ccache_exe )
+
 # Projeleri organize ederken dizinleri kullanmayi seciyioruz
 set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
@@ -72,14 +94,35 @@ if(TARGET_OS STREQUAL "Windows")
      add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
-# SPDLogu indirelim
-include(FetchContent)
-FetchContent_Declare(
-     spdlog
-     GIT_REPOSITORY https://github.com/gabime/spdlog.git
-     GIT_TAG        v1.8.2)
+# SPDLogu indirelim 
+# Asagidaki kullanima gecilmesi durumunda 
+# target'lardan `add_dependencies(${TARGET_NAME} spdlog)` kaldirilmali
+# target'lara, target_link_libraries ifadelerine spdlog_header_only eklenmelidir
+#include(FetchContent)
+#FetchContent_Declare(
+#     spdlog
+#     GIT_REPOSITORY https://github.com/gabime/spdlog.git
+#     GIT_TAG        v1.8.2)
 
-FetchContent_MakeAvailable(spdlog)
+# FetchContent_MakeAvailable(spdlog)
+
+# Direk bagimlilik olarak kullanma
+# Asagidaki kullanima gecilmesi durumunda 
+# target'lar `add_dependencies(${TARGET_NAME} spdlog)` eklenmelidir
+# target_link_libraries ifadelerinden spdlog_header_only cikarilmalidir
+include(ExternalProject)
+ExternalProject_Add(spdlog
+    PREFIX spdlog
+    SOURCE_DIR ${SPDLOG_DIR}
+    CMAKE_ARGS -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
+    -DCMAKE_CXX_COMPILER=${CMAKE_CXX_COMPILER}
+    -DCMAKE_C_COMPILER=${CMAKE_C_COMPILER}
+    -DCMAKE_TOOLCHAIN_FILE=${CMAKE_TOOLCHAIN_FILE}
+    -DCMAKE_INSTALL_PREFIX=${SPDLOG_DIR}/install
+    -DSPDLOG_BUILD_SHARED=OFF
+)
+
+message ("Staging dir is: ${STAGING_DIR}")
 
 # Dis kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("ext")

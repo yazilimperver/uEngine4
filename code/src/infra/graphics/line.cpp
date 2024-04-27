@@ -175,7 +175,7 @@ bool Line::Intersect(const glm::dvec2& center, double dRadius)
 bool IsEqual(double first, double second) {
 	bool equality = false;
 
-	if (abs(first - second) < std::numeric_limits<double>::epsilon())	{
+	if (std::abs(first - second) < std::numeric_limits<double>::epsilon())	{
 		equality = true;
 	}
 

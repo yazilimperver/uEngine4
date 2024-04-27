@@ -541,6 +541,8 @@ namespace gl {
                 }
             }
             break;
+            default:
+            break;
             }
         }
     }

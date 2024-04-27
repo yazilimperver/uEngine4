@@ -6,8 +6,8 @@
  * @remark
  */
 
-#ifndef INC_LAYER_CONTROL_H
-#define INC_LAYER_CONTROL_H
+#ifndef LAYER_MANAGEMENT
+#define LAYER_MANAGEMENT
 
 #include <cstdint>
 #include <vector>
@@ -63,9 +63,9 @@ namespace gis {
         /** @brief   Katman servisleri */      
         virtual void MoveUp(int layerIndexToMove) override;
         virtual void MoveDown(int layerIndexToMove) override;
-        virtual std::optional<SharedLayer> GetLayer(std::string_view layerName);
-        virtual std::optional<LayerStatus> Status(std::string_view layerName);
-        virtual void SetStatus(std::string_view layerName, LayerStatus layerStatus);
+        virtual std::optional<SharedLayer> GetLayer(std::string_view layerName) override;
+        virtual std::optional<LayerStatus> Status(std::string_view layerName) override;
+        virtual void SetStatus(std::string_view layerName, LayerStatus layerStatus) override;
         
         /** @brief   Her katman icin ortak olarak kullanilacak olan veriler */
         void SetMapView(std::shared_ptr<gis::MapView> mapView);
@@ -114,7 +114,7 @@ namespace gis {
 	};
 }
 
-#endif	// INC_LAYER_CONTROL_H
+#endif /* LAYER_MANAGEMENT */
 
 /**
 Copyright (c) [2023][Yazilimperver - yazilimpervergs@gmail.com]

@@ -11,6 +11,7 @@
 
 #include <chrono>
 #include <thread>
+#include <atomic>
 #include <functional>
 #include <condition_variable>
 

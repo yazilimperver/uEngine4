@@ -255,7 +255,7 @@ bool SdlApplication::InitializeOpenGL()
     rev = glewInit();
 
     if (GLEW_OK != rev) {
-        spdlog::error("GLEW init error. Error: {}\n", glewGetErrorString(rev));
+        spdlog::error("GLEW init error. Error: {}\n", reinterpret_cast<const char*>(glewGetErrorString(rev)));
     }
     else {
         status = true;
@@ -271,7 +271,7 @@ bool SdlApplication::InitializeOpenGL()
     }
 
     const GLubyte* str = glGetString(GL_VERSION);
-    spdlog::info("GL Version: {}\n", str);
+    spdlog::info("GL Version: {}\n", reinterpret_cast<const char*>(str));
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();

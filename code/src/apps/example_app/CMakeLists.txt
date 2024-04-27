@@ -32,7 +32,7 @@ COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
 #  ${CMAKE_DL_LIBS}'i kontrol edelim
-target_link_libraries(${APP_NAME} infra spdlog_header_only nlohmann_json ${CMAKE_DL_LIBS}           
+target_link_libraries(${APP_NAME} infra nlohmann_json ${CMAKE_DL_LIBS}           
                                   SDL2::SDL2 SDL2::SDL2main)
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim

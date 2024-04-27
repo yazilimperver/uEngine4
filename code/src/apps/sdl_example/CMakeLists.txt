@@ -67,7 +67,7 @@ add_custom_command(
 )
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} infra gl gis basic_engine spdlog_header_only
+target_link_libraries(${APP_NAME} infra gl gis basic_engine
 								  ${OPENGL_LIBS} ${CMAKE_DL_LIBS} ${SDL_FONT_CACHE_LIBRARIES})
 
 # Baslik dosyalarinin yolunu ekleyelim

@@ -29,7 +29,7 @@ namespace gis_asset {
 
 		int32_t Width() const;
 		int32_t Height() const;
-        virtual bool IsValid() const;
+        virtual bool IsValid() const override;
 	private:
 		int32_t mWidth{ 0 };
 		int32_t mHeight{ 0 };

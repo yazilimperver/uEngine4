@@ -48,7 +48,7 @@ COPY_SDL_CONFIG_FILE(${APP_NAME})
 COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} infra gl basic_engine spdlog_header_only
+target_link_libraries(${APP_NAME} infra gl basic_engine
  								  ${CMAKE_DL_LIBS} ${OPENGL_LIBS}  ${SDL_FONT_CACHE_LIBRARIES}
 )
 

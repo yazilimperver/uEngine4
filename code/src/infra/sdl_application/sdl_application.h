@@ -90,9 +90,9 @@ protected:
 
     //virtual uErrorCode PostInitialize() override;
     virtual void Finalize() override;
-    virtual void Input(double intervalInMsec);
-    virtual void Update(double intervalInMsec);
-    virtual void Display(double intervalInMsec);
+    virtual void Input(double intervalInMsec) override;
+    virtual void Update(double intervalInMsec) override;
+    virtual void Display(double intervalInMsec) override;
 
     void HandleSDLEvents();
     void ParseWindowParameters();
@@ -103,7 +103,7 @@ protected:
     void InitializeWindows();
     bool InitializeOpenGL();
 
-    /** @brief Ýstemci grafik uygulamasý */
+    /** @brief ï¿½stemci grafik uygulamasï¿½ */
     std::shared_ptr<ClientGraphicApplication> mClientGraphicalApplication{ nullptr };
     std::shared_ptr<ClientGraphicApplication> mClientGraphicalApplicationToBeUsed{ nullptr };
 
@@ -130,13 +130,13 @@ protected:
     std::vector<TouchEventHandler*>      mTouchEventListeners;
     std::vector<SDLEventListener*>       mSDLEventListeners;
 
-    /** @brief Gamepad kontrolcüsü */
+    /** @brief Gamepad kontrolcï¿½sï¿½ */
     SdlGamepadController mGamepadController;
 
     /** @brief SDL parametreleri */
     SdlParameters mSdlParameters;
 
-    /** @brief Pencere ayarlarý */
+    /** @brief Pencere ayarlarï¿½ */
     WindowParameter mWindowParameters;
 
     /** @brief Gosterim yapilan goruntuleme alani */
@@ -148,7 +148,7 @@ protected:
     /** @brief FPS ticker */
     FpsTicker mFpsTicker;
 
-    /** @brief Varsayýlan SDL ticker */
+    /** @brief Varsayï¿½lan SDL ticker */
     SdlAppTicker mSdlTicker;
 
     /** @brief Perioydik ticker */

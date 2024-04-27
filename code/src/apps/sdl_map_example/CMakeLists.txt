@@ -41,13 +41,17 @@ add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} glm::glm-header-only infra gis nlohmann_json spdlog_header_only
+target_link_libraries(${APP_NAME} glm::glm-header-only infra gis nlohmann_json
 								  ${OPENGL_LIBS}
 								  SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew)
 
 if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
 	target_link_libraries(${APP_NAME} curl) 
+else()
+	target_link_libraries(${APP_NAME} ${CURL_DIR}/lib/libcurl.lib) 
 endif()
+
+target_include_directories(${APP_NAME} PUBLIC ${CURL_DIR}/include)
 
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${APP_NAME} PROPERTIES FOLDER apps)

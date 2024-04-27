@@ -52,7 +52,7 @@ namespace gl {
         void InvalidateMipmap();
 
         //! Is texture asset valid
-        bool IsValid() const;
+        bool IsValid() const override;
 
         uint32_t GetOpenGLTextureId() const;
         virtual const infra::AssetInfo& Info() const override;

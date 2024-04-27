@@ -13,6 +13,7 @@ struct SDL_Renderer;
 namespace basic_engine {
 	class Layer {
 	public:
+		virtual ~Layer() = default;
 		virtual void Update(double deltaTimeInMsec) = 0;
 		virtual void Display(SDL_Renderer* renderer) const = 0;
 	};

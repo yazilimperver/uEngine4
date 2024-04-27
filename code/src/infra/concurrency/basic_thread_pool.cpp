@@ -2,7 +2,7 @@
 
 BasicThreadPool::BasicThreadPool(std::size_t threadCount) {
 	if (!threadCount)
-		throw std::invalid_argument("Thread adeti sýfýr olmamalý!");
+		throw std::invalid_argument("Thread adeti sifir olmamalidir!");
 	mThreadCount = threadCount;
 	mThreads.reserve(mThreadCount);
 }

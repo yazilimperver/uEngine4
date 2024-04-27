@@ -26,13 +26,15 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 add_library(${TARGET_NAME} STATIC ${GL_CORE_LOADER_FILES} ${GL_PAINTER_FILES} ${GL_TEXTURE_FILES})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${TARGET_NAME} PRIVATE infra spdlog_header_only)
+target_link_libraries(${TARGET_NAME} PRIVATE infra)
 target_link_libraries(${TARGET_NAME} PUBLIC glm::glm-header-only  GLEW::glew Freetype::Freetype)
+
+add_dependencies(${TARGET_NAME} spdlog)
 
 # Baslik dosyalarinin yolunu ekleyelim
 target_include_directories(${TARGET_NAME} PUBLIC ${GLUT_INCLUDE_DIRS} ${STB_DIR} ${DEVIL_INCLUDE_DIR} 
                                                  ${INFRA_INCLUDE_FOLDER} 
-                                                 ${GLDIR_INCLUDE_FOLDER})
+                                                 ${GLDIR_INCLUDE_FOLDER} ${SPDLOG_DIR}/include )
                                                  
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
 set_target_properties(${TARGET_NAME} PROPERTIES FOLDER _libs)

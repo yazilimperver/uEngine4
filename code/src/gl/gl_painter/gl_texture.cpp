@@ -169,7 +169,7 @@ namespace gl {
 
             GLenum error = glGetError();
             if (error != GL_NO_ERROR)      {
-                spdlog::error("Error loading texture from pixels! Error: {}\n", gluErrorString(error));
+                spdlog::error("Error loading texture from pixels! Error: {}\n", reinterpret_cast<const char*>(gluErrorString(error)));
                 success = false;
             }
             else {
@@ -216,7 +216,7 @@ namespace gl {
 
         GLenum error = glGetError();
         if (error != GL_NO_ERROR) {
-            spdlog::error("Error loading texture from pixels! Error: {}\n", gluErrorString(error));
+            spdlog::error("Error loading texture from pixels! Error: {}\n", reinterpret_cast<const char*>(gluErrorString(error)));
             return false;
         }
 
@@ -349,7 +349,7 @@ namespace gl {
             
             GLenum error = glGetError();
             if (error != GL_NO_ERROR) {
-                spdlog::error("Error loading texture from pixels! {}\n", gluErrorString(error));
+                spdlog::error("Error loading texture from pixels! {}\n", reinterpret_cast<const char*>(gluErrorString(error)));
                 success = false;
             }
             else {

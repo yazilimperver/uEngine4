@@ -58,7 +58,7 @@ COPY_SDL_CONFIG_FILE(${APP_NAME})
 COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME}  glm::glm-header-only infra gl nlohmann_json spdlog_header_only ${CMAKE_DL_LIBS} 
+target_link_libraries(${APP_NAME}  glm::glm-header-only infra gl nlohmann_json ${CMAKE_DL_LIBS} 
 										Freetype::Freetype SDL2::SDL2 SDL2_image::SDL2_image GLEW::glew 
 										${OPENGL_LIBS})
 

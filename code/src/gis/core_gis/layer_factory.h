@@ -24,6 +24,7 @@ namespace gis {
     class Layer;
     class LayerFactory {
     public:
+        virtual ~LayerFactory() = default;
         virtual std::string LayerType() const = 0;
         virtual std::shared_ptr<Layer> CreateLayer(const ParameterSet layerParameters) = 0;
         virtual void SetLayerIterator(LayerIterator* iterator) = 0;

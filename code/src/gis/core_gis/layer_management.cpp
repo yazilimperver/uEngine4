@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-#include "Layer.h"
+#include "layer.h"
 #include "layer_controller.h"
 #include "layer_renderer.h"
 #include "layer_configurator.h"

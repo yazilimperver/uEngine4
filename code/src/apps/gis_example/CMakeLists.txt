@@ -39,7 +39,7 @@ add_executable(${APP_NAME} ${HEADER_FILES} ${SOURCE_FILES})
 COPY_WIN_DLLS(${APP_NAME})
 
 # kutuphaneleri baglayalim
-target_link_libraries(${APP_NAME} glm::glm-header-only basic_engine infra gl gis nlohmann_json spdlog_header_only
+target_link_libraries(${APP_NAME} glm::glm-header-only basic_engine infra gl gis nlohmann_json
 								 ${OPENGL_LIBS} ${CMAKE_DL_LIBS}
 								 Freetype::Freetype SDL2::SDL2 SDL2_image::SDL2_image SDL2_ttf::SDL2_ttf GLEW::glew)								 
 
