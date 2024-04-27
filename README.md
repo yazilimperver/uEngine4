@@ -119,21 +119,17 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
     * `wget https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-2.30.2.tar.gz` 
     * tar -xvf SDL2-2.30.2.tar.gz
     * cd SDL2-2.30.2
-    * mkdir build
-    * cd build
-    * cmake .. -DCMAKE_BUILD_TYPE=Release
-    * cmake --build . --config Release --parallel
-    * sudo cmake --install . --config Release
+    * cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    * cmake --build build --config Release --parallel
+    * sudo cmake --install build --config Release
 9. SDL Image Kütüphanelerinin kurulması
     * cd code/src/ext/sdl2
-    * `wget https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-2.8.2.tar.gz` 
+    * wget https://github.com/libsdl-org/SDL_image/releases/download/release-2.8.2/SDL2_image-2.8.2.tar.gz
     * tar -xvf SDL2_image-2.8.2.tar.gz
     * cd SDL2_image-2.8.2
-    * mkdir build
-    * cd build
-    * cmake .. -DCMAKE_BUILD_TYPE=Release
-    * cmake --build . --config Release --parallel
-    * sudo cmake --install . --config Release
+    * cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    * cmake --build build --config Release --parallel
+    * sudo cmake --install build --config Release
 10. SDL TTF Kütüphanelerinin kurulması
     * sudo apt-get install libfreetype-dev
     * sudo apt-get install libjpeg-dev
@@ -141,30 +137,19 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
     * `wget https://www.libsdl.org/projects/SDL_ttf/release/SDL2_ttf-2.22.0.tar.gz` 
     * tar -xvf SDL2_ttf-2.22.0.tar.gz
     * cd SDL2_image-2.8.2
-    * mkdir build
-    * cd build
-    * cmake .. -DCMAKE_BUILD_TYPE=Release
-    * cmake --build . --config Release --parallel
-    * sudo cmake --install . --config Release
+    * cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    * cmake --build build --config Release --parallel
+    * sudo cmake --install build --config Release
 11. DevIL kütüphanelerinin kurulması
     * cd code/src/ext
     * wget https://github.com/DentonW/DevIL/archive/refs/tags/v1.8.0.tar.gz
     * tar -xvf v1.8.0.tar.gz
     * cd DevIL-1.8.0/DevIL
-    * mkdir build
-    * cd build
-    * cmake .. -DCMAKE_BUILD_TYPE=Release
-    * cmake --build . --config Release --parallel
-    * sudo cmake --install . --config Release
+    * cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+    * cmake --build build --config Release --parallel
+    * sudo cmake --install build --config Release
 12. curl kütüphanesini kuralım
     * sudo apt install libcurl4-openssl-dev
-
-
-Linux için de benzer bir şekilde /code/src dizini altındaki "PrepareSDL2ForLinux.sh" betiği, SDL kütüphaneleri ve diğer üçüncü parti bağımlılıkların indirilmesi, bunların derlenmesi, kurulması ve son olarak da uygulamanın, Ninja aracı ile oluşturulmasına yönelik gerekli dosyaları oluşturmasından sorumludur.
-
-SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForLinux.sh"** betiğini düzenleyebilirsiniz.
-
-Linux için bu betikler, gerekli araçları kurmakta, SDL, Glew kütüphanelerini indirip oluşturmakta ve sistem dizinleri altına atmaktadır. Bunları çalıştırdıktan sonra geriye kalan /code/src/build dizinine gidip "ninja" komutunu çalıştırmak olacak.
 
 ## Visual Studio Projesi
 
