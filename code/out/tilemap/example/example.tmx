@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.8" tiledversion="1.8.5" orientation="orthogonal" renderorder="right-down" width="40" height="22" tilewidth="16" tileheight="16" infinite="0" backgroundcolor="#689fc6" nextlayerid="9" nextobjectid="13">
+ <editorsettings>
+  <export target="../../../../../../../../assets/tilemap/example/example.tmj" format="json"/>
+ </editorsettings>
+ <tileset firstgid="1" source="../../../../../../../../assets/tilemap/forest_tileset_2/TiledFiles/Tileset.tsx"/>
+ <tileset firstgid="721" source="objects/coin_gold.tsx"/>
+ <imagelayer id="2" name="background_sky">
+  <image source="../../../../../../../../assets/tilemap/example/background/sky_cloud.png" width="688" height="211"/>
+ </imagelayer>
+ <imagelayer id="3" name="background_hills" offsetx="0" offsety="144">
+  <image source="../../../../../../../../assets/tilemap/example/background/mountain2.png" width="688" height="127"/>
+ </imagelayer>
+ <imagelayer id="4" name="background_forest1" offsetx="0" offsety="196">
+  <image source="../../../../../../../../assets/tilemap/example/background/pine1.png" width="688" height="148"/>
+ </imagelayer>
+ <imagelayer id="5" name="background_forest2" offsetx="0" offsety="256">
+  <image source="../../../../../../../../assets/tilemap/example/background/pine2.png" width="688" height="199"/>
+ </imagelayer>
+ <layer id="7" name="trees" width="40" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt00kvQ1EYxvHTLsxsDKm2rMxsDKm2rMysENPSzBZtl2Y+AJZmPoWZL2EMWzMbQ0zxv6Rpe9O6UZJG3Df5Le577nnPc25TIdRSSy211PpLdYoznOMCl7jCNW5wG7hoHxWkESIYIQhFGMIRgUhEaQKbL4nzk5GCVKQhHRnIRNYv5Ttmzokfs4rYU4wSlKIM5ahAJap+mO+J/c94wSveZPMSkIg9+vs4kK0389yCVrShHR3oRBe6FfLtajxn2+k53NZ1WiHioYcBRq3n/gIU4p69D3iUndfP8wAGMYRhjGAUYxhXyHen8T1bKhN58mGGBVYpL3297L0Y+rGIk+WfZuYMZjGHeSxgEUtYVsgXrfU9W6o6evVoQCOapLz0zbL3cujnIk82Y4XzV7GGdWxgE1vYxo5Cvmyt79nO79RH3wY7HF7uIFU1/RrU+liX6pAsR9/8P/SgV3zOtsn6zu8krU1gElNfnK9Uznw64bq7AUb/R/pdNuF5X5tbPpNw3d0CawDyeSt/ft//Uu+EnE3D
+  </data>
+ </layer>
+ <layer id="6" name="platforms" width="40" height="22">
+  <data encoding="base64" compression="zlib">
+   eJzt0rlKA0EAxvFZsE4stNQitQZMG1/AKMRWwdooaGPUeLQeXbwviI1HpzHxSMD0sfE+3kBfQ/9LZthBdoIL2zkf/HbZ3dnZj9kRwsbGxsbGxsbm/yYtDfo8+3YPzt/nquMujFJaJqRJn2cddOsM0O8TX4ggitaAXUzrZEqSbr1N+vUhhX4MYAQtjO/i3I14wH6mdTJliG8NN+k3igzGMK710zuHmSnmzmIaM5hFDnOYxwIWtb5LWEZBOpT99M5uepAIod86c29gE1vYxg52sYd9HPj0u/3Vz723glWsCW9f5eW12hdqnVMG6h+o94rMfYESyrjEFa5xgwqqjjdeXz+3Y032O+Z8glOcC29fnclrtS/UOmcM1D9Q790z9wMe8YRnvOAVb3jHh+ONPxKNLm1OQzti+AHhpUrZ
+  </data>
+ </layer>
+ <objectgroup id="8" name="objects">
+  <object id="1" x="200" y="16" width="290" height="19">
+   <text wrap="1" bold="1" halign="center">Begum'un Dunyasina Hos Geldiniz</text>
+  </object>
+  <object id="10" gid="721" x="416" y="224" width="32" height="32"/>
+  <object id="11" gid="721" x="560" y="256" width="32" height="32"/>
+  <object id="12" gid="721" x="64" y="320" width="32" height="32"/>
+ </objectgroup>
+</map>

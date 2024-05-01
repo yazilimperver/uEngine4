@@ -1,0 +1,2 @@
+#pragma code_page(65001)
+1 /* CREATEPROCESS_MANIFEST_RESOURCE_ID */ 24 /* RT_MANIFEST */ "D:/GitRepository/Yazilimperver/uEngine4/code/src/out/build/windows-default/example_app/CMakeFiles/example_app.dir/embed.manifest"

@@ -1,0 +1,117 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"childIndexes" : 
+					[
+						1,
+						2
+					],
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"projectIndex" : 0,
+					"source" : "."
+				},
+				{
+					"build" : "example_app",
+					"jsonFile" : "directory-example_app-Debug-204f783d6f2bbcdbb211.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "example_app",
+					"targetIndexes" : 
+					[
+						1
+					]
+				},
+				{
+					"build" : "infra",
+					"childIndexes" : 
+					[
+						3
+					],
+					"jsonFile" : "directory-infra-Debug-41ded3413a9781b4123d.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 0,
+					"projectIndex" : 0,
+					"source" : "infra"
+				},
+				{
+					"build" : "infra/data_structures",
+					"jsonFile" : "directory-infra.data_structures-Debug-7e752b718162a42d64c6.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.8"
+					},
+					"parentIndex" : 2,
+					"projectIndex" : 0,
+					"source" : "infra/data_structures",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3
+					],
+					"name" : "src",
+					"targetIndexes" : 
+					[
+						0,
+						1
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 3,
+					"id" : "data_structures::@1c6bdba9e6b773596fce",
+					"jsonFile" : "target-data_structures-Debug-b4a416657b57fe8c69be.json",
+					"name" : "data_structures",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 1,
+					"id" : "example_app::@5261aeaf83f82b553a06",
+					"jsonFile" : "target-example_app-Debug-8becdd8deccbbde086a5.json",
+					"name" : "example_app",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "D:/GitRepository/Yazilimperver/uEngine4/code/src/out/build/windows-default",
+		"source" : "D:/GitRepository/Yazilimperver/uEngine4/code/src"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

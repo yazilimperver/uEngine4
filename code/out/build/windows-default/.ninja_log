@@ -1,0 +1,6 @@
+# ninja log v5
+0	334	6682065428481757	example_app/CMakeFiles/example_app.dir/example_app.cpp.obj	3716156ae09f9ad6
+334	524	6682065430071733	example_app/example_app.exe	992fc90096160bb
+1	128	6682090289670080	build.ninja	6349043a525282f1
+670	774	6682090288480101	infra/data_structures/data_structures.lib	1f56a744b528644b
+1	669	6682090287460081	infra/data_structures/CMakeFiles/data_structures.dir/stop_watch.cpp.obj	c61110eabc4fd8a4
