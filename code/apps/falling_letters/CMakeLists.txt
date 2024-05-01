@@ -15,7 +15,7 @@ find_package(OpenGL REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 
 # Asset dizinini ayarlayalim
-set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/falling_letters_assets/)
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../assets/falling_letters_assets/)
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )

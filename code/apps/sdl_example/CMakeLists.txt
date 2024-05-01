@@ -15,7 +15,7 @@ find_package(CEREAL REQUIRED)
 find_package(SDLFONT_CACHE REQUIRED)
 
 # Asset dizinini ayarlayalim
-set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/sdl_example_assets/)
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../assets/sdl_example_assets/)
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
             "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )

@@ -13,7 +13,7 @@ find_package(GLEW REQUIRED)
 find_package(OpenGL REQUIRED)
 
 # Asset dizinini ayarlayalim
-set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../../assets/gl_example_assets/)
+set(EXAMPLE_ASSET_ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../../../assets/gl_example_assets/)
 
 configure_file ("${CMAKE_CURRENT_SOURCE_DIR}/configuration.h.in"
                 "${CMAKE_CURRENT_SOURCE_DIR}/configuration.h" )
