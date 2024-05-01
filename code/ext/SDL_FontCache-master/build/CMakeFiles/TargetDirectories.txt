@@ -1,4 +1,0 @@
-D:/GitRepository/Yazilimperver/uEngine4/code/src/ext/SDL_FontCache-master/build/CMakeFiles/FontCache.dir
-D:/GitRepository/Yazilimperver/uEngine4/code/src/ext/SDL_FontCache-master/build/CMakeFiles/FontCache-tests.dir
-D:/GitRepository/Yazilimperver/uEngine4/code/src/ext/SDL_FontCache-master/build/CMakeFiles/ALL_BUILD.dir
-D:/GitRepository/Yazilimperver/uEngine4/code/src/ext/SDL_FontCache-master/build/CMakeFiles/ZERO_CHECK.dir

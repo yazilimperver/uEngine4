@@ -15,8 +15,6 @@
 
 # Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
 
 # Fortran module files
 *.mod
@@ -25,13 +23,7 @@
 # Compiled Static libraries
 *.lai
 *.la
-*.a
-*.lib
 
-# Executables
-*.exe
-*.out
-*.app
 
 # VScode dizinleri
 .vscode/
@@ -450,9 +442,9 @@ FodyWeavers.xsd
 /code/buildLinux
 /code/buildNinja
 /code/build_ninja
-/code/build
+/code/build/*
 /code/src/ext/freetype-master/builds
-/code/src/ext/freetype-master/builds/*
+/code/src/ext/freetype-master/CMakeFiles/*
 /code/ext/SDL_FontCache-master/linuxBuild
 /code/ext/sdl2_libraries/*
 /code/ext/sdl2_linux/*
