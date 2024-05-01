@@ -8,3 +8,6 @@ Paketler için https://github.com/libsdl-org/SDL/releases adresi üzerinden SDL2
 ayrıca ilgili dizini tepe CMake betiği içerisinde de güncellemeniz gerekiyor:
 
 list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/SDL2-2.X.Y/cmake")
+
+* https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-devel-2.30.2-VC.zip
+* 

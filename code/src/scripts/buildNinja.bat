@@ -1,5 +1,1 @@
-@echo off
-echo %time% < nul
-ninja -t clean
-ninja
-echo %time% < nul
+cmake -S . -B build_ninja -G "Ninja"
