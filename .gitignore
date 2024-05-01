@@ -455,3 +455,6 @@ FodyWeavers.xsd
 /code/src/apps/falling_letters/configuration.h
 /code/src/apps/gl_example/configuration.h
 /code/src/apps/sdl_example/configuration.h
+code/src/apps/falling_letters/configuration.h
+code/src/apps/gl_example/configuration.h
+code/src/apps/sdl_example/configuration.h
