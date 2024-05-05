@@ -90,11 +90,7 @@ Bu proje kapsamında da aslında en önemli bağımlılık SDL kütüphaneleri o
 
 ### Windows
 
-Windows için /code/src dizini altındaki **"prepareSDLAndProjectForWin.bat"**, SDL kütüphanelerinin indirilmesi, CMake ile Vs2022'ye yönelik dosyaların hazırlanması için gerekli adımları içermektedir. Vs2022'den farklı bir geliştirme ortamı için ilgili betiğin içeriğini güncelleyebilirsiniz.
-
-SDL'in farklı sürümlerini kullanabilmek için ise yine /code/src/ext/sdl2_libraries dizini altında bulunan **"PrepareSDL2ForWindows.bat"** betiğini düzenleyebilirsiniz.
-
-Windows için bu betik, SDL2 ve Glew kütüphanelerini indirmektedir.
+TBD
 
 ### Linux
 
