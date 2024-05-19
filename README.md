@@ -26,6 +26,8 @@ Burada elbette sizlerden gelen geri bildirimler de benim için önemli. İlave k
 🚀: Çalışmaya başlandı
 ❌: Henüz başlamadı
 
+Önceliğim açıkçası CI/CD entegrasyonu kapsamında Github actions olacak. Sonrasında plug-in mekanizmasına giriyor olacağız.
+
 ### [2B Oyun/Grafik Kabiliyetleri]
 Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliştirmeyi planladığımız kabiliyetleri sıralıyor olacağız.
 
@@ -46,6 +48,8 @@ Bu başlık altında temel olarak 2B oyun geliştirme için eksik olan ve geliş
 🚀: Çalışmaya başlandı
 ❌: Henüz başlamadı
 
+Bu bağlamda çok bir kabiliyet kalmadı aslında. Sadece ses kabiliyeti onu da inşallah en yakın zamanda kazandıracağım.
+
 ### [2B CBS Kabiliyetleri]
 Bu başlık altında ise, temel 2B harita kabiliyetlerine ilişkin planlanan yol haritasını takip ediyor olacağız.
 
@@ -61,6 +65,9 @@ Bu başlık altında ise, temel 2B harita kabiliyetlerine ilişkin planlanan yol
 ✔ : Gerçeklendi
 🚀: Çalışmaya başlandı
 ❌: Henüz başlamadı
+
+CBS için önümüz açık :)
+
 
 ![](https://i.imgur.com/waxVImv.png)
 
@@ -86,7 +93,9 @@ Her ne kadar basit uygulamalar için ya da tecrübeli yazılımcılar için bu b
 
 Önceki, çok küçük çaplı olmayan projelerimin bir çoğunu Visual Studio kullanarak geliştirip paylaştığım için bu tarz hususları da VS kullanarak çözebiliyordum. Fakat son zamanlarda, çoklu platform desteği ve CMake kullanımı ile birlikte, farklı yollar aramaya başladım. Elbette, bu noktada ilk adım CMake bağımlılıklarını kullanmak oldu. Windows için ilgili kütüphaneleri indirip, CMake üzerinden Visual Studio Projesi kolayca oluşturup, projeleri derlerken, WSL2 ve Linux için, bu kadar kolay olmadı açıkçası. 
 
-Bu proje kapsamında da aslında en önemli bağımlılık SDL kütüphaneleri oldu. Bu sebeple, ilk etapta bu kütüphanelerin kolay bir şekilde kurulabilmesi için bir takım betikler hazırladım. Her ne kadar bu kütüphaneleri "sudo apt .." ile de kurabilseniz de, daha kontrollü olması açısında ilgili sitelerden son sürümleri indirip, hazırlama yöntemi bana doğru geldi açıkçası. Şimdi, Windows ve Linux için yapılması gerekenlere bir göz atalım:
+Bu proje kapsamında da aslında en önemli bağımlılık SDL kütüphaneleri oldu. Bu sebeple, ilk etapta bu kütüphanelerin kolay bir şekilde kurulabilmesi için bir takım betikler hazırladım. Her ne kadar bu kütüphaneleri "sudo apt .." ile de kurabilseniz de, daha kontrollü olması açısında ilgili sitelerden son sürümleri indirip, hazırlama yöntemi bana doğru geldi açıkçası. Şimdi, Windows ve Linux için yapılması gerekenlere bir göz atalım.
+
+Bu arada şunu belirtmekte fayda görüyorum, aşağıdaki adımlar bir betik ile de kotarılabilir, bunun farkındayım, zaten bunları da peyder pey ekliyor olacağım. 
 
 ### Windows
 
