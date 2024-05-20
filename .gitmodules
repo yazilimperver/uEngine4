@@ -1,0 +1,3 @@
+[submodule "code/ext/glm"]
+	path = code/ext/glm
+	url = https://github.com/g-truc/glm
