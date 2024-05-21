@@ -452,6 +452,7 @@ FodyWeavers.xsd
 /code/ext/freetype-master/buildLinux/*
 /code/ext/spdlog-1.13.0/install/*
 /code/ext/sdl2/*
-code/apps/falling_letters/configuration.h
-code/apps/gl_example/configuration.h
-code/apps/sdl_example/configuration.h
+/code/ext/curl-8.7.1/*
+/code/apps/falling_letters/configuration.h
+/code/apps/gl_example/configuration.h
+/code/apps/sdl_example/configuration.h
