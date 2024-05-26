@@ -1,2 +1,2 @@
 cmake --preset debug-msvc
-REM cmake --build --preset debug-msvc
+cmake --build --preset debug-msvc

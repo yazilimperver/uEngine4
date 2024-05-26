@@ -117,7 +117,7 @@ Windows kurulumu için izlemeniz gereken adımları aşağıya sıralıyorum.
     * `git submodule update --init --recursive` ile diger repolari da alalim,
     * Daha önce indirdiyseniz `git submodule update --recursive --remote` ile güncelleyebilirsiniz.
 6. Glew'u kuralım
-    * `code/ext/` altına gidelim,
+    * cd code/ext
     * `curl.exe -L --ssl-revoke-best-effort https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip --output glew.zip` ile glew'i indirelim,
     * `tar -xf glew.zip`
 7. SDL Kütüphanelerinin kurulması
