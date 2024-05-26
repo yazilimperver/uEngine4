@@ -116,6 +116,7 @@ Windows kurulumu için izlemeniz gereken adımları aşağıya sıralıyorum.
     * `git clone https://github.com/yazilimperver/uEngine4.git`
     * `git submodule update --init --recursive` ile diger repolari da alalim,
     * Daha önce indirdiyseniz `git submodule update --recursive --remote` ile güncelleyebilirsiniz.
+**ÖNEMLİ NOT: Bundan sonraki adımları *install_for_windows.bat* komutu ile de uygulayabilirsiniz ;)**
 6. Glew'u kuralım
     * cd code/ext
     * `curl.exe -L --ssl-revoke-best-effort https://github.com/nigels-com/glew/releases/download/glew-2.2.0/glew-2.2.0-win32.zip --output glew.zip` ile glew'i indirelim,
