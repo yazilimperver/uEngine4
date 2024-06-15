@@ -42,9 +42,16 @@ DownloadAndInstallSDL2Item(){
 }
 
 DownloadAndInstallSDL2Libraries(){
+    echo $'#################  SDL - START  ######################\n'    
     cd code/ext
     mkdir sdl2
     cd sdl2
+
+    DownloadAndInstallSDL2Item SDL2-Main SDL2-2.30.2 https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-2.30.2.tar.gz
+
+    echo $'#################  SDL - END  ######################\n'    
+
+    cd ../../..
 }
 
 # Gerekli araçlar var mı kontrol edelim
@@ -59,3 +66,7 @@ sudo apt-get install libxmu-dev libxi-dev libgl-dev -y
 
 echo GLEW bağımlılıkları kuruluyor
 sudo apt-get install libglew-dev -y
+
+DownloadAndInstallSDL2Libraries
+
+echo 
