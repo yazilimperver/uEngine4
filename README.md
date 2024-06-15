@@ -184,7 +184,7 @@ Linux kurulumu için izlenecek adımlar aşağıda sıralanmıştır:
 8. SDL Kütüphanelerinin kurulması
     * cd code/ext
     * mkdir sdl2
-    * cd code/ext/sdl2
+    * cd sdl2
     * `wget https://github.com/libsdl-org/SDL/releases/download/release-2.30.2/SDL2-2.30.2.tar.gz` 
     * tar -xvf SDL2-2.30.2.tar.gz
     * cd SDL2-2.30.2
