@@ -135,4 +135,16 @@ jobs:
           install_for_linux.sh
         fi
       shell: bash
+    
+    - name: Build uEngine4
+      id: build_uengine4
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          echo "Windows Build"
+        elif [ "$RUNNER_OS" == "Linux" ]; then
+          cd code
+          chmod 700 ./scripts/buildLinux.sh
+          ./scripts/buildLinux.sh
+        fi
+      shell: bash      
   
