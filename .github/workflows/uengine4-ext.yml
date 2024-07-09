@@ -96,11 +96,11 @@ jobs:
 
     - name: Download ccache
       id: ccache
-      shell: cmake -P {0}
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           sudo apt install ccache
-        endif()
+        fi
+      shell: bash
     
     - name: Install Other 3rd Party Dependencies
       id: externals
