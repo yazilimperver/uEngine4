@@ -98,9 +98,7 @@ jobs:
       id: ccache
       shell: cmake -P {0}
       run: |
-        if ("${{ runner.os }}" STREQUAL "Windows")
-          echo "windows ccache install"
-        elseif ("${{ runner.os }}" STREQUAL "Linux")
+        if [ "$RUNNER_OS" == "Windows" ]; then
           sudo apt install ccache
         endif()
     
