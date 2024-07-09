@@ -131,6 +131,7 @@ jobs:
       id: build_uengine4_windows
       if: runner.os == 'Windows'
       run: |
+        git submodule update --init --recursive
         cd code
         call .\scripts\buildNinja.bat
         cd build_ninja
