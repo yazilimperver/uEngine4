@@ -131,6 +131,7 @@ jobs:
         if [ "$RUNNER_OS" == "Windows" ]; then
           echo "Windows Installation"
         elif [ "$RUNNER_OS" == "Linux" ]; then
+          chmod 700 install_for_linux.sh
           install_for_linux.sh
         fi
       shell: bash
