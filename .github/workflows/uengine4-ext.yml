@@ -39,10 +39,10 @@ jobs:
       run: |
         echo "Yazilimperver Github Actions started from Windows!"
 
-        - name: Greeting-Linux
-        if: runner.os == 'Linux'
-        run: |
-          echo "Yazilimperver Github Actions started from Linux!"    
+    - name: Greeting-Linux
+      if: runner.os == 'Linux'
+      run: |
+        echo "Yazilimperver Github Actions started from Linux!"    
 
     - name: Linux Dependencies
       if: runner.os == 'Linux'
