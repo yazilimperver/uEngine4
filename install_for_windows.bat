@@ -59,8 +59,9 @@ if not exist glew.zip (
 ) else (
     echo glew.zip dosyası zaten var!
 )
+dir
 
-tar -xf glew.zip
+tar -xvf glew.zip
 del glew.zip
 
 cd ../..
@@ -131,6 +132,12 @@ call "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Bu
 cmake -B build_ninja -G "Ninja Multi-Config"
 cmake --build build_ninja --config Release
 cmake --build build_ninja --config Debug
+pwd
+dir .\build_ninja
+dir .\build_ninja\lib
+dir .\build_ninja\lib\Release
+dir .\build_ninja\lib\Debug
+mkdir lib
 copy .\build_ninja\lib\Release\libcurl_imp.lib .\lib\libcurl.lib
 copy .\build_ninja\lib\Debug\libcurl-d_imp.lib .\lib\libcurld.lib
 cd ..
