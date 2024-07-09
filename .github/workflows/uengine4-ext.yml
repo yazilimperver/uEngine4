@@ -104,41 +104,37 @@ jobs:
     
     - name: Install Other 3rd Party Dependencies - Linux
       id: external_libraries_linux
+      if: runner.os == 'Linux'
       run: |
-        if [ "$RUNNER_OS" == "Linux" ]; then
-          chmod 700 install_for_linux.sh
-          install_for_linux.sh
-        fi
+        chmod 700 install_for_linux.sh
+        install_for_linux.sh
       shell: bash
     
     - name: Install Other 3rd Party Dependencies - Windows
       id: external_libraries_win
+      if: runner.os == 'Windows'
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          install_for_windows.bat
-        fi
+        install_for_windows.bat
       shell: cmd
     
     - name: Build uEngine4 Linux
       id: build_uengine4_linux
+      if: runner.os == 'Linux'
       run: |
         git submodule update --init --recursive
-        if [ "$RUNNER_OS" == "Linux" ]; then
-          cd code
-          chmod 700 ./scripts/buildLinux.sh
-          ./scripts/buildLinux.sh
-        fi
+        cd code
+        chmod 700 ./scripts/buildLinux.sh
+        ./scripts/buildLinux.sh
       shell: bash      
     
     - name: Build uEngine4 Windows
       id: build_uengine4_windows
+      if: runner.os == 'Windows'
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          cd code
-          call .\scripts\buildNinja.bat
-          cd build_ninja
-          ninja
-          cd ..
-        fi
+        cd code
+        call .\scripts\buildNinja.bat
+        cd build_ninja
+        ninja
+        cd ..
       shell: cmd
   
