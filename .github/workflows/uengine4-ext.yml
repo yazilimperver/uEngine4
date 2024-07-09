@@ -99,30 +99,9 @@ jobs:
       shell: cmake -P {0}
       run: |
         if ("${{ runner.os }}" STREQUAL "Windows")
-          set(ccache_dir "ccache-$ENV{CCACHE_VERSION}-windows-x86_64")
-          set(ccache_archive "${ccache_dir}.zip")
+          echo "windows ccache install"
         elseif ("${{ runner.os }}" STREQUAL "Linux")
-          set(ccache_dir "ccache-$ENV{CCACHE_VERSION}-linux-x86_64")
-          set(ccache_archive "${ccache_dir}.tar.xz")
-        elseif ("${{ runner.os }}" STREQUAL "macOS")
-          set(ccache_dir "ccache-$ENV{CCACHE_VERSION}-darwin")
-          set(ccache_archive "${ccache_dir}.tar.gz")
-        endif()
-
-        set(ccache_url "https://github.com/ccache/ccache/releases/download/v$ENV{CCACHE_VERSION}/${ccache_archive}")
-        file(DOWNLOAD "${ccache_url}" ./${ccache_archive} SHOW_PROGRESS)
-        execute_process(COMMAND ${CMAKE_COMMAND} -E tar xvf ./${ccache_archive})
-
-        # Add to PATH environment variable
-        file(TO_CMAKE_PATH "$ENV{GITHUB_WORKSPACE}/${ccache_dir}" ccache_dir)
-        set(path_separator ":")
-        if ("${{ runner.os }}" STREQUAL "Windows")
-          set(path_separator ";")
-        endif()
-        file(APPEND "$ENV{GITHUB_PATH}" "$ENV{GITHUB_WORKSPACE}${path_separator}${ccache_dir}")
-
-        if (NOT "${{ runner.os }}" STREQUAL "Windows")
-          execute_process(COMMAND chmod +x ${ccache_dir}/ccache)
+          sudo apt install ccache
         endif()
     
     - name: Install Other 3rd Party Dependencies
@@ -139,6 +118,7 @@ jobs:
     - name: Build uEngine4
       id: build_uengine4
       run: |
+        git submodule update --init --recursive
         if [ "$RUNNER_OS" == "Windows" ]; then
           echo "Windows Build"
         elif [ "$RUNNER_OS" == "Linux" ]; then
