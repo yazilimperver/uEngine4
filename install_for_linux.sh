@@ -57,8 +57,8 @@ DownloadAndInstallSDL2Libraries(){
 # Gerekli araçlar var mı kontrol edelim
 CheckExistance g++ build-essential
 CheckExistance git
-CheckExistance cmake
-CheckExistance ninja ninja-build
+#CheckExistance cmake
+#CheckExistance ninja ninja-build
 
 # Kütüphane bağımlılıkları kurulacaktır
 echo OpenGL bağımlılıkları kuruluyor
