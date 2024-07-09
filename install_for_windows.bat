@@ -24,13 +24,6 @@ call:DownloadAndInstallFreeType
 :: Sonra Curl kütüphaneleri
 call:DownloadAndInstallCurl
 
-:: Artık Visual Studio icin kurulumu baslatabiliriz
-cd code
-call .\scripts\buildNinja.bat
-cd build_ninja
-ninja
-cd ..
-
 echo Windows için kontroller ve kurulumlar tamamlandı
 
 :AfterSDL

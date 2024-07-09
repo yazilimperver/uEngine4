@@ -19,13 +19,13 @@ jobs:
       fail-fast: false
       matrix:
         config:
-        # - {
-        #     name: "Windows Latest MSVC", artifact: "Windows-MSVC",
-        #     os: windows-latest,
-        #     cc: "cl", cxx: "cl",
-        #     environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
-        #   }
-        - {
+         - {
+            name: "Windows Latest MSVC", artifact: "Windows-MSVC",
+            os: windows-latest,
+            cc: "cl", cxx: "cl",
+            environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
+          }
+         - {
             name: "Ubuntu Latest GCC", artifact: "Linux",
             os: ubuntu-latest,
             cc: "gcc", cxx: "g++"
@@ -97,32 +97,48 @@ jobs:
     - name: Download ccache
       id: ccache
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
+        if [ "$RUNNER_OS" == "Linux" ]; then
           sudo apt install ccache
         fi
       shell: bash
     
-    - name: Install Other 3rd Party Dependencies
-      id: externals
+    - name: Install Other 3rd Party Dependencies - Linux
+      id: external_libraries_linux
       run: |
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          echo "Windows Installation"
-        elif [ "$RUNNER_OS" == "Linux" ]; then
+        if [ "$RUNNER_OS" == "Linux" ]; then
           chmod 700 install_for_linux.sh
           install_for_linux.sh
         fi
       shell: bash
     
-    - name: Build uEngine4
-      id: build_uengine4
+    - name: Install Other 3rd Party Dependencies - Windows
+      id: external_libraries_win
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          install_for_windows.bat
+        fi
+      shell: cmd
+    
+    - name: Build uEngine4 Linux
+      id: build_uengine4_linux
       run: |
         git submodule update --init --recursive
-        if [ "$RUNNER_OS" == "Windows" ]; then
-          echo "Windows Build"
-        elif [ "$RUNNER_OS" == "Linux" ]; then
+        if [ "$RUNNER_OS" == "Linux" ]; then
           cd code
           chmod 700 ./scripts/buildLinux.sh
           ./scripts/buildLinux.sh
         fi
       shell: bash      
+    
+    - name: Build uEngine4 Windows
+      id: build_uengine4_windows
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          cd code
+          call .\scripts\buildNinja.bat
+          cd build_ninja
+          ninja
+          cd ..
+        fi
+      shell: cmd
   
