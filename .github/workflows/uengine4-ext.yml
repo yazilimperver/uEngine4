@@ -110,11 +110,16 @@ jobs:
         install_for_linux.sh
       shell: bash
     
+    - name: Configure build for amd64
+      if: runner.os == 'Windows'
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: amd64
+
     - name: Install Other 3rd Party Dependencies - Windows
       id: external_libraries_win
       if: runner.os == 'Windows'
       run: |
-        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && install_for_windows.bat' }}
         install_for_windows.bat
       shell: cmd
     
@@ -128,6 +133,15 @@ jobs:
         ./scripts/buildLinux.sh
       shell: bash      
     
+    - name: VcPkg Installation
+      if: runner.os == 'Windows'
+      run: |
+        git clone https://github.com/microsoft/vcpkg.git
+        cd vcpkg
+        bootstrap-vcpkg.bat
+        vcpkg integrate install
+        vcpkg install opengl glew glm freetype --triplet=x64-windows-static
+
     - name: Build uEngine4 Windows
       id: build_uengine4_windows
       if: runner.os == 'Windows'
