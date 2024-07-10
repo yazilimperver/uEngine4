@@ -140,7 +140,7 @@ jobs:
         cd vcpkg
         bootstrap-vcpkg.bat
         vcpkg integrate install
-        vcpkg install opengl glew --triplet=x64-windows-static
+        vcpkg install opengl glew glm freetype --triplet=x64-windows-static
 
     - name: Build uEngine4 Windows
       id: build_uengine4_windows
