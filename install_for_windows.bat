@@ -13,7 +13,8 @@ call:CheckExistance ninja
 
 :: Ext'leri indirelim
 :: Once glew. Glew icin ilave bir sey yapmaya gerek yok
-call:DownloadAndExtractGlew
+:: VcPck ile kurulabilir
+:: call:DownloadAndExtractGlew
 
 :: Sonra SDL2 kütüphaneleri
 call:DownloadAndInstallSDL2Libraries
