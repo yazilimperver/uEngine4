@@ -114,7 +114,7 @@ jobs:
       id: external_libraries_win
       if: runner.os == 'Windows'
       run: |
-        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && msbuild' }}
+        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"' }}
         install_for_windows.bat
       shell: cmd
     
@@ -133,7 +133,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         git submodule update --init --recursive
-        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && msbuild' }}
+        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"' }}
         cd code
         call .\scripts\buildNinja.bat
         cd build_ninja
