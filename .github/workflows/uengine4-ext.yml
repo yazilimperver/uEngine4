@@ -148,7 +148,7 @@ jobs:
       run: |
         git submodule update --init --recursive
         cd code
-        cmake -S . -B build_ninja -G "Ninja" -D
+        cmake -S . -B build_ninja -G "Ninja"
         cd build_ninja
         ninja
         cd ..
