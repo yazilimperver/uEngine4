@@ -129,7 +129,7 @@ if not exist curl-8.7.1.zip (
 tar -xvf curl-8.7.1.zip
 cd curl-8.7.1
 call "C:\Program Files\Microsoft Visual Studio\2022\Professional\VC\Auxiliary\Build\vcvars64.bat"
-cmake -B build_ninja -G "Ninja Multi-Config"
+cmake -B build_ninja -G "Ninja Multi-Config" -DBUILD_STATIC_LIBS=ON
 cmake --build build_ninja --config Release
 cmake --build build_ninja --config Debug
 pwd

@@ -25,11 +25,11 @@ jobs:
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
-         - {
-            name: "Ubuntu Latest GCC", artifact: "Linux",
-            os: ubuntu-latest,
-            cc: "gcc", cxx: "g++"
-          }
+        #  - {
+        #     name: "Ubuntu Latest GCC", artifact: "Linux",
+        #     os: ubuntu-latest,
+        #     cc: "gcc", cxx: "g++"
+        #   }
 
     steps:
     - uses: actions/checkout@v4
@@ -114,6 +114,7 @@ jobs:
       id: external_libraries_win
       if: runner.os == 'Windows'
       run: |
+        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && msbuild' }}
         install_for_windows.bat
       shell: cmd
     
@@ -132,6 +133,7 @@ jobs:
       if: runner.os == 'Windows'
       run: |
         git submodule update --init --recursive
+        ${{ '"C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat" && msbuild' }}
         cd code
         call .\scripts\buildNinja.bat
         cd build_ninja
