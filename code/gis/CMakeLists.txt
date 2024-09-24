@@ -37,4 +37,4 @@ target_include_directories(${TARGET_NAME} PUBLIC ${INFRA_INCLUDE_FOLDER} ${GIS_I
                                                  ${CEREAL_INCLUDE_DIR} ${SPDLOG_DIR}/include )
                                                  
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${TARGET_NAME} PROPERTIES FOLDER _libs)
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER uengine_libs)

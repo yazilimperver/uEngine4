@@ -1,11 +1,11 @@
 # Temel dizin animlamalarini yapalim
-set(EXT_FOLDER "${CMAKE_SOURCE_DIR}/ext")
+set(EXT_FOLDER "${UENGINE_ROOT_PATH}/ext")
 
 # Baslik dosyalarini ayri tutma kararimiz isiginda ilgili dizinleri ekleyelim
-set(INFRA_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/infra")
-set(BASIC_ENGINE_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/basic_engine")
-set(GIS_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gis")
-set(GLDIR_INCLUDE_FOLDER "${CMAKE_SOURCE_DIR}/gl")
+set(INFRA_INCLUDE_FOLDER "${UENGINE_ROOT_PATH}/infra")
+set(BASIC_ENGINE_INCLUDE_FOLDER "${UENGINE_ROOT_PATH}/basic_engine")
+set(GIS_INCLUDE_FOLDER "${UENGINE_ROOT_PATH}/gis")
+set(GLDIR_INCLUDE_FOLDER "${UENGINE_ROOT_PATH}/gl")
 
 # CMake dosyalari icin nereye bakalim
 set(SDLFONT_CACHE_DIR "${EXT_FOLDER}/SDL_FontCache-master")

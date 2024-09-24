@@ -41,4 +41,4 @@ target_include_directories(${TARGET_NAME} PUBLIC ${STB_DIR} ${DEVIL_INCLUDE_DIR}
                                                  ${SDLFONT_CACHE_DIR} ${TILESON_DIR} ${SPDLOG_DIR}/include )
                                                  
 # Bu projeyi VS icerisinde ayri bir folderda tutalim
-set_target_properties(${TARGET_NAME} PROPERTIES FOLDER _libs)
+set_target_properties(${TARGET_NAME} PROPERTIES FOLDER uengine_libs)

@@ -6,17 +6,26 @@
 # https://cmake.org/cmake/help/latest/policy/CMP0135.html ilgili policy aktiflestirmek icin
 cmake_policy(SET CMP0135 NEW)
 
-# cmake konfigurasyon dizini
-set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})   
-
-if(WIN32)
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2-2.30.2/cmake")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2_image-2.8.2/cmake")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/sdl2/SDL2_ttf-2.22.0/cmake")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/freetype-windows-binaries-2.13.2")
-    list(APPEND CMAKE_PREFIX_PATH "${CMAKE_CURRENT_SOURCE_DIR}/ext/glew-2.2.0")
+if(NOT DEFINED UENGINE_ROOT_PATH)
+    message("uEngine is being used as standalone!")
+    set(UENGINE_ROOT_PATH ".")
+else()
+    message("uEngine is being used as a part of another project so relative path of \"${UENGINE_ROOT_PATH}\" will be used as root!")
 endif()
 
+# cmake konfigurasyon dizini
+list(APPEND CMAKE_MODULE_PATH "${UENGINE_ROOT_PATH}/cmake")   
+
+# TODO: Bunlari ileride el ile disarida veririz
+if(WIN32)
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/sdl2/SDL2-2.30.2/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/sdl2/SDL2_image-2.8.2/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/sdl2/SDL2_ttf-2.22.0/cmake")
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/SDL_FontCache-master")
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/freetype-windows-binaries-2.13.2")
+    list(APPEND CMAKE_PREFIX_PATH "${UENGINE_ROOT_PATH}ext/glew-2.2.0")
+endif()
+    
 # Ortak cmake betiklerini alalim
 include(StandardOptions)    # Standard ayarlar
 include(InsourceGuard)      # Source icerisinde buildi onleme
@@ -114,8 +123,6 @@ ExternalProject_Add(spdlog
     -DSPDLOG_BUILD_SHARED=OFF
 )
 
-message ("Staging dir is: ${STAGING_DIR}")
-
 # Dis kütüphane alt dizinlerini ekleyelim
 add_subdirectory ("ext")
 
@@ -126,9 +133,13 @@ add_subdirectory ("gis")
 add_subdirectory ("basic_engine")
 
 # Uygulama alt dizinlerini ekleyelim
-add_subdirectory ("apps")
+if(BUILD_APPS)
+    message ("uEngine4 Applications will be built!")
+    add_subdirectory ("apps")
+endif()
 
 # Test projelerini ekleyelim
 if(BUILD_TESTING)
+    message ("uEngine4 unit tests will be built!")
      add_subdirectory ("test")
 endif()
