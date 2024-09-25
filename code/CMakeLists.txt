@@ -8,7 +8,7 @@ cmake_policy(SET CMP0135 NEW)
 
 if(NOT DEFINED UENGINE_ROOT_PATH)
     message("uEngine is being used as standalone!")
-    set(UENGINE_ROOT_PATH ".")
+    set(UENGINE_ROOT_PATH "${CMAKE_CURRENT_SOURCE_DIR}/")
 else()
     message("uEngine is being used as a part of another project so relative path of \"${UENGINE_ROOT_PATH}\" will be used as root!")
 endif()
